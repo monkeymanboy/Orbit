@@ -1,0 +1,8 @@
+<Container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../OrbitSchema.xsd">
+    <List Items="~listItems">
+        <Clickable ClickEvent="CellClicked">
+            <Image AnchorPreset="FillParent" ImageColor="~color"/>
+            <Text Text="~text" AnchorPreset="FillParent" FontSize="26"/>
+        </Clickable>
+    </List>
+</Container>

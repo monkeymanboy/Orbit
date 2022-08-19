@@ -1,0 +1,71 @@
+﻿using Atlas.Orbit.TypeSetters;
+using Atlas.Orbit.Parser;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Xml.Schema;
+using Atlas.Orbit.Components;
+
+namespace Atlas.Orbit.ComponentProcessors {
+    using Parser;
+    using TypeSetters;
+
+    public abstract class ComponentProcessor {
+        public abstract Type ComponentType { get; }
+        protected UIRenderData CurrentData { get; set; }
+
+        public abstract void Process(Component genericComponent, TagParameters processorParams);
+
+        public abstract List<XmlSchemaAttribute> GenerateSchemaAttributes();
+    }
+    public abstract class ComponentProcessor<T> : ComponentProcessor where T : Component {
+        public override Type ComponentType => typeof(T);
+
+        private Dictionary<string, TypeSetter<T>> cachedSetters;
+        public Dictionary<string ,TypeSetter<T>> CachedSetters {
+            get {
+                if(cachedSetters == null)
+                    cachedSetters = Setters;
+                return cachedSetters;
+            }
+        }
+        public abstract Dictionary<string, TypeSetter<T>> Setters { get; }
+
+        public override void Process(Component genericComponent, TagParameters processorParams) {
+            if(!(genericComponent is T component))
+                return;
+            CurrentData = processorParams.RenderData;
+            foreach(KeyValuePair<string, string> pair in processorParams.Data) {
+                if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
+                    if(pair.Value == null) {
+                        UIValue uiValue = processorParams.Values[pair.Key];
+                        ValueChangeSetter valueChangeSetter = genericComponent.gameObject.GetComponent<ValueChangeSetter>();
+                        if(valueChangeSetter == null)
+                            valueChangeSetter = genericComponent.gameObject.AddComponent<ValueChangeSetter>();
+                        Action setValue = () => {
+                            if(uiValue.HasValue) typeSetter.Set(component, uiValue.GetValue()); //TODO(David): This should be moved to a component that handles subscribing to UIValues so that when the object is destroyed they can be unsubcribed
+                        };
+                        uiValue.OnChange += setValue;
+                        valueChangeSetter.OnObjectDestroyed += () => {
+                            uiValue.OnChange -= setValue;
+                        };
+                        setValue();
+                        continue;
+                    }
+                    typeSetter.SetFromString(component, pair.Value);
+                }
+            }
+        }
+        
+        public override List<XmlSchemaAttribute> GenerateSchemaAttributes() {
+            List<XmlSchemaAttribute> attributes = new();
+            foreach(KeyValuePair<string, TypeSetter<T>> pair in CachedSetters) {
+                XmlSchemaAttribute attribute = new();
+                attribute.Name = pair.Key;
+                attribute.SchemaType = pair.Value.GenerateSchemaType();
+                attributes.Add(attribute);
+            }
+            return attributes;
+        }
+    }
+}

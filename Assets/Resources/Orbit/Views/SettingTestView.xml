@@ -1,0 +1,8 @@
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd'>
+    <Vertical ChildControlWidth='true'>
+        <SettingSlider Text='Slider' BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='100'/>
+        <SettingToggle Text='Toggle' BoundValue='ToggleVal'/>
+        <SettingInputField Text="Input" BoundValue="InputVal"/>
+        <Button Text="Print Values" ClickEvent="PrintValues"/>
+    </Vertical>
+</Container>
