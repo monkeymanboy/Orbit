@@ -19,7 +19,7 @@ namespace Atlas.Orbit.Macros {
 
         public abstract List<XmlSchemaAttribute> GenerateSchemaAttributes();
     }
-    public abstract class Macro<T> : Macro {
+    public abstract class Macro<T> : Macro where T : Macro<T> {
         private Dictionary<string, TypeSetter<T>> cachedSetters;
         public Dictionary<string, TypeSetter<T>> CachedSetters {
             get {
@@ -32,7 +32,7 @@ namespace Atlas.Orbit.Macros {
         public abstract void SetToDefault();
 
         public override void Execute(XmlNode node, GameObject parent, TagParameters parameters) {
-            T data = default;
+            T data = (T) this;
             CurrentData = parameters.RenderData;
             SetToDefault();
             foreach(KeyValuePair<string, string> pair in parameters.Data) {

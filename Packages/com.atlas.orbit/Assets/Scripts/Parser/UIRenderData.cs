@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Reflection;
 
 namespace Atlas.Orbit.Parser {
+    using UnityEngine;
+
     public class UIRenderData {
         private object host;
         public object Host {
@@ -22,12 +24,13 @@ namespace Atlas.Orbit.Parser {
 
         public UIRenderData ParentRenderData { get; set; }
 
-        internal Dictionary<string, UIValue> Values { get; } = new Dictionary<string, UIValue>();
-        internal Dictionary<string, UIValue> Properties { get; } = new Dictionary<string, UIValue>();
-        internal Dictionary<string, PropertyInfo> PropertyInfoCache { get; } = new Dictionary<string, PropertyInfo>();
-        internal Dictionary<string, Action> Events { get; } = new Dictionary<string, Action>();
-        internal Dictionary<string, Action<object>> ChildEvents { get; } = new Dictionary<string, Action<object>>();
+        internal Dictionary<string, UIValue> Values { get; } = new();
+        internal Dictionary<string, UIValue> Properties { get; } = new();
+        internal Dictionary<string, PropertyInfo> PropertyInfoCache { get; } = new();
+        internal Dictionary<string, Action> Events { get; } = new();
+        internal Dictionary<string, Action<object>> ChildEvents { get; } = new();
         internal UIParser Parser { get; set; }
+        public List<GameObject> RootObjects { get; } = new();
 
         internal UIValue GetValueFromID(string id) {
             if(id.StartsWith(UIParser.PARENT_HOST_VALUE_PREFIX)) {

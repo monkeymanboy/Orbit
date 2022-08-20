@@ -99,7 +99,7 @@ namespace Atlas.Orbit.Parser {
             preParse?.Invoke(renderData);
 
             foreach(XmlNode node in parentNode.ChildNodes)
-                RenderNode(node, parent, renderData);
+                renderData.RootObjects.Add(RenderNode(node, parent, renderData));
 
             if(host != null) {
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) { //TODO(David): ViewComponentAttributes could be cached so we don't need to iterate over the fields twice
@@ -117,7 +117,7 @@ namespace Atlas.Orbit.Parser {
             return renderData;
         }
 
-        public void RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
+        public GameObject RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
             TagParameters parameters = new TagParameters();
             parameters.RenderData = renderData;
             parameters.Data = new Dictionary<string, string>();
@@ -141,12 +141,12 @@ namespace Atlas.Orbit.Parser {
 
             if(Macros.TryGetValue(node.Name, out Macro macro)) {
                 RenderMacroNode(node, macro, parent, parameters);
-                return;
+                return null;
             }
-            RenderTagNode(node, parent, parameters);
+            return RenderTagNode(node, parent, parameters);
         }
 
-        private void RenderTagNode(XmlNode node, GameObject parent, TagParameters parameters) {
+        private GameObject RenderTagNode(XmlNode node, GameObject parent, TagParameters parameters) {
             GameObject nodeGO = CreatePrefab(node.Name, parent);
             MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
             if(markupPrefab == null)
@@ -161,6 +161,8 @@ namespace Atlas.Orbit.Parser {
                 foreach(XmlNode childNode in node.ChildNodes)
                     RenderNode(childNode, markupPrefab.ChildrenContainer, parameters.RenderData);
             }
+
+            return nodeGO;
         }
         private void RenderMacroNode(XmlNode node, Macro macro, GameObject parent, TagParameters parameters) {
             macro.Execute(node, parent, parameters);
