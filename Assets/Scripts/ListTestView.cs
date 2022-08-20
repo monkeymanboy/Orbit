@@ -22,7 +22,7 @@ public class ListTestView : UIView {
         Debug.Log($"Parent detected click of child item '{clickedItem.text}'");
     }
 
-    private class ListItem {
+    private struct ListItem {
         [ValueID] internal Color color;
         [ValueID] internal string text;
         

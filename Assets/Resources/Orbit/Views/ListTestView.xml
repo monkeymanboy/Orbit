@@ -2,7 +2,7 @@
     <List Items="~listItems">
         <Clickable ClickEvent="CellClicked">
             <Image AnchorPreset="FillParent" ImageColor="~color"/>
-            <Text Text="~text" AnchorPreset="FillParent" FontSize="26"/>
+            <Text AnchorPreset="FillParent" Text="~text" FontSize="26"/>
         </Clickable>
     </List>
 </Container>
