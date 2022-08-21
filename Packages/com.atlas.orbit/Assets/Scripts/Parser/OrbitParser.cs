@@ -182,5 +182,9 @@ namespace Atlas.Orbit.Parser {
         public virtual GameObject CreatePrefab(string name, GameObject parent) {
             return GameObject.Instantiate(Resources.Load<GameObject>($"Orbit/Prefabs/{name}"), parent.transform);
         }
+
+        public static void SetDefaultParser(OrbitParser parser) {
+            OrbitParser.parser = parser;
+        }
     }
 }
