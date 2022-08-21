@@ -12,9 +12,9 @@ namespace Atlas.Orbit.Schema {
 
     public static class SchemaGenerator {
         public static void Generate() {
-            UIParser uiParser = OrbitParser.DefaultParser;
+            OrbitParser orbitParser = OrbitParser.DefaultParser;
             XmlSchema schema = new XmlSchema();
-            uiParser.Init();
+            orbitParser.Init();
 
             XmlSchemaSimpleType valueBoundType = new XmlSchemaSimpleType();
             XmlSchemaSimpleTypeRestriction valueBoundTypeRestriction = new XmlSchemaSimpleTypeRestriction();
@@ -26,8 +26,11 @@ namespace Atlas.Orbit.Schema {
             valueBoundType.Name = "ValueBoundType";
             schema.Items.Add(valueBoundType);
 
+            List<string> addedTags = new();
             #region Prefab Tags
             foreach(Object resource in Resources.LoadAll("Orbit/Prefabs")) {
+                if(addedTags.Contains(resource.name))
+                    continue;
                 XmlSchemaElement currentElement = new() { Name = resource.name };
 
                 XmlSchemaComplexType complexType = new();
@@ -36,9 +39,9 @@ namespace Atlas.Orbit.Schema {
                 sequence.Items.Add(any);
                 complexType.Particle = sequence;
                 
-                GameObject nodeGO = GameObject.Instantiate(resource as GameObject);
+                GameObject nodeGO = resource as GameObject;
                 MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
-                foreach(ComponentProcessor processor in uiParser.ComponentProcessors) {
+                foreach(ComponentProcessor processor in orbitParser.ComponentProcessors) {
                     Component component = markupPrefab.FindComponent(processor.ComponentType);
                     if(component != null) {
                         foreach(XmlSchemaAttribute attribute in processor.GenerateSchemaAttributes()) {
@@ -49,10 +52,11 @@ namespace Atlas.Orbit.Schema {
 
                 currentElement.SchemaType = complexType;
                 schema.Items.Add(currentElement);
+                addedTags.Add(resource.name);
             }
             #endregion
             #region Macro Tags
-            foreach(KeyValuePair<string, Macro> pair in uiParser.Macros) {
+            foreach(KeyValuePair<string, Macro> pair in orbitParser.Macros) {
                 XmlSchemaElement currentElement = new XmlSchemaElement();
                 currentElement.Name = pair.Key;
 
