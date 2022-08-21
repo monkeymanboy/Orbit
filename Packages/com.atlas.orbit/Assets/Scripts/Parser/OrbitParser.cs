@@ -37,7 +37,7 @@ namespace Atlas.Orbit.Parser {
 
         private bool initialized = false;
 
-        public void Init() {
+        public virtual void Init() {
             if(initialized)
                 return;
             readerSettings.IgnoreComments = true;
