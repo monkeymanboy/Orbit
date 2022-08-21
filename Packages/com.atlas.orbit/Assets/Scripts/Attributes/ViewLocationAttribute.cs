@@ -4,7 +4,7 @@ namespace Atlas.Orbit.Attributes {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class ViewLocationAttribute : Attribute {
         public string Location { get; }
-        public string FullPath { get; }
+        public string FullPath { get; set; }
 
         /// <summary>
         /// When applied to a UIView, indicates that it uses the resource at
