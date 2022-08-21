@@ -2,7 +2,7 @@ using Atlas.Orbit.Attributes;
 using Atlas.Orbit.Components;
 using UnityEngine;
 
-public class SettingTestView : UIView {
+public class SettingTestView : OrbitView {
     private enum DropdownValue {
         FirstOption,
         SecondOption,

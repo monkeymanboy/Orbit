@@ -18,7 +18,7 @@ namespace Atlas.Orbit.Components
         private UIValue expansionValue;
         private UIValue focusedValue;
 
-        public void Parse(UIParser parser, XmlNode rootNode, object host, UIRenderData parentData)
+        public void Parse(OrbitParser parser, XmlNode rootNode, object host, UIRenderData parentData)
         {
             renderData = parser.Parse(rootNode, gameObject, host, parentData, (renderData) =>
             {

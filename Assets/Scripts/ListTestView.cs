@@ -3,7 +3,7 @@ using Atlas.Orbit.Components;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ListTestView : UIView {
+public class ListTestView : OrbitView {
     [ValueID] private List<object> listItems;
 
     [ListenFor("PreParse")]

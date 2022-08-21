@@ -8,12 +8,11 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using System.IO;
 
 namespace Atlas.Orbit.Components {
-    using System.IO;
-
-    public class UIView : MonoBehaviour, INotifyPropertyChanged {
-        protected virtual UIParser Parser => OrbitParser.DefaultParser;
+    public class OrbitView : MonoBehaviour, INotifyPropertyChanged {
+        protected virtual OrbitParser Parser => OrbitParser.DefaultParser;
         public virtual bool ShouldParse => true;
         public virtual object UIViewHost => this;
 
@@ -42,7 +41,7 @@ namespace Atlas.Orbit.Components {
 #if ORBIT_HOT_RELOAD
             string filePath = $"Assets/Resources/{resourceName}.xml";
             if(File.Exists(filePath)) {
-                FileSystemWatcher watcher = new(Path.GetDirectoryName(filePath));
+                FileSystemWatcher watcher = new(Path.GetDirectoryName(filePath)); //TODO(David): Might need to dispose this OnDestroy
                 watcher.Path = Path.GetDirectoryName(filePath);
                 watcher.Filter = Path.GetFileName(filePath);
                 watcher.NotifyFilter = NotifyFilters.Attributes

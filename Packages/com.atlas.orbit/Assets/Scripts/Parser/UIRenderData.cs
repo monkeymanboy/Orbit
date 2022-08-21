@@ -29,14 +29,14 @@ namespace Atlas.Orbit.Parser {
         internal Dictionary<string, PropertyInfo> PropertyInfoCache { get; } = new();
         internal Dictionary<string, Action> Events { get; } = new();
         internal Dictionary<string, Action<object>> ChildEvents { get; } = new();
-        internal UIParser Parser { get; set; }
+        internal OrbitParser Parser { get; set; }
         public List<GameObject> RootObjects { get; } = new();
 
         internal UIValue GetValueFromID(string id) {
-            if(id.StartsWith(UIParser.PARENT_HOST_VALUE_PREFIX)) {
+            if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
                 if(ParentRenderData == null)
                     throw new Exception("Trying to use ^ when there is no parent host");
-                string valueID = id.Substring(UIParser.PARENT_HOST_VALUE_PREFIX.Length);
+                string valueID = id.Substring(OrbitParser.PARENT_HOST_VALUE_PREFIX.Length);
                 return ParentRenderData.GetValueFromID(valueID);
             }
 
@@ -51,10 +51,10 @@ namespace Atlas.Orbit.Parser {
         }
 
         public void SetValue(string id, object value) {
-            if(id.StartsWith(UIParser.PARENT_HOST_VALUE_PREFIX)) {
+            if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
                 if(ParentRenderData == null)
                     throw new Exception("Trying to use ^ when there is no parent host");
-                string valueID = id.Substring(UIParser.PARENT_HOST_VALUE_PREFIX.Length);
+                string valueID = id.Substring(OrbitParser.PARENT_HOST_VALUE_PREFIX.Length);
                 SetValue(valueID, value);
                 return;
             }

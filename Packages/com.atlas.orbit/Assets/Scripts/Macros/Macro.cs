@@ -13,7 +13,7 @@ namespace Atlas.Orbit.Macros {
     public abstract class Macro {
         public abstract string Tag { get; }
         protected UIRenderData CurrentData { get; set; }
-        public UIParser Parser { get; set; }
+        public OrbitParser Parser { get; set; }
 
         public abstract void Execute(XmlNode node, GameObject parent, TagParameters parameters);
 

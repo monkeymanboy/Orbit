@@ -1,6 +1,6 @@
 using Atlas.Orbit.Attributes;
 using Atlas.Orbit.Components;
 
-public class TestView : UIView {
+public class TestView : OrbitView {
     
 }
