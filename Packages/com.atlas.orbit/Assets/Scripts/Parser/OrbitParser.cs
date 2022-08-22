@@ -38,8 +38,6 @@ namespace Atlas.Orbit.Parser {
         private bool initialized = false;
 
         public virtual void Init() {
-            if(initialized)
-                return;
             readerSettings.IgnoreComments = true;
             ComponentProcessors = UtilReflection.GetAllSubclasses<ComponentProcessor>();
             Macros = new Dictionary<string, Macro>();
@@ -50,13 +48,21 @@ namespace Atlas.Orbit.Parser {
             initialized = true;
         }
 
+        public void AddAssemblyTypes(Assembly assembly) {
+            ComponentProcessors.AddRange(UtilReflection.GetAllSubclasses<ComponentProcessor>(assembly));
+            foreach(Macro macro in UtilReflection.GetAllSubclasses<Macro>(assembly)) {
+                macro.Parser = this;
+                Macros.Add(macro.Tag, macro);
+            }
+        }
+
         public UIRenderData Parse(string content, GameObject parent, object host = null, UIRenderData parentData = null) {
             doc.Load(XmlReader.Create(new StringReader(content), readerSettings));
             return Parse(doc, parent, host, parentData);
         }
 
         public UIRenderData Parse(XmlNode parentNode, GameObject parent, object host = null, UIRenderData parentData = null, Action<UIRenderData> preParse = null) {
-            Init();
+            if(!initialized) Init();
 
             UIRenderData renderData = new UIRenderData {
                 Host = host,
