@@ -14,6 +14,7 @@ namespace Atlas.Orbit.ComponentProcessors {
             {"CellHeight", new FloatSetter<ScrollingList>((component, value) => component.CellHeight = value) },
             {"CellSpacing", new FloatSetter<ScrollingList>((component, value) => component.CellSpacing = value) },
             {"Items", new ObjectSetter<ScrollingList, List<object>>((component, value) => component.Hosts = value) },
+            {"RefreshEvent", new StringSetter<ScrollingList>((component, value) => CurrentData.AddEvent(value, component.Refresh)) },
             {"_Node", new ObjectSetter<ScrollingList, XmlNode>((component, value) => component.ItemXml = value) },
         };
 

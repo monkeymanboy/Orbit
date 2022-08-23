@@ -136,6 +136,9 @@ namespace Atlas.Orbit.Components {
                 scrollRect.verticalNormalizedPosition = 1;
             }
 
+            if(Hosts == null || Hosts.Count == 0)
+                return;
+            
             bool childrenChanged = CheckChildItems();
             bool populateAll = childrenChanged || clearContents;
 
@@ -151,7 +154,6 @@ namespace Atlas.Orbit.Components {
             // If we've moved too far to be able to reuse anything, same as init case
             int diff = newRowStart - sourceDataRowStart;
             if(populateAll || Mathf.Abs(diff) >= childItems.Length) {
-
                 sourceDataRowStart = newRowStart;
                 childBufferStart = 0;
                 int rowIdx = newRowStart;
