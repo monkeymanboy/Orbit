@@ -18,14 +18,7 @@ namespace Atlas.Orbit.Components {
         public Transform cellContainer;
         protected override Transform CellContainer => cellContainer;
 
-        protected override bool CanSnap => activeSpinTransform == null;
-
-        [SerializeField]
-        private Collider spinCollider;
-
-        private bool isFirstFrame = true;
-        float lastAngle;
-        private Transform activeSpinTransform;
+        protected override bool CanSnap => true;
 
         public UIFunction OnCellCentered { get; set; }
 
