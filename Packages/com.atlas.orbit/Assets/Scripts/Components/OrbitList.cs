@@ -1,6 +1,5 @@
 using Atlas.Orbit.Parser;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Atlas.Orbit.Components {
     public class OrbitList : RepeatingList {
@@ -29,21 +28,10 @@ namespace Atlas.Orbit.Components {
         private Transform activeSpinTransform;
 
         public UIFunction OnCellCentered { get; set; }
-        public bool ExpandHoverEffect { get; set; }
 
         private void Awake() {
             if(cellContainer == null)
                 cellContainer = transform;
-
-            /*
-            EventTrigger.Entry pointerDown = new EventTrigger.Entry();
-            pointerDown.eventID = EventTriggerType.InitializePotentialDrag;
-            pointerDown.callback.AddListener((data) => {
-                PointerEventData pointerData = data as PointerEventData;
-                Debug.Log(pointerData.position);
-                Debug.Log(pointerData.pressPosition);
-            });
-            GetComponent<EventTrigger>().triggers.Add(pointerDown);*/
         }
 
         protected override void UpdateChildPosition(ListItem child, int rowIdx) {
@@ -90,35 +78,6 @@ namespace Atlas.Orbit.Components {
 
         protected override void Update() {
             base.Update();
-            //TODO(David): Not a big fan of this way of doing input, would be a good idea to switch out to somehing better
-
-            /*
-            if(ControllerCache.Left.uiPressInteractionState.activatedThisFrame) {
-                isFirstFrame = true;
-                activeSpinTransform = ControllerCache.Left.transform;
-            }
-            if(ControllerCache.Right.uiPressInteractionState.activatedThisFrame) {
-                isFirstFrame = true;
-                activeSpinTransform = ControllerCache.Right.transform;
-            }
-            if(!ControllerCache.Left.uiPressInteractionState.active && !ControllerCache.Right.uiPressInteractionState.active)
-                activeSpinTransform = null;
-            if(activeSpinTransform != null && Physics.Raycast(activeSpinTransform.position, activeSpinTransform.transform.forward, out RaycastHit hit)) {
-                Vector3 hitPos = transform.InverseTransformPoint(hit.point);
-                float angle = Mathf.Atan2(hitPos.y, hitPos.x);
-                angle = (angle / Mathf.PI) * 180 + cellContainer.localEulerAngles.z;
-                if(!isFirstFrame) {
-                    float angleDelta = Mathf.DeltaAngle(angle, lastAngle);
-                    velocity = 10* angleDelta / (360f / visibleItems);
-                }
-                isFirstFrame = false;
-                lastAngle = angle;
-            } else {
-                if(isFirstFrame) {
-                    activeSpinTransform = null;
-                    isFirstFrame = false;
-                }
-            }*/
 
             cellContainer.localEulerAngles = new Vector3(0, 0, -(Spacing * (middleIndex + extraScroll) + 90));
             if(extraMiddleSpace > 0) {
@@ -133,30 +92,6 @@ namespace Atlas.Orbit.Components {
 
         protected override void OnCreatePrefab(ListItem listItem) {
             listItem.OnFocusCell += ClickScrollToRow;
-            (listItem.transform as RectTransform).pivot = Vector2.zero;
-            (listItem.transform as RectTransform).sizeDelta = Vector2.zero;
-
-
-            Canvas canvas = listItem.gameObject.AddComponent<Canvas>();
-            canvas.overrideSorting = true;
-            canvas.sortingOrder = 1;
-            
-            if(ExpandHoverEffect) {
-                EventTrigger eventTrigger = listItem.transform.gameObject.AddComponent<EventTrigger>();
-
-                EventTrigger.Entry pointerEnter = new EventTrigger.Entry();
-                pointerEnter.eventID = EventTriggerType.PointerEnter;
-                pointerEnter.callback.AddListener((data) => {
-                    listItem.ScaleTo(1.05f);
-                });
-                eventTrigger.triggers.Add(pointerEnter);
-                EventTrigger.Entry pointerExit = new EventTrigger.Entry();
-                pointerExit.eventID = EventTriggerType.PointerExit;
-                pointerExit.callback.AddListener((data) => {
-                    listItem.ScaleTo(1f);
-                });
-                eventTrigger.triggers.Add(pointerExit);
-            }
         }
 
         protected override void OnIndexCentered(int index) {

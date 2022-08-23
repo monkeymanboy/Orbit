@@ -24,6 +24,8 @@ namespace Atlas.Orbit.Components {
 
         protected const int rowsAboveBelow = 0;
 
+        [SerializeField] protected ListItem cellPrefab;
+        
         [SerializeField]
         protected int middleIndex;
         [SerializeField]
@@ -83,13 +85,10 @@ namespace Atlas.Orbit.Components {
         }
 
         protected ListItem CreatePrefab() {
-            GameObject prefabObject = new GameObject("ListItem");
-            prefabObject.transform.SetParent(CellContainer, false);
-            prefabObject.AddComponent<RectTransform>();
-            ListItem item = prefabObject.AddComponent<ListItem>();
+            ListItem item = Instantiate(cellPrefab, CellContainer, false);
             OnCreatePrefab(item);
             item.Parse(ParentData.Parser, ItemXml, Hosts[0], ParentData);
-            prefabObject.SetActive(false);
+            item.gameObject.SetActive(false);
             return item;
         }
 

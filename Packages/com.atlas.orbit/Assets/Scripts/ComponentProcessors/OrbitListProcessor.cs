@@ -1,6 +1,4 @@
 ﻿using Atlas.Orbit.Components;
-using Atlas.Orbit.Parser;
-using Atlas.Orbit.TypeSetters;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
@@ -17,8 +15,7 @@ namespace Atlas.Orbit.ComponentProcessors {
             {"Items", new ObjectSetter<OrbitList, List<object>>((component, value) => component.Hosts = value) },
             {"ScrollLocked", new BoolSetter<OrbitList>((component, value) => component.ScrollLocked = value) },
             {"_Node", new ObjectSetter<OrbitList, XmlNode>((component, value) => component.ItemXml = value) },
-            {"OnCellCentered", new ObjectSetter<OrbitList, UIFunction>((component, value) => component.OnCellCentered = value ) },
-            {"ExpandHoverEffect", new BoolSetter<OrbitList>((component, value) => component.ExpandHoverEffect = value ) }
+            {"OnCellCentered", new ObjectSetter<OrbitList, UIFunction>((component, value) => component.OnCellCentered = value ) }
         };
 
         public override void Process(Component genericComponent, TagParameters processorParams) {

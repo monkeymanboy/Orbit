@@ -65,28 +65,5 @@ namespace Atlas.Orbit.Components
             LoopedIndex = loopedIndex;
             renderData.Host = host;
         }
-
-        public void ScaleTo(float scale)
-        {
-            StopAllCoroutines();
-            StartCoroutine(ScaleToSizeCoroutine(scale));
-        }
-
-        private IEnumerator ScaleToSizeCoroutine(float scale)
-        {
-            float
-                startScale =
-                    transform.GetChild(0).localScale
-                        .x; //TODO(David): Relying on the first child containing everything here, should wrap the object around a scaler
-            float t = 0;
-            while (t < 1)
-            {
-                t = Mathf.Clamp(t, 0, 1);
-                float scaleThisFrame = t;//UtilEasingFunction.EaseOutElastic(startScale, scale, t);
-                transform.GetChild(0).localScale = new Vector3(scaleThisFrame, scaleThisFrame, scaleThisFrame);
-                t += Time.deltaTime * 4;
-                yield return null;
-            }
-        }
     }
 }
