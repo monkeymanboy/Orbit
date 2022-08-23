@@ -1,0 +1,10 @@
+<Container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../OrbitSchema.xsd">
+    <List Items="~strings" RefreshEvent="RefreshList">
+        <Text AnchorPreset="FillParent" Text="~this" FontSize="26"/>
+        <Button Text="X" AnchorPreset="RightAlign" SizeDeltaX="30" ClickEvent="RemoveString"/>
+    </List>
+    <Horizontal AnchorPreset="BottomAlign" SizeDeltaY="30" ChildControlWidth="true">
+        <InputField Text="Text" BoundValue="enteredText"/>
+        <Button Text="Add" ClickEvent="AddString"/>
+    </Horizontal>
+</Container>
