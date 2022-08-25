@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
+using Atlas.Orbit.Parser;
+using System.Collections;
 
 namespace Atlas.Orbit.Components {
-    using Parser;
 
     [RequireComponent(typeof(ScrollRect))]
     public class ScrollingList : MonoBehaviour {
@@ -14,7 +14,7 @@ namespace Atlas.Orbit.Components {
         public float CellHeight = 30;
         public float CellSpacing = 15f;
         
-        public List<object> Hosts { get; set; }
+        public IList Hosts { get; set; }
         public XmlNode ItemXml { get; set; }
 
         public int RowCount => Hosts.Count;
@@ -75,7 +75,8 @@ namespace Atlas.Orbit.Components {
         }
 
         protected virtual void Awake() {
-            scrollRect = GetComponent<ScrollRect>();
+            if(scrollRect == null) 
+                scrollRect = GetComponent<ScrollRect>();
         }
 
         protected virtual bool CheckChildItems() {
@@ -223,6 +224,8 @@ namespace Atlas.Orbit.Components {
         }
 
         protected virtual void UpdateContentHeight() {
+            if(scrollRect == null) 
+                scrollRect = GetComponent<ScrollRect>();
             float height = CellHeight * RowCount + (RowCount - 1) * CellSpacing;
             scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, height);
         }

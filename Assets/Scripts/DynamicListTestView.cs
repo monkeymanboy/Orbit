@@ -5,7 +5,7 @@ namespace DefaultNamespace {
     using System.Collections.Generic;
 
     public class DynamicListTestView : OrbitView {
-        [ValueID] private List<object> strings = new();
+        [ValueID] private List<string> strings = new();
         [ValueID] private string enteredText = "";
         [EventEmitter("RefreshList")] private Action RefreshList;
 

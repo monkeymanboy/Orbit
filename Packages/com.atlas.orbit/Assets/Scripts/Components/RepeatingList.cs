@@ -1,13 +1,14 @@
 using Atlas.Orbit.Parser;
 using System;
-using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using System.Collections;
 
 namespace Atlas.Orbit.Components {
+
     public abstract class RepeatingList : MonoBehaviour {
         public UIRenderData ParentData { get; internal set; }
-        public List<object> Hosts { get; set; }
+        public IList Hosts { get; set; }
         public XmlNode ItemXml { get; set; }
 
         public int ItemCount => Hosts.Count;
