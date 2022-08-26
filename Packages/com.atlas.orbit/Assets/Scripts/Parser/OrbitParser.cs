@@ -11,14 +11,19 @@ namespace Atlas.Orbit.Parser {
     using Attributes;
     using ComponentProcessors;
     using Macros;
+    using System.Diagnostics;
     using Util;
+    using Debug = UnityEngine.Debug;
 
     public class OrbitParser {
         internal const string RETRIEVE_VALUE_PREFIX = "~";
         internal const string PARENT_HOST_VALUE_PREFIX = "^";
-        internal const BindingFlags HOST_FLAGS = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+
+        internal const BindingFlags HOST_FLAGS =
+            BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
         private static OrbitParser parser;
+
         public static OrbitParser DefaultParser {
             get {
                 if(parser == null) {
@@ -28,9 +33,10 @@ namespace Atlas.Orbit.Parser {
                 return parser;
             }
         }
-        
+
         public List<ComponentProcessor> ComponentProcessors { get; set; }
         public Dictionary<string, Macro> Macros { get; set; }
+        public Dictionary<string, GameObject> Prefabs { get; set; }
 
         private XmlDocument doc = new XmlDocument();
         private XmlReaderSettings readerSettings = new XmlReaderSettings();
@@ -41,10 +47,12 @@ namespace Atlas.Orbit.Parser {
             readerSettings.IgnoreComments = true;
             ComponentProcessors = UtilReflection.GetAllSubclasses<ComponentProcessor>();
             Macros = new Dictionary<string, Macro>();
+            Prefabs = new Dictionary<string, GameObject>();
             foreach(Macro macro in UtilReflection.GetAllSubclasses<Macro>()) {
                 macro.Parser = this;
                 Macros.Add(macro.Tag, macro);
             }
+
             initialized = true;
         }
 
@@ -56,60 +64,92 @@ namespace Atlas.Orbit.Parser {
             }
         }
 
-        public UIRenderData Parse(string content, GameObject parent, object host = null, UIRenderData parentData = null) {
+        public UIRenderData Parse(string content, GameObject parent, object host = null,
+            UIRenderData parentData = null) {
             doc.Load(XmlReader.Create(new StringReader(content), readerSettings));
             return Parse(doc, parent, host, parentData);
         }
 
-        public UIRenderData Parse(XmlNode parentNode, GameObject parent, object host = null, UIRenderData parentData = null, Action<UIRenderData> preParse = null) {
-            if(!initialized) Init();
+        public UIRenderData Parse(XmlNode parentNode, GameObject parent, object host = null,
+            UIRenderData parentData = null, Action<UIRenderData> preParse = null) {
+            if(!initialized) {
+#if ORBIT_BENCHMARK
+                Stopwatch stopwatch = new();
+                stopwatch.Start();
+#endif
+                Init();
+#if ORBIT_BENCHMARK
+                stopwatch.Stop();
+                Debug.Log($"Orbit Init: {stopwatch.ElapsedMilliseconds}ms");
+#endif
+            }
 
-            UIRenderData renderData = new UIRenderData {
-                Host = host,
-                ParentRenderData = parentData,
-                Parser = this
-            };
+#if ORBIT_BENCHMARK
+            Stopwatch parseStopWatch = new();
+            parseStopWatch.Start();
+#endif
+            
+            UIRenderData renderData = new UIRenderData { Host = host, ParentRenderData = parentData, Parser = this };
 
             if(host != null) {
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
-                    EventEmitterAttribute eventEmitter = fieldInfo.GetCustomAttributes(typeof(EventEmitterAttribute), true).FirstOrDefault() as EventEmitterAttribute;
+                    EventEmitterAttribute eventEmitter =
+                        fieldInfo.GetCustomAttributes(typeof(EventEmitterAttribute), true).FirstOrDefault() as
+                            EventEmitterAttribute;
                     if(eventEmitter != null) {
                         fieldInfo.SetValue(host, new Action(() => renderData.EmitEvent(eventEmitter.ID)));
                     }
 
-                    ValueIDAttribute valueID = fieldInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as ValueIDAttribute;
+                    ValueIDAttribute valueID =
+                        fieldInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as
+                            ValueIDAttribute;
                     if(valueID == null)
                         continue;
-                    renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? fieldInfo.Name : valueID.ID, new UIFieldValue(renderData, fieldInfo));
+                    renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? fieldInfo.Name : valueID.ID,
+                        new UIFieldValue(renderData, fieldInfo));
                 }
+
                 foreach(PropertyInfo propInfo in host.GetType().GetProperties(HOST_FLAGS)) {
-                    ValueIDAttribute valueID = propInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as ValueIDAttribute;
+                    ValueIDAttribute valueID =
+                        propInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as
+                            ValueIDAttribute;
                     if(valueID == null)
                         continue;
                     UIPropertyValue uiPropertyValue = new UIPropertyValue(renderData, propInfo);
-                    renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? propInfo.Name : valueID.ID, uiPropertyValue);
+                    renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? propInfo.Name : valueID.ID,
+                        uiPropertyValue);
                     renderData.Properties.Add(propInfo.Name, uiPropertyValue);
                     renderData.PropertyInfoCache.Add(propInfo.Name, propInfo);
                 }
+
                 foreach(MethodInfo methodInfo in host.GetType().GetMethods(HOST_FLAGS)) {
-                    ValueIDAttribute valueID = methodInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as ValueIDAttribute;
+                    ValueIDAttribute valueID =
+                        methodInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as
+                            ValueIDAttribute;
                     if(valueID != null) {
-                        renderData.SetValue(string.IsNullOrEmpty(valueID.ID) ? methodInfo.Name : valueID.ID, new UIFunction(renderData, methodInfo));
+                        renderData.SetValue(string.IsNullOrEmpty(valueID.ID) ? methodInfo.Name : valueID.ID,
+                            new UIFunction(renderData, methodInfo));
                     }
 
-                    ListenForAttribute listenFor = methodInfo.GetCustomAttributes(typeof(ListenForAttribute), true).FirstOrDefault() as ListenForAttribute;
+                    ListenForAttribute listenFor =
+                        methodInfo.GetCustomAttributes(typeof(ListenForAttribute), true).FirstOrDefault() as
+                            ListenForAttribute;
                     if(listenFor == null)
                         continue;
                     if(methodInfo.GetParameters().Length == 1)
-                        renderData.AddChildEvent(listenFor.Events, (host) => methodInfo.Invoke(renderData.Host, new object[] { host }));
+                        renderData.AddChildEvent(listenFor.Events,
+                            (host) => methodInfo.Invoke(renderData.Host, new object[] { host }));
                     else
-                        renderData.AddEvent(listenFor.Events, () => methodInfo.Invoke(renderData.Host, new object[] { }));
+                        renderData.AddEvent(listenFor.Events,
+                            () => methodInfo.Invoke(renderData.Host, new object[] { }));
                 }
             }
 
             renderData.Values.Add("this", new UIHostValue(renderData));
 
-            renderData.AddEvent("RefreshAll", renderData.RefreshAllValues); //TODO(David): Not sure if I want this to actually exist or not, should reconsider after implementing property binding
+            renderData.AddEvent("RefreshAll",
+                renderData
+                    .RefreshAllValues); //TODO(David): Not sure if I want this to actually exist or not, should reconsider after implementing property binding
 
             renderData.EmitEvent("PreParse");
 
@@ -119,26 +159,36 @@ namespace Atlas.Orbit.Parser {
                 renderData.RootObjects.Add(RenderNode(node, parent, renderData));
 
             if(host != null) {
-                foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) { //TODO(David): ViewComponentAttributes could be cached so we don't need to iterate over the fields twice
-                    ViewComponentAttribute objectID = fieldInfo.GetCustomAttributes(typeof(ViewComponentAttribute), true).FirstOrDefault() as ViewComponentAttribute;
+                foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
+                    //TODO(David): ViewComponentAttributes could be cached so we don't need to iterate over the fields twice
+                    ViewComponentAttribute objectID =
+                        fieldInfo.GetCustomAttributes(typeof(ViewComponentAttribute), true).FirstOrDefault() as
+                            ViewComponentAttribute;
                     if(objectID == null) continue;
                     if(renderData.GetValueFromID(objectID.ID).GetValue() is MarkupPrefab markupPrefab) {
                         fieldInfo.SetValue(host, markupPrefab.FindComponent(fieldInfo.FieldType));
                     } else {
-                        throw new Exception("Tried using [ViewComponent] on an ID that is not bound to an object in the view");
+                        throw new Exception(
+                            "Tried using [ViewComponent] on an ID that is not bound to an object in the view");
                     }
                 }
             }
 
             renderData.EmitEvent("PostParse");
+#if ORBIT_BENCHMARK
+            parseStopWatch.Stop();
+            Debug.Log($"Parsed {host.GetType().Name} in {parseStopWatch.ElapsedMilliseconds}ms");
+#endif
             return renderData;
         }
 
         public GameObject RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
             TagParameters parameters = new TagParameters();
             parameters.RenderData = renderData;
-            parameters.Data = new Dictionary<string, string>();
-            parameters.Values = new Dictionary<string, UIValue>(); //TODO(David) reuse Dictionaries?
+            if(parameters.Data == null) 
+                parameters.Data = new Dictionary<string, string>();
+            if(parameters.Values == null) 
+                parameters.Values = new Dictionary<string, UIValue>(); //TODO(David) reuse Dictionaries?
             foreach(XmlAttribute attribute in node.Attributes) {
                 string propertyName = attribute.Name;
                 string value = attribute.Value;
@@ -148,11 +198,14 @@ namespace Atlas.Orbit.Parser {
                     UIValue uiValue = renderData.GetValueFromID(valueID);
 
                     parameters.Values.Add(propertyName, uiValue);
-                    parameters.Data.Add(propertyName, null); //If data points to a null string it is bound to a property/field
+                    parameters.Data.Add(propertyName,
+                        null); //If data points to a null string it is bound to a property/field
                     continue;
                 }
+
                 parameters.Data.Add(propertyName, value);
             }
+
             parameters.Values.Add("_Node", new DefinedUIValue(null, node));
             parameters.Data.Add("_Node", null);
 
@@ -160,6 +213,7 @@ namespace Atlas.Orbit.Parser {
                 RenderMacroNode(node, macro, parent, parameters);
                 return null;
             }
+
             return RenderTagNode(node, parent, parameters);
         }
 
@@ -168,12 +222,14 @@ namespace Atlas.Orbit.Parser {
             MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
             if(markupPrefab == null)
                 throw new Exception($"'Orbit/Prefabs/{node.Name}' is missing it's MarkupPrefab component");
-            foreach(ComponentProcessor processor in ComponentProcessors) { //TODO(PERFORMANCE): It might be better to instead loop through the components on the prefab and then look up the processors in a dictionary, though with a small number of processors this should be fine for a while.
+            foreach(ComponentProcessor processor in ComponentProcessors) {
+                //TODO(PERFORMANCE): It might be better to instead loop through the components on the prefab and then look up the processors in a dictionary, though with a small number of processors this should be fine for a while.
                 Component component = markupPrefab.FindComponent(processor.ComponentType);
                 if(component != null) {
                     processor.Process(component, parameters);
                 }
             }
+
             if(markupPrefab.ParseChildren) {
                 foreach(XmlNode childNode in node.ChildNodes)
                     RenderNode(childNode, markupPrefab.ChildrenContainer, parameters.RenderData);
@@ -181,12 +237,18 @@ namespace Atlas.Orbit.Parser {
 
             return nodeGO;
         }
+
         private void RenderMacroNode(XmlNode node, Macro macro, GameObject parent, TagParameters parameters) {
             macro.Execute(node, parent, parameters);
         }
 
         public virtual GameObject CreatePrefab(string name, GameObject parent) {
-            return GameObject.Instantiate(Resources.Load<GameObject>($"Orbit/Prefabs/{name}"), parent.transform);
+            if(!Prefabs.TryGetValue(name, out GameObject prefab)) {
+                prefab = Resources.Load<GameObject>($"Orbit/Prefabs/{name}");
+                Prefabs.Add(name, prefab);
+            }
+            GameObject newObject = GameObject.Instantiate(prefab, parent.transform);
+            return newObject;
         }
 
         public static void SetDefaultParser(OrbitParser parser) {
