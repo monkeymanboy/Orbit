@@ -16,7 +16,11 @@ namespace Atlas.Orbit.ComponentProcessors {
             BottomLeftAlign,
             TopRightAlign,
             BottomRightAlign,
-            Center
+            Center,
+            LeftHalf,
+            RightHalf,
+            TopHalf,
+            BottomHalf
         }
 
         public override Dictionary<string, TypeSetter<RectTransform>> Setters => new() {
@@ -103,6 +107,30 @@ namespace Atlas.Orbit.ComponentProcessors {
                     rectTransform.anchorMin = new Vector2(1, 0);
                     rectTransform.anchorMax = new Vector2(1, 0);
                     rectTransform.pivot = new Vector2(1, 0);
+                    break;
+                case AnchorPreset.LeftHalf:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(0, 0);
+                    rectTransform.anchorMax = new Vector2(0.5f, 1);
+                    rectTransform.pivot = new Vector2(0, 0.5f);
+                    break;
+                case AnchorPreset.RightHalf:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(0.5f, 0);
+                    rectTransform.anchorMax = new Vector2(1, 1);
+                    rectTransform.pivot = new Vector2(1, 0.5f);
+                    break;
+                case AnchorPreset.BottomHalf:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(0, 0);
+                    rectTransform.anchorMax = new Vector2(1, 0.5f);
+                    rectTransform.pivot = new Vector2(0.5f, 0);
+                    break;
+                case AnchorPreset.TopHalf:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(0, 0.5f);
+                    rectTransform.anchorMax = new Vector2(1, 1);
+                    rectTransform.pivot = new Vector2(0.5f, 1);
                     break;
             }
         }
