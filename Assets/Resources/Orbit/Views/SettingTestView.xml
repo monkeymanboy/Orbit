@@ -2,7 +2,9 @@
     <Vertical ChildControlWidth='true' PadAll="10" Spacing="10">
         <SettingSlider Text='Slider' BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='100'/>
         <SettingToggle Text='Toggle' BoundValue='ToggleVal'/>
-        <SettingInputField Text="Input" BoundValue="InputVal"/>
+        <SettingInputField Text="StringInput" BoundValue="InputStringVal"/>
+        <SettingInputField Text="FloatInput" BoundValue="InputFloatVal"/>
+        <SettingInputField Text="IntInput" BoundValue="InputIntVal"/>
         <SettingDropdown Text="Dropdown" BoundValue="DropdownVal"/>
         <Button Text="Print Values" ClickEvent="PrintValues"/>
     </Vertical>

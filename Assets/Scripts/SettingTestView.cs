@@ -11,7 +11,9 @@ public class SettingTestView : OrbitView {
     
     [ValueID("SliderVal")] private float sliderVal;
     [ValueID("ToggleVal")] private bool toggleVal;
-    [ValueID("InputVal")] private string inputVal;
+    [ValueID("InputStringVal")] private string inputVal;
+    [ValueID("InputFloatVal")] private float inputFloatVal = 1.5f;
+    [ValueID("InputIntVal")] private int inputIntVal;
     [ValueID("DropdownVal")] private DropdownValue dropdownVal;
 
     [ListenFor("PrintValues")]
@@ -19,6 +21,8 @@ public class SettingTestView : OrbitView {
         Debug.Log(sliderVal);
         Debug.Log(toggleVal);
         Debug.Log(inputVal);
+        Debug.Log(inputFloatVal);
+        Debug.Log(inputIntVal);
         Debug.Log(dropdownVal);
     }
 }

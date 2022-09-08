@@ -7,19 +7,55 @@ namespace Atlas.Orbit.Components.Settings {
         private TMP_InputField inputField;
 
         private bool initialized = false;
+        private ValueType valueType;
 
         public override void PostParse() {
             initialized = true;
+
+            valueType = ValueType.STRING;
+            
+            object value = UIValue.GetValue();
+            switch(value) {
+                case int:
+                    inputField.contentType = TMP_InputField.ContentType.IntegerNumber;
+                    valueType = ValueType.INT;
+                    break;
+                case float:
+                    inputField.contentType = TMP_InputField.ContentType.DecimalNumber;
+                    valueType = ValueType.FLOAT;
+                    break;
+            }
+            
             inputField.onValueChanged.AddListener(SetUIValue);
             UpdateInputText();
         }
 
         private void UpdateInputText() {
-            inputField.SetTextWithoutNotify(UIValue.GetValue<string>());
+            switch(valueType) {
+                case ValueType.INT:
+                    inputField.SetTextWithoutNotify(UIValue.GetValue<int>().ToString());
+                    break;
+                case ValueType.FLOAT:
+                    inputField.SetTextWithoutNotify(UIValue.GetValue<float>().ToString());
+                    break;
+                case ValueType.STRING:
+                    inputField.SetTextWithoutNotify(UIValue.GetValue<string>());
+                    break;
+            }
         }
 
         private void SetUIValue(string val) {
-            UIValue.SetValue(val);
+            switch(valueType) {
+                case ValueType.INT:
+                    UIValue.SetValue(int.Parse(val));
+                    break;
+                case ValueType.FLOAT:
+                    UIValue.SetValue(float.Parse(val));
+                    break;
+                case ValueType.STRING:
+                    UIValue.SetValue(val);
+                    break;
+            }
             OnChangeEvent?.Invoke();
         }
 
@@ -31,6 +67,10 @@ namespace Atlas.Orbit.Components.Settings {
         protected override void OnValueChanged() {
             if(!initialized) return;
             UpdateInputText();
+        }
+
+        public enum ValueType {
+            STRING, FLOAT, INT
         }
     }
 }
