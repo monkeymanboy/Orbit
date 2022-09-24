@@ -32,7 +32,7 @@ namespace Atlas.Orbit.Parser {
         internal OrbitParser Parser { get; set; }
         public List<GameObject> RootObjects { get; } = new();
 
-        internal UIValue GetValueFromID(string id) {
+        public UIValue GetValueFromID(string id) {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
                 if(ParentRenderData == null)
                     throw new Exception("Trying to use ^ when there is no parent host");
