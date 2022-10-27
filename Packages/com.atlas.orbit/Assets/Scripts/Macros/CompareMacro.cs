@@ -30,8 +30,9 @@ namespace Atlas.Orbit.Macros {
             UIRenderData renderData = CurrentData;
             UIValue firstValue = renderData.GetValueFromID(FirstID);
             UIValue secondValue = renderData.GetValueFromID(SecondID);
+            string id = ID;
             Action UpdateValue = () => {
-                renderData.SetValue(ID, firstValue.GetValue().Equals(secondValue.GetValue()));
+                renderData.SetValue(id, firstValue.GetValue().Equals(secondValue.GetValue()));
             };
             firstValue.OnChange += UpdateValue;
             secondValue.OnChange += UpdateValue;

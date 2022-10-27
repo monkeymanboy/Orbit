@@ -23,10 +23,11 @@ namespace Atlas.Orbit.Macros {
         public override void Execute(XmlNode node, GameObject parent, NegateMacro data) {
             UIRenderData renderData = CurrentData;
             UIValue boolValue = renderData.GetValueFromID(BoolID);
+            string id = ID;
             boolValue.OnChange += () => {
-                renderData.SetValue(ID, !boolValue.GetValue<bool>());
+                renderData.SetValue(id, !boolValue.GetValue<bool>());
             };
-            renderData.SetValue(ID, !boolValue.GetValue<bool>());
+            renderData.SetValue(id, !boolValue.GetValue<bool>());
         }
 
         public override void SetToDefault() {

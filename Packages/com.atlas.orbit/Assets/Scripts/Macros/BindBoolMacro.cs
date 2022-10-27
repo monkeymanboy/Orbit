@@ -29,10 +29,11 @@ namespace Atlas.Orbit.Macros {
         public override void Execute(XmlNode node, GameObject parent, BindBoolMacro data) {
             UIRenderData renderData = CurrentData;
             UIValue boolValue = renderData.GetValueFromID(BoolID);
+            string id = ID;
             boolValue.OnChange += () => {
-                renderData.SetValue(ID, renderData.GetValueFromID(boolValue.GetValue<bool>() ? TrueID : FalseID).GetValue());
+                renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? TrueID : FalseID).GetValue());
             };
-            renderData.SetValue(ID, renderData.GetValueFromID(boolValue.GetValue<bool>() ? TrueID : FalseID).GetValue());
+            renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? TrueID : FalseID).GetValue());
         }
 
         public override void SetToDefault() {
