@@ -37,6 +37,7 @@ namespace Atlas.Orbit.Macros {
             SetToDefault();
             foreach(KeyValuePair<string, string> pair in parameters.Data) {
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
+                    
                     if(pair.Value == null) {
                         typeSetter.Set(data, parameters.Values[pair.Key].GetValue());
                         continue;

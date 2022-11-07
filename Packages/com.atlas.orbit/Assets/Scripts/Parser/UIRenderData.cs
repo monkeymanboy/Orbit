@@ -31,6 +31,7 @@ namespace Atlas.Orbit.Parser {
         internal Dictionary<string, Action<object>> ChildEvents { get; } = new();
         internal OrbitParser Parser { get; set; }
         public List<GameObject> RootObjects { get; } = new();
+        public bool Disabled { get; set; }
 
         public UIValue GetValueFromID(string id) {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
@@ -122,6 +123,23 @@ namespace Atlas.Orbit.Parser {
             PropertyInfo propInfo = PropertyInfoCache[e.PropertyName];
             UIValue uiValue = Properties[e.PropertyName];
             uiValue.InvokeOnChange();
+        }
+
+        public void DisableRootObjects() {
+            if(Disabled)
+                return;
+            for(int i=0;i<RootObjects.Count;i++) {
+                RootObjects[i].SetActive(false);
+            }
+            Disabled = true;
+        }
+        public void EnableRootObjects() {
+            if(!Disabled)
+                return;
+            for(int i=0;i<RootObjects.Count;i++) {
+                RootObjects[i].SetActive(true);
+            }
+            Disabled = false;
         }
     }
 }
