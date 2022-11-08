@@ -159,12 +159,14 @@ namespace Atlas.Orbit.Parser {
                 renderData.RootObjects.Add(RenderNode(node, parent, renderData));
 
             if(host != null) {
+                List<(string, FieldInfo)> viewComponentFields = new();
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
                     //TODO(David): ViewComponentAttributes could be cached so we don't need to iterate over the fields twice
                     ViewComponentAttribute objectID =
                         fieldInfo.GetCustomAttributes(typeof(ViewComponentAttribute), true).FirstOrDefault() as
                             ViewComponentAttribute;
                     if(objectID == null) continue;
+                    viewComponentFields.Add(new(objectID.ID, fieldInfo));
                     if(renderData.GetValueFromID(objectID.ID).GetValue() is MarkupPrefab markupPrefab) {
                         fieldInfo.SetValue(host, markupPrefab.FindComponent(fieldInfo.FieldType));
                     } else {
@@ -172,6 +174,8 @@ namespace Atlas.Orbit.Parser {
                             "Tried using [ViewComponent] on an ID that is not bound to an object in the view");
                     }
                 }
+
+                renderData.ViewComponentFields = viewComponentFields;
             }
 
             renderData.EmitEvent("PostParse");

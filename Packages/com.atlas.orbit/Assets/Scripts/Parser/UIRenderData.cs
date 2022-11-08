@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 
 namespace Atlas.Orbit.Parser {
+    using Components;
     using UnityEngine;
 
     public class UIRenderData {
@@ -18,6 +19,8 @@ namespace Atlas.Orbit.Parser {
                 if(host is INotifyPropertyChanged newHost) {
                     newHost.PropertyChanged += HandlePropertyChanged;
                 }
+                if(ViewComponentFields != null)
+                    InjectViewComponentFields();
                 RefreshAllValues();
             }
         }
@@ -32,6 +35,7 @@ namespace Atlas.Orbit.Parser {
         internal OrbitParser Parser { get; set; }
         public List<GameObject> RootObjects { get; } = new();
         public bool Disabled { get; set; }
+        public List<(string, FieldInfo)> ViewComponentFields { get; set; }
 
         public UIValue GetValueFromID(string id) {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
@@ -140,6 +144,18 @@ namespace Atlas.Orbit.Parser {
                 RootObjects[i].SetActive(true);
             }
             Disabled = false;
+        }
+        
+
+        public void InjectViewComponentFields() {
+            foreach(var pair in ViewComponentFields) {
+                if(GetValueFromID(pair.Item1).GetValue() is MarkupPrefab markupPrefab) {
+                    pair.Item2.SetValue(host, markupPrefab.FindComponent(pair.Item2.FieldType));
+                } else {
+                    throw new Exception(
+                        "Tried using [ViewComponent] on an ID that is not bound to an object in the view");
+                }
+            }
         }
     }
 }
