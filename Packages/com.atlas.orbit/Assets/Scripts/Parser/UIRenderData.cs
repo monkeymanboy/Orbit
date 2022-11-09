@@ -21,6 +21,8 @@ namespace Atlas.Orbit.Parser {
                 }
                 if(ViewComponentFields != null)
                     InjectViewComponentFields();
+                if(EventEmitterFields != null)
+                    InjectEventEmitterFields();
                 RefreshAllValues();
             }
         }
@@ -36,6 +38,7 @@ namespace Atlas.Orbit.Parser {
         public List<GameObject> RootObjects { get; } = new();
         public bool Disabled { get; set; }
         public List<(string, FieldInfo)> ViewComponentFields { get; set; }
+        public List<(string, FieldInfo)> EventEmitterFields { get; set; }
 
         public UIValue GetValueFromID(string id) {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
@@ -155,6 +158,12 @@ namespace Atlas.Orbit.Parser {
                     throw new Exception(
                         "Tried using [ViewComponent] on an ID that is not bound to an object in the view");
                 }
+            }
+        }
+
+        public void InjectEventEmitterFields() {
+            foreach(var pair in EventEmitterFields) {
+                pair.Item2.SetValue(host, new Action(() => EmitEvent(pair.Item1)));
             }
         }
     }

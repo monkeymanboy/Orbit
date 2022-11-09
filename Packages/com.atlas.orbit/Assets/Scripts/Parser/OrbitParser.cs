@@ -92,12 +92,16 @@ namespace Atlas.Orbit.Parser {
             UIRenderData renderData = new UIRenderData { Host = host, ParentRenderData = parentData, Parser = this };
 
             if(host != null) {
+                List<(string, FieldInfo)> eventEmitterFields = null;
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
                     EventEmitterAttribute eventEmitter =
                         fieldInfo.GetCustomAttributes(typeof(EventEmitterAttribute), true).FirstOrDefault() as
                             EventEmitterAttribute;
                     if(eventEmitter != null) {
                         fieldInfo.SetValue(host, new Action(() => renderData.EmitEvent(eventEmitter.ID)));
+                        if(eventEmitterFields == null)
+                            eventEmitterFields = new();
+                        eventEmitterFields.Add((eventEmitter.ID, fieldInfo));
                     }
 
                     ValueIDAttribute valueID =
@@ -108,6 +112,7 @@ namespace Atlas.Orbit.Parser {
                     renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? fieldInfo.Name : valueID.ID,
                         new UIFieldValue(renderData, fieldInfo));
                 }
+                renderData.EventEmitterFields = eventEmitterFields;
 
                 foreach(PropertyInfo propInfo in host.GetType().GetProperties(HOST_FLAGS)) {
                     ValueIDAttribute valueID =
@@ -159,13 +164,15 @@ namespace Atlas.Orbit.Parser {
                 renderData.RootObjects.Add(RenderNode(node, parent, renderData));
 
             if(host != null) {
-                List<(string, FieldInfo)> viewComponentFields = new();
+                List<(string, FieldInfo)> viewComponentFields = null;
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
                     //TODO(David): ViewComponentAttributes could be cached so we don't need to iterate over the fields twice
                     ViewComponentAttribute objectID =
                         fieldInfo.GetCustomAttributes(typeof(ViewComponentAttribute), true).FirstOrDefault() as
                             ViewComponentAttribute;
                     if(objectID == null) continue;
+                    if(viewComponentFields == null)
+                        viewComponentFields = new();
                     viewComponentFields.Add(new(objectID.ID, fieldInfo));
                     if(renderData.GetValueFromID(objectID.ID).GetValue() is MarkupPrefab markupPrefab) {
                         fieldInfo.SetValue(host, markupPrefab.FindComponent(fieldInfo.FieldType));
