@@ -28,7 +28,17 @@ namespace Atlas.Orbit.Macros {
                 return cachedSetters;
             }
         }
+        
+        private Dictionary<string, TypeSetter<T, UIValue>> cachedValueSetters;
+        public Dictionary<string, TypeSetter<T, UIValue>> CachedValueSetters {
+            get {
+                if(cachedValueSetters == null)
+                    cachedValueSetters = ValueSetters;
+                return cachedValueSetters;
+            }
+        }
         public abstract Dictionary<string, TypeSetter<T>> Setters { get; }
+        public virtual Dictionary<string, TypeSetter<T, UIValue>> ValueSetters => null;
         public abstract void SetToDefault();
 
         public override void Execute(XmlNode node, GameObject parent, TagParameters parameters) {
@@ -36,6 +46,9 @@ namespace Atlas.Orbit.Macros {
             CurrentData = parameters.RenderData;
             SetToDefault();
             foreach(KeyValuePair<string, string> pair in parameters.Data) {
+                if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter)) {
+                    valueTypeSetter.Set(data, parameters.Values[pair.Key]);
+                }
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
                     
                     if(pair.Value == null) {
