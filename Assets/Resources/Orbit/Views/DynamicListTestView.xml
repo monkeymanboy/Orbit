@@ -1,5 +1,5 @@
 <Container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../OrbitSchema.xsd">
-    <List Items="~strings" RefreshEvent="RefreshList" AnchorPreset="FillParent" PivotY="1" SizeDeltaY="-30">
+    <List Items="~strings" RefreshEvent="RefreshList" AnchorPreset="FillParent" PivotY="1" SizeDeltaY="-30" ScrollSensitivity="15">
         <Text AnchorPreset="FillParent" Text="~this" FontSize="26"/>
         <Button Text="X" AnchorPreset="RightAlign" SizeDeltaX="30" ClickEvent="RemoveString"/>
     </List>

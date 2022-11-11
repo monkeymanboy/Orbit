@@ -51,6 +51,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="UnHoveredEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ImageColor">
         <xs:simpleType>
           <xs:annotation>
@@ -129,6 +143,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -185,6 +213,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -217,6 +273,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -765,6 +825,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -829,6 +931,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="UnHoveredEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="IgnoreLayout">
         <xs:simpleType>
           <xs:annotation>
@@ -839,6 +955,20 @@
               <xs:restriction base="xs:string">
                 <xs:enumeration value="true" />
                 <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -900,6 +1030,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -932,6 +1090,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -1288,6 +1450,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -1357,6 +1561,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -1413,6 +1631,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -1445,6 +1691,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -1773,6 +2023,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -1959,6 +2251,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -2002,6 +2308,34 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="MinHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -2139,6 +2473,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -2467,6 +2805,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -2580,6 +2960,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -2636,6 +3030,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -2668,6 +3090,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -3009,6 +3435,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -3109,6 +3577,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -3165,6 +3647,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -3197,6 +3707,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -3553,6 +4067,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -3618,6 +4174,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -3674,6 +4244,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -3706,6 +4304,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -3952,7 +4554,7 @@
       <xs:attribute name="Items">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>List`1</xs:documentation>
+            <xs:documentation>IList</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
         </xs:simpleType>
@@ -3977,6 +4579,109 @@
             <xs:documentation>XmlNode</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="MovementType">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>MovementType</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="Unrestricted" />
+                <xs:enumeration value="Elastic" />
+                <xs:enumeration value="Clamped" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Elasticity">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Horizontal">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Vertical">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Inertia">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="DecelerationRate">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScrollSensitivity">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Rotation">
@@ -4105,6 +4810,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -4159,6 +4906,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -4500,6 +5251,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -4532,6 +5325,20 @@
               <xs:restriction base="xs:string">
                 <xs:enumeration value="true" />
                 <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -4593,6 +5400,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -4625,6 +5460,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -5160,6 +5999,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -5238,6 +6119,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -5294,6 +6189,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -5326,6 +6249,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -5861,6 +6788,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -5956,6 +6925,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -6476,6 +7449,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -6619,6 +7634,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -6675,6 +7704,34 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -6707,6 +7764,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -7255,6 +8316,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -7305,6 +8408,119 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="IgnoreLayout">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PreferredWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PreferredHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="MinWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="MinHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -7337,6 +8553,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -7857,6 +9077,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -8043,6 +9305,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -8086,6 +9362,34 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="MinHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -8223,6 +9527,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -8551,6 +9859,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -8904,6 +10254,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -9245,6 +10599,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -9362,6 +10758,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -9718,6 +11118,48 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
@@ -9891,6 +11333,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="PreferredWidth">
         <xs:simpleType>
           <xs:annotation>
@@ -9934,6 +11390,34 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="MinHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -10071,6 +11555,10 @@
                 <xs:enumeration value="TopRightAlign" />
                 <xs:enumeration value="BottomRightAlign" />
                 <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -10286,6 +11774,109 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="MovementType">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>MovementType</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="Unrestricted" />
+                <xs:enumeration value="Elastic" />
+                <xs:enumeration value="Clamped" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Elasticity">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Horizontal">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Vertical">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Inertia">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="DecelerationRate">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScrollSensitivity">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="Rotation">
         <xs:simpleType>
           <xs:annotation>
@@ -10399,6 +11990,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Single</xs:documentation>
@@ -10696,9 +12329,23 @@
       <xs:attribute name="Items" use="required">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>IEnumerable`1</xs:documentation>
+            <xs:documentation>IList</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="RefreshEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
         </xs:simpleType>
       </xs:attribute>
     </xs:complexType>
@@ -10855,6 +12502,41 @@
                 <xs:enumeration value="teal" />
                 <xs:enumeration value="aqua" />
                 <xs:enumeration value="magenta" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NEGATE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:any minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="ID" use="required">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="BoolValue" use="required">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
