@@ -42,6 +42,10 @@ namespace Atlas.Orbit.Schema {
                 GameObject nodeGO = resource as GameObject;
                 MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
                 foreach(ComponentProcessor processor in orbitParser.ComponentProcessors) {
+                    if (markupPrefab == null) {
+                        Debug.LogWarning($"{resource.name} is missing it's MarkupPrefab component");
+                        continue;
+                    }
                     Component component = markupPrefab.FindComponent(processor.ComponentType);
                     if(component != null) {
                         foreach(XmlSchemaAttribute attribute in processor.GenerateSchemaAttributes()) {
