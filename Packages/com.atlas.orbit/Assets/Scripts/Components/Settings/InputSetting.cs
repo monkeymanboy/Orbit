@@ -2,7 +2,11 @@ using TMPro;
 using UnityEngine;
 
 namespace Atlas.Orbit.Components.Settings {
+    using System;
+
     public class InputSetting : SettingComponent {
+        public Action OnEndEditEvent { get; set; }
+        
         [SerializeField]
         private TMP_InputField inputField;
 
@@ -28,6 +32,10 @@ namespace Atlas.Orbit.Components.Settings {
             
             inputField.onValueChanged.AddListener(SetUIValue);
             UpdateInputText();
+        }
+
+        public void EndEdit(string text) {
+            OnEndEditEvent?.Invoke();
         }
 
         private void UpdateInputText() {
