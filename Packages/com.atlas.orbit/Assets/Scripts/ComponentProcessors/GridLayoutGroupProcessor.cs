@@ -9,7 +9,6 @@ namespace Atlas.Orbit.ComponentProcessors {
             {"CellSize", new Vector2Setter<GridLayoutGroup>((component, value) => component.cellSize = value) },
             {"StartAxis", new EnumSetter<GridLayoutGroup,GridLayoutGroup.Axis>((component, value) => component.startAxis = value) },
             {"StartCorner", new EnumSetter<GridLayoutGroup,GridLayoutGroup.Corner>((component, value) => component.startCorner = value) },
-            {"StartAxis", new EnumSetter<GridLayoutGroup,GridLayoutGroup.Axis>((component, value) => component.startAxis = value) },
             {"Constraint", new EnumSetter<GridLayoutGroup,GridLayoutGroup.Constraint>((component, value) => component.constraint = value) },
             {"ConstraintCount", new IntSetter<GridLayoutGroup>((component, value) => component.constraintCount = value) },
         };
