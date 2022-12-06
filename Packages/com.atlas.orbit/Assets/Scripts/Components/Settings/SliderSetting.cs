@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Atlas.Orbit.Components.Settings {
+    
     public class SliderSetting : SettingComponent {
         [SerializeField]
         private Slider slider;
@@ -43,13 +44,20 @@ namespace Atlas.Orbit.Components.Settings {
             }
         }
 
+        public bool ImmediateUpdate { get; set; } = true;
+
         public UIFunction Formatter { get; set; }
 
         private bool initialized = false;
 
         public override void PostParse() {
             initialized = true;
-            slider.onValueChanged.AddListener(SetUIValue);
+            if(ImmediateUpdate) {
+                slider.onValueChanged.AddListener(SetUIValue);
+            } else {
+                slider.gameObject.AddComponent<SliderPointerUp>().SetOnFinished(SetUIValue);
+                slider.onValueChanged.AddListener(UpdateText);
+            }
             UpdateSlider();
         }
 
