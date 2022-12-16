@@ -160,8 +160,11 @@ namespace Atlas.Orbit.Parser {
 
             preParse?.Invoke(renderData);
 
-            foreach(XmlNode node in parentNode.ChildNodes)
-                renderData.RootObjects.Add(RenderNode(node, parent, renderData));
+            foreach (XmlNode node in parentNode.ChildNodes) {
+                GameObject nodeGO = RenderNode(node, parent, renderData);
+                if(nodeGO != null) renderData.RootObjects.Add(nodeGO);
+                //TODO(David): if nodeGO is null we parsed a macro, this is fine to ignore in most cases however if the macro has child nodes those should be included in root objects
+            }
 
             if(host != null) {
                 List<(string, FieldInfo)> viewComponentFields = null;
