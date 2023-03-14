@@ -46,8 +46,9 @@ namespace Atlas.Orbit.Macros {
             CurrentData = parameters.RenderData;
             SetToDefault();
             foreach(KeyValuePair<string, string> pair in parameters.Data) {
-                if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter)) {
-                    valueTypeSetter.Set(data, parameters.Values[pair.Key]);
+                if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter)
+                   && parameters.Values.TryGetValue(pair.Key, out UIValue uiValue)) {
+                    valueTypeSetter.Set(data, uiValue);
                 }
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
                     
