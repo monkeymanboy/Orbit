@@ -8,7 +8,7 @@ namespace Atlas.Orbit.ComponentProcessors {
 
     public class ImageProcessor : ComponentProcessor<Image> {
         public override Dictionary<string, TypeSetter<Image>> Setters => new() {
-            {"ImageColor", new ColorSetter<Image>((comonent, value) => comonent.color = value) },
+            {"ImageColor", new ColorSetter<Image>((component, value) => component.color = value) },
             {"ImageSprite", new ObjectSetter<Image, Sprite>((component, value) => component.sprite = value) },
             {"PreserveAspect", new BoolSetter<Image>((component, value) => component.preserveAspect = value) },
         };
