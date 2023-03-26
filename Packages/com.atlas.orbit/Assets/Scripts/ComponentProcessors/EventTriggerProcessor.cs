@@ -9,29 +9,33 @@ namespace Atlas.Orbit.ComponentProcessors {
         public override Dictionary<string, TypeSetter<EventTrigger>> Setters => new() {
             { "HoveredValue", new StringSetter<EventTrigger>(RegisterHovered) },
             { "HoveredEvent", new StringSetter<EventTrigger>(RegisterHoveredEvent) },
-            { "UnHoveredEvent", new StringSetter<EventTrigger>(RegisterUnHoveredEvent) }
+            { "UnHoveredEvent", new StringSetter<EventTrigger>(RegisterUnHoveredEvent) },
+            { "PointerDownEvent", new StringSetter<EventTrigger>(RegisterPointerDownEvent) },
+            { "PointerUpEvent", new StringSetter<EventTrigger>(RegisterPointerUpEvent) }
         };
+        
+        
+        private void RegisterPointerDownEvent(EventTrigger eventTrigger, string events) =>
+            RegisterEvent(eventTrigger, events, EventTriggerType.PointerDown);
 
-        private void RegisterHoveredEvent(EventTrigger eventTrigger, string events) {
+        private void RegisterPointerUpEvent(EventTrigger eventTrigger, string events) =>
+            RegisterEvent(eventTrigger, events, EventTriggerType.PointerUp);
+        
+        private void RegisterHoveredEvent(EventTrigger eventTrigger, string events) =>
+            RegisterEvent(eventTrigger, events, EventTriggerType.PointerEnter);
+
+        private void RegisterUnHoveredEvent(EventTrigger eventTrigger, string events) =>
+            RegisterEvent(eventTrigger, events, EventTriggerType.PointerExit);
+
+        private void RegisterEvent(EventTrigger eventTrigger, string events, EventTriggerType triggerType) {
             UIRenderData renderData = CurrentData;
 
-            EventTrigger.Entry pointerEnter = new();
-            pointerEnter.eventID = EventTriggerType.PointerEnter;
-            pointerEnter.callback.AddListener((data) => {
+            EventTrigger.Entry entry = new();
+            entry.eventID = triggerType;
+            entry.callback.AddListener((data) => {
                 renderData.EmitEvent(events);
             });
-            eventTrigger.triggers.Add(pointerEnter);
-        }
-
-        private void RegisterUnHoveredEvent(EventTrigger eventTrigger, string events) {
-            UIRenderData renderData = CurrentData;
-
-            EventTrigger.Entry pointerEnter = new();
-            pointerEnter.eventID = EventTriggerType.PointerExit;
-            pointerEnter.callback.AddListener((data) => {
-                renderData.EmitEvent(events);
-            });
-            eventTrigger.triggers.Add(pointerEnter);
+            eventTrigger.triggers.Add(entry);
         }
 
         private void RegisterHovered(EventTrigger eventTrigger, string valueID) {
