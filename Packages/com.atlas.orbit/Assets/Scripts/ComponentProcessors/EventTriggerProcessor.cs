@@ -11,9 +11,13 @@ namespace Atlas.Orbit.ComponentProcessors {
             { "HoveredEvent", new StringSetter<EventTrigger>(RegisterHoveredEvent) },
             { "UnHoveredEvent", new StringSetter<EventTrigger>(RegisterUnHoveredEvent) },
             { "PointerDownEvent", new StringSetter<EventTrigger>(RegisterPointerDownEvent) },
-            { "PointerUpEvent", new StringSetter<EventTrigger>(RegisterPointerUpEvent) }
+            { "PointerUpEvent", new StringSetter<EventTrigger>(RegisterPointerUpEvent) },
+            { "PointerDragEvent", new StringSetter<EventTrigger>(RegisterPointerDragEvent) }
         };
         
+        
+        private void RegisterPointerDragEvent(EventTrigger eventTrigger, string events) =>
+            RegisterEvent(eventTrigger, events, EventTriggerType.BeginDrag);
         
         private void RegisterPointerDownEvent(EventTrigger eventTrigger, string events) =>
             RegisterEvent(eventTrigger, events, EventTriggerType.PointerDown);
