@@ -1,5 +1,6 @@
 using Atlas.Orbit.Attributes;
 using Atlas.Orbit.Components;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SettingTestView : OrbitView {
@@ -15,6 +16,8 @@ public class SettingTestView : OrbitView {
     [ValueID("InputFloatVal")] private float inputFloatVal = 1.5f;
     [ValueID("InputIntVal")] private int inputIntVal;
     [ValueID("DropdownVal")] private DropdownValue dropdownVal;
+    [ValueID("ListDropdownVal")] private string listdropdownVal = "List";
+    [ValueID("ListDropdownVals")] private List<string> listdropdownVals = new() {"Values", "Coming", "From", "List"};
 
     [ListenFor("PrintValues")]
     private void PrintValues() {
@@ -24,5 +27,6 @@ public class SettingTestView : OrbitView {
         Debug.Log(inputFloatVal);
         Debug.Log(inputIntVal);
         Debug.Log(dropdownVal);
+        Debug.Log(listdropdownVal);
     }
 }

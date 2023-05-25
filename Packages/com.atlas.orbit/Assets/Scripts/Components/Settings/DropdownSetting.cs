@@ -3,12 +3,31 @@ using UnityEngine;
 
 namespace Atlas.Orbit.Components.Settings {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
     public class DropdownSetting : SettingComponent {
         [SerializeField]
         private TMP_Dropdown dropdown;
 
+        private IList optionsList;
+
+        public IList OptionsList {
+            get => optionsList;
+            set {
+                optionsList = value;
+                if(Options == null) Options = new();
+                else Options.Clear();
+                foreach(object option in OptionsList) {
+                    Options.Add(new TMP_Dropdown.OptionData(option.ToString()));
+                }
+
+                if(initialized) {
+                    dropdown.ClearOptions();
+                    dropdown.AddOptions(Options);
+                }
+            }
+        }
         public List<TMP_Dropdown.OptionData> Options { get; set; }
         private Array enumValues;
         
@@ -23,6 +42,7 @@ namespace Atlas.Orbit.Components.Settings {
                     Options.Add(new TMP_Dropdown.OptionData(option.ToString()));
                 }
             }
+            
             dropdown.ClearOptions();
             dropdown.AddOptions(Options);
             dropdown.onValueChanged.AddListener(SetUIValue);
@@ -33,14 +53,14 @@ namespace Atlas.Orbit.Components.Settings {
             if(enumValues != null) 
                 dropdown.SetValueWithoutNotify(Array.IndexOf(enumValues, UIValue.GetValue()));
             else 
-                dropdown.SetValueWithoutNotify(Options.IndexOf(UIValue.GetValue<TMP_Dropdown.OptionData>()));
+                dropdown.SetValueWithoutNotify(OptionsList.IndexOf(UIValue.GetValue()));
         }
 
         private void SetUIValue(int index) {
             if(enumValues != null) 
                 UIValue.SetValue(enumValues.GetValue(index));
             else 
-                UIValue.SetValue(Options[index]);
+                UIValue.SetValue(OptionsList[index]);
             OnChangeEvent?.Invoke();
         }
 
