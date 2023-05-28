@@ -30,10 +30,12 @@ namespace Atlas.Orbit.Macros {
             UIRenderData renderData = CurrentData;
             UIValue boolValue = renderData.GetValueFromID(BoolID);
             string id = ID;
+            string trueID = TrueID;
+            string falseID = FalseID;
             boolValue.OnChange += () => {
-                renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? TrueID : FalseID).GetValue());
+                renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? trueID : falseID).GetValue());
             };
-            renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? TrueID : FalseID).GetValue());
+            renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? trueID : falseID).GetValue());
         }
 
         public override void SetToDefault() {
