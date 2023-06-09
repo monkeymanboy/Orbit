@@ -6,6 +6,7 @@
         <SettingInputField Text="FloatInput" BoundValue="InputFloatVal"/>
         <SettingInputField Text="IntInput" BoundValue="InputIntVal"/>
         <SettingDropdown Text="Dropdown" BoundValue="DropdownVal"/>
+        <SettingDropdown Text="ListDropdown" BoundValue="ListDropdownVal" Items="~ListDropdownVals"/>
         <Button Text="Print Values" ClickEvent="PrintValues"/>
     </Vertical>
 </Container>
