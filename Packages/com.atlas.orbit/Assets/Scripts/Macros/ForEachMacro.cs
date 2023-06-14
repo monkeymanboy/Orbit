@@ -31,8 +31,10 @@ namespace Atlas.Orbit.Macros {
             IList items = data.Items;
             UIRenderData renderData = CurrentData;
             List<UIRenderData> rendered = new(items.Count);
+            string refreshEvent = RefreshEvent;
+            UIValue itemsValue = ItemsValue;
             for(int i=0;i<items.Count;i++) {
-                rendered.Add(Parser.Parse(node, parent, items[i], CurrentData));
+                rendered.Add(Parser.Parse(node, parent, items[i], renderData));
             }
             Action refreshAction = () => {
                 for(int i=0;i<items.Count;i++) {
@@ -47,13 +49,13 @@ namespace Atlas.Orbit.Macros {
                     rendered[i].DisableRootObjects();
                 }
             };
-            ItemsValue.OnChange += () => {
+            itemsValue.OnChange += () => {
                 items = uiValue.GetValue<IList>();
                 refreshAction();
             };
 
-            if(RefreshEvent != null) {
-                renderData.AddEvent(RefreshEvent, refreshAction);
+            if(refreshEvent != null) {
+                renderData.AddEvent(refreshEvent, refreshAction);
             }
         }
 
