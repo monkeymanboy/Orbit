@@ -37,6 +37,8 @@ namespace Atlas.Orbit.Parser {
         public List<ComponentProcessor> ComponentProcessors { get; set; }
         public Dictionary<string, Macro> Macros { get; set; }
         public Dictionary<string, GameObject> Prefabs { get; set; }
+        
+        public Dictionary<string, Color> ColorDefinitions { get; set; }
 
         private XmlDocument doc = new XmlDocument();
         private XmlReaderSettings readerSettings = new XmlReaderSettings();
@@ -48,12 +50,18 @@ namespace Atlas.Orbit.Parser {
             ComponentProcessors = UtilReflection.GetAllSubclasses<ComponentProcessor>();
             Macros = new Dictionary<string, Macro>();
             Prefabs = new Dictionary<string, GameObject>();
+            ColorDefinitions = new Dictionary<string, Color>();
             foreach(Macro macro in UtilReflection.GetAllSubclasses<Macro>()) {
                 macro.Parser = this;
                 Macros.Add(macro.Tag, macro);
             }
 
             initialized = true;
+        }
+
+        public void DefineColor(string name, Color color) {
+            ColorDefinitions.Remove(name);
+            ColorDefinitions.Add(name, color);
         }
 
         public void AddAssemblyTypes(Assembly assembly) {
