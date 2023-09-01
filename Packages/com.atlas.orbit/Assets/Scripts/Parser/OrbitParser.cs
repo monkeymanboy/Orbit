@@ -42,6 +42,7 @@ namespace Atlas.Orbit.Parser {
 
         private XmlDocument doc = new();
         private XmlReaderSettings readerSettings = new();
+        private Dictionary<string, List<ComponentProcessor>> processorPrefabCache = new();
 
         private bool initialized = false;
 
@@ -243,12 +244,19 @@ namespace Atlas.Orbit.Parser {
             MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
             if(markupPrefab == null)
                 throw new Exception($"'Orbit/Prefabs/{node.Name}' is missing it's MarkupPrefab component");
-            foreach(ComponentProcessor processor in ComponentProcessors) {
-                //TODO(PERFORMANCE): It might be better to instead loop through the components on the prefab and then look up the processors in a dictionary, though with a small number of processors this should be fine for a while.
-                Component component = markupPrefab.FindComponent(processor.ComponentType);
-                if(component != null) {
-                    processor.Process(component, parameters);
+
+            if(processorPrefabCache.TryGetValue(node.Name, out List<ComponentProcessor> processors)) {
+                foreach(ComponentProcessor processor in processors) {
+                    markupPrefab.ProcessComponentType(processor, parameters);
                 }
+            } else {
+                //First time encountering this object it must search all the components and build a list for the cache
+                List<ComponentProcessor> processorCache = new();
+                foreach(ComponentProcessor processor in ComponentProcessors) {
+                    if(markupPrefab.ProcessComponentType(processor, parameters))
+                        processorCache.Add(processor);
+                }
+                processorPrefabCache.Add(node.Name, processorCache);
             }
 
             if(markupPrefab.ParseChildren) {
