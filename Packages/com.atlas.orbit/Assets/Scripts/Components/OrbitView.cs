@@ -32,12 +32,25 @@ namespace Atlas.Orbit.Components {
             ManualParse();
         }
 
-        protected void ManualParse() {
-            if(hasParsed)
-                return;
+        public void ForceReloadView() {
+            if(renderData != null) {
+                foreach(GameObject go in renderData.RootObjects) {
+                    Destroy(go);
+                }
+            }
+            ParseView();
+        }
+
+        protected void ParseView() {
             ViewLocationAttribute viewLocation = UIViewHost.GetType().GetCustomAttribute<ViewLocationAttribute>();
             resourceName = viewLocation?.FullPath ?? GetDefaultResourceLocation(GetType(), viewLocation?.Location);
             renderData = Parser.Parse(Resources.Load<TextAsset>(resourceName).text, gameObject, UIViewHost);
+        }
+
+        protected void ManualParse() {
+            if(hasParsed)
+                return;
+            ParseView();
 #if ORBIT_HOT_RELOAD
             string filePath = $"Assets/Resources/{resourceName}.xml";
             if(File.Exists(filePath)) {
