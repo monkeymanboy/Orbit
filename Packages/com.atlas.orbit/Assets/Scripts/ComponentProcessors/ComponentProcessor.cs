@@ -43,7 +43,11 @@ namespace Atlas.Orbit.ComponentProcessors {
                         if(valueChangeSetter == null)
                             valueChangeSetter = genericComponent.gameObject.AddComponent<ValueChangeSetter>();
                         Action setValue = () => {
-                            if(uiValue.HasValue) typeSetter.Set(component, uiValue.GetValue()); //TODO(David): This should be moved to a component that handles subscribing to UIValues so that when the object is destroyed they can be unsubcribed
+                            if(valueChangeSetter == null) { //If the object gets destroyed while disabled OnDestroy is not called so we check for that here
+                                valueChangeSetter.NotifyDestroyed();
+                                return;
+                            }
+                            if(uiValue.HasValue) typeSetter.Set(component, uiValue.GetValue());
                         };
                         uiValue.OnChange += setValue;
                         valueChangeSetter.OnObjectDestroyed += () => {

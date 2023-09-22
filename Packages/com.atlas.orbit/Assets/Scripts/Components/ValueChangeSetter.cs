@@ -9,5 +9,9 @@ namespace Atlas.Orbit.Components {
         private void OnDestroy() {
             OnObjectDestroyed?.Invoke();
         }
+
+        public void NotifyDestroyed() {
+            OnObjectDestroyed?.Invoke();
+        }
     }
 }
