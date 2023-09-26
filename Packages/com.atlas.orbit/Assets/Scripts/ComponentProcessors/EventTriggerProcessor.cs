@@ -9,7 +9,6 @@ namespace Atlas.Orbit.ComponentProcessors {
     public class EventTriggerProcessor : ComponentProcessor<EventTrigger> {
         public override Dictionary<string, TypeSetter<EventTrigger>> Setters => new() {
             { "HoveredValue", new StringSetter<EventTrigger>(RegisterHovered) },
-            { "NormalizedMouseValue", new StringSetter<EventTrigger>(RegisterNormalizedMouse) },
             { "HoveredEvent", new StringSetter<EventTrigger>(RegisterHoveredEvent) },
             { "UnHoveredEvent", new StringSetter<EventTrigger>(RegisterUnHoveredEvent) },
             { "PointerDownEvent", new StringSetter<EventTrigger>(RegisterPointerDownEvent) },
@@ -61,23 +60,6 @@ namespace Atlas.Orbit.ComponentProcessors {
                 renderData.SetValue(valueID, false);
             });
             eventTrigger.triggers.Add(pointerExit);
-        }
-
-        private void RegisterNormalizedMouse(EventTrigger eventTrigger, string valueID) {
-            UIRenderData renderData = CurrentData; 
-            
-            renderData.SetValue(valueID, Vector2.zero);
-            
-            RectTransform rectTransform = eventTrigger.GetComponent<RectTransform>();
-            EventTrigger.Entry move = new();
-            move.eventID = EventTriggerType.Move;
-            move.callback.AddListener((data) => {
-                PointerEventData eventData = data as PointerEventData;
-                if(!RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out var localPosition)) return;
-                Vector2 normalizedPosition = Rect.PointToNormalized(rectTransform.rect, localPosition);
-                renderData.SetValue(valueID, normalizedPosition);
-            });
-            eventTrigger.triggers.Add(move);
         }
     }
 }
