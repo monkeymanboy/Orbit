@@ -25,6 +25,7 @@ namespace Atlas.Orbit.Components.Settings {
                 if(initialized) {
                     dropdown.ClearOptions();
                     dropdown.AddOptions(Options);
+                    UpdateDropdownValue();
                 }
             }
         }
