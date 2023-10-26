@@ -65,6 +65,63 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="PointerDownEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PointerUpEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PointerDragEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ImageColor">
         <xs:simpleType>
           <xs:annotation>
@@ -109,6 +166,14 @@
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Sprite</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ImageMaterial">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Material</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
         </xs:simpleType>
@@ -932,6 +997,48 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="UnHoveredEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PointerDownEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PointerUpEvent">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PointerDragEvent">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>String</xs:documentation>
@@ -3650,6 +3757,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ImageColor">
         <xs:simpleType>
           <xs:annotation>
@@ -3694,6 +3816,14 @@
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Sprite</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ImageMaterial">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Material</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
         </xs:simpleType>
@@ -4267,6 +4397,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ImageColor">
         <xs:simpleType>
           <xs:annotation>
@@ -4311,6 +4456,14 @@
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Sprite</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ImageMaterial">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Material</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
         </xs:simpleType>
@@ -5651,6 +5804,623 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RawImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:any minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="IgnoreLayout">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="LayoutPriority">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Int32</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PreferredWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PreferredHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="MinWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="MinHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleWidth">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="FlexibleHeight">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ID">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ImageColor">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Color</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="([#][a-fA-F0-9]*)" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="red" />
+                <xs:enumeration value="cyan" />
+                <xs:enumeration value="blue" />
+                <xs:enumeration value="darkblue" />
+                <xs:enumeration value="lightblue" />
+                <xs:enumeration value="purple" />
+                <xs:enumeration value="yellow" />
+                <xs:enumeration value="lime" />
+                <xs:enumeration value="fuchsia" />
+                <xs:enumeration value="white" />
+                <xs:enumeration value="silver" />
+                <xs:enumeration value="grey" />
+                <xs:enumeration value="black" />
+                <xs:enumeration value="orange" />
+                <xs:enumeration value="brown" />
+                <xs:enumeration value="maroon" />
+                <xs:enumeration value="green" />
+                <xs:enumeration value="olive" />
+                <xs:enumeration value="navy" />
+                <xs:enumeration value="teal" />
+                <xs:enumeration value="aqua" />
+                <xs:enumeration value="magenta" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ImageTexture">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Texture</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorPreset">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>AnchorPreset</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="FillParent" />
+                <xs:enumeration value="LeftAlign" />
+                <xs:enumeration value="RightAlign" />
+                <xs:enumeration value="TopAlign" />
+                <xs:enumeration value="BottomAlign" />
+                <xs:enumeration value="TopLeftAlign" />
+                <xs:enumeration value="BottomLeftAlign" />
+                <xs:enumeration value="TopRightAlign" />
+                <xs:enumeration value="BottomRightAlign" />
+                <xs:enumeration value="Center" />
+                <xs:enumeration value="LeftHalf" />
+                <xs:enumeration value="RightHalf" />
+                <xs:enumeration value="TopHalf" />
+                <xs:enumeration value="BottomHalf" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorMin">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorMinX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorMinY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorMax">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorMaxX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorMaxY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorPos">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorPosX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AnchorPosY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="SizeDelta">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="SizeDeltaX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="SizeDeltaY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Pivot">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PivotX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PivotY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Rotation">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector3</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="RotationX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="RotationY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="RotationZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Position">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector3</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PositionX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PositionY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="PositionZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Scale">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleX">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleY">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ScaleZ">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Single</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Active">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RectMask">
     <xs:complexType>
       <xs:sequence>
@@ -6097,6 +6867,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="IgnoreLayout">
         <xs:simpleType>
           <xs:annotation>
@@ -6851,6 +7636,14 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="Items">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>IList</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="BoundValue">
         <xs:simpleType>
           <xs:annotation>
@@ -6886,6 +7679,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="IgnoreLayout">
         <xs:simpleType>
           <xs:annotation>
@@ -7689,6 +8497,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ID">
         <xs:simpleType>
           <xs:annotation>
@@ -8408,6 +9231,36 @@
           <xs:union memberTypes="ValueBoundType" />
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="ImmediateUpdate">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="WholeNumbers">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="SettingToggle">
@@ -8415,6 +9268,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="IgnoreLayout">
         <xs:simpleType>
           <xs:annotation>
@@ -9204,6 +10072,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="IgnoreLayout">
         <xs:simpleType>
           <xs:annotation>
@@ -11459,6 +12342,21 @@
       <xs:sequence>
         <xs:any minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
+      <xs:attribute name="RaycastTarget">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Boolean</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="true" />
+                <xs:enumeration value="false" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="ImageColor">
         <xs:simpleType>
           <xs:annotation>
@@ -11503,6 +12401,14 @@
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Sprite</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ImageMaterial">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Material</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
         </xs:simpleType>
