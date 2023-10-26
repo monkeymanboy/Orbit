@@ -43,6 +43,14 @@ namespace Atlas.Orbit.Components.Settings {
                 UpdateSlider();
             }
         }
+        private bool wholeNumbers = true;
+        public bool WholeNumbers {
+            get => wholeNumbers;
+            set {
+                wholeNumbers = value;
+                UpdateSlider();
+            }
+        }
 
         public bool ImmediateUpdate { get; set; } = true;
 
@@ -65,18 +73,26 @@ namespace Atlas.Orbit.Components.Settings {
             if(!initialized) return;
             slider.minValue = 0;
             slider.maxValue = increments;
-            slider.wholeNumbers = true;
+            slider.wholeNumbers = WholeNumbers;
             UpdateSliderValue();
         }
 
         private void UpdateSliderValue() {
-            if(UseInt) slider.SetValueWithoutNotify(Mathf.RoundToInt(((UIValue.GetValue<int>() - MinValue) / (MaxValue - MinValue)) * Increments));
-            else slider.SetValueWithoutNotify(Mathf.RoundToInt(((UIValue.GetValue<float>() - MinValue) / (MaxValue - MinValue)) * Increments));
+            float value = UseInt
+                ? (float)(UIValue.GetValue<int>())
+                : UIValue.GetValue<float>();
+
+            value = WholeNumbers
+                ? Mathf.RoundToInt(((value - MinValue) / (MaxValue - MinValue)) * Increments)
+                : Mathf.Clamp(value - MinValue, 0, MaxValue);
+
+            slider.SetValueWithoutNotify(value);
+
             UpdateText(slider.value);
         }
 
         public void Increment(){
-            slider.value = Mathf.RoundToInt((Mathf.Clamp(slider.value + 1, 0f, increments)));
+            slider.value = Mathf.RoundToInt((Mathf.Clamp(slider.value + 1, 0f, wholeNumbers ? increments : MaxValue)));
         }
 
         private void UpdateText(float val) {
