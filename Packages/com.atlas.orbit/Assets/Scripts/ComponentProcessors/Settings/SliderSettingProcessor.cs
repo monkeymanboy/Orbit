@@ -13,7 +13,8 @@ namespace Atlas.Orbit.ComponentProcessors.Settings {
             {"Increments", new IntSetter<SliderSetting>((component, value) => component.Increments = value ) },
             {"UseInt", new BoolSetter<SliderSetting>((component, value) => component.UseInt = value ) },
             {"Formatter", new ObjectSetter<SliderSetting, UIFunction>((component, value) => component.Formatter = value ) },
-            {"ImmediateUpdate", new BoolSetter<SliderSetting>((component, value) => component.ImmediateUpdate = value ) }
+            {"ImmediateUpdate", new BoolSetter<SliderSetting>((component, value) => component.ImmediateUpdate = value ) },
+            {"WholeNumbers", new BoolSetter<SliderSetting>((component, value) => component.WholeNumbers = value ) }
         };
     }
 }
