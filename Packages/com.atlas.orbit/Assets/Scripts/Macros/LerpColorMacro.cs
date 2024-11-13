@@ -13,42 +13,32 @@ namespace Atlas.Orbit.Macros {
     [RequiresProperty("ValueID")]
     [RequiresProperty("StartColor")]
     [RequiresProperty("EndColor")]
-    public class LerpColorMacro : Macro<LerpColorMacro> {
+    public class LerpColorMacro : Macro<LerpColorMacro.LerpColorMacroData> {
+        public struct LerpColorMacroData {
+            public string ID;
+            public string ValueID;
+            public Color StartColor;
+            public Color EndColor;
+        }
         public override string Tag => "LERP_COLOR";
 
-        public string ID { get; set; }
-        public string ValueID { get; set; }
-        public Color StartColor { get; set; }
-        public Color EndColor { get; set; }
-
-        public override Dictionary<string, TypeSetter<LerpColorMacro>> Setters => new Dictionary<string, TypeSetter<LerpColorMacro>>() {
-            {"ID", new StringSetter<LerpColorMacro>((data, value) => data.ID = value) },
-            {"ValueID", new StringSetter<LerpColorMacro>((data, value) => data.ValueID = value) },
-            {"StartColor", new ColorSetter<LerpColorMacro>((data, value) => data.StartColor = value) },
-            {"EndColor", new ColorSetter<LerpColorMacro>((data, value) => data.EndColor = value) }
+        public override Dictionary<string, TypeSetter<LerpColorMacroData>> Setters => new() {
+            {"ID", new StringSetter<LerpColorMacroData>((ref LerpColorMacroData data, string value) => data.ID = value) },
+            {"ValueID", new StringSetter<LerpColorMacroData>((ref LerpColorMacroData data, string value) => data.ValueID = value) },
+            {"StartColor", new ColorSetter<LerpColorMacroData>((ref LerpColorMacroData data, Color value) => data.StartColor = value) },
+            {"EndColor", new ColorSetter<LerpColorMacroData>((ref LerpColorMacroData data, Color value) => data.EndColor = value) }
         };
 
-        public override void Execute(XmlNode node, GameObject parent, LerpColorMacro data) {
-            UIRenderData renderData = CurrentData;
-            UIValue value = renderData.GetValueFromID(ValueID);
-            Color startColor = StartColor;
-            Color endColor = EndColor;
-            string id = ID;
+        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, LerpColorMacroData data) {
+            UIValue value = renderData.GetValueFromID(data.ValueID);
             value.OnChange += () => {
-                renderData.SetValue(id, Color.Lerp(startColor, endColor, value.GetValue<float>()));
+                renderData.SetValue(data.ID, Color.Lerp(data.StartColor, data.EndColor, value.GetValue<float>()));
             };
-            renderData.SetValue(id, Color.Lerp(startColor, endColor, value.GetValue<float>()));
+            renderData.SetValue(data.ID, Color.Lerp(data.StartColor, data.EndColor, value.GetValue<float>()));
         }
 
         private float Remap(float value, Vector2 fromRange, Vector2 toRange) {
             return (value - fromRange.x) / (fromRange.y - fromRange.x) * (toRange.y - toRange.x) + toRange.x;
-        }
-
-        public override void SetToDefault() {
-            ID = null;
-            ValueID = null;
-            StartColor = Color.white;
-            EndColor = Color.white;
         }
     }
 }

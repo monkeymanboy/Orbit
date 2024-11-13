@@ -8,6 +8,7 @@ namespace Atlas.Orbit.TypeSetters {
     public class ColorSetter<T> : TypeSetter<T, Color> {
         protected override string[] Regexes => new string[] { "([#][a-fA-F0-9]*)" };
         public ColorSetter(Action<T, Color> setter) : base(setter) { }
+        public ColorSetter(ActionRef<T, Color> setter) : base(setter) { }
 
         public override Color Parse(string value) {
             if(ColorUtility.TryParseHtmlString(value, out Color color))

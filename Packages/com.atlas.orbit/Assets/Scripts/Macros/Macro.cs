@@ -12,14 +12,13 @@ namespace Atlas.Orbit.Macros {
 
     public abstract class Macro {
         public abstract string Tag { get; }
-        protected UIRenderData CurrentData { get; set; }
         public OrbitParser Parser { get; set; }
 
         public abstract void Execute(XmlNode node, GameObject parent, TagParameters parameters);
 
         public abstract List<XmlSchemaAttribute> GenerateSchemaAttributes();
     }
-    public abstract class Macro<T> : Macro where T : Macro<T> {
+    public abstract class Macro<T> : Macro {
         private Dictionary<string, TypeSetter<T>> cachedSetters;
         public Dictionary<string, TypeSetter<T>> CachedSetters {
             get {
@@ -39,29 +38,26 @@ namespace Atlas.Orbit.Macros {
         }
         public abstract Dictionary<string, TypeSetter<T>> Setters { get; }
         public virtual Dictionary<string, TypeSetter<T, UIValue>> ValueSetters => null;
-        public abstract void SetToDefault();
 
         public override void Execute(XmlNode node, GameObject parent, TagParameters parameters) {
-            T data = (T) this;
-            CurrentData = parameters.RenderData;
-            SetToDefault();
+            T data = default;
             foreach(KeyValuePair<string, string> pair in parameters.Data) {
                 if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter)
                    && parameters.Values.TryGetValue(pair.Key, out UIValue uiValue)) {
-                    valueTypeSetter.Set(data, uiValue);
+                    valueTypeSetter.Set(ref data, uiValue);
                 }
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
                     
                     if(pair.Value == null) {
-                        typeSetter.Set(data, parameters.Values[pair.Key].GetValue());
+                        typeSetter.Set(ref data, parameters.Values[pair.Key].GetValue());
                         continue;
                     }
-                    typeSetter.SetFromString(data, pair.Value);
+                    typeSetter.SetFromString(ref data, pair.Value);
                 }
             }
-            Execute(node, parent, data);
+            Execute(node, parent, parameters.RenderData, data);
         }
-        public abstract void Execute(XmlNode node, GameObject parent, T data);
+        public abstract void Execute(XmlNode node, GameObject parent, UIRenderData renderData, T data);
 
         public override List<XmlSchemaAttribute> GenerateSchemaAttributes() {
             List<XmlSchemaAttribute> attributes = new List<XmlSchemaAttribute>();

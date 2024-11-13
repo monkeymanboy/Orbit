@@ -6,6 +6,7 @@ namespace Atlas.Orbit.TypeSetters {
     public class EnumSetter<T, U> : TypeSetter<T, U> where U : Enum {
         //TODO(David): Generate a regex that will match any number of enumerations separated by a '|' for flags
         public EnumSetter(Action<T, U> setter) : base(setter) { }
+        public EnumSetter(ActionRef<T, U> setter) : base(setter) { }
 
         public override U Parse(string value) {
             string[] toCombine = value.Split('|');

@@ -11,38 +11,28 @@ namespace Atlas.Orbit.Macros {
     [RequiresProperty("BoolValue")]
     [RequiresProperty("TrueValue")]
     [RequiresProperty("FalseValue")]
-    public class BindBoolMacro : Macro<BindBoolMacro> {
+    public class BindBoolMacro : Macro<BindBoolMacro.BindBoolMacroData> {
+        public struct BindBoolMacroData {
+            public string ID;
+            public string BoolID;
+            public string TrueID;
+            public string FalseID;
+        }
         public override string Tag => "BIND_BOOL";
 
-        public string ID { get; set; }
-        public string BoolID { get; set; }
-        public string TrueID { get; set; }
-        public string FalseID { get; set; }
-
-        public override Dictionary<string, TypeSetter<BindBoolMacro>> Setters => new Dictionary<string, TypeSetter<BindBoolMacro>>() {
-            {"ID", new StringSetter<BindBoolMacro>((data, value) => data.ID = value) },
-            {"BoolValue", new StringSetter<BindBoolMacro>((data, value) => data.BoolID = value) },
-            {"TrueValue", new StringSetter<BindBoolMacro>((data, value) => data.TrueID = value) },
-            {"FalseValue", new StringSetter<BindBoolMacro>((data, value) => data.FalseID = value) },
+        public override Dictionary<string, TypeSetter<BindBoolMacroData>> Setters => new() {
+            {"ID", new StringSetter<BindBoolMacroData>((ref BindBoolMacroData data, string value) => data.ID = value) },
+            {"BoolValue", new StringSetter<BindBoolMacroData>((ref BindBoolMacroData data, string value) => data.BoolID = value) },
+            {"TrueValue", new StringSetter<BindBoolMacroData>((ref BindBoolMacroData data, string value) => data.TrueID = value) },
+            {"FalseValue", new StringSetter<BindBoolMacroData>((ref BindBoolMacroData data, string value) => data.FalseID = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, BindBoolMacro data) {
-            UIRenderData renderData = CurrentData;
-            UIValue boolValue = renderData.GetValueFromID(BoolID);
-            string id = ID;
-            string trueID = TrueID;
-            string falseID = FalseID;
+        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, BindBoolMacroData data) {
+            UIValue boolValue = renderData.GetValueFromID(data.BoolID);
             boolValue.OnChange += () => {
-                renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? trueID : falseID).GetValue());
+                renderData.SetValue(data.ID, renderData.GetValueFromID(boolValue.GetValue<bool>() ? data.TrueID : data.FalseID).GetValue());
             };
-            renderData.SetValue(id, renderData.GetValueFromID(boolValue.GetValue<bool>() ? trueID : falseID).GetValue());
-        }
-
-        public override void SetToDefault() {
-            ID = null;
-            BoolID = null;
-            TrueID = null;
-            FalseID = null;
+            renderData.SetValue(data.ID, renderData.GetValueFromID(boolValue.GetValue<bool>() ? data.TrueID : data.FalseID).GetValue());
         }
     }
 }

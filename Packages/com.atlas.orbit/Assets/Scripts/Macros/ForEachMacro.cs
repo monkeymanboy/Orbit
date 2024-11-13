@@ -10,34 +10,33 @@ namespace Atlas.Orbit.Macros {
     using System;
 
     [RequiresProperty("Items")]
-    public class ForEachMacro : Macro<ForEachMacro> {
+    public class ForEachMacro : Macro<ForEachMacro.ForEachMacroData> {
+        public struct ForEachMacroData {
+            public UIValue ItemsValue;
+            public IList Items;
+            public string RefreshEvent;
+        }
         public override string Tag => "FOR_EACH";
 
-        public UIValue ItemsValue { get; set; }
-        public IList Items { get; set; }
-        public string RefreshEvent { get; set; }
-
-        public override Dictionary<string, TypeSetter<ForEachMacro>> Setters => new() {
-            {"Items", new ObjectSetter<ForEachMacro, IList>((data, value) => data.Items = value) },
-            {"RefreshEvent", new StringSetter<ForEachMacro>((data,value) => data.RefreshEvent = value)}
+        public override Dictionary<string, TypeSetter<ForEachMacroData>> Setters => new() {
+            {"Items", new ObjectSetter<ForEachMacroData, IList>((ref ForEachMacroData data, IList value) => data.Items = value) },
+            {"RefreshEvent", new StringSetter<ForEachMacroData>((ref ForEachMacroData data, string value) => data.RefreshEvent = value)}
         };
 
-        public override Dictionary<string, TypeSetter<ForEachMacro, UIValue>> ValueSetters=> new() {
-            {"Items", new ObjectSetter<ForEachMacro, UIValue>((data, value) => data.ItemsValue = value) },
+        public override Dictionary<string, TypeSetter<ForEachMacroData, UIValue>> ValueSetters => new() {
+            {"Items", new ObjectSetter<ForEachMacroData, UIValue>((ref ForEachMacroData data, UIValue value) => data.ItemsValue = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, ForEachMacro data) {
-            UIValue uiValue = ItemsValue;
+        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, ForEachMacroData data) {
+            UIValue uiValue = data.ItemsValue;
             IList items = data.Items;
-            UIRenderData renderData = CurrentData;
             List<UIRenderData> rendered = new(items.Count);
-            string refreshEvent = RefreshEvent;
-            UIValue itemsValue = ItemsValue;
             for(int i=0;i<items.Count;i++) {
                 rendered.Add(Parser.Parse(node, parent, items[i], renderData));
             }
-            Action refreshAction = () => {
-                for(int i=0;i<items.Count;i++) {
+
+            void RefreshAction() {
+                for(int i = 0;i < items.Count;i++) {
                     if(i < rendered.Count) {
                         rendered[i].EnableRootObjects();
                         rendered[i].Host = items[i];
@@ -45,23 +44,20 @@ namespace Atlas.Orbit.Macros {
                         rendered.Add(Parser.Parse(node, parent, items[i], renderData));
                     }
                 }
+
                 for(int i = items.Count;i < rendered.Count;i++) {
                     rendered[i].DisableRootObjects();
                 }
-            };
-            itemsValue.OnChange += () => {
-                items = uiValue.GetValue<IList>();
-                refreshAction();
-            };
-
-            if(refreshEvent != null) {
-                renderData.AddEvent(refreshEvent, refreshAction);
             }
-        }
 
-        public override void SetToDefault() {
-            Items = null;
-            RefreshEvent = null;
+            uiValue.OnChange += () => {
+                items = uiValue.GetValue<IList>();
+                RefreshAction();
+            };
+
+            if(data.RefreshEvent != null) {
+                renderData.AddEvent(data.RefreshEvent, RefreshAction);
+            }
         }
     }
 }

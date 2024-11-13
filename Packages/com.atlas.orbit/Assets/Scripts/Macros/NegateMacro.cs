@@ -9,30 +9,24 @@ namespace Atlas.Orbit.Macros {
 
     [RequiresProperty("ID")]
     [RequiresProperty("BoolValue")]
-    public class NegateMacro : Macro<NegateMacro> {
+    public class NegateMacro : Macro<NegateMacro.NegateMacroData> {
+        public struct NegateMacroData {
+            public string ID;
+            public string BoolID;
+        }
         public override string Tag => "NEGATE";
 
-        public string ID { get; set; }
-        public string BoolID { get; set; }
-
-        public override Dictionary<string, TypeSetter<NegateMacro>> Setters => new() {
-            {"ID", new StringSetter<NegateMacro>((data, value) => data.ID = value) },
-            {"BoolValue", new StringSetter<NegateMacro>((data, value) => data.BoolID = value) }
+        public override Dictionary<string, TypeSetter<NegateMacroData>> Setters => new() {
+            {"ID", new StringSetter<NegateMacroData>((ref NegateMacroData data, string value) => data.ID = value) },
+            {"BoolValue", new StringSetter<NegateMacroData>((ref NegateMacroData data, string value) => data.BoolID = value) }
         };
 
-        public override void Execute(XmlNode node, GameObject parent, NegateMacro data) {
-            UIRenderData renderData = CurrentData;
-            UIValue boolValue = renderData.GetValueFromID(BoolID);
-            string id = ID;
+        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, NegateMacroData data) {
+            UIValue boolValue = renderData.GetValueFromID(data.BoolID);
             boolValue.OnChange += () => {
-                renderData.SetValue(id, !boolValue.GetValue<bool>());
+                renderData.SetValue(data.ID, !boolValue.GetValue<bool>());
             };
-            renderData.SetValue(id, !boolValue.GetValue<bool>());
-        }
-
-        public override void SetToDefault() {
-            ID = null;
-            BoolID = null;
+            renderData.SetValue(data.ID, !boolValue.GetValue<bool>());
         }
     }
 }

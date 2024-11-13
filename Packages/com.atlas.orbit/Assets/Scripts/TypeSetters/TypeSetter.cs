@@ -8,7 +8,9 @@ namespace Atlas.Orbit.TypeSetters {
 
     public abstract class TypeSetter<T> {
         public abstract void SetFromString(T obj, string value);
+        public abstract void SetFromString(ref T obj, string value);
         public abstract void Set(T obj, object value);
+        public abstract void Set(ref T obj, object value);
 
         public abstract XmlSchemaSimpleType GenerateSchemaType();
     }
@@ -16,9 +18,14 @@ namespace Atlas.Orbit.TypeSetters {
     public abstract class TypeSetter<T, U> : TypeSetter<T> {
         protected virtual string[] Regexes => new string[0];
         public Action<T, U> Setter { get; private set; }
+        public ActionRef<T, U> RefSetter { get; private set; }
+        public delegate void ActionRef<T, U>(ref T item, U value);
         
         public TypeSetter(Action<T, U> setter) {
             Setter = setter;
+        }
+        public TypeSetter(ActionRef<T, U> refSetter) {
+            RefSetter = refSetter;
         }
 
         public override void SetFromString(T obj, string value) {
@@ -30,9 +37,21 @@ namespace Atlas.Orbit.TypeSetters {
             }
             Setter(obj, parsedValue);
         }
+        public override void SetFromString(ref T obj, string value) {
+            U parsedValue;
+            try {
+                parsedValue = Parse(value);
+            } catch (Exception ex){
+                throw ex is ParseValueException ? ex : new ParseValueException(typeof(U), value);
+            }
+            RefSetter(ref obj, parsedValue);
+        }
 
         public override void Set(T obj, object value) {
             Setter(obj, (U)value);
+        }
+        public override void Set(ref T obj, object value) {
+            RefSetter(ref obj, (U)value);
         }
 
         public abstract U Parse(string value);

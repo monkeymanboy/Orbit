@@ -13,36 +13,29 @@ namespace Atlas.Orbit.Macros {
     [RequiresProperty("ID")]
     [RequiresProperty("FirstID")]
     [RequiresProperty("SecondID")]
-    public class CompareMacro : Macro<CompareMacro> {
+    public class CompareMacro : Macro<CompareMacro.CompareMacroData> {
+        public struct CompareMacroData {
+            public string ID;
+            public string FirstID;
+            public string SecondID;
+        }
         public override string Tag => "COMPARE";
 
-        public string ID { get; set; }
-        public string FirstID { get; set; }
-        public string SecondID { get; set; }
-
-        public override Dictionary<string, TypeSetter<CompareMacro>> Setters => new Dictionary<string, TypeSetter<CompareMacro>>() {
-            {"ID", new StringSetter<CompareMacro>((data, value) => data.ID = value) },
-            {"FirstValue", new StringSetter<CompareMacro>((data, value) => data.FirstID = value) },
-            {"SecondValue", new StringSetter<CompareMacro>((data, value) => data.SecondID = value) },
+        public override Dictionary<string, TypeSetter<CompareMacroData>> Setters => new() {
+            {"ID", new StringSetter<CompareMacroData>((ref CompareMacroData data, string value) => data.ID = value) },
+            {"FirstValue", new StringSetter<CompareMacroData>((ref CompareMacroData data, string value) => data.FirstID = value) },
+            {"SecondValue", new StringSetter<CompareMacroData>((ref CompareMacroData data, string value) => data.SecondID = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, CompareMacro data) {
-            UIRenderData renderData = CurrentData;
-            UIValue firstValue = renderData.GetValueFromID(FirstID);
-            UIValue secondValue = renderData.GetValueFromID(SecondID);
-            string id = ID;
-            Action UpdateValue = () => {
-                renderData.SetValue(id, firstValue.GetValue().Equals(secondValue.GetValue()));
-            };
+        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, CompareMacroData data) {
+            UIValue firstValue = renderData.GetValueFromID(data.FirstID);
+            UIValue secondValue = renderData.GetValueFromID(data.SecondID);
+            void UpdateValue() {
+                renderData.SetValue(data.ID, firstValue.GetValue().Equals(secondValue.GetValue()));
+            }
             firstValue.OnChange += UpdateValue;
             secondValue.OnChange += UpdateValue;
             UpdateValue();
-        }
-
-        public override void SetToDefault() {
-            ID = null;
-            FirstID = null;
-            SecondID = null;
         }
     }
 }
