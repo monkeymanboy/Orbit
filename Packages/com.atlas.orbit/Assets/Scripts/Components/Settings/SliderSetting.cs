@@ -35,14 +35,6 @@ namespace Atlas.Orbit.Components.Settings {
                 UpdateSlider();
             }
         }
-        private bool useInt = false;
-        public bool UseInt {
-            get => useInt;
-            set {
-                useInt = value;
-                UpdateSlider();
-            }
-        }
         private bool wholeNumbers = true;
         public bool WholeNumbers {
             get => wholeNumbers;
@@ -57,6 +49,7 @@ namespace Atlas.Orbit.Components.Settings {
         public UIFunction Formatter { get; set; }
 
         private bool initialized = false;
+        private bool useInt = false;
 
         public override void PostParse() {
             initialized = true;
@@ -65,6 +58,14 @@ namespace Atlas.Orbit.Components.Settings {
             } else {
                 slider.gameObject.AddComponent<SliderPointerUp>().SetOnFinished(SetUIValue);
                 slider.onValueChanged.AddListener(UpdateText);
+            }
+            switch(UIValue.GetValue()) {
+                case int:
+                    useInt = true;
+                    break;
+                case float:
+                    useInt = false;
+                    break;
             }
             UpdateSlider();
         }
@@ -78,7 +79,7 @@ namespace Atlas.Orbit.Components.Settings {
         }
 
         private void UpdateSliderValue() {
-            float value = UseInt
+            float value = useInt
                 ? (float)(UIValue.GetValue<int>())
                 : UIValue.GetValue<float>();
 
@@ -97,7 +98,7 @@ namespace Atlas.Orbit.Components.Settings {
 
         private void UpdateText(float val) {
             if(!valueMesh) return;
-            if(UseInt) valueMesh.text = (Formatter?.Invoke(Mathf.RoundToInt(GetRealValue(val))) as string) ?? Mathf.RoundToInt(GetRealValue(val)).ToString("0");
+            if(useInt) valueMesh.text = (Formatter?.Invoke(Mathf.RoundToInt(GetRealValue(val))) as string) ?? Mathf.RoundToInt(GetRealValue(val)).ToString("0");
             else valueMesh.text = (Formatter?.Invoke(GetRealValue(val)) as string) ?? GetRealValue(val).ToString("0.00");
         }
         private float GetRealValue(float val) {
@@ -105,7 +106,7 @@ namespace Atlas.Orbit.Components.Settings {
         }
 
         private void SetUIValue(float val) {
-            if(UseInt) UIValue.SetValue(Mathf.RoundToInt(GetRealValue(val)));
+            if(useInt) UIValue.SetValue(Mathf.RoundToInt(GetRealValue(val)));
             else UIValue.SetValue(GetRealValue(val));
             OnChangeEvent?.Invoke();
         }
