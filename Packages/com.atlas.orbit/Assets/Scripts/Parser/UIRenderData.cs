@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 
 namespace Atlas.Orbit.Parser {
+    using Attributes.TagGenerators;
     using Components;
     using UnityEngine;
 
@@ -31,7 +32,6 @@ namespace Atlas.Orbit.Parser {
 
         internal Dictionary<string, UIValue> Values { get; } = new();
         internal Dictionary<string, UIValue> Properties { get; } = new();
-        internal Dictionary<string, PropertyInfo> PropertyInfoCache { get; } = new();
         internal Dictionary<string, Action> Events { get; } = new();
         internal Dictionary<string, Action<object>> ChildEvents { get; } = new();
         internal OrbitParser Parser { get; set; }
@@ -107,7 +107,7 @@ namespace Atlas.Orbit.Parser {
                 if(Events.ContainsKey(id))
                     Events[id].Invoke();
             }
-            if(ParentRenderData != null) //TODO(David): Right now emitting events in a child render data sends the events to the parent, should the opposite be true?
+            if(ParentRenderData != null)
                 ParentRenderData.EmitChildEvent(ids, Host);
         }
 
@@ -127,7 +127,6 @@ namespace Atlas.Orbit.Parser {
         }
 
         private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e) {
-            PropertyInfo propInfo = PropertyInfoCache[e.PropertyName];
             UIValue uiValue = Properties[e.PropertyName];
             uiValue.InvokeOnChange();
         }

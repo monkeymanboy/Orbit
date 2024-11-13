@@ -9,6 +9,7 @@ using System;
 
 namespace Atlas.Orbit.Parser {
     using Attributes;
+    using Attributes.TagGenerators;
     using ComponentProcessors;
     using Macros;
     using System.Diagnostics;
@@ -46,6 +47,8 @@ namespace Atlas.Orbit.Parser {
 
         private bool initialized = false;
 
+        public XmlDocument XmlDocument => doc;
+
         public virtual void Init() {
             readerSettings.IgnoreComments = true;
             ComponentProcessors = UtilReflection.GetAllSubclasses<ComponentProcessor>();
@@ -72,10 +75,14 @@ namespace Atlas.Orbit.Parser {
             }
         }
 
+        public XmlNode ParseXML(string content) {
+            doc.Load(XmlReader.Create(new StringReader(content), readerSettings));
+            return doc;
+        }
+
         public UIRenderData Parse(string content, GameObject parent, object host = null,
             UIRenderData parentData = null) {
-            doc.Load(XmlReader.Create(new StringReader(content), readerSettings));
-            return Parse(doc, parent, host, parentData);
+            return Parse(ParseXML(content), parent, host, parentData);
         }
 
         public UIRenderData Parse(XmlNode parentNode, GameObject parent, object host = null,
@@ -102,9 +109,7 @@ namespace Atlas.Orbit.Parser {
             if(host != null) {
                 List<(string, FieldInfo)> eventEmitterFields = null;
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
-                    EventEmitterAttribute eventEmitter =
-                        fieldInfo.GetCustomAttributes(typeof(EventEmitterAttribute), true).FirstOrDefault() as
-                            EventEmitterAttribute;
+                    EventEmitterAttribute eventEmitter = fieldInfo.GetCustomAttribute<EventEmitterAttribute>(true);
                     if(eventEmitter != null) {
                         fieldInfo.SetValue(host, new Action(() => renderData.EmitEvent(eventEmitter.ID)));
                         if(eventEmitterFields == null)
@@ -112,9 +117,12 @@ namespace Atlas.Orbit.Parser {
                         eventEmitterFields.Add((eventEmitter.ID, fieldInfo));
                     }
 
-                    ValueIDAttribute valueID =
-                        fieldInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as
-                            ValueIDAttribute;
+                    ValueIDAttribute valueID = fieldInfo.GetCustomAttribute<ValueIDAttribute>(true);
+                    TagGenerator tagGenerator = fieldInfo.GetCustomAttribute<TagGenerator>(true);
+                    if(tagGenerator != null) {
+                        renderData.TagGenerators.Add((valueID.ID ?? fieldInfo.Name, tagGenerator));
+                    } 
+                    
                     if(valueID == null)
                         continue;
                     renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? fieldInfo.Name : valueID.ID,
@@ -123,47 +131,39 @@ namespace Atlas.Orbit.Parser {
                 renderData.EventEmitterFields = eventEmitterFields;
 
                 foreach(PropertyInfo propInfo in host.GetType().GetProperties(HOST_FLAGS)) {
-                    ValueIDAttribute valueID =
-                        propInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as
-                            ValueIDAttribute;
+                    ValueIDAttribute valueID = propInfo.GetCustomAttribute<ValueIDAttribute>(true);
                     if(valueID == null)
                         continue;
+                    TagGenerator tagGenerator = propInfo.GetCustomAttribute<TagGenerator>(true);
+                    if(tagGenerator != null) {
+                        renderData.TagGenerators.Add((valueID.ID ?? propInfo.Name, tagGenerator));
+                    } 
                     UIPropertyValue uiPropertyValue = new UIPropertyValue(renderData, propInfo);
                     renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? propInfo.Name : valueID.ID,
                         uiPropertyValue);
                     renderData.Properties.Add(propInfo.Name, uiPropertyValue);
-                    renderData.PropertyInfoCache.Add(propInfo.Name, propInfo);
                 }
 
                 foreach(MethodInfo methodInfo in host.GetType().GetMethods(HOST_FLAGS)) {
-                    ValueIDAttribute valueID =
-                        methodInfo.GetCustomAttributes(typeof(ValueIDAttribute), true).FirstOrDefault() as
-                            ValueIDAttribute;
+                    ValueIDAttribute valueID = methodInfo.GetCustomAttribute<ValueIDAttribute>(true);
                     if(valueID != null) {
                         renderData.SetValue(string.IsNullOrEmpty(valueID.ID) ? methodInfo.Name : valueID.ID,
                             new UIFunction(renderData, methodInfo));
                     }
-
-                    ListenForAttribute listenFor =
-                        methodInfo.GetCustomAttributes(typeof(ListenForAttribute), true).FirstOrDefault() as
-                            ListenForAttribute;
+                    ListenForAttribute listenFor = methodInfo.GetCustomAttribute<ListenForAttribute>(true);
                     if(listenFor == null)
                         continue;
                     if(methodInfo.GetParameters().Length == 1)
                         renderData.AddChildEvent(listenFor.Events,
-                            (host) => methodInfo.Invoke(renderData.Host, new object[] { host }));
+                            (host) => methodInfo.Invoke(renderData.Host, ArrayParameters<object>.Single(host)));
                     else
                         renderData.AddEvent(listenFor.Events,
-                            () => methodInfo.Invoke(renderData.Host, new object[] { }));
+                            () => methodInfo.Invoke(renderData.Host, Array.Empty<object>()));
                 }
             }
 
             renderData.Values.Add("this", new UIHostValue(renderData));
-
-            renderData.AddEvent("RefreshAll",
-                renderData
-                    .RefreshAllValues); //TODO(David): Not sure if I want this to actually exist or not, should reconsider after implementing property binding
-
+            renderData.AddEvent("RefreshAll", renderData.RefreshAllValues);
             renderData.EmitEvent("PreParse");
 
             preParse?.Invoke(renderData);
@@ -178,9 +178,7 @@ namespace Atlas.Orbit.Parser {
                 List<(string, FieldInfo)> viewComponentFields = null;
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
                     //TODO(David): ViewComponentAttributes could be cached so we don't need to iterate over the fields twice
-                    ViewComponentAttribute objectID =
-                        fieldInfo.GetCustomAttributes(typeof(ViewComponentAttribute), true).FirstOrDefault() as
-                            ViewComponentAttribute;
+                    ViewComponentAttribute objectID = fieldInfo.GetCustomAttribute<ViewComponentAttribute>(true);
                     if(objectID == null) continue;
                     if(viewComponentFields == null)
                         viewComponentFields = new();

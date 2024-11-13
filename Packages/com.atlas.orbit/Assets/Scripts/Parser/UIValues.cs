@@ -2,6 +2,8 @@
 using System.Reflection;
 
 namespace Atlas.Orbit.Parser {
+    using Util;
+
     public abstract class UIValue {
         public event Action OnChange;
 
@@ -91,7 +93,7 @@ namespace Atlas.Orbit.Parser {
         }
         
         public override void SetValue(object value) {
-            SetMethod?.Invoke(renderData.Host, new object[] { value });
+            SetMethod?.Invoke(renderData.Host, ArrayParameters<object>.Single(value));
             InvokeOnChange();
         }
     }
