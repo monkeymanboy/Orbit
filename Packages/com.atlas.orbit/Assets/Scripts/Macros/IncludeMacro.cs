@@ -15,19 +15,15 @@ namespace Atlas.Orbit.Macros {
         public struct IncludeMacroData {
             public Type ViewType;
             public string ViewValue;
-            public bool Active;
+            public bool? Active;
             public UIValue ActiveValue;
-            public bool DidSetActive;
         }
         public override string Tag => "INCLUDE";
 
         public override Dictionary<string, TypeSetter<IncludeMacroData>> Setters => new() {
             {"ViewType", new ObjectSetter<IncludeMacroData, Type>((ref IncludeMacroData data, Type value) => data.ViewType = value) },
             {"ViewValue", new StringSetter<IncludeMacroData>((ref IncludeMacroData data, string value) => data.ViewValue = value) },
-            {"Active", new BoolSetter<IncludeMacroData>((ref IncludeMacroData data, bool value) => {
-                data.Active = value;
-                data.DidSetActive = true;
-            }) },
+            {"Active", new BoolSetter<IncludeMacroData>((ref IncludeMacroData data, bool value) => data.Active = value) },
         };
 
 
@@ -44,8 +40,8 @@ namespace Atlas.Orbit.Macros {
             viewRect.anchorMax = new Vector2(1, 1);
             viewRect.sizeDelta = Vector2.zero;
             renderData.SetValue(data.ViewValue, viewGO.AddComponent(data.ViewType));
-            if(data.DidSetActive) {
-                viewGO.SetActive(data.Active);
+            if(data.Active.HasValue) {
+                viewGO.SetActive(data.Active.Value);
                 data.ActiveValue.OnChange += () => {
                     viewGO.SetActive(data.ActiveValue.GetValue<bool>());
                 };
