@@ -116,31 +116,37 @@ namespace Atlas.Orbit.Parser {
                             eventEmitterFields = new();
                         eventEmitterFields.Add((eventEmitter.ID, fieldInfo));
                     }
-
                     ValueIDAttribute valueID = fieldInfo.GetCustomAttribute<ValueIDAttribute>(true);
+                    string id = null;
+                    if(valueID != null)
+                        id = valueID.ID ?? fieldInfo.Name;
                     TagGenerator tagGenerator = fieldInfo.GetCustomAttribute<TagGenerator>(true);
                     if(tagGenerator != null) {
-                        renderData.TagGenerators.Add((valueID.ID ?? fieldInfo.Name, tagGenerator));
-                    } 
-                    
-                    if(valueID == null)
+                        //Allows UIValues to be made implicitly by presence of a tag generator attribute without ValueID
+                        id ??= fieldInfo.Name;
+                        renderData.TagGenerators.Add((id, tagGenerator));
+                    }
+                    if(id == null)
                         continue;
-                    renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? fieldInfo.Name : valueID.ID,
-                        new UIFieldValue(renderData, fieldInfo));
+                    renderData.Values.Add(id, new UIFieldValue(renderData, fieldInfo));
                 }
                 renderData.EventEmitterFields = eventEmitterFields;
 
                 foreach(PropertyInfo propInfo in host.GetType().GetProperties(HOST_FLAGS)) {
                     ValueIDAttribute valueID = propInfo.GetCustomAttribute<ValueIDAttribute>(true);
-                    if(valueID == null)
-                        continue;
+                    string id = null;
+                    if(valueID != null)
+                        id = valueID.ID ?? propInfo.Name;
                     TagGenerator tagGenerator = propInfo.GetCustomAttribute<TagGenerator>(true);
                     if(tagGenerator != null) {
-                        renderData.TagGenerators.Add((valueID.ID ?? propInfo.Name, tagGenerator));
+                        //Allows UIValues to be made implicitly by presence of a tag generator attribute without ValueID
+                        id ??= propInfo.Name;
+                        renderData.TagGenerators.Add((id, tagGenerator));
                     } 
-                    UIPropertyValue uiPropertyValue = new UIPropertyValue(renderData, propInfo);
-                    renderData.Values.Add(string.IsNullOrEmpty(valueID.ID) ? propInfo.Name : valueID.ID,
-                        uiPropertyValue);
+                    if(id == null)
+                        continue;
+                    UIPropertyValue uiPropertyValue = new(renderData, propInfo);
+                    renderData.Values.Add(id, uiPropertyValue);
                     renderData.Properties.Add(propInfo.Name, uiPropertyValue);
                 }
 

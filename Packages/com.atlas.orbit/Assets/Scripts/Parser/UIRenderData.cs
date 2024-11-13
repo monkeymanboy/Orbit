@@ -40,6 +40,8 @@ namespace Atlas.Orbit.Parser {
         public List<(string, FieldInfo)> ViewComponentFields { get; set; }
         public List<(string, FieldInfo)> EventEmitterFields { get; set; }
 
+        public List<(string,TagGenerator)> TagGenerators { get; set; } = new();
+
         public UIValue GetValueFromID(string id) {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
                 if(ParentRenderData == null)

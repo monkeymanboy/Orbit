@@ -600,6 +600,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="AutoFontSize">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="FontColor">
         <xs:simpleType>
           <xs:annotation>
@@ -7289,6 +7303,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="AutoFontSize">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="FontColor">
         <xs:simpleType>
           <xs:annotation>
@@ -8101,6 +8129,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="AutoFontSize">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="FontColor">
         <xs:simpleType>
           <xs:annotation>
@@ -8791,6 +8833,20 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="AutoFontSize">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="FontColor">
         <xs:simpleType>
           <xs:annotation>
@@ -9203,21 +9259,6 @@
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:pattern value="[-+]?[0-9]*" />
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:union>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="UseInt">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Boolean</xs:documentation>
-          </xs:annotation>
-          <xs:union memberTypes="ValueBoundType">
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:enumeration value="true" />
-                <xs:enumeration value="false" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -9685,6 +9726,20 @@
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AutoFontSize">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -10474,6 +10529,20 @@
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="AutoFontSize">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Vector2</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>
@@ -13775,6 +13844,27 @@
             <xs:documentation>Object</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType" />
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ATTRIBUTE_TAGS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:any minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="Group">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>String</xs:documentation>
+          </xs:annotation>
+          <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value=".*" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:union>
         </xs:simpleType>
       </xs:attribute>
     </xs:complexType>
