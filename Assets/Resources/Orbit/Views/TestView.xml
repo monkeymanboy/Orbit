@@ -1,10 +1,11 @@
 <Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd'>
     <Vertical ChildControlWidth='true'>
-        <Container SizeDeltaY="20">
-            <DEFINE_FLOAT ID="SliderVal" Value="0"/>
-            <LERP_COLOR ID='CurrentColor' ValueID='SliderVal' StartColor="white" EndColor="red"/>
-            <Image ImageColor="~CurrentColor" AnchorPreset="FillParent"/>
-            <SettingSlider AnchorPreset="FillParent" Text='Redness' FontColor="black" BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='100'/>
-        </Container>
+        <DEFINE_FLOAT ID="SliderVal" Value="0"/>
+        <LERP_COLOR ID='CurrentColor' ValueID='SliderVal' StartColor="white" EndColor="red"/>
+        <SettingSlider Text='Redness' FontColor="~CurrentColor" BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='100'/>
+
+        <DEFINE_BOOL ID="CheckboxVal" Value="false"/>
+        <SettingToggle Text="Normal" BoundValue="CheckboxVal"/>
+        <SettingToggle Text="Negated" BoundValue="!CheckboxVal"/>
     </Vertical>
 </Container>

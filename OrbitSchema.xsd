@@ -14169,7 +14169,7 @@
           </xs:union>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="StartsActive">
+      <xs:attribute name="Active">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Boolean</xs:documentation>
@@ -14294,41 +14294,6 @@
                 <xs:enumeration value="teal" />
                 <xs:enumeration value="aqua" />
                 <xs:enumeration value="magenta" />
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:union>
-        </xs:simpleType>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NEGATE">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:any minOccurs="0" maxOccurs="unbounded" />
-      </xs:sequence>
-      <xs:attribute name="ID" use="required">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>String</xs:documentation>
-          </xs:annotation>
-          <xs:union memberTypes="ValueBoundType">
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:pattern value=".*" />
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:union>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="BoolValue" use="required">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>String</xs:documentation>
-          </xs:annotation>
-          <xs:union memberTypes="ValueBoundType">
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:pattern value=".*" />
               </xs:restriction>
             </xs:simpleType>
           </xs:union>

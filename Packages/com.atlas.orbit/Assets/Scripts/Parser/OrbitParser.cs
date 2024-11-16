@@ -19,6 +19,7 @@ namespace Atlas.Orbit.Parser {
     public class OrbitParser {
         internal const char RETRIEVE_VALUE_PREFIX = '~';
         internal const char PARENT_HOST_VALUE_PREFIX = '^';
+        internal const char NEGATE_VALUE_PREFIX = '!';
 
         internal const BindingFlags HOST_FLAGS =
             BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;

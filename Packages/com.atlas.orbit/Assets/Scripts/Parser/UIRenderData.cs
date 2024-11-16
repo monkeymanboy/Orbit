@@ -49,15 +49,37 @@ namespace Atlas.Orbit.Parser {
                 string valueID = id.Substring(1);
                 return ParentRenderData.GetValueFromID(valueID);
             }
-
             if(Values.TryGetValue(id, out UIValue value))
                 return value;
+            if(id.StartsWith(OrbitParser.NEGATE_VALUE_PREFIX)) {
+                string negatedId = id;
+                id = id.Substring(1);
+                if(!Values.TryGetValue(id, out UIValue valueToNegate))
+                    throw new Exception($"Could not negate nonexistent value '{id}'");
+                UIValue negatedValue = SetValue(negatedId, !valueToNegate.GetValue<bool>());
+                BindNegatedValue(negatedValue, valueToNegate);
+                return negatedValue;
+            }
             if(ParentRenderData?.Values.ContainsKey(id) ?? false)
                 throw new Exception($"Could not find requested UIValue: '{id}' -- Detected possible typo, '~{id}' might need to be '~^{id}'");
             throw new Exception($"Could not find requested UIValue: '{id}'");
         }
+        
         internal bool TryGetValueFromID(string id, out UIValue value) {
             return Values.TryGetValue(id, out value);
+        }
+
+        private void BindNegatedValue(UIValue negatedValue, UIValue valueToNegate) {
+            void OnNegatedValueChange() {
+                bool negated = negatedValue.GetValue<bool>();
+                if(valueToNegate.GetValue<bool>() == negated) valueToNegate.SetValue(!negated);
+            }
+            negatedValue.OnChange += OnNegatedValueChange;
+
+            void OnValueToNegateChange() {
+                negatedValue.SetValue(!valueToNegate.GetValue<bool>());
+            }
+            valueToNegate.OnChange += OnValueToNegateChange;
         }
 
         public UIValue SetValue<T>(string id, T value) {
