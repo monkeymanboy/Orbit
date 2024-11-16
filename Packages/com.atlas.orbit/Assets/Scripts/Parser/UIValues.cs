@@ -2,6 +2,9 @@
 using System.Reflection;
 
 namespace Atlas.Orbit.Parser {
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using UnityEngine;
     using Util;
 
     public abstract class UIValue {
@@ -11,13 +14,14 @@ namespace Atlas.Orbit.Parser {
 
         public virtual bool HasValue => renderData?.Host != null;
 
+        public UIValue() { }
         public UIValue(UIRenderData renderData) {
             this.renderData = renderData;
         }
 
-        public abstract void SetValue(object value);
+        public abstract void SetValue<T>(T value);
         public abstract object GetValue();
-        public T GetValue<T>() {
+        public virtual T GetValue<T>() {
             try {
                 return (T)GetValue();
             } catch {
@@ -28,11 +32,11 @@ namespace Atlas.Orbit.Parser {
         public void InvokeOnChange() => OnChange?.Invoke();
     }
 
-    public class DefinedUIValue : UIValue {
+    public class DefinedUIValue<ObjectType> : UIValue {
         public override bool HasValue => true;
-        private object value;
+        private ObjectType value;
         
-        public DefinedUIValue(UIRenderData renderData, object value) : base(renderData) {
+        public DefinedUIValue(UIRenderData renderData, ObjectType value) : base(renderData) {
             this.value = value;
         }
 
@@ -40,9 +44,13 @@ namespace Atlas.Orbit.Parser {
             return value;
         }
 
-        public override void SetValue(object value) {
-            this.value = value;
+        public override void SetValue<T>(T value) {
+            this.value = (ObjectType)(object)value;
             InvokeOnChange();
+        }
+
+        public override T GetValue<T>() {
+            return (T)(object)value;
         }
     }
 
@@ -57,7 +65,7 @@ namespace Atlas.Orbit.Parser {
             return fieldInfo.GetValue(renderData.Host);
         }
 
-        public override void SetValue(object value) {
+        public override void SetValue<T>(T value) {
             fieldInfo.SetValue(renderData.Host, value);
             InvokeOnChange();
         }
@@ -92,7 +100,7 @@ namespace Atlas.Orbit.Parser {
             return GetMethod.Invoke(renderData.Host, Array.Empty<object>());
         }
         
-        public override void SetValue(object value) {
+        public override void SetValue<T>(T value) {
             SetMethod?.Invoke(renderData.Host, ArrayParameters<object>.Single(value));
             InvokeOnChange();
         }
@@ -105,7 +113,7 @@ namespace Atlas.Orbit.Parser {
             return renderData.Host;
         }
 
-        public override void SetValue(object value) {
+        public override void SetValue<T>(T value) {
             renderData.Host = value;
             InvokeOnChange();
         }

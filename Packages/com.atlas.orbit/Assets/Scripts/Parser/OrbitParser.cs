@@ -17,8 +17,8 @@ namespace Atlas.Orbit.Parser {
     using Debug = UnityEngine.Debug;
 
     public class OrbitParser {
-        internal const string RETRIEVE_VALUE_PREFIX = "~";
-        internal const string PARENT_HOST_VALUE_PREFIX = "^";
+        internal const char RETRIEVE_VALUE_PREFIX = '~';
+        internal const char PARENT_HOST_VALUE_PREFIX = '^';
 
         internal const BindingFlags HOST_FLAGS =
             BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
@@ -219,7 +219,7 @@ namespace Atlas.Orbit.Parser {
                 string propertyName = attribute.Name;
                 string value = attribute.Value;
                 if(value.StartsWith(RETRIEVE_VALUE_PREFIX)) {
-                    string valueID = value.Substring(RETRIEVE_VALUE_PREFIX.Length);
+                    string valueID = value.Substring(1);
 
                     UIValue uiValue = renderData.GetValueFromID(valueID);
 
@@ -232,7 +232,7 @@ namespace Atlas.Orbit.Parser {
                 parameters.Data.Add(propertyName, value);
             }
 
-            parameters.Values.Add("_Node", new DefinedUIValue(null, node));
+            parameters.Values.Add("_Node", new DefinedUIValue<XmlNode>(null, node));
             parameters.Data.Add("_Node", null);
 
             if(Macros.TryGetValue(node.Name, out Macro macro)) {

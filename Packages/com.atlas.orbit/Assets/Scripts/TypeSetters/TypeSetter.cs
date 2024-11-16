@@ -5,12 +5,16 @@ using System.Xml.Schema;
 
 namespace Atlas.Orbit.TypeSetters {
     using Exceptions;
+    using Parser;
+    using UnityEngine;
 
     public abstract class TypeSetter<T> {
         public abstract void SetFromString(T obj, string value);
         public abstract void SetFromString(ref T obj, string value);
-        public abstract void Set(T obj, object value);
-        public abstract void Set(ref T obj, object value);
+        public abstract void Set<SetType>(T obj, SetType value);
+        public abstract void Set(T obj, UIValue value);
+        public abstract void Set<SetType>(ref T obj, SetType value);
+        public abstract void Set(ref T obj, UIValue value);
 
         public abstract XmlSchemaSimpleType GenerateSchemaType();
     }
@@ -47,12 +51,11 @@ namespace Atlas.Orbit.TypeSetters {
             RefSetter(ref obj, parsedValue);
         }
 
-        public override void Set(T obj, object value) {
-            Setter(obj, (U)value);
-        }
-        public override void Set(ref T obj, object value) {
-            RefSetter(ref obj, (U)value);
-        }
+        public override void Set<SetType>(T obj, SetType value) => Setter(obj, (U)(object)value);
+        public override void Set(T obj, UIValue value) => Set(obj, value.GetValue<U>());
+
+        public override void Set<SetType>(ref T obj, SetType value) => RefSetter(ref obj, (U)(object)value);
+        public override void Set(ref T obj, UIValue value) => Set(ref obj, value.GetValue<U>());
 
         public abstract U Parse(string value);
         

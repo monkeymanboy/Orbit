@@ -10,11 +10,11 @@ namespace Atlas.Orbit.TypeSetters {
             return value;
         }
 
-        public override void Set(T obj, object value) {
-            base.Set(obj, value is string ? value : (value?.ToString() ?? throw new Exception($"Orbit encountered null when string was expected")));
+        public override void Set<SetType>(T obj, SetType value) {
+            base.Set(obj, (value?.ToString() ?? throw new Exception($"Orbit encountered null when string was expected")));
         }
-        public override void Set(ref T obj, object value) {
-            base.Set(ref obj, value is string ? value : (value?.ToString() ?? throw new Exception($"Orbit encountered null when string was expected")));
+        public override void Set<SetType>(ref T obj, SetType value) {
+            base.Set(ref obj, (value?.ToString() ?? throw new Exception($"Orbit encountered null when string was expected")));
         }
     }
 }

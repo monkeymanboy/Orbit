@@ -44,12 +44,11 @@ namespace Atlas.Orbit.Macros {
             foreach(KeyValuePair<string, string> pair in parameters.Data) {
                 if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter)
                    && parameters.Values.TryGetValue(pair.Key, out UIValue uiValue)) {
-                    valueTypeSetter.Set(ref data, uiValue);
+                    valueTypeSetter.Set<UIValue>(ref data, uiValue);
                 }
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
-                    
                     if(pair.Value == null) {
-                        typeSetter.Set(ref data, parameters.Values[pair.Key].GetValue());
+                        typeSetter.Set(ref data, parameters.Values[pair.Key]);
                         continue;
                     }
                     typeSetter.SetFromString(ref data, pair.Value);

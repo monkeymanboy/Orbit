@@ -47,7 +47,7 @@ namespace Atlas.Orbit.ComponentProcessors {
                                 valueChangeSetter.NotifyDestroyed();
                                 return;
                             }
-                            if(uiValue.HasValue) typeSetter.Set(component, uiValue.GetValue());
+                            if(uiValue.HasValue) typeSetter.Set(component, uiValue);
                         };
                         uiValue.OnChange += setValue;
                         valueChangeSetter.OnObjectDestroyed += () => {
