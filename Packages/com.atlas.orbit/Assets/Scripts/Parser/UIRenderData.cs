@@ -31,7 +31,7 @@ namespace Atlas.Orbit.Parser {
         public UIRenderData ParentRenderData { get; set; }
 
         internal Dictionary<string, UIValue> Values { get; } = new();
-        internal Dictionary<string, UIValue> Properties { get; } = new();
+        internal Dictionary<string, UIPropertyValue> Properties { get; } = new();
         internal Dictionary<string, Action> Events { get; } = new();
         internal Dictionary<string, Action<object>> ChildEvents { get; } = new();
         internal OrbitParser Parser { get; set; }
@@ -46,7 +46,7 @@ namespace Atlas.Orbit.Parser {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
                 if(ParentRenderData == null)
                     throw new Exception("Trying to use ^ when there is no parent host");
-                string valueID = id.Substring(OrbitParser.PARENT_HOST_VALUE_PREFIX.Length);
+                string valueID = id.Substring(1);
                 return ParentRenderData.GetValueFromID(valueID);
             }
 
@@ -60,19 +60,20 @@ namespace Atlas.Orbit.Parser {
             return Values.TryGetValue(id, out value);
         }
 
-        public void SetValue(string id, object value) {
+        public UIValue SetValue<T>(string id, T value) {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
                 if(ParentRenderData == null)
                     throw new Exception("Trying to use ^ when there is no parent host");
-                string valueID = id.Substring(OrbitParser.PARENT_HOST_VALUE_PREFIX.Length);
-                SetValue(valueID, value);
-                return;
+                string valueID = id.Substring(1);
+                return SetValue(valueID, value);
             }
             if(Values.TryGetValue(id, out UIValue uiValue)) {
                 uiValue.SetValue(value);
-                return;
+                return uiValue;
             }
-            Values.Add(id, new DefinedUIValue(this, value));
+            UIValue definedValue = new DefinedUIValue<T>(this, value);
+            Values.Add(id, definedValue);
+            return definedValue;
         }
 
 

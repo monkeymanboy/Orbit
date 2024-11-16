@@ -32,10 +32,13 @@ namespace Atlas.Orbit.Macros {
 
         public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, RemapMacroData data) {
             UIValue value = renderData.GetValueFromID(data.ValueID);
-            value.OnChange += () => {
-                renderData.SetValue(data.ID, Remap(value.GetValue<float>(), data.ValueRange, data.Range));
-            };
-            renderData.SetValue(data.ID, Remap(value.GetValue<float>(), data.ValueRange, data.Range));
+            
+            UIValue mappedValue = renderData.SetValue(data.ID, Remap(value.GetValue<float>(), data.ValueRange, data.Range));
+            void OnValueChange() {
+                mappedValue.SetValue(Remap(value.GetValue<float>(), data.ValueRange, data.Range));
+            }
+
+            value.OnChange += OnValueChange;
         }
 
         private float Remap(float value, Vector2 fromRange, Vector2 toRange) {

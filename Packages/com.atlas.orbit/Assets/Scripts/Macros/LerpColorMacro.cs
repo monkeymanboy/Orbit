@@ -31,10 +31,12 @@ namespace Atlas.Orbit.Macros {
 
         public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, LerpColorMacroData data) {
             UIValue value = renderData.GetValueFromID(data.ValueID);
-            value.OnChange += () => {
-                renderData.SetValue(data.ID, Color.Lerp(data.StartColor, data.EndColor, value.GetValue<float>()));
-            };
-            renderData.SetValue(data.ID, Color.Lerp(data.StartColor, data.EndColor, value.GetValue<float>()));
+
+            UIValue colorValue = renderData.SetValue(data.ID, Color.Lerp(data.StartColor, data.EndColor, value.GetValue<float>()));
+            void OnValueChange() {
+                colorValue.SetValue(Color.Lerp(data.StartColor, data.EndColor, value.GetValue<float>()));
+            }
+            value.OnChange += OnValueChange;
         }
 
         private float Remap(float value, Vector2 fromRange, Vector2 toRange) {

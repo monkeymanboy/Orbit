@@ -30,12 +30,12 @@ namespace Atlas.Orbit.Macros {
         public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, CompareMacroData data) {
             UIValue firstValue = renderData.GetValueFromID(data.FirstID);
             UIValue secondValue = renderData.GetValueFromID(data.SecondID);
-            void UpdateValue() {
-                renderData.SetValue(data.ID, firstValue.GetValue().Equals(secondValue.GetValue()));
+            UIValue resultValue = renderData.SetValue(data.ID, firstValue.GetValue().Equals(secondValue.GetValue()));
+            void OnValueChange() {
+                resultValue.SetValue(firstValue.GetValue().Equals(secondValue.GetValue()));
             }
-            firstValue.OnChange += UpdateValue;
-            secondValue.OnChange += UpdateValue;
-            UpdateValue();
+            firstValue.OnChange += OnValueChange;
+            secondValue.OnChange += OnValueChange;
         }
     }
 }
