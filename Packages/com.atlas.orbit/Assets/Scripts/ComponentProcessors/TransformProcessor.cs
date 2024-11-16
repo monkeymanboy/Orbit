@@ -14,7 +14,7 @@ namespace Atlas.Orbit.ComponentProcessors {
             {"PositionX", new FloatSetter<Transform>((component, value) => component.localPosition = new Vector3(value, component.localPosition.y, component.localPosition.z)) },
             {"PositionY", new FloatSetter<Transform>((component, value) => component.localPosition = new Vector3(component.localPosition.x, value, component.localPosition.z)) },
             {"PositionZ", new FloatSetter<Transform>((component, value) => component.localPosition = new Vector3(component.localPosition.x, component.localPosition.y, value)) },
-            {"Scale", new FloatSetter<Transform>((component, value) => component.localScale = new Vector3(value, value, value)) },
+            {"Scale", new Vector3Setter<Transform>((component, value) => component.localScale = value) },
             {"ScaleX", new FloatSetter<Transform>((component, value) => component.localScale = new Vector3(value, component.localPosition.y, component.localScale.z)) },
             {"ScaleY", new FloatSetter<Transform>((component, value) => component.localScale = new Vector3(component.localPosition.x, value, component.localScale.z)) },
             {"ScaleZ", new FloatSetter<Transform>((component, value) => component.localScale = new Vector3(component.localPosition.x, component.localScale.y, value)) },

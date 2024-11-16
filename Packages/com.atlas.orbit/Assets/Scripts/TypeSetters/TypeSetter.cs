@@ -37,7 +37,7 @@ namespace Atlas.Orbit.TypeSetters {
             try {
                 parsedValue = Parse(value);
             } catch (Exception ex){
-                throw ex is ParseValueException ? ex : new ParseValueException(typeof(U), value);
+                throw ex is ParseValueException ? ex : new ParseValueException(typeof(U), value, ex.Message);
             }
             Setter(obj, parsedValue);
         }
