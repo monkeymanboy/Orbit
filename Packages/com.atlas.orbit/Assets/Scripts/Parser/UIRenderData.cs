@@ -35,7 +35,8 @@ namespace Atlas.Orbit.Parser {
         internal Dictionary<string, Action> Events { get; } = new();
         internal Dictionary<string, Action<object>> ChildEvents { get; } = new();
         internal OrbitParser Parser { get; set; }
-        public List<GameObject> RootObjects { get; } = new();
+        public GameObject RootParent { get; set; }
+        public List<GameObject> RootObjects { get; set; } = new();
         public bool Disabled { get; set; }
         public List<(string, FieldInfo)> ViewComponentFields { get; set; }
         public List<(string, FieldInfo)> EventEmitterFields { get; set; }

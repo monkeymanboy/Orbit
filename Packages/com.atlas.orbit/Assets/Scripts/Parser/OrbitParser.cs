@@ -106,7 +106,17 @@ namespace Atlas.Orbit.Parser {
             parseStopWatch.Start();
 #endif
             
-            UIRenderData renderData = new UIRenderData { Host = host, ParentRenderData = parentData, Parser = this };
+            UIRenderData renderData = new() {
+                Host = host,
+                ParentRenderData = parentData,
+                Parser = this,
+                RootParent = parent
+            };
+
+            if(parentData != null && parentData.RootParent == parent) {
+                //This can happen if macros that parse with a new host are at the root, can share RootObjects in these cases to make sure these objects get destroyed when hot reloading
+                renderData.RootObjects = parentData.RootObjects;
+            }
 
             if(host != null) {
                 List<(string, FieldInfo)> eventEmitterFields = null;
@@ -177,9 +187,7 @@ namespace Atlas.Orbit.Parser {
             preParse?.Invoke(renderData);
 
             foreach (XmlNode node in parentNode.ChildNodes) {
-                GameObject nodeGO = RenderNode(node, parent, renderData);
-                if(nodeGO != null) renderData.RootObjects.Add(nodeGO);
-                //TODO(David): if nodeGO is null we parsed a macro, this is fine to ignore in most cases however if the macro has child nodes those should be included in root objects
+                RenderNode(node, parent, renderData);
             }
 
             if(host != null) {
@@ -210,7 +218,7 @@ namespace Atlas.Orbit.Parser {
             return renderData;
         }
         
-        public GameObject RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
+        public void RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
             TagParameters parameters = new() {
                 RenderData = renderData,
                 Node = node,
@@ -232,13 +240,12 @@ namespace Atlas.Orbit.Parser {
             
             if(Macros.TryGetValue(node.Name, out Macro macro)) {
                 RenderMacroNode(macro, parent, parameters);
-                return null;
+                return;
             }
-
-            return RenderTagNode(parent, parameters);
+            RenderTagNode(parent, parameters);
         }
 
-        private GameObject RenderTagNode(GameObject parent, TagParameters parameters) {
+        private void RenderTagNode(GameObject parent, TagParameters parameters) {
             XmlNode node = parameters.Node;
             GameObject nodeGO = CreatePrefab(node.Name, parent);
             MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
@@ -263,8 +270,10 @@ namespace Atlas.Orbit.Parser {
                 foreach(XmlNode childNode in node.ChildNodes)
                     RenderNode(childNode, markupPrefab.ChildrenContainer, parameters.RenderData);
             }
-
-            return nodeGO;
+            
+            if(parent == parameters.RenderData.RootParent) {
+                parameters.RenderData.RootObjects.Add(nodeGO);
+            }
         }
 
         private void RenderMacroNode(Macro macro, GameObject parent, TagParameters parameters) {
