@@ -11,6 +11,8 @@ using UnityEngine;
 using System.IO;
 
 namespace Atlas.Orbit.Components {
+    using System.Threading;
+
     public class OrbitView : MonoBehaviour, INotifyPropertyChanged {
         protected virtual OrbitParser Parser => OrbitParser.DefaultParser;
         public virtual bool ShouldParse => true;
@@ -19,7 +21,7 @@ namespace Atlas.Orbit.Components {
         private bool hasParsed = false;
         private string resourceName;
         private UIRenderData renderData;
-        private bool reload;
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) {
@@ -32,6 +34,7 @@ namespace Atlas.Orbit.Components {
             ManualParse();
         }
 
+        [Obsolete("This will reparse the entire view, you should never need this if you call OnPropertyChanged in your property setters. If you still want all bound values to update, you should emit the 'RefreshAll' event instead of using this.")]
         public void ForceReloadView() {
             if(renderData != null) {
                 foreach(GameObject go in renderData.RootObjects) {
@@ -54,24 +57,29 @@ namespace Atlas.Orbit.Components {
 #if ORBIT_HOT_RELOAD
             string filePath = $"Assets/Resources/{resourceName}.xml";
             if(File.Exists(filePath)) {
-                FileSystemWatcher watcher = new(Path.GetDirectoryName(filePath)); //TODO(David): Might need to dispose this OnDestroy
-                watcher.Path = Path.GetDirectoryName(filePath);
-                watcher.Filter = Path.GetFileName(filePath);
-                watcher.NotifyFilter = NotifyFilters.Attributes
-                                       | NotifyFilters.CreationTime
-                                       | NotifyFilters.DirectoryName
-                                       | NotifyFilters.FileName
-                                       | NotifyFilters.LastAccess
-                                       | NotifyFilters.LastWrite
-                                       | NotifyFilters.Security
-                                       | NotifyFilters.Size;
-
+                FileSystemWatcher watcher = new(Path.GetDirectoryName(filePath)) {
+                    Path = Path.GetDirectoryName(filePath),
+                    Filter = Path.GetFileName(filePath),
+                    NotifyFilter = NotifyFilters.Attributes
+                                   | NotifyFilters.CreationTime
+                                   | NotifyFilters.DirectoryName
+                                   | NotifyFilters.FileName
+                                   | NotifyFilters.LastAccess
+                                   | NotifyFilters.LastWrite
+                                   | NotifyFilters.Security
+                                   | NotifyFilters.Size
+                };
+                SynchronizationContext syncContext = SynchronizationContext.Current;
                 watcher.Changed += (sender, args) => {
-                    if(args.ChangeType != WatcherChangeTypes.Changed) {
+                    if(this == null) { //Handles view being destroyed or exiting play mode
+                        watcher.Dispose();
                         return;
                     }
-
-                    reload = true;
+                    if(args.ChangeType != WatcherChangeTypes.Changed)
+                        return;
+                    syncContext.Post(_ => {
+                        HotReloadView();
+                    },null);
                 };
                 watcher.EnableRaisingEvents = true;
             }
@@ -80,16 +88,13 @@ namespace Atlas.Orbit.Components {
         }
 
 #if ORBIT_HOT_RELOAD
-        private void Update() {
-            if(reload) { //TODO(David): Would be better if this didn't use update, need to make this code run on the main thread though
-                foreach(GameObject go in renderData.RootObjects) {
-                    Destroy(go);
-                }
-
-                string filePath = $"Assets/Resources/{resourceName}.xml";
-                renderData = Parser.Parse(File.ReadAllText(filePath), gameObject, UIViewHost);
-                reload = false;
+        private void HotReloadView() {
+            foreach(GameObject go in renderData.RootObjects) {
+                Destroy(go);
             }
+
+            string filePath = $"Assets/Resources/{resourceName}.xml";
+            renderData = Parser.Parse(File.ReadAllText(filePath), gameObject, UIViewHost);
         }
 #endif
 
