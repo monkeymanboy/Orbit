@@ -20,7 +20,7 @@ namespace Atlas.Orbit.TypeSetters {
     }
 
     public abstract class TypeSetter<T, U> : TypeSetter<T> {
-        protected virtual string[] Regexes => new string[0];
+        protected virtual string[] Regexes => Array.Empty<string>();
         public Action<T, U> Setter { get; private set; }
         public ActionRef<T, U> RefSetter { get; private set; }
         public delegate void ActionRef<T, U>(ref T item, U value);
