@@ -8,6 +8,7 @@ using Atlas.Orbit.Components;
 
 namespace Atlas.Orbit.ComponentProcessors {
     using Parser;
+    using System.Xml;
     using TypeSetters;
 
     public abstract class ComponentProcessor {
@@ -35,6 +36,7 @@ namespace Atlas.Orbit.ComponentProcessors {
             if(!(genericComponent is T component))
                 return;
             CurrentData = processorParams.RenderData;
+            SetNode(component, processorParams.Node);
             foreach(KeyValuePair<string, TagParameters.BoundData> pair in processorParams.Data) {
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
                     UIValue uiValue = pair.Value.boundValue;
@@ -60,6 +62,7 @@ namespace Atlas.Orbit.ComponentProcessors {
                 }
             }
         }
+        public virtual void SetNode(T data, XmlNode node) { }
         
         public override List<XmlSchemaAttribute> GenerateSchemaAttributes() {
             List<XmlSchemaAttribute> attributes = new();

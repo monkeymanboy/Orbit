@@ -212,7 +212,8 @@ namespace Atlas.Orbit.Parser {
         
         public GameObject RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
             TagParameters parameters = new() {
-                RenderData = renderData, 
+                RenderData = renderData,
+                Node = node,
                 Data = reusableParameterData
             };
             parameters.Data.Clear(); //Clear out dictionary since the same one gets reused here
@@ -227,18 +228,18 @@ namespace Atlas.Orbit.Parser {
 
                 parameters.Data.Add(propertyName, new TagParameters.BoundData(value));
             }
+            parameters.Node = node;
             
-            parameters.Data.Add("_Node", new TagParameters.BoundData(new DefinedUIValue<XmlNode>(null, node)));
-
             if(Macros.TryGetValue(node.Name, out Macro macro)) {
-                RenderMacroNode(node, macro, parent, parameters);
+                RenderMacroNode(macro, parent, parameters);
                 return null;
             }
 
-            return RenderTagNode(node, parent, parameters);
+            return RenderTagNode(parent, parameters);
         }
 
-        private GameObject RenderTagNode(XmlNode node, GameObject parent, TagParameters parameters) {
+        private GameObject RenderTagNode(GameObject parent, TagParameters parameters) {
+            XmlNode node = parameters.Node;
             GameObject nodeGO = CreatePrefab(node.Name, parent);
             MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
             if(markupPrefab == null)
@@ -266,8 +267,8 @@ namespace Atlas.Orbit.Parser {
             return nodeGO;
         }
 
-        private void RenderMacroNode(XmlNode node, Macro macro, GameObject parent, TagParameters parameters) {
-            macro.Execute(node, parent, parameters);
+        private void RenderMacroNode(Macro macro, GameObject parent, TagParameters parameters) {
+            macro.Execute(parent, parameters);
         }
 
         public virtual GameObject CreatePrefab(string name, GameObject parent) {

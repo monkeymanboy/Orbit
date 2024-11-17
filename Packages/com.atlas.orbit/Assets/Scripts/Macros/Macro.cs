@@ -14,7 +14,7 @@ namespace Atlas.Orbit.Macros {
         public abstract string Tag { get; }
         public OrbitParser Parser { get; set; }
 
-        public abstract void Execute(XmlNode node, GameObject parent, TagParameters parameters);
+        public abstract void Execute(GameObject parent, TagParameters parameters);
 
         public abstract List<XmlSchemaAttribute> GenerateSchemaAttributes();
     }
@@ -36,10 +36,11 @@ namespace Atlas.Orbit.Macros {
                 return cachedValueSetters;
             }
         }
+        
         public abstract Dictionary<string, TypeSetter<T>> Setters { get; }
         public virtual Dictionary<string, TypeSetter<T, UIValue>> ValueSetters => null;
 
-        public override void Execute(XmlNode node, GameObject parent, TagParameters parameters) {
+        public override void Execute(GameObject parent, TagParameters parameters) {
             T data = default;
             foreach(KeyValuePair<string, TagParameters.BoundData> pair in parameters.Data) {
                 UIValue uiValue = pair.Value.boundValue;
@@ -54,7 +55,7 @@ namespace Atlas.Orbit.Macros {
                     typeSetter.SetFromString(ref data, pair.Value.data);
                 }
             }
-            Execute(node, parent, parameters.RenderData, data);
+            Execute(parameters.Node, parent, parameters.RenderData, data);
         }
         public abstract void Execute(XmlNode node, GameObject parent, UIRenderData renderData, T data);
 
