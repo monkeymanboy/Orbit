@@ -118,9 +118,18 @@ namespace Atlas.Orbit.Parser {
                 renderData.RootObjects = parentData.RootObjects;
             }
 
+            List<(string, FieldInfo)> viewComponentFields = null;
+            List<(string, PropertyInfo)> viewComponentProperties = null;
             if(host != null) {
                 List<(string, FieldInfo)> eventEmitterFields = null;
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
+                    ViewComponentAttribute viewComponent = fieldInfo.GetCustomAttribute<ViewComponentAttribute>(true);
+                    if(viewComponent != null) {
+                        if(viewComponentFields == null)
+                            viewComponentFields = new();
+                        viewComponentFields.Add((viewComponent.ID,fieldInfo));
+                    }
+                    
                     EventEmitterAttribute eventEmitter = fieldInfo.GetCustomAttribute<EventEmitterAttribute>(true);
                     if(eventEmitter != null) {
                         fieldInfo.SetValue(host, new Action(() => renderData.EmitEvent(eventEmitter.ID)));
@@ -128,6 +137,7 @@ namespace Atlas.Orbit.Parser {
                             eventEmitterFields = new();
                         eventEmitterFields.Add((eventEmitter.ID, fieldInfo));
                     }
+                    
                     ValueIDAttribute valueID = fieldInfo.GetCustomAttribute<ValueIDAttribute>(true);
                     string id = null;
                     if(valueID != null)
@@ -145,6 +155,13 @@ namespace Atlas.Orbit.Parser {
                 renderData.EventEmitterFields = eventEmitterFields;
 
                 foreach(PropertyInfo propInfo in host.GetType().GetProperties(HOST_FLAGS)) {
+                    ViewComponentAttribute viewComponent = propInfo.GetCustomAttribute<ViewComponentAttribute>(true);
+                    if(viewComponent != null) {
+                        if(viewComponentProperties == null)
+                            viewComponentProperties = new();
+                        viewComponentProperties.Add((viewComponent.ID,propInfo));
+                    }
+                    
                     ValueIDAttribute valueID = propInfo.GetCustomAttribute<ValueIDAttribute>(true);
                     string id = null;
                     if(valueID != null)
@@ -190,26 +207,27 @@ namespace Atlas.Orbit.Parser {
                 RenderNode(node, parent, renderData);
             }
 
-            if(host != null) {
-                List<(string, FieldInfo)> viewComponentFields = null;
-                foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
-                    //TODO(David): ViewComponentAttributes could be cached so we don't need to iterate over the fields twice
-                    ViewComponentAttribute objectID = fieldInfo.GetCustomAttribute<ViewComponentAttribute>(true);
-                    if(objectID == null) continue;
-                    if(viewComponentFields == null)
-                        viewComponentFields = new();
-                    viewComponentFields.Add(new(objectID.ID, fieldInfo));
-                    if(renderData.GetValueFromID(objectID.ID).GetValue() is MarkupPrefab markupPrefab) {
-                        fieldInfo.SetValue(host, markupPrefab.FindComponent(fieldInfo.FieldType));
-                    } else {
-                        throw new Exception(
-                            "Tried using [ViewComponent] on an ID that is not bound to an object in the view");
+            if(viewComponentFields != null) {
+                foreach((string valueID, FieldInfo fieldInfo) in viewComponentFields) {
+                    UIValue value = renderData.GetValueFromID(valueID);
+                    void UpdateViewComponent() {
+                        fieldInfo.SetValue(host, value.GetValue<MarkupPrefab>().FindComponent(fieldInfo.FieldType));
                     }
+                    value.OnChange += UpdateViewComponent;
+                    UpdateViewComponent();
                 }
-
-                renderData.ViewComponentFields = viewComponentFields;
             }
-
+            
+            if(viewComponentProperties != null) {
+                foreach((string valueID, PropertyInfo propInfo) in viewComponentProperties) {
+                    UIValue value = renderData.GetValueFromID(valueID);
+                    void UpdateViewComponent() {
+                        propInfo.SetValue(host, value.GetValue<MarkupPrefab>().FindComponent(propInfo.PropertyType));
+                    }
+                    value.OnChange += UpdateViewComponent;
+                    UpdateViewComponent();
+                }
+            }
             renderData.EmitEvent("PostParse");
 #if ORBIT_BENCHMARK
             parseStopWatch.Stop();

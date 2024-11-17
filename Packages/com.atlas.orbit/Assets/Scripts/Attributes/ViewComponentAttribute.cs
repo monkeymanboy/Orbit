@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Atlas.Orbit.Attributes {
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class ViewComponentAttribute : Attribute {
         public string ID { get; }
 

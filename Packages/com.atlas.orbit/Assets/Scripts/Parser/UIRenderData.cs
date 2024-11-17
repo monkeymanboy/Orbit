@@ -20,8 +20,6 @@ namespace Atlas.Orbit.Parser {
                 if(host is INotifyPropertyChanged newHost) {
                     newHost.PropertyChanged += HandlePropertyChanged;
                 }
-                if(ViewComponentFields != null)
-                    InjectViewComponentFields();
                 if(EventEmitterFields != null)
                     InjectEventEmitterFields();
                 RefreshAllValues();
@@ -38,7 +36,6 @@ namespace Atlas.Orbit.Parser {
         public GameObject RootParent { get; set; }
         public List<GameObject> RootObjects { get; set; } = new();
         public bool Disabled { get; set; }
-        public List<(string, FieldInfo)> ViewComponentFields { get; set; }
         public List<(string, FieldInfo)> EventEmitterFields { get; set; }
 
         public List<(string,TagGenerator)> TagGenerators { get; set; } = new();
@@ -172,18 +169,6 @@ namespace Atlas.Orbit.Parser {
                 RootObjects[i].SetActive(true);
             }
             Disabled = false;
-        }
-        
-
-        public void InjectViewComponentFields() {
-            foreach(var pair in ViewComponentFields) {
-                if(GetValueFromID(pair.Item1).GetValue() is MarkupPrefab markupPrefab) {
-                    pair.Item2.SetValue(host, markupPrefab.FindComponent(pair.Item2.FieldType));
-                } else {
-                    throw new Exception(
-                        "Tried using [ViewComponent] on an ID that is not bound to an object in the view");
-                }
-            }
         }
 
         public void InjectEventEmitterFields() {
