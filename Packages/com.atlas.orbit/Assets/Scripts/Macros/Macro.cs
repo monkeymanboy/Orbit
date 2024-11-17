@@ -41,17 +41,17 @@ namespace Atlas.Orbit.Macros {
 
         public override void Execute(XmlNode node, GameObject parent, TagParameters parameters) {
             T data = default;
-            foreach(KeyValuePair<string, string> pair in parameters.Data) {
-                if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter)
-                   && parameters.Values.TryGetValue(pair.Key, out UIValue uiValue)) {
+            foreach(KeyValuePair<string, TagParameters.BoundData> pair in parameters.Data) {
+                UIValue uiValue = pair.Value.boundValue;
+                if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter) && uiValue != null) {
                     valueTypeSetter.Set<UIValue>(ref data, uiValue);
                 }
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
-                    if(pair.Value == null) {
-                        typeSetter.Set(ref data, parameters.Values[pair.Key]);
+                    if(uiValue != null) {
+                        typeSetter.Set(ref data, uiValue);
                         continue;
                     }
-                    typeSetter.SetFromString(ref data, pair.Value);
+                    typeSetter.SetFromString(ref data, pair.Value.data);
                 }
             }
             Execute(node, parent, parameters.RenderData, data);

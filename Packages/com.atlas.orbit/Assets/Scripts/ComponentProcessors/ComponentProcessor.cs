@@ -35,10 +35,10 @@ namespace Atlas.Orbit.ComponentProcessors {
             if(!(genericComponent is T component))
                 return;
             CurrentData = processorParams.RenderData;
-            foreach(KeyValuePair<string, string> pair in processorParams.Data) {
+            foreach(KeyValuePair<string, TagParameters.BoundData> pair in processorParams.Data) {
                 if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
-                    if(pair.Value == null) {
-                        UIValue uiValue = processorParams.Values[pair.Key];
+                    UIValue uiValue = pair.Value.boundValue;
+                    if(uiValue != null) {
                         ValueChangeSetter valueChangeSetter = genericComponent.gameObject.GetComponent<ValueChangeSetter>();
                         if(valueChangeSetter == null)
                             valueChangeSetter = genericComponent.gameObject.AddComponent<ValueChangeSetter>();
@@ -56,7 +56,7 @@ namespace Atlas.Orbit.ComponentProcessors {
                         setValue();
                         continue;
                     }
-                    typeSetter.SetFromString(component, pair.Value);
+                    typeSetter.SetFromString(component, pair.Value.data);
                 }
             }
         }

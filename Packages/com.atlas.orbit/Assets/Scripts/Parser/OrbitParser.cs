@@ -45,6 +45,7 @@ namespace Atlas.Orbit.Parser {
         private XmlDocument doc = new();
         private XmlReaderSettings readerSettings = new();
         private Dictionary<string, List<ComponentProcessor>> processorPrefabCache = new();
+        private Dictionary<string, TagParameters.BoundData> reusableParameterData = new();
 
         private bool initialized = false;
 
@@ -208,33 +209,26 @@ namespace Atlas.Orbit.Parser {
 #endif
             return renderData;
         }
-
+        
         public GameObject RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
-            TagParameters parameters = new TagParameters();
-            parameters.RenderData = renderData;
-            if(parameters.Data == null) 
-                parameters.Data = new Dictionary<string, string>();
-            if(parameters.Values == null) 
-                parameters.Values = new Dictionary<string, UIValue>(); //TODO(David) reuse Dictionaries?
+            TagParameters parameters = new() {
+                RenderData = renderData, 
+                Data = reusableParameterData
+            };
+            parameters.Data.Clear(); //Clear out dictionary since the same one gets reused here
             foreach(XmlAttribute attribute in node.Attributes) {
                 string propertyName = attribute.Name;
                 string value = attribute.Value;
                 if(value.StartsWith(RETRIEVE_VALUE_PREFIX)) {
                     string valueID = value.Substring(1);
-
-                    UIValue uiValue = renderData.GetValueFromID(valueID);
-
-                    parameters.Values.Add(propertyName, uiValue);
-                    parameters.Data.Add(propertyName,
-                        null); //If data points to a null string it is bound to a property/field
+                    parameters.Data.Add(propertyName, new TagParameters.BoundData(renderData.GetValueFromID(valueID)));
                     continue;
                 }
 
-                parameters.Data.Add(propertyName, value);
+                parameters.Data.Add(propertyName, new TagParameters.BoundData(value));
             }
-
-            parameters.Values.Add("_Node", new DefinedUIValue<XmlNode>(null, node));
-            parameters.Data.Add("_Node", null);
+            
+            parameters.Data.Add("_Node", new TagParameters.BoundData(new DefinedUIValue<XmlNode>(null, node)));
 
             if(Macros.TryGetValue(node.Name, out Macro macro)) {
                 RenderMacroNode(node, macro, parent, parameters);
