@@ -5,7 +5,7 @@
         <SettingSlider Text='Redness' FontColor="~CurrentColor" BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='100'/>
 
         <DEFINE_BOOL ID="CheckboxVal" Value="false"/>
-        <SettingToggle Text="Normal" BoundValue="CheckboxVal"/>
+        <SettingToggle Text="Normal" BoundValue="CheckboxVal" FontStyle="Underline,Bold"/>
         <SettingToggle Text="Negated" BoundValue="!CheckboxVal"/>
     </Vertical>
 </Container>

@@ -1,8 +1,10 @@
 using Atlas.Orbit.Attributes;
 using Atlas.Orbit.Attributes.TagGenerators;
 using Atlas.Orbit.Components;
+using System;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AttributeTagsView : OrbitView {
     private enum DropdownValue {
@@ -27,7 +29,7 @@ public class AttributeTagsView : OrbitView {
     private string InputVal { get; set; }
 
     private string randomText;
-    [OrbitText(FontSize = 40, AutoMinFontSize = 20, FontStyle = FontStyles.Bold, FontColor = "red", Group = "RandomText")]
+    [OrbitText(FontSize = 40, AutoMinFontSize = 20, FontStyle = FontStyles.Bold | FontStyles.Italic, FontColor = "red", Group = "RandomText")]
     private string RandomText {
         get => randomText;
         set {

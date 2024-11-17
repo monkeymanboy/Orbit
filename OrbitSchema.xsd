@@ -328,6 +328,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -707,6 +712,16 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="((Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight),\s*)*(Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight)" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Normal" />
                 <xs:enumeration value="Bold" />
                 <xs:enumeration value="Italic" />
@@ -729,6 +744,11 @@
             <xs:documentation>TextAlignmentOptions</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="TopLeft" />
@@ -779,6 +799,11 @@
             <xs:documentation>TextOverflowModes</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Overflow" />
@@ -1244,6 +1269,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -1728,6 +1758,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
                 <xs:enumeration value="MinSize" />
                 <xs:enumeration value="PreferredSize" />
@@ -1742,6 +1777,11 @@
             <xs:documentation>FitMode</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
@@ -1885,6 +1925,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -2354,6 +2399,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
                 <xs:enumeration value="MinSize" />
                 <xs:enumeration value="PreferredSize" />
@@ -2368,6 +2418,11 @@
             <xs:documentation>FitMode</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
@@ -2424,6 +2479,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Horizontal" />
                 <xs:enumeration value="Vertical" />
               </xs:restriction>
@@ -2437,6 +2497,11 @@
             <xs:documentation>Corner</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="UpperLeft" />
@@ -2454,6 +2519,11 @@
             <xs:documentation>Constraint</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Flexible" />
@@ -2599,6 +2669,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="UpperLeft" />
                 <xs:enumeration value="UpperCenter" />
                 <xs:enumeration value="UpperRight" />
@@ -2703,6 +2778,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -3172,6 +3252,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
                 <xs:enumeration value="MinSize" />
                 <xs:enumeration value="PreferredSize" />
@@ -3186,6 +3271,11 @@
             <xs:documentation>FitMode</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
@@ -3421,6 +3511,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="UpperLeft" />
                 <xs:enumeration value="UpperCenter" />
                 <xs:enumeration value="UpperRight" />
@@ -3525,6 +3620,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -4207,6 +4307,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -4887,6 +4992,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -5538,6 +5648,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -5856,6 +5971,11 @@
             <xs:documentation>MovementType</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unrestricted" />
@@ -6356,6 +6476,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -6835,6 +6960,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -7446,6 +7576,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -7825,6 +7960,16 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="((Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight),\s*)*(Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight)" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Normal" />
                 <xs:enumeration value="Bold" />
                 <xs:enumeration value="Italic" />
@@ -7847,6 +7992,11 @@
             <xs:documentation>TextAlignmentOptions</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="TopLeft" />
@@ -7897,6 +8047,11 @@
             <xs:documentation>TextOverflowModes</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Overflow" />
@@ -8317,6 +8472,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -8696,6 +8856,16 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="((Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight),\s*)*(Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight)" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Normal" />
                 <xs:enumeration value="Bold" />
                 <xs:enumeration value="Italic" />
@@ -8718,6 +8888,11 @@
             <xs:documentation>TextAlignmentOptions</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="TopLeft" />
@@ -8768,6 +8943,11 @@
             <xs:documentation>TextOverflowModes</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Overflow" />
@@ -9079,6 +9259,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -9445,6 +9630,16 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="((Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight),\s*)*(Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight)" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Normal" />
                 <xs:enumeration value="Bold" />
                 <xs:enumeration value="Italic" />
@@ -9467,6 +9662,11 @@
             <xs:documentation>TextAlignmentOptions</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="TopLeft" />
@@ -9517,6 +9717,11 @@
             <xs:documentation>TextOverflowModes</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Overflow" />
@@ -10009,6 +10214,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -10388,6 +10598,16 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="((Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight),\s*)*(Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight)" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Normal" />
                 <xs:enumeration value="Bold" />
                 <xs:enumeration value="Italic" />
@@ -10410,6 +10630,11 @@
             <xs:documentation>TextAlignmentOptions</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="TopLeft" />
@@ -10460,6 +10685,11 @@
             <xs:documentation>TextOverflowModes</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Overflow" />
@@ -10872,6 +11102,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -11236,6 +11471,16 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="((Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight),\s*)*(Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight)" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Normal" />
                 <xs:enumeration value="Bold" />
                 <xs:enumeration value="Italic" />
@@ -11258,6 +11503,11 @@
             <xs:documentation>TextAlignmentOptions</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="TopLeft" />
@@ -11308,6 +11558,11 @@
             <xs:documentation>TextOverflowModes</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Overflow" />
@@ -11550,6 +11805,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
                 <xs:enumeration value="MinSize" />
                 <xs:enumeration value="PreferredSize" />
@@ -11564,6 +11824,11 @@
             <xs:documentation>FitMode</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
@@ -11799,6 +12064,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="UpperLeft" />
                 <xs:enumeration value="UpperCenter" />
                 <xs:enumeration value="UpperRight" />
@@ -11903,6 +12173,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -12372,6 +12647,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
                 <xs:enumeration value="MinSize" />
                 <xs:enumeration value="PreferredSize" />
@@ -12386,6 +12666,11 @@
             <xs:documentation>FitMode</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
@@ -12506,6 +12791,11 @@
             <xs:documentation>TextAnchor</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="UpperLeft" />
@@ -12670,6 +12960,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -13239,6 +13534,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
                 <xs:enumeration value="LeftAlign" />
                 <xs:enumeration value="RightAlign" />
@@ -13721,6 +14021,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
                 <xs:enumeration value="MinSize" />
                 <xs:enumeration value="PreferredSize" />
@@ -13735,6 +14040,11 @@
             <xs:documentation>FitMode</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unconstrained" />
@@ -13970,6 +14280,11 @@
           <xs:union memberTypes="ValueBoundType">
             <xs:simpleType>
               <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
                 <xs:enumeration value="UpperLeft" />
                 <xs:enumeration value="UpperCenter" />
                 <xs:enumeration value="UpperRight" />
@@ -14074,6 +14389,11 @@
             <xs:documentation>AnchorPreset</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="FillParent" />
@@ -14336,6 +14656,11 @@
             <xs:documentation>MovementType</xs:documentation>
           </xs:annotation>
           <xs:union memberTypes="ValueBoundType">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="[-+]?[0-9]*" />
+              </xs:restriction>
+            </xs:simpleType>
             <xs:simpleType>
               <xs:restriction base="xs:string">
                 <xs:enumeration value="Unrestricted" />
