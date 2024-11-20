@@ -9,16 +9,17 @@ namespace Atlas.Orbit.Schema {
     using ComponentProcessors;
     using Macros;
     using Parser;
+    using System.Text;
 
     public static class SchemaGenerator {
         public static void Generate() {
             OrbitParser orbitParser = OrbitParser.DefaultParser;
-            XmlSchema schema = new XmlSchema();
+            XmlSchema schema = new();
             orbitParser.Init();
 
-            XmlSchemaSimpleType valueBoundType = new XmlSchemaSimpleType();
-            XmlSchemaSimpleTypeRestriction valueBoundTypeRestriction = new XmlSchemaSimpleTypeRestriction();
-            XmlSchemaPatternFacet valueBoundPattern = new XmlSchemaPatternFacet();
+            XmlSchemaSimpleType valueBoundType = new();
+            XmlSchemaSimpleTypeRestriction valueBoundTypeRestriction = new();
+            XmlSchemaPatternFacet valueBoundPattern = new();
             valueBoundTypeRestriction.BaseTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
             valueBoundPattern.Value = "([~].*)"; //Matches the pattern ~ followed by anything else
             valueBoundTypeRestriction.Facets.Add(valueBoundPattern);
@@ -27,15 +28,17 @@ namespace Atlas.Orbit.Schema {
             schema.Items.Add(valueBoundType);
 
             List<string> addedTags = new();
+            List<string> addedAttributeGroups = new();
             #region Prefab Tags
             foreach(Object resource in Resources.LoadAll("Orbit/Prefabs")) {
                 if(addedTags.Contains(resource.name))
                     continue;
                 XmlSchemaElement currentElement = new() { Name = resource.name };
 
-                XmlSchemaComplexType complexType = new();
-                XmlSchemaSequence sequence = new();
-                XmlSchemaAny any = new() { MinOccurs = 0, MaxOccursString = "unbounded" };
+                string typeName = $"{resource.name}Tag";
+                XmlSchemaComplexType complexType = new() { Name = typeName };
+                XmlSchemaSequence sequence = new() { MinOccurs = 0, MaxOccursString = "unbounded" };
+                XmlSchemaAny any = new() { MinOccurs = 0 };
                 sequence.Items.Add(any);
                 complexType.Particle = sequence;
                 
@@ -48,27 +51,34 @@ namespace Atlas.Orbit.Schema {
                     }
                     Component component = markupPrefab.FindComponent(processor.ComponentType);
                     if(component != null) {
-                        foreach(XmlSchemaAttribute attribute in processor.GenerateSchemaAttributes()) {
-                            complexType.Attributes.Add(attribute);
+                        string attributeGroupName = $"{processor.ComponentType.Name}Component";
+                        if(!addedAttributeGroups.Contains(attributeGroupName)) {
+                            XmlSchemaAttributeGroup group = new() { Name = attributeGroupName };
+                            foreach(XmlSchemaAttribute attribute in processor.GenerateSchemaAttributes()) {
+                                group.Attributes.Add(attribute);
+                            }
+                            schema.Items.Add(group);
+                            addedAttributeGroups.Add(attributeGroupName);
                         }
+                        complexType.Attributes.Add(new XmlSchemaAttributeGroupRef() { RefName = new XmlQualifiedName(attributeGroupName) });
                     }
                 }
-
-                currentElement.SchemaType = complexType;
+                
+                currentElement.SchemaTypeName = new XmlQualifiedName(typeName);
+                //currentElement.SchemaType = complexType;
                 schema.Items.Add(currentElement);
+                schema.Items.Add(complexType);
                 addedTags.Add(resource.name);
             }
             #endregion
             #region Macro Tags
             foreach(KeyValuePair<string, Macro> pair in orbitParser.Macros) {
-                XmlSchemaElement currentElement = new XmlSchemaElement();
-                currentElement.Name = pair.Key;
+                XmlSchemaElement currentElement = new() { Name = pair.Key };
 
-                XmlSchemaComplexType complexType = new XmlSchemaComplexType();
-                XmlSchemaSequence sequence = new XmlSchemaSequence();
-                XmlSchemaAny any = new XmlSchemaAny();
-                any.MinOccurs = 0;
-                any.MaxOccursString = "unbounded";
+                string typeName = $"{pair.Key}Macro";
+                XmlSchemaComplexType complexType = new() { Name = typeName };
+                XmlSchemaSequence sequence = new() { MinOccurs = 0, MaxOccursString = "unbounded" };
+                XmlSchemaAny any = new() { MinOccurs = 0 };
                 sequence.Items.Add(any);
                 complexType.Particle = sequence;
                 
@@ -76,21 +86,22 @@ namespace Atlas.Orbit.Schema {
                     complexType.Attributes.Add(attribute);
                 }
 
-                currentElement.SchemaType = complexType;
+                currentElement.SchemaTypeName = new XmlQualifiedName(typeName);
+                //currentElement.SchemaType = complexType;
                 schema.Items.Add(currentElement);
+                schema.Items.Add(complexType);
             }
             #endregion
 
-            XmlSchemaSet schemaSet = new XmlSchemaSet();
+            XmlSchemaSet schemaSet = new();
 
             schemaSet.Add(schema);
             schemaSet.Compile();
             foreach(XmlSchema compiledSchema in schemaSet.Schemas())
                 schema = compiledSchema;
 
-            StringWriter schemaWriter = new StringWriter();
-            schema.Write(schemaWriter);
-            File.WriteAllText("OrbitSchema.xsd", schemaWriter.ToString().Substring(41));//substring 41 skips writing <?xml version="1.0" encoding="utf-16"?>
+            using StreamWriter writer = new("OrbitSchema.xsd", false, Encoding.UTF8);
+            schema.Write(writer);
         }
     }
 }
