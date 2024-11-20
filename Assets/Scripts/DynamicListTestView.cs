@@ -1,6 +1,6 @@
 namespace DefaultNamespace {
-    using Atlas.Orbit.Attributes;
-    using Atlas.Orbit.Components;
+    using Orbit.Attributes;
+    using Orbit.Components;
     using System;
     using System.Collections.Generic;
 

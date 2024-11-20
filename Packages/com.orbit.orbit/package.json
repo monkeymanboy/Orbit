@@ -1,0 +1,15 @@
+{
+  "name": "com.orbit.orbit",
+  "version": "0.0.1",
+  "displayName": "Orbit",
+  "description": "An XML UI Generator",
+  "unity": "2021.3",
+  "unityRelease": "8f1",
+  "dependencies": {
+ },
+ "keywords": [
+    "XML",
+    "UI",
+    "Markup"
+  ]
+}

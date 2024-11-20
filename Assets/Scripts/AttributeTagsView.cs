@@ -1,6 +1,6 @@
-using Atlas.Orbit.Attributes;
-using Atlas.Orbit.Attributes.TagGenerators;
-using Atlas.Orbit.Components;
+using Orbit.Attributes;
+using Orbit.Attributes.TagGenerators;
+using Orbit.Components;
 using System;
 using TMPro;
 using UnityEngine;
