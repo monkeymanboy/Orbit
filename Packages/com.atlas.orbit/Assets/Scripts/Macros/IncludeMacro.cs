@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Atlas.Orbit.Macros {
     using Parser;
-    using PlasticGui;
     using Schema.Attributes;
     using TypeSetters;
 
