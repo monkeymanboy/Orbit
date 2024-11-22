@@ -6,6 +6,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "1.17.1",
       "depth": 0,
@@ -162,7 +168,7 @@
       "url": "https://packages.unity.com"
     },
     "orbit-basic-components": {
-      "version": "file:orbit-basic-components",
+      "version": "file:com.orbit.orbit-basic-components",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
