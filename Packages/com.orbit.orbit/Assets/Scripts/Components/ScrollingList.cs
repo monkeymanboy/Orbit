@@ -138,8 +138,13 @@ namespace Orbit.Components {
                 scrollRect.verticalNormalizedPosition = 1;
             }
 
-            if(Hosts == null || Hosts.Count == 0)
+            if(Hosts == null || Hosts.Count == 0) {
+                if(childItems == null) return;
+                foreach(ListItem child in childItems) {
+                    child?.gameObject.SetActive(false);
+                }
                 return;
+            }
             
             bool childrenChanged = CheckChildItems();
             bool populateAll = childrenChanged || clearContents;
