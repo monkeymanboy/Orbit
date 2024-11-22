@@ -3,8 +3,12 @@
         <Text AnchorPreset="FillParent" Text="~this" FontSize="26"/>
         <Button Text="X" AnchorPreset="RightAlign" SizeDeltaX="30" ClickEvent="RemoveString"/>
     </List>
-    <Horizontal AnchorPreset="BottomAlign" SizeDeltaY="30" ChildControlWidth="true">
-        <InputField BoundValue="enteredText"/>
-        <Button Text="Add" ClickEvent="AddString"/>
+    <Horizontal AnchorPreset="BottomAlign" SizeDeltaY="30" ChildControlWidth="true" ChildControlHeight="true">
+        <InputField BoundValue="enteredText" PreferredWidth="120"/>
+        <ButtonGroup Spacing="2">
+            <Background ImageColor="grey"/>
+            <Button Text="Add" ClickEvent="AddString"/>
+            <Button Text="Clear" ClickEvent="ClearStrings"/>
+        </ButtonGroup>
     </Horizontal>
 </Container>

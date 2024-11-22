@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 5264237483732347999}
   - component: {fileID: 5264237483732347996}
   - component: {fileID: 6315835572521089356}
-  - component: {fileID: 4173459801393781241}
-  - component: {fileID: 7278815940435132764}
+  - component: {fileID: 947224592774879460}
+  - component: {fileID: 4417775397937822715}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4173459801393781241}
+  m_TargetGraphic: {fileID: 947224592774879460}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -148,20 +148,8 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UIFeedback, Assembly-CSharp
-          m_MethodName: PointerEnter
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &4173459801393781241
+        m_Calls: []
+--- !u!114 &947224592774879460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,7 +169,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 99e1fd8edfcc8494c89e9e179d816405, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -191,7 +179,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7278815940435132764
+--- !u!114 &4417775397937822715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e7b4266075fdd4db4d9fea27b79360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 4173459801393781241}
+  image: {fileID: 947224592774879460}
 --- !u!1 &5264237484757906586
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,5 +20,11 @@ namespace DefaultNamespace {
             strings.Add(enteredText);
             RefreshList();
         }
+
+        [ListenFor("ClearStrings")]
+        private void ClearStrings() {
+            strings.Clear();
+            RefreshList();
+        }
     }
 }
