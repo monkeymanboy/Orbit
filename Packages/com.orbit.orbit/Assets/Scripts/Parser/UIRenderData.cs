@@ -13,6 +13,7 @@ namespace Orbit.Parser {
         public object Host {
             get => host;
             set {
+                if(host == value) return;
                 if(host is INotifyPropertyChanged oldHost) {
                     oldHost.PropertyChanged -= HandlePropertyChanged;
                 }
