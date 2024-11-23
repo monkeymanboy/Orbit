@@ -41,9 +41,11 @@ namespace Orbit.Macros {
             renderData.SetValue(data.ViewValue, viewGO.AddComponent(data.ViewType));
             if(data.Active.HasValue) {
                 viewGO.SetActive(data.Active.Value);
-                data.ActiveValue.OnChange += () => {
-                    viewGO.SetActive(data.ActiveValue.GetValue<bool>());
-                };
+                if(data.ActiveValue != null) {
+                    data.ActiveValue.OnChange += () => {
+                        viewGO.SetActive(data.ActiveValue.GetValue<bool>());
+                    };
+                }
             }
         }
     }
