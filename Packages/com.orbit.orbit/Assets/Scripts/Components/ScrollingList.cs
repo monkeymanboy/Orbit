@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Orbit.Parser;
 using System.Collections;
+using System.Collections.Specialized;
 
 namespace Orbit.Components {
-    using Parser;
-
     [RequireComponent(typeof(ScrollRect))]
     public class ScrollingList : MonoBehaviour {
         public UIRenderData ParentData { get; internal set; }
@@ -15,7 +14,19 @@ namespace Orbit.Components {
         public float CellHeight = 30;
         public float CellSpacing = 15f;
         
-        public IList Hosts { get; set; }
+        private INotifyCollectionChanged observedCollection;
+        private IList hosts;
+        public IList Hosts {
+            get => hosts;
+            set {
+                hosts = value;
+                observedCollection = hosts as INotifyCollectionChanged;
+                if(observedCollection != null)
+                    observedCollection.CollectionChanged += OnCollectionChanged;
+                
+            }
+        }
+
         public XmlNode ItemXml { get; set; }
 
         public int RowCount => Hosts.Count;
@@ -31,7 +42,16 @@ namespace Orbit.Components {
         
         protected float previousBuildHeight = 0;
         protected const int rowsAboveBelow = 1;
+        
 
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            if(this == null) { //Handles this component being destroyed
+                observedCollection.CollectionChanged -= OnCollectionChanged;
+                return;
+            }
+            Refresh();
+        }
+        
         /// <summary>
         /// Trigger the refreshing of the list content (e.g. if you've changed some values).
         /// Use this if the number of rows hasn't changed but you want to update the contents

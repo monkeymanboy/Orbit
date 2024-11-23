@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ListTestView : OrbitView {
-    [ValueID] private List<object> listItems;
+    [ValueID] private List<ListItem> listItems;
 
     [ListenFor("PreParse")]
     private void PreParse() {
-        listItems = new List<object>();
+        listItems = new List<ListItem>();
         for(int i = 0;i < 100;i++) {
-            ListItem listItem = new ListItem();
-            listItem.color = Random.ColorHSV(0, 1);
-            listItem.text = $"Item #{i}";
-            listItems.Add(listItem);
+            listItems.Add(new() {
+                color = Random.ColorHSV(0, 1),
+                text = $"Item #{i}"
+            });
         }
     }
 

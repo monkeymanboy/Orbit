@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
-using Orbit.TypeSetters;
-using Orbit.Schema.Attributes;
 using UnityEngine;
 using System.Collections;
 
 namespace Orbit.Macros {
     using Parser;
     using Schema.Attributes;
-    using System;
+    using System.Collections.Specialized;
     using TypeSetters;
 
     [RequiresProperty("Items")]
@@ -51,9 +49,27 @@ namespace Orbit.Macros {
                     rendered[i].DisableRootObjects();
                 }
             }
+            
+            INotifyCollectionChanged observedItems = items as INotifyCollectionChanged;
+            void CollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs) {
+                if(parent == null) { //Handles getting destroyed
+                    observedItems.CollectionChanged -= CollectionChanged;
+                    return;
+                }
+                RefreshAction();
+            }
+            if(observedItems != null) 
+                observedItems.CollectionChanged += CollectionChanged;
 
             uiValue.OnChange += () => {
                 items = uiValue.GetValue<IList>();
+                if(observedItems != null) {
+                    observedItems.CollectionChanged -= CollectionChanged;
+                }
+                observedItems = items as INotifyCollectionChanged;
+                if(observedItems != null) {
+                    observedItems.CollectionChanged += CollectionChanged;
+                }
                 RefreshAction();
             };
 
