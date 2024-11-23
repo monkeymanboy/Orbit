@@ -19,11 +19,12 @@ namespace Orbit.Components {
         public IList Hosts {
             get => hosts;
             set {
+                if(observedCollection != null)
+                    observedCollection.CollectionChanged -= OnCollectionChanged;
                 hosts = value;
                 observedCollection = hosts as INotifyCollectionChanged;
                 if(observedCollection != null)
                     observedCollection.CollectionChanged += OnCollectionChanged;
-                
             }
         }
 
