@@ -39,12 +39,13 @@ namespace Orbit.Components.ButtonLayoutGroup {
             int endIndex = m_ReverseArrangement ? 0 : rectChildren.Count - 1;
             int increment = m_ReverseArrangement ? -1 : 1;
             if(startIndex == endIndex) {
-                rectChildren[0].GetComponent<IButtonLayoutGroupElement>().SetSingle();
+                rectChildren[0].GetComponent<IButtonLayoutGroupElement>()?.SetSingle();
                 return;
             }
 
             for(int i = startIndex;m_ReverseArrangement ? i >= endIndex : i <= endIndex;i += increment) {
                 IButtonLayoutGroupElement spriteSwapper = rectChildren[i].GetComponent<IButtonLayoutGroupElement>();
+                if(spriteSwapper == null) continue;
                 if(isVertical) {
                     if(i == startIndex)
                         spriteSwapper.SetBottom();
