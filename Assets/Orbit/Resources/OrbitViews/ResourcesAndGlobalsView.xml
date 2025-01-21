@@ -1,0 +1,9 @@
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd'>
+    <Vertical ChildControlWidth='true' ChildControlHeight="true" ChildForceExpandHeight="true" Spacing="10">
+        <!-- This feature will be most useful for assigning sprites when you don't want to have a sprite be a serialized reference on the view component-->
+        <Image FlexibleHeight="1000" PreferredHeight="40" PreserveAspect="true" ImageSprite="@Cats"/>
+        <!-- Using a font stored in resources can be useful if you don't want it to be available project wide and just want to access it via the asset path-->
+        <!-- You can also use any TextAsset for strings long strings or anything that you may want separate from the view -->
+        <Text PreferredHeight="20" FontSize="20" TextAlignment="Midline" Text="@Cat Names" Font="@Comic Sans"/>
+    </Vertical>
+</Container>

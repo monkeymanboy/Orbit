@@ -52,7 +52,10 @@ namespace Orbit.Macros {
                         typeSetter.Set(ref data, uiValue);
                         continue;
                     }
-                    typeSetter.SetFromString(ref data, pair.Value.data);
+                    if(pair.Value.isDataResourcePath)
+                        typeSetter.SetFromResource(ref data, pair.Value.data);
+                    else 
+                        typeSetter.SetFromString(ref data, pair.Value.data);
                 }
             }
             Execute(parameters.Node, parent, parameters.RenderData, data);

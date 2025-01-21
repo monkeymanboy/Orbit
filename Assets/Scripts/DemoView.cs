@@ -13,6 +13,7 @@ public class DemoView : OrbitView {
     [ValueID]
     protected List<ViewData> Views = new(){
         new("Test", typeof(TestView)),
+        new("Resources & Globals", typeof(ResourcesAndGlobalsView)),
         new("Setting", typeof(SettingTestView)),
         new("List", typeof(ListTestView)),
         new("Dynamic List", typeof(DynamicListTestView)),

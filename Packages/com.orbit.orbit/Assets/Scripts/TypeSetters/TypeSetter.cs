@@ -9,6 +9,8 @@ namespace Orbit.TypeSetters {
     using UnityEngine;
 
     public abstract class TypeSetter<T> {
+        public abstract void SetFromResource(T obj, string resourcePath);
+        public abstract void SetFromResource(ref T obj, string resourcePath);
         public abstract void SetFromString(T obj, string value);
         public abstract void SetFromString(ref T obj, string value);
         public abstract void Set<SetType>(T obj, SetType value);
@@ -30,6 +32,13 @@ namespace Orbit.TypeSetters {
         }
         public TypeSetter(ActionRef<T, U> refSetter) {
             RefSetter = refSetter;
+        }
+
+        public override void SetFromResource(T obj, string resourcePath) {
+            Setter(obj, (U)(object)Resources.Load(resourcePath, typeof(U)));
+        }
+        public override void SetFromResource(ref T obj, string resourcePath) {
+            RefSetter(ref obj, (U)(object)Resources.Load(resourcePath, typeof(U)));
         }
 
         public override void SetFromString(T obj, string value) {
@@ -73,7 +82,7 @@ namespace Orbit.TypeSetters {
             XmlSchemaSimpleTypeUnion union = new XmlSchemaSimpleTypeUnion();
 
             union.MemberTypes = new XmlQualifiedName[1];
-            union.MemberTypes[0] = new XmlQualifiedName("ValueBoundType");
+            union.MemberTypes[0] = new XmlQualifiedName("BoundType");
             foreach(string regex in Regexes) {
                 XmlSchemaSimpleType regexType = new XmlSchemaSimpleType();
                 XmlSchemaSimpleTypeRestriction regexTypeRestriction = new XmlSchemaSimpleTypeRestriction();

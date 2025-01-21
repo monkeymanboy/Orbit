@@ -21,6 +21,7 @@ namespace Orbit.Parser {
         internal const char RETRIEVE_VALUE_PREFIX = '~';
         internal const char PARENT_HOST_VALUE_PREFIX = '^';
         internal const char NEGATE_VALUE_PREFIX = '!';
+        internal const char RESOURCE_VALUE_PREFIX = '@';
 
         internal const BindingFlags HOST_FLAGS =
             BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
@@ -250,13 +251,18 @@ namespace Orbit.Parser {
             foreach(XmlAttribute attribute in node.Attributes) {
                 string propertyName = attribute.Name;
                 string value = attribute.Value;
-                if(value.StartsWith(RETRIEVE_VALUE_PREFIX)) {
-                    string valueID = value.Substring(1);
-                    parameters.Data.Add(propertyName, new TagParameters.BoundData(renderData.GetValueFromID(valueID)));
-                    continue;
+                switch(value[0]) {
+                    case RETRIEVE_VALUE_PREFIX:
+                        parameters.Data.Add(propertyName, new TagParameters.BoundData(renderData.GetValueFromID(value.Substring(1))));
+                        break;
+                    case RESOURCE_VALUE_PREFIX:
+                        parameters.Data.Add(propertyName, new TagParameters.BoundData(value.Substring(1), true));
+                        break;
+                    default:
+                        parameters.Data.Add(propertyName, new TagParameters.BoundData(value));
+                        break;
+                    
                 }
-
-                parameters.Data.Add(propertyName, new TagParameters.BoundData(value));
             }
             parameters.Node = node;
             

@@ -20,12 +20,15 @@ namespace Orbit.Schema {
 
             XmlSchemaSimpleType valueBoundType = new();
             XmlSchemaSimpleTypeRestriction valueBoundTypeRestriction = new();
-            XmlSchemaPatternFacet valueBoundPattern = new();
             valueBoundTypeRestriction.BaseTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
+            XmlSchemaPatternFacet valueBoundPattern = new();
             valueBoundPattern.Value = "([~].*)"; //Matches the pattern ~ followed by anything else
             valueBoundTypeRestriction.Facets.Add(valueBoundPattern);
+            XmlSchemaPatternFacet resourceBoundPattern = new();
+            resourceBoundPattern.Value = "([@].*)"; //Matches the pattern @ followed by anything else
+            valueBoundTypeRestriction.Facets.Add(resourceBoundPattern);
             valueBoundType.Content = valueBoundTypeRestriction;
-            valueBoundType.Name = "ValueBoundType";
+            valueBoundType.Name = "BoundType";
             schema.Items.Add(valueBoundType);
 
             List<string> addedTags = new();

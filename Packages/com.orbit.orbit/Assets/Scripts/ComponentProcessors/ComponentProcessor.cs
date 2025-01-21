@@ -59,7 +59,10 @@ namespace Orbit.ComponentProcessors {
                         setValue();
                         continue;
                     }
-                    typeSetter.SetFromString(component, pair.Value.data);
+                    if(pair.Value.isDataResourcePath)
+                        typeSetter.SetFromResource(component, pair.Value.data);
+                    else 
+                        typeSetter.SetFromString(component, pair.Value.data);
                 }
             }
         }
