@@ -809,6 +809,50 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
+  <xs:attributeGroup name="OrbitFontUpdaterComponent">
+    <xs:attribute name="Font">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>OrbitFont</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="ValueBoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Montserrat" />
+              <xs:enumeration value="MontserratGlow" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FontWeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>FontWeight</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="ValueBoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Thin" />
+              <xs:enumeration value="ExtraLight" />
+              <xs:enumeration value="Light" />
+              <xs:enumeration value="Regular" />
+              <xs:enumeration value="Medium" />
+              <xs:enumeration value="SemiBold" />
+              <xs:enumeration value="Bold" />
+              <xs:enumeration value="Heavy" />
+              <xs:enumeration value="Black" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:attributeGroup name="SelectableComponent">
     <xs:attribute name="Interactable">
       <xs:simpleType>
@@ -1070,6 +1114,7 @@
     <xs:attributeGroup ref="ImageComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
+    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="SelectableComponent" />
     <xs:attributeGroup ref="TMP_TextComponent" />
@@ -1589,6 +1634,7 @@
     <xs:attributeGroup ref="ImageComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
+    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="SelectableComponent" />
     <xs:attributeGroup ref="TransformComponent" />
@@ -1858,6 +1904,7 @@
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
+    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="SelectableComponent" />
     <xs:attributeGroup ref="TMP_TextComponent" />
@@ -1873,6 +1920,7 @@
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
+    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="SelectableComponent" />
     <xs:attributeGroup ref="TMP_TextComponent" />
@@ -1969,6 +2017,7 @@
     </xs:sequence>
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
+    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="TMP_TextComponent" />
     <xs:attributeGroup ref="TransformComponent" />
@@ -1983,6 +2032,7 @@
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
+    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="SelectableComponent" />
     <xs:attributeGroup ref="TMP_TextComponent" />
@@ -1997,6 +2047,7 @@
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
+    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="TMP_TextComponent" />
     <xs:attributeGroup ref="TransformComponent" />

@@ -1,0 +1,28 @@
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+           xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd' AnchorPreset="FillParent">
+    <Image AnchorPreset="FillParent" ImageColor="#1e1e1e"/>
+    <Vertical ChildControlHeight="true" ChildControlWidth="true" PadAll="10">
+        <VerticalScrollView PreferredHeight="40">
+            <DEFINE_COLOR ID="ButtonActiveColor" Value="#007acc"/>
+            <DEFINE_COLOR ID="ButtonDefaultColor" Value="#3e3e42"/>
+            <DEFINE_COLOR ID="TextActiveColor" Value="white"/>
+            <DEFINE_COLOR ID="TextDefaultColor" Value="#aaaaaa"/>
+            <ButtonGroup SizeDeltaY="40" Spacing="2">
+                <FOR_EACH Items='~Views'>
+                    <BIND_BOOL BoolValue="Active" ID="ButtonColor" FalseValue="^ButtonDefaultColor" TrueValue="^ButtonActiveColor"/>
+                    <BIND_BOOL BoolValue="Active" ID="TextColor" FalseValue="^TextDefaultColor" TrueValue="^TextActiveColor"/>
+                    <Button Text='~Name' ClickEvent='SelectView' FontColor="~TextColor" ImageColor="~ButtonColor" FontWeight="Light"/>
+                </FOR_EACH>
+            </ButtonGroup>
+        </VerticalScrollView>
+        <Container FlexibleHeight="10000">
+            <Background SizeDelta="-20,-20" ImageColor="#252526">
+                <Container SizeDelta="-20,-20">
+                    <FOR_EACH Items='~Views'>
+                        <INCLUDE ViewType='~ViewType' ViewValue='View' Active="~Active"/>
+                    </FOR_EACH>
+                </Container>
+            </Background>
+        </Container>
+    </Vertical>
+</Container>

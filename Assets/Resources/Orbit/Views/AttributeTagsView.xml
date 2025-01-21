@@ -1,6 +1,0 @@
-<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd'>
-    <Vertical ChildControlWidth='true'>
-        <ATTRIBUTE_TAGS/>
-        <ATTRIBUTE_TAGS Group="RandomText"/>
-    </Vertical>
-</Container>

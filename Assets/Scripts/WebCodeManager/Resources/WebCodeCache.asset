@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41e1b874e1e4c26b9410fe685bfd394, type: 3}
+  m_Name: WebCodeCache
+  m_EditorClassIdentifier: 
+  code:
+  - type: AttributeTagsView
+    code: "using Orbit.Attributes;\r\nusing Orbit.Attributes.TagGenerators;\r\nusing
+      Orbit.Components;\r\nusing System;\r\nusing TMPro;\r\nusing UnityEngine;\r\nusing
+      Random = UnityEngine.Random;\r\n\r\npublic class AttributeTagsView : OrbitView
+      {\r\n    private enum DropdownValue {\r\n        FirstOption,\r\n        SecondOption,\r\n       
+      ThirdOption\r\n    }\r\n    \r\n    [OrbitSlider(0, 1, WholeNumbers = false)]\r\n   
+      private float SliderVal { get; set; }\r\n    \r\n    [OrbitSlider(0, 100, Increments
+      = 100)]\r\n    private int SliderValInt { get; set; }\r\n    \r\n    [OrbitDropdown(Text
+      = \"Custom Label\")]\r\n    private DropdownValue DropdownVal { get; set; }\r\n   
+      \r\n    [OrbitToggle]\r\n    private bool ToggleVal { get; set; }\r\n    \r\n   
+      [OrbitInputField]\r\n    private string InputVal { get; set; }\r\n\r\n    private
+      string randomText;\r\n    [OrbitText(FontSize = 40, AutoMinFontSize = 20, FontStyle
+      = FontStyles.Bold | FontStyles.Italic, FontColor = \"red\", Group = \"RandomText\")]\r\n   
+      private string RandomText {\r\n        get => randomText;\r\n        set {\r\n           
+      randomText = value;\r\n            OnPropertyChanged();\r\n        }\r\n   
+      }\r\n    \r\n    [OrbitTag(\"<Button Text='~$VALUE_ID' ClickEvent='PrintValues'/>\")]\r\n   
+      private string ButtonText => \"Print Values\";\r\n    \r\n    [OrbitTag(\"<Button
+      Text='~$VALUE_ID' ClickEvent='RandomizeText'/>\", Group = \"RandomText\")]\r\n   
+      private string RandomizeTextButton => \"Randomize Text\";\r\n    \r\n    [ListenFor(\"PreParse,RandomizeText\")]\r\n   
+      private void RandomizeText() {\r\n        RandomText = Random.Range(0, 3) switch
+      {\r\n            0 => \"This text is random\",\r\n            1 => \"Random
+      text\",\r\n            2 => \"I was randomly picked\",\r\n            _ =>
+      RandomText\r\n        };\r\n    }\r\n    \r\n    [ListenFor(\"PrintValues\")]\r\n   
+      private void PrintValues() {\r\n        Debug.Log(SliderVal);\r\n        Debug.Log(SliderValInt);\r\n       
+      Debug.Log(DropdownVal);\r\n        Debug.Log(ToggleVal);\r\n        Debug.Log(InputVal);\r\n   
+      }\r\n}"
+  - type: DemoView
+    code: "using Orbit.Attributes;\r\nusing Orbit.Components;\r\nusing System;\r\nusing
+      System.Collections.Generic;\r\nusing System.ComponentModel;\r\nusing System.Linq;\r\nusing
+      System.Runtime.CompilerServices;\r\nusing UnityEngine;\r\n\r\npublic class
+      DemoView : OrbitView {\r\n    [SerializeField] private WebCodeManager webCodeManager;\r\n   
+      \r\n    [ValueID]\r\n    protected List<ViewData> Views = new(){\r\n       
+      new(\"Test\", typeof(TestView)),\r\n        new(\"Setting\", typeof(SettingTestView)),\r\n       
+      new(\"List\", typeof(ListTestView)),\r\n        new(\"Dynamic List\", typeof(DynamicListTestView)),\r\n       
+      new(\"Attributes\", typeof(AttributeTagsView)),\r\n    };\r\n\r\n    private
+      ViewData currentView;\r\n    private void Awake() {\r\n        currentView
+      = Views.First();\r\n    }\r\n\r\n    [ListenFor(\"PostParse\")]\r\n    private
+      void ShowActiveTab() {\r\n        currentView.View.gameObject.SetActive(true);\r\n       
+      currentView.Active = true;\r\n        webCodeManager.SetCode(currentView.View);\r\n   
+      }\r\n\r\n    [ListenFor(\"SelectView\")]\r\n    private void SelectView(ViewData
+      viewData) {\r\n        if(currentView != null) {\r\n            currentView.Active
+      = false;\r\n        }\r\n        currentView = viewData;\r\n        currentView.Active
+      = true;\r\n        webCodeManager.SetCode(viewData.View);\r\n    }\r\n    \r\n   
+      public class ViewData : INotifyPropertyChanged {\r\n        [ValueID]\r\n       
+      public string Name { get; }\r\n        [ValueID]\r\n        public Type ViewType
+      { get; }\r\n        [ValueID]\r\n        public OrbitView View { get; private
+      set; }\r\n\r\n        private bool active;\r\n        [ValueID]\r\n       
+      public bool Active {\r\n            get => active;\r\n            set {\r\n               
+      active = value;\r\n                OnPropertyChanged();\r\n            }\r\n       
+      }\r\n        \r\n        public ViewData(string name, Type viewType) {\r\n           
+      Name = name;\r\n            ViewType = viewType;\r\n        }\r\n\r\n\r\n       
+      public event PropertyChangedEventHandler PropertyChanged;\r\n        protected
+      void OnPropertyChanged([CallerMemberName] string propertyName = null) {\r\n           
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));\r\n       
+      }\r\n    }\r\n}"
+  - type: DynamicListTestView
+    code: "using Orbit.Attributes;\r\nusing Orbit.Components;\r\nusing System.Collections.ObjectModel;\r\n\r\npublic
+      class DynamicListTestView : OrbitView {\r\n    //By using ObservableCollection
+      instead of List, we don't need to worry about refreshing the list at all, it
+      will happen automatically when the content changes\r\n    [ValueID] private
+      ObservableCollection<string> strings = new();\r\n    [ValueID] private string
+      enteredText = \"\";\r\n\r\n    [ListenFor(\"RemoveString\")]\r\n    private
+      void RemoveString(string str) => strings.Remove(str);\r\n\r\n    [ListenFor(\"AddString\")]\r\n   
+      private void AddString() => strings.Add(enteredText);\r\n\r\n    [ListenFor(\"ClearStrings\")]\r\n   
+      private void ClearStrings() => strings.Clear();\r\n}"
+  - type: ListTestView
+    code: "using Orbit.Attributes;\r\nusing Orbit.Components;\r\nusing System.Collections.Generic;\r\nusing
+      UnityEngine;\r\n\r\npublic class ListTestView : OrbitView {\r\n    [ValueID]
+      private List<ListItem> listItems;\r\n\r\n    [ListenFor(\"PreParse\")]\r\n   
+      private void PreParse() {\r\n        listItems = new List<ListItem>();\r\n       
+      for(int i = 0;i < 100;i++) {\r\n            listItems.Add(new() {\r\n               
+      color = Random.ColorHSV(0, 1),\r\n                text = $\"Item #{i}\"\r\n           
+      });\r\n        }\r\n    }\r\n\r\n    [ListenFor(\"CellClicked\")]\r\n    private
+      void CellClicked(ListItem clickedItem) {\r\n        Debug.Log($\"Parent detected
+      click of child item '{clickedItem.text}'\");\r\n    }\r\n\r\n    private struct
+      ListItem {\r\n        [ValueID] internal Color color;\r\n        [ValueID]
+      internal string text;\r\n        \r\n        [ListenFor(\"CellClicked\")]\r\n       
+      private void CellClicked() {\r\n            Debug.Log($\"Detected click of
+      item '{text}'\");\r\n        }\r\n    }\r\n}"
+  - type: SettingTestView
+    code: "using Orbit.Attributes;\r\nusing Orbit.Components;\r\nusing System.Collections.Generic;\r\nusing
+      UnityEngine;\r\n\r\npublic class SettingTestView : OrbitView {\r\n    private
+      enum DropdownValue {\r\n        FirstOption,\r\n        SecondOption,\r\n       
+      ThirdOption\r\n    }\r\n    \r\n    [ValueID(\"SliderVal\")] private float
+      sliderVal;\r\n    [ValueID(\"ToggleVal\")] private bool toggleVal;\r\n    [ValueID(\"InputStringVal\")]
+      private string inputVal;\r\n    [ValueID(\"InputFloatVal\")] private float
+      inputFloatVal = 1.5f;\r\n    [ValueID(\"InputIntVal\")] private int inputIntVal;\r\n   
+      [ValueID(\"DropdownVal\")] private DropdownValue dropdownVal;\r\n    [ValueID(\"ListDropdownVal\")]
+      private string listdropdownVal = \"List\";\r\n    [ValueID(\"ListDropdownVals\")]
+      private List<string> listdropdownVals = new() {\"Values\", \"Coming\", \"From\",
+      \"List\"};\r\n\r\n    [ListenFor(\"PrintValues\")]\r\n    private void PrintValues()
+      {\r\n        Debug.Log(sliderVal);\r\n        Debug.Log(toggleVal);\r\n       
+      Debug.Log(inputVal);\r\n        Debug.Log(inputFloatVal);\r\n        Debug.Log(inputIntVal);\r\n       
+      Debug.Log(dropdownVal);\r\n        Debug.Log(listdropdownVal);\r\n    }\r\n}"
+  - type: TestView
+    code: "using Orbit.Attributes;\r\nusing Orbit.Components;\r\n\r\npublic class
+      TestView : OrbitView {\r\n    \r\n}\r\n"

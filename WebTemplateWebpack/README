@@ -1,0 +1,8 @@
+npm project for building dependencies for the webgl template
+
+
+to build just run
+```
+npm run-script build
+```
+Then merge dist with a build using the default WebGL template, replacing any files necessary (tried making this just generate a new template but ran into some issues, may do that in the future)

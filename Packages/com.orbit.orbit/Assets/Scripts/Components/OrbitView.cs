@@ -14,6 +14,7 @@ namespace Orbit.Components {
     using Attributes;
     using Parser;
     using System.Threading;
+    using UnityEditor;
 
     public class OrbitView : MonoBehaviour, INotifyPropertyChanged {
         protected virtual OrbitParser Parser => OrbitParser.DefaultParser;
@@ -25,6 +26,17 @@ namespace Orbit.Components {
         private UIRenderData renderData;
         
         public event PropertyChangedEventHandler PropertyChanged;
+        
+        #if ORBIT_HOT_RELOAD
+        private string viewAssetPath;
+        private string ViewAssetPath {
+            get {
+                if(viewAssetPath == null)
+                    viewAssetPath = AssetDatabase.GetAssetPath(Resources.Load<TextAsset>(resourceName));
+                return viewAssetPath;
+            }
+        }
+        #endif
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -46,10 +58,23 @@ namespace Orbit.Components {
             ParseView();
         }
 
-        protected void ParseView() {
+        public void ForceReloadView(string content) {
+            if(renderData != null) {
+                foreach(GameObject go in renderData.RootObjects) {
+                    Destroy(go);
+                }
+            }
+            renderData = Parser.Parse(content, gameObject, UIViewHost);
+        }
+
+        public string GetXmlString() {
             ViewLocationAttribute viewLocation = UIViewHost.GetType().GetCustomAttribute<ViewLocationAttribute>();
             resourceName = viewLocation?.FullPath ?? GetDefaultResourceLocation(GetType(), viewLocation?.Location);
-            renderData = Parser.Parse(Resources.Load<TextAsset>(resourceName).text, gameObject, UIViewHost);
+            return Resources.Load<TextAsset>(resourceName).text;
+        }
+
+        protected void ParseView() {
+            renderData = Parser.Parse(GetXmlString(), gameObject, UIViewHost);
         }
 
         protected void ManualParse() {
@@ -57,7 +82,7 @@ namespace Orbit.Components {
                 return;
             ParseView();
 #if ORBIT_HOT_RELOAD
-            string filePath = $"Assets/Resources/{resourceName}.xml";
+            string filePath = ViewAssetPath;
             if(File.Exists(filePath)) {
                 FileSystemWatcher watcher = new(Path.GetDirectoryName(filePath)) {
                     Path = Path.GetDirectoryName(filePath),
@@ -94,16 +119,14 @@ namespace Orbit.Components {
             foreach(GameObject go in renderData.RootObjects) {
                 Destroy(go);
             }
-
-            string filePath = $"Assets/Resources/{resourceName}.xml";
-            renderData = Parser.Parse(File.ReadAllText(filePath), gameObject, UIViewHost);
+            renderData = Parser.Parse(File.ReadAllText(ViewAssetPath), gameObject, UIViewHost);
         }
 #endif
 
         protected virtual string GetDefaultResourceLocation(Type type, string location) {
             if(location == null)
-                return $"Orbit/Views/{type.Name}";
-            return $"Orbit/Views/{location}/{type.Name}";
+                return $"OrbitViews/{type.Name}";
+            return $"OrbitViews/{location}/{type.Name}";
         }
     }
 }

@@ -204,9 +204,12 @@ namespace Orbit.Parser {
 
             preParse?.Invoke(renderData);
 
+            Stopwatch renderNodesStopwatch = new();
+            renderNodesStopwatch.Start();
             foreach (XmlNode node in parentNode.ChildNodes) {
                 RenderNode(node, parent, renderData);
             }
+            renderNodesStopwatch.Stop();
 
             if(viewComponentFields != null) {
                 foreach((string valueID, FieldInfo fieldInfo) in viewComponentFields) {
@@ -232,7 +235,7 @@ namespace Orbit.Parser {
             renderData.EmitEvent("PostParse");
 #if ORBIT_BENCHMARK
             parseStopWatch.Stop();
-            Debug.Log($"Parsed {host.GetType().Name} in {parseStopWatch.ElapsedMilliseconds}ms");
+            Debug.Log($"Parsed {host.GetType().Name} in {parseStopWatch.ElapsedMilliseconds}ms {renderNodesStopwatch.ElapsedMilliseconds}ms");
 #endif
             return renderData;
         }
