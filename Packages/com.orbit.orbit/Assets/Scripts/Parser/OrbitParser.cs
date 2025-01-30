@@ -46,8 +46,9 @@ namespace Orbit.Parser {
 
         private XmlDocument doc = new();
         private XmlReaderSettings readerSettings = new();
-        private Dictionary<string, List<ComponentProcessor>> processorPrefabCache = new();
+        private Dictionary<string, List<(ComponentProcessor,int)>> processorPrefabCache = new();
         private Dictionary<string, TagParameters.BoundData> reusableParameterData = new();
+        private List<Component> reusableComponentList = new();
 
         private bool initialized = false;
 
@@ -279,19 +280,18 @@ namespace Orbit.Parser {
             MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
             if(markupPrefab == null)
                 throw new Exception($"'Orbit/Prefabs/{node.Name}' is missing it's MarkupPrefab component");
-
-            if(processorPrefabCache.TryGetValue(node.Name, out List<ComponentProcessor> processors)) {
-                foreach(ComponentProcessor processor in processors) {
-                    markupPrefab.ProcessComponentType(processor, parameters);
-                }
-            } else {
-                //First time encountering this object it must search all the components and build a list for the cache
-                List<ComponentProcessor> processorCache = new();
+            
+            reusableComponentList.Clear();
+            markupPrefab.GetAllComponents(reusableComponentList);
+            if(!processorPrefabCache.TryGetValue(node.Name, out List<(ComponentProcessor,int)> processors)) {
+                processors = new();
                 foreach(ComponentProcessor processor in ComponentProcessors) {
-                    if(markupPrefab.ProcessComponentType(processor, parameters))
-                        processorCache.Add(processor);
+                    markupPrefab.AddComponentIndexes(processor, processors, reusableComponentList);
                 }
-                processorPrefabCache.Add(node.Name, processorCache);
+                processorPrefabCache.Add(node.Name, processors);
+            }
+            foreach((ComponentProcessor processor, int index) in processors) {
+                processor.Process(reusableComponentList[index], parameters);
             }
 
             if(markupPrefab.ParseChildren) {
