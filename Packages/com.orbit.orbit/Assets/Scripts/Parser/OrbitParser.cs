@@ -32,6 +32,15 @@ namespace Orbit.Parser {
             get {
                 if(parser == null) {
                     parser = new OrbitParser();
+#if ORBIT_BENCHMARK
+                    Stopwatch stopwatch = new();
+                    stopwatch.Start();
+#endif
+                    parser.Init(OrbitConfig.Config);
+#if ORBIT_BENCHMARK
+                    stopwatch.Stop();
+                    Debug.Log($"Orbit Init: {stopwatch.ElapsedMilliseconds}ms");
+#endif
                 }
 
                 return parser;
@@ -50,26 +59,25 @@ namespace Orbit.Parser {
         private Dictionary<string, TagParameters.BoundData> reusableParameterData = new();
         private List<Component> reusableComponentList = new();
 
-        private bool initialized = false;
-
         public XmlDocument XmlDocument => doc;
 
-        public virtual void Init() {
+        public virtual void Init(OrbitConfig config) {
             readerSettings.IgnoreComments = true;
             ComponentProcessors = UtilReflection.GetAllSubclasses<ComponentProcessor>();
             Macros = new Dictionary<string, Macro>();
             Prefabs = new Dictionary<string, GameObject>();
             foreach(Macro macro in UtilReflection.GetAllSubclasses<Macro>()) {
                 macro.Parser = this;
-                Macros.Add(macro.Tag, macro);
+                Macros.TryAdd(macro.Tag, macro);
             }
-
-            initialized = true;
+            ColorDefinitions.Clear();
+            foreach(OrbitConfig.ColorDefintion colorDef in config.Colors) {
+                DefineColor(colorDef.name, colorDef.color);
+            }
         }
 
         public void DefineColor(string name, Color color) {
-            ColorDefinitions.Remove(name);
-            ColorDefinitions.Add(name, color);
+            ColorDefinitions[name] = color;
         }
 
         public void AddAssemblyTypes(Assembly assembly) {
@@ -92,18 +100,6 @@ namespace Orbit.Parser {
 
         public UIRenderData Parse(XmlNode parentNode, GameObject parent, object host = null,
             UIRenderData parentData = null, Action<UIRenderData> preParse = null) {
-            if(!initialized) {
-#if ORBIT_BENCHMARK
-                Stopwatch stopwatch = new();
-                stopwatch.Start();
-#endif
-                Init();
-#if ORBIT_BENCHMARK
-                stopwatch.Stop();
-                Debug.Log($"Orbit Init: {stopwatch.ElapsedMilliseconds}ms");
-#endif
-            }
-
 #if ORBIT_BENCHMARK
             Stopwatch parseStopWatch = new();
             parseStopWatch.Start();

@@ -14,6 +14,11 @@ namespace Orbit.Parser {
             public TMP_FontAsset fontAsset;
             public Material fontMaterial;
         }
+        [Serializable]
+        public struct ColorDefintion {
+            public string name;
+            public Color color;
+        }
         
         private static OrbitConfig config;
         public static OrbitConfig Config {
@@ -24,12 +29,14 @@ namespace Orbit.Parser {
             }
         }
 
-        private const string configPath = "Assets/Orbit/Resources/OrbitConfig.asset";
+        private const string configPath = "Resources/OrbitConfig.asset";
         private const string configResource = "OrbitConfig";
 
         [SerializeField] private OrbitFont[] fonts;
+        [SerializeField] private ColorDefintion[] colors;
         public OrbitFont DefaultFont { get; private set; }
         public Dictionary<string, OrbitFont> Fonts { get; private set; }
+        public ColorDefintion[] Colors => colors;
 
         public static OrbitConfig CreateDefault() {
             OrbitConfig defaultConfig = CreateInstance<OrbitConfig>();
@@ -37,7 +44,6 @@ namespace Orbit.Parser {
 #if UNITY_EDITOR
             AssetDatabase.CreateFolder("Assets", "Orbit");
             AssetDatabase.CreateFolder("Assets/Orbit", "Resources");
-            Debug.Log(2);
             AssetDatabase.CreateAsset(defaultConfig, configPath);
 #endif
             return defaultConfig;

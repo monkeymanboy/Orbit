@@ -15,8 +15,8 @@ namespace Orbit.Schema {
     public static class SchemaGenerator {
         public static void Generate() {
             OrbitParser orbitParser = OrbitParser.DefaultParser;
+            orbitParser.Init(OrbitConfig.Config);
             XmlSchema schema = new();
-            orbitParser.Init();
 
             XmlSchemaSimpleType valueBoundType = new();
             XmlSchemaSimpleTypeRestriction valueBoundTypeRestriction = new();
