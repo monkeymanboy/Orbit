@@ -22,6 +22,7 @@ namespace Orbit.Parser {
         internal const char PARENT_HOST_VALUE_PREFIX = '^';
         internal const char NEGATE_VALUE_PREFIX = '!';
         internal const char RESOURCE_VALUE_PREFIX = '@';
+        internal const char GLOBAL_VALUE_PREFIX = '$';
 
         internal const BindingFlags HOST_FLAGS =
             BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
@@ -52,6 +53,7 @@ namespace Orbit.Parser {
         public Dictionary<string, GameObject> Prefabs { get; set; }
         
         public Dictionary<string, Color> ColorDefinitions { get; set; } = new();
+        public Dictionary<string, UIValue> Globals { get; set; } = new();
 
         private XmlDocument doc = new();
         private XmlReaderSettings readerSettings = new();
@@ -74,6 +76,14 @@ namespace Orbit.Parser {
             foreach(OrbitConfig.ColorDefintion colorDef in config.Colors) {
                 DefineColor(colorDef.name, colorDef.color);
             }
+        }
+
+        public void SetGlobal<T>(string name, T value) {
+            if(Globals.TryGetValue(name, out UIValue uiValue)) {
+                uiValue.SetValue(value);
+                return;
+            }
+            Globals[name] = new DefinedUIValue<T>(null, value);
         }
 
         public void DefineColor(string name, Color color) {
@@ -254,6 +264,11 @@ namespace Orbit.Parser {
                         break;
                     case RESOURCE_VALUE_PREFIX:
                         parameters.Data.Add(propertyName, new TagParameters.BoundData(value.Substring(1), true));
+                        break;
+                    case GLOBAL_VALUE_PREFIX:
+                        if(!Globals.TryGetValue(value.Substring(1), out UIValue uiValue)) 
+                            throw new Exception($"Attempted to access '{value}' but no such global exists");
+                        parameters.Data.Add(propertyName, new TagParameters.BoundData(uiValue));
                         break;
                     default:
                         parameters.Data.Add(propertyName, new TagParameters.BoundData(value));
