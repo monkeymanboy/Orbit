@@ -45,16 +45,17 @@ MonoBehaviour:
       System.Runtime.CompilerServices;\r\nusing UnityEngine;\r\n\r\npublic class
       DemoView : OrbitView {\r\n    [SerializeField] private WebCodeManager webCodeManager;\r\n   
       \r\n    [ValueID]\r\n    protected List<ViewData> Views = new(){\r\n       
-      new(\"Test\", typeof(TestView)),\r\n        new(\"Setting\", typeof(SettingTestView)),\r\n       
-      new(\"List\", typeof(ListTestView)),\r\n        new(\"Dynamic List\", typeof(DynamicListTestView)),\r\n       
-      new(\"Attributes\", typeof(AttributeTagsView)),\r\n    };\r\n\r\n    private
-      ViewData currentView;\r\n    private void Awake() {\r\n        currentView
-      = Views.First();\r\n    }\r\n\r\n    [ListenFor(\"PostParse\")]\r\n    private
-      void ShowActiveTab() {\r\n        currentView.View.gameObject.SetActive(true);\r\n       
-      currentView.Active = true;\r\n        webCodeManager.SetCode(currentView.View);\r\n   
-      }\r\n\r\n    [ListenFor(\"SelectView\")]\r\n    private void SelectView(ViewData
-      viewData) {\r\n        if(currentView != null) {\r\n            currentView.Active
-      = false;\r\n        }\r\n        currentView = viewData;\r\n        currentView.Active
+      new(\"Test\", typeof(TestView)),\r\n        new(\"Resources & Globals\", typeof(ResourcesAndGlobalsView)),\r\n       
+      new(\"Setting\", typeof(SettingTestView)),\r\n        new(\"List\", typeof(ListTestView)),\r\n       
+      new(\"Dynamic List\", typeof(DynamicListTestView)),\r\n        new(\"Attributes\",
+      typeof(AttributeTagsView)),\r\n    };\r\n\r\n    private ViewData currentView;\r\n   
+      private void Awake() {\r\n        currentView = Views.First();\r\n    }\r\n\r\n   
+      [ListenFor(\"PostParse\")]\r\n    private void ShowActiveTab() {\r\n       
+      currentView.View.gameObject.SetActive(true);\r\n        currentView.Active
+      = true;\r\n        webCodeManager.SetCode(currentView.View);\r\n    }\r\n\r\n   
+      [ListenFor(\"SelectView\")]\r\n    private void SelectView(ViewData viewData)
+      {\r\n        if(currentView != null) {\r\n            currentView.Active =
+      false;\r\n        }\r\n        currentView = viewData;\r\n        currentView.Active
       = true;\r\n        webCodeManager.SetCode(viewData.View);\r\n    }\r\n    \r\n   
       public class ViewData : INotifyPropertyChanged {\r\n        [ValueID]\r\n       
       public string Name { get; }\r\n        [ValueID]\r\n        public Type ViewType
@@ -92,6 +93,9 @@ MonoBehaviour:
       internal string text;\r\n        \r\n        [ListenFor(\"CellClicked\")]\r\n       
       private void CellClicked() {\r\n            Debug.Log($\"Detected click of
       item '{text}'\");\r\n        }\r\n    }\r\n}"
+  - type: ResourcesAndGlobalsView
+    code: "using Orbit.Attributes;\r\nusing Orbit.Components;\r\n\r\npublic class
+      ResourcesAndGlobalsView : OrbitView {\r\n    \r\n}"
   - type: SettingTestView
     code: "using Orbit.Attributes;\r\nusing Orbit.Components;\r\nusing System.Collections.Generic;\r\nusing
       UnityEngine;\r\n\r\npublic class SettingTestView : OrbitView {\r\n    private

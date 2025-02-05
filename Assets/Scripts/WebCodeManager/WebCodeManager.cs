@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class WebCodeManager : MonoBehaviour {
     private OrbitView targetView;
@@ -21,12 +22,15 @@ public class WebCodeManager : MonoBehaviour {
         }
         initialized = true;
 #if !UNITY_EDITOR && UNITY_WEBGL
-        WebGLInput.captureAllKeyboardInput = false;
         SubscribeToCodeChanged(name, nameof(UpdateView));
 #endif
         foreach(WebCodeCacheSO.CodeData codeData in Resources.Load<WebCodeCacheSO>("WebCodeCache").code) {
             typeToCode.Add(codeData.type, codeData.code);
         }
+    }
+
+    private void Update() {
+        WebGLInput.captureAllKeyboardInput = EventSystem.current.currentSelectedGameObject != null;
     }
 
     public void SetCode(OrbitView view) {
