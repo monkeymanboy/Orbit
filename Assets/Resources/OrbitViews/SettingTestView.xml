@@ -1,4 +1,4 @@
-<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd'>
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
     <Vertical ChildControlWidth='true' PadAll="10" Spacing="10">
         <SettingSlider Text='Slider' BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='4'/>
 		<SettingSlider Text='Slider 2' BoundValue='SliderVal' MinValue='0' MaxValue='1' WholeNumbers='false'/>

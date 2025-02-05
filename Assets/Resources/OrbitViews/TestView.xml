@@ -1,4 +1,4 @@
-<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd'>
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
     <Vertical ChildControlWidth='true'>
         <DEFINE_FLOAT ID="SliderVal" Value="0"/>
         <LERP_COLOR ID='CurrentColor' ValueID='SliderVal' StartColor="white" EndColor="red"/>

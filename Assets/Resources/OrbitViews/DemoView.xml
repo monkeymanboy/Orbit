@@ -1,5 +1,5 @@
 <Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-           xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd' AnchorPreset="FillParent">
+           xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd' AnchorPreset="FillParent">
     <Image AnchorPreset="FillParent" ImageColor="#1e1e1e"/>
     <Vertical ChildControlHeight="true" ChildControlWidth="true" PadAll="10">
         <VerticalScrollView PreferredHeight="40">

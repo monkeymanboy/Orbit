@@ -1,4 +1,4 @@
-<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../OrbitSchema.xsd'>
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
     <Vertical ChildControlWidth='true' ChildControlHeight="true" ChildForceExpandHeight="true" Spacing="10">
         <!-- This feature will be most useful for assigning sprites when you don't want to have a sprite be a serialized reference on the view component-->
         <Image FlexibleHeight="1000" PreferredHeight="40" PreserveAspect="true" ImageSprite="@Cats"/>
