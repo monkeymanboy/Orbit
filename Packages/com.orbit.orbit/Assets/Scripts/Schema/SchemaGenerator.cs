@@ -34,7 +34,7 @@ namespace Orbit.Schema {
             List<string> addedTags = new();
             List<string> addedAttributeGroups = new();
             #region Prefab Tags
-            foreach(Object resource in Resources.LoadAll("Orbit/Prefabs")) {
+            foreach(Object resource in Resources.LoadAll("OrbitPrefabs")) {
                 if(addedTags.Contains(resource.name))
                     continue;
                 XmlSchemaElement currentElement = new() { Name = resource.name };

@@ -279,7 +279,7 @@ namespace Orbit.Parser {
             GameObject nodeGO = CreatePrefab(node.Name, parent);
             MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
             if(markupPrefab == null)
-                throw new Exception($"'Orbit/Prefabs/{node.Name}' is missing it's MarkupPrefab component");
+                throw new Exception($"'OrbitPrefabs/{node.Name}' is missing it's MarkupPrefab component");
             
             reusableComponentList.Clear();
             markupPrefab.GetAllComponents(reusableComponentList);
@@ -310,7 +310,7 @@ namespace Orbit.Parser {
 
         public virtual GameObject CreatePrefab(string name, GameObject parent) {
             if(!Prefabs.TryGetValue(name, out GameObject prefab)) {
-                prefab = Resources.Load<GameObject>($"Orbit/Prefabs/{name}");
+                prefab = Resources.Load<GameObject>($"OrbitPrefabs/{name}");
                 Prefabs.Add(name, prefab);
             }
             GameObject newObject = GameObject.Instantiate(prefab, parent.transform);
