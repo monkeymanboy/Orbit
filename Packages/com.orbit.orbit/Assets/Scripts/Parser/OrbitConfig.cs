@@ -19,6 +19,11 @@ namespace Orbit.Parser {
             public string name;
             public Color color;
         }
+        [Serializable]
+        public struct GlobalsCsv {
+            public TextAsset textAsset;
+            public bool vertical;
+        }
         
         private static OrbitConfig config;
         public static OrbitConfig Config {
@@ -34,6 +39,7 @@ namespace Orbit.Parser {
 
         [SerializeField] private OrbitFont[] fonts;
         [SerializeField] private ColorDefintion[] colors;
+        [SerializeField] private GlobalsCsv[] globalsCsvs;
         public OrbitFont DefaultFont { get; private set; }
         public Dictionary<string, OrbitFont> Fonts { get; private set; }
         public ColorDefintion[] Colors => colors;
@@ -55,6 +61,9 @@ namespace Orbit.Parser {
             config.DefaultFont = config.fonts[0];
             foreach(OrbitFont font in config.fonts) {
                 config.Fonts.Add(font.name, font);
+            }
+            foreach(GlobalsCsv globalsCSV in config.globalsCsvs) {
+                CSVHelper.PopulateGlobals(OrbitParser.DefaultParser,globalsCSV.textAsset, globalsCSV.vertical);
             }
             return config;
         }

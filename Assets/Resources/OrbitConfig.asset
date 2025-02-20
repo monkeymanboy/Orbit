@@ -17,3 +17,6 @@ MonoBehaviour:
     fontAsset: {fileID: 11400000, guid: ef6e4678e88d1914084b3882c79905d9, type: 2}
     fontMaterial: {fileID: 0}
   colors: []
+  globalsCsvs:
+  - textAsset: {fileID: 4900000, guid: 4b1111f3bfda7d8449862090689f9856, type: 3}
+    vertical: 0

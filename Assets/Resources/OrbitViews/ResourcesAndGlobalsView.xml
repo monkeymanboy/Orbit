@@ -7,7 +7,7 @@
         <Text PreferredHeight="20" FontSize="20" TextAlignment="Midline" Text="@Cat Names" Font="@Comic Sans"/>
     </Vertical>
     <!-- Globals can be useful for any data that should have a global scope such as localization text -->
-    <!-- These values will update as they are changed just like any other value so no need to reload views or anything if you are using this for localization-->
+    <!-- These values will update as they are changed just like any other value so no need to reload views or anything when globals change-->
     <Vertical AnchorPreset="RightHalf" ChildControlWidth='true' ChildControlHeight="true" ChildForceExpandHeight="true" Spacing="10">
         <Text Text="$GlobalText"/>
         <Button Text="Change global text" ClickEvent="ChangeGlobal"/>

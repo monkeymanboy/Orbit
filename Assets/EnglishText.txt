@@ -1,0 +1,2 @@
+ENGLISH_BUTTON_TEXT,SPANISH_BUTTON_TEXT,TEXT
+Switch to English,Switch to Spanish,Globals are useful for translations!

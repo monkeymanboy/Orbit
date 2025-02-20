@@ -18,6 +18,7 @@ public class DemoView : OrbitView {
         new("List", typeof(ListTestView)),
         new("Dynamic List", typeof(DynamicListTestView)),
         new("Attributes", typeof(AttributeTagsView)),
+        new("Localization", typeof(LocalizationView))
     };
 
     private ViewData currentView;

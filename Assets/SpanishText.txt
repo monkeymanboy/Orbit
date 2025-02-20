@@ -1,0 +1,2 @@
+ENGLISH_BUTTON_TEXT,SPANISH_BUTTON_TEXT,TEXT
+Cambiar a inglés,Cambiar a español,Las globales son útiles para las traducciones!

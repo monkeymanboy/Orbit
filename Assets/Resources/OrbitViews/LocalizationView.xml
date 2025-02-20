@@ -1,0 +1,10 @@
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
+    <!-- The best way to localize is by using global values for all localized text-->
+    <!-- Then there is a CSVHelper class to help populate globals with localized text-->
+    <!-- You could even bind things like font sizes if those need to be changed by locale-->
+    <Vertical AnchorPreset="Center" SizeDelta="300,200" ChildControlWidth='true' ChildControlHeight="true" ChildForceExpandHeight="true" Spacing="10">
+        <Text PreferredHeight="20" FontSize="20" TextAlignment="Midline" Text="$TEXT" Font="@Comic Sans"/>
+        <Button Text="$ENGLISH_BUTTON_TEXT" ClickEvent="EnglishClicked"/>
+        <Button Text="$SPANISH_BUTTON_TEXT" ClickEvent="SpanishClicked"/>
+    </Vertical>
+</Container>
