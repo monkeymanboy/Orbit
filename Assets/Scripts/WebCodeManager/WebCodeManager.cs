@@ -30,7 +30,9 @@ public class WebCodeManager : MonoBehaviour {
     }
 
     private void Update() {
+#if UNITY_WEBGL && !UNITY_EDITOR
         WebGLInput.captureAllKeyboardInput = EventSystem.current.currentSelectedGameObject != null;
+#endif
     }
 
     public void SetCode(OrbitView view) {
