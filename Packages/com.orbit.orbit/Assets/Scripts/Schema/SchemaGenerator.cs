@@ -28,6 +28,10 @@ namespace Orbit.Schema {
             resourceBoundPattern.Value = "([@].*)"; //Matches the pattern @ followed by anything else
             valueBoundTypeRestriction.Facets.Add(resourceBoundPattern);
             valueBoundType.Content = valueBoundTypeRestriction;
+            XmlSchemaPatternFacet globalBoundPattern = new();
+            globalBoundPattern.Value = "([$].*)"; //Matches the pattern $ followed by anything else
+            valueBoundTypeRestriction.Facets.Add(globalBoundPattern);
+            valueBoundType.Content = valueBoundTypeRestriction;
             valueBoundType.Name = "BoundType";
             schema.Items.Add(valueBoundType);
 
