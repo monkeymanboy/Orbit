@@ -1994,21 +1994,6 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="WholeNumbers">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Boolean</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:enumeration value="true" />
-              <xs:enumeration value="false" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
   </xs:attributeGroup>
   <xs:element name="SettingSlider" type="SettingSliderTag" />
   <xs:complexType name="SettingSliderTag">

@@ -12,11 +12,12 @@ namespace Orbit.Components.Settings {
         [SerializeField]
         private TextMeshProUGUI valueMesh;
 
-        private int increments = 1;
+        private int increments = -1;
         public int Increments {
             get => increments;
             set {
                 increments = value;
+                if(increments == 0) increments = -1; //Allows 0 increments to mean stepless
                 UpdateSlider();
             }
         }
@@ -33,14 +34,6 @@ namespace Orbit.Components.Settings {
             get => minValue;
             set {
                 minValue = value;
-                UpdateSlider();
-            }
-        }
-        private bool wholeNumbers = true;
-        public bool WholeNumbers {
-            get => wholeNumbers;
-            set {
-                wholeNumbers = value;
                 UpdateSlider();
             }
         }
@@ -74,8 +67,8 @@ namespace Orbit.Components.Settings {
         private void UpdateSlider() {
             if(!initialized) return;
             slider.minValue = 0;
-            slider.maxValue = increments;
-            slider.wholeNumbers = WholeNumbers;
+            slider.maxValue = Mathf.Abs(increments);
+            slider.wholeNumbers = increments != -1;
             UpdateSliderValue();
         }
 
@@ -83,18 +76,16 @@ namespace Orbit.Components.Settings {
             float value = useInt
                 ? (float)(UIValue.GetValue<int>())
                 : UIValue.GetValue<float>();
-
-            value = WholeNumbers
-                ? Mathf.RoundToInt(((value - MinValue) / (MaxValue - MinValue)) * Increments)
-                : Mathf.Clamp(value - MinValue, 0, MaxValue);
-
+            
+            
+            value = increments != -1
+                ? Mathf.RoundToInt(((value - MinValue) / (MaxValue - MinValue)) * increments)
+                : Mathf.InverseLerp(MinValue, MaxValue, value);
+            //value = Mathf.RoundToInt(((value - MinValue) / (MaxValue - MinValue)) * Mathf.Abs(Increments));
+            
             slider.SetValueWithoutNotify(value);
 
             UpdateText(slider.value);
-        }
-
-        public void Increment(){
-            slider.value = Mathf.RoundToInt((Mathf.Clamp(slider.value + 1, 0f, wholeNumbers ? increments : MaxValue)));
         }
 
         private void UpdateText(float val) {
@@ -103,7 +94,7 @@ namespace Orbit.Components.Settings {
             else valueMesh.text = (Formatter?.Invoke(GetRealValue(val)) as string) ?? GetRealValue(val).ToString("0.00");
         }
         private float GetRealValue(float val) {
-            return (val / increments) * (MaxValue - MinValue) + MinValue;
+            return (val / Mathf.Abs(increments)) * (MaxValue - MinValue) + MinValue;
         }
 
         private void SetUIValue(float val) {
