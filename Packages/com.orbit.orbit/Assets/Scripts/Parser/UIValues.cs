@@ -23,6 +23,8 @@ namespace Orbit.Parser {
         public abstract object GetValue();
         public virtual T GetValue<T>() {
             try {
+                if(typeof(T) == typeof(string))
+                    return (T)(object)GetValue().ToString();
                 return (T)GetValue();
             } catch {
                 throw new Exception($"Error casting UIValue of type '{GetValue().GetType()}' to type '{typeof(T)}'");
