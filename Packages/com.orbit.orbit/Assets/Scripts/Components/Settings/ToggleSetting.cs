@@ -16,8 +16,11 @@ namespace Orbit.Components.Settings {
             UpdateToggleValue();
         }
 
-        private void UpdateToggleValue() {
-            toggle.SetIsOnWithoutNotify(UIValue.GetValue<bool>());
+        private void UpdateToggleValue(bool notify = false) {
+            if(notify)
+                toggle.isOn = UIValue.GetValue<bool>();
+            else 
+                toggle.SetIsOnWithoutNotify(UIValue.GetValue<bool>());
         }
 
         private void SetUIValue(bool val) {
@@ -32,7 +35,7 @@ namespace Orbit.Components.Settings {
 
         protected override void OnValueChanged() {
             if(!initialized) return;
-            UpdateToggleValue();
+            UpdateToggleValue(NotifyValueChanged);
         }
     }
 }

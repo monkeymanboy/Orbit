@@ -72,7 +72,7 @@ namespace Orbit.Components.Settings {
             UpdateSliderValue();
         }
 
-        private void UpdateSliderValue() {
+        private void UpdateSliderValue(bool notify = false) {
             float value = useInt
                 ? (float)(UIValue.GetValue<int>())
                 : UIValue.GetValue<float>();
@@ -82,8 +82,11 @@ namespace Orbit.Components.Settings {
                 ? Mathf.RoundToInt(((value - MinValue) / (MaxValue - MinValue)) * increments)
                 : Mathf.InverseLerp(MinValue, MaxValue, value);
             //value = Mathf.RoundToInt(((value - MinValue) / (MaxValue - MinValue)) * Mathf.Abs(Increments));
-            
-            slider.SetValueWithoutNotify(value);
+
+            if(notify)
+                slider.value = value;
+            else 
+                slider.SetValueWithoutNotify(value);
 
             UpdateText(slider.value);
         }
@@ -110,7 +113,7 @@ namespace Orbit.Components.Settings {
 
         protected override void OnValueChanged() {
             if(!initialized) return;
-            UpdateSliderValue();
+            UpdateSliderValue(NotifyValueChanged);
         }
     }
 }

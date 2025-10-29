@@ -50,11 +50,16 @@ namespace Orbit.Components.Settings {
             UpdateDropdownValue();
         }
 
-        private void UpdateDropdownValue() {
+        private void UpdateDropdownValue(bool notify = false) {
+            int value;
             if(enumValues != null) 
-                dropdown.SetValueWithoutNotify(Array.IndexOf(enumValues, UIValue.GetValue()));
+                value = Array.IndexOf(enumValues, UIValue.GetValue());
             else 
-                dropdown.SetValueWithoutNotify(OptionsList.IndexOf(UIValue.GetValue()));
+                value = OptionsList.IndexOf(UIValue.GetValue());
+            if(notify)
+                dropdown.value = value;
+            else
+                dropdown.SetValueWithoutNotify(value);
         }
 
         private void SetUIValue(int index) {
@@ -72,7 +77,7 @@ namespace Orbit.Components.Settings {
 
         protected override void OnValueChanged() {
             if(!initialized) return;
-            UpdateDropdownValue();
+            UpdateDropdownValue(NotifyValueChanged);
         }
     }
 }

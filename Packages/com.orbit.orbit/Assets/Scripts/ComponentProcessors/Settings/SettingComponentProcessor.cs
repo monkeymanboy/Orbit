@@ -12,7 +12,8 @@ namespace Orbit.ComponentProcessors.Settings {
     public class SettingComponentProcessor : ComponentProcessor<SettingComponent> {
         public override Dictionary<string, TypeSetter<SettingComponent>> Setters => new() {
             {"BoundValue", new StringSetter<SettingComponent>(SetBoundValue) },
-            {"ValueChangedEvent", new StringSetter<SettingComponent>(SetChangedEvent) }
+            {"ValueChangedEvent", new StringSetter<SettingComponent>(SetChangedEvent) },
+            {"NotifyValueChanged", new BoolSetter<SettingComponent>((component, value) => component.NotifyValueChanged = value) },
         };
 
         public override void Process(Component genericComponent, TagParameters processorParams) {

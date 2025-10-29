@@ -16,17 +16,17 @@ namespace Orbit.Components.Settings {
         public override void PostParse() {
             initialized = true;
 
-            valueType = ValueType.STRING;
+            valueType = ValueType.String;
             
             object value = UIValue.GetValue();
             switch(value) {
                 case int:
                     inputField.contentType = TMP_InputField.ContentType.IntegerNumber;
-                    valueType = ValueType.INT;
+                    valueType = ValueType.Int;
                     break;
                 case float:
                     inputField.contentType = TMP_InputField.ContentType.DecimalNumber;
-                    valueType = ValueType.FLOAT;
+                    valueType = ValueType.Float;
                     break;
             }
             
@@ -38,29 +38,36 @@ namespace Orbit.Components.Settings {
             OnEndEditEvent?.Invoke();
         }
 
-        private void UpdateInputText() {
+        private void UpdateInputText(bool notify = false) {
+            string text;
             switch(valueType) {
-                case ValueType.INT:
-                    inputField.SetTextWithoutNotify(UIValue.GetValue<int>().ToString());
+                case ValueType.Int:
+                    text = UIValue.GetValue<int>().ToString();
                     break;
-                case ValueType.FLOAT:
-                    inputField.SetTextWithoutNotify(UIValue.GetValue<float>().ToString());
+                case ValueType.Float:
+                    text = UIValue.GetValue<float>().ToString();
                     break;
-                case ValueType.STRING:
-                    inputField.SetTextWithoutNotify(UIValue.GetValue<string>());
+                case ValueType.String:
+                    text = UIValue.GetValue<string>();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+            if(notify)
+                inputField.text = text;
+            else
+                inputField.SetTextWithoutNotify(text);
         }
 
         private void SetUIValue(string val) {
             switch(valueType) {
-                case ValueType.INT:
+                case ValueType.Int:
                     UIValue.SetValue(int.Parse(val));
                     break;
-                case ValueType.FLOAT:
+                case ValueType.Float:
                     UIValue.SetValue(float.Parse(val));
                     break;
-                case ValueType.STRING:
+                case ValueType.String:
                     UIValue.SetValue(val);
                     break;
             }
@@ -74,11 +81,11 @@ namespace Orbit.Components.Settings {
 
         protected override void OnValueChanged() {
             if(!initialized) return;
-            UpdateInputText();
+            UpdateInputText(NotifyValueChanged);
         }
 
         public enum ValueType {
-            STRING, FLOAT, INT
+            String, Float, Int
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Orbit.Components.Settings {
 
     public abstract class SettingComponent : MonoBehaviour {
         public Action OnChangeEvent { get; set; }
+        public bool NotifyValueChanged { get; set; }
         private UIValue uiValue;
         public UIValue UIValue {
             get => uiValue;
