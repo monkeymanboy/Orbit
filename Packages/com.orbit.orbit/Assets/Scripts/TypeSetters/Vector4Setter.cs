@@ -3,13 +3,13 @@ using System.Globalization;
 using UnityEngine;
 
 namespace Orbit.TypeSetters {
-    public class Vector4Setter<T> : TypeSetter<T, Vector3> {
+    public class Vector4Setter<T> : TypeSetter<T, Vector4> {
         protected override string[] Regexes => new string[] { "[-+]?[0-9]*\\.?[0-9]+", //matches 'float'
             "[-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+" }; //matches 'float,float,float,float'
-        public Vector4Setter(Action<T, Vector3> setter) : base(setter) { }
-        public Vector4Setter(ActionRef<T, Vector3> setter) : base(setter) { }
+        public Vector4Setter(Action<T, Vector4> setter) : base(setter) { }
+        public Vector4Setter(ActionRef<T, Vector4> setter) : base(setter) { }
 
-        public override Vector3 Parse(string value) {
+        public override Vector4 Parse(string value) {
             int commaIndex = value.IndexOf(',');
             if(commaIndex == -1) { //If single number use that number as x, y, and z
                 float singleFloat = float.Parse(value, CultureInfo.InvariantCulture);
