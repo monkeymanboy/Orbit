@@ -52,6 +52,8 @@ namespace Orbit.Parser {
         }
 
         public override T GetValue<T>() {
+            if(typeof(T) == typeof(string))
+                return (T)(object)value.ToString();
             return (T)(object)value;
         }
     }

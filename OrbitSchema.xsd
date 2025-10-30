@@ -2374,6 +2374,74 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
+  <xs:element name="DEFINE_STRING" type="DEFINE_STRINGMacro" />
+  <xs:complexType name="DEFINE_STRINGMacro">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="ID">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Value">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="DEFINE_INT" type="DEFINE_INTMacro" />
+  <xs:complexType name="DEFINE_INTMacro">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="ID">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Value">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
   <xs:element name="DEFINE_FLOAT" type="DEFINE_FLOATMacro" />
   <xs:complexType name="DEFINE_FLOATMacro">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -2754,6 +2822,40 @@
             <xs:restriction base="xs:string">
               <xs:enumeration value="true" />
               <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="EXPRESSION" type="EXPRESSIONMacro" />
+  <xs:complexType name="EXPRESSIONMacro">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="ID" use="required">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Expression" use="required">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>
