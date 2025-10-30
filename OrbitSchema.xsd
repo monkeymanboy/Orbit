@@ -1103,6 +1103,25 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="TextMargin">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector4</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:element name="Button" type="ButtonTag" />
   <xs:complexType name="ButtonTag">
@@ -1625,6 +1644,21 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="NotifyValueChanged">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:element name="InputField" type="InputFieldTag" />
   <xs:complexType name="InputFieldTag">
@@ -2010,6 +2044,16 @@
     <xs:attributeGroup ref="SettingComponentComponent" />
     <xs:attributeGroup ref="SliderSettingComponent" />
   </xs:complexType>
+  <xs:attributeGroup name="ToggleComponent">
+    <xs:attribute name="ToggleGroup">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>ToggleGroup</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:element name="SettingToggle" type="SettingToggleTag" />
   <xs:complexType name="SettingToggleTag">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -2022,6 +2066,7 @@
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="SelectableComponent" />
     <xs:attributeGroup ref="TMP_TextComponent" />
+    <xs:attributeGroup ref="ToggleComponent" />
     <xs:attributeGroup ref="TransformComponent" />
     <xs:attributeGroup ref="SettingComponentComponent" />
   </xs:complexType>
@@ -2674,6 +2719,41 @@
           <xs:simpleType>
             <xs:restriction base="xs:string">
               <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="TOGGLE_GROUP" type="TOGGLE_GROUPMacro" />
+  <xs:complexType name="TOGGLE_GROUPMacro">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="ID" use="required">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AllowSwitchOff">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>

@@ -4,6 +4,7 @@ using Orbit.Components;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class AttributeTagsView : OrbitView {
@@ -12,6 +13,16 @@ public class AttributeTagsView : OrbitView {
         SecondOption,
         ThirdOption
     }
+    
+    [OrbitToggleGroup(ID = "toggleGroup")]
+    [OrbitToggle(ToggleGroup = "toggleGroup")]
+    public bool Toggle1;
+    [OrbitToggle(ToggleGroup = "toggleGroup")]
+    public bool Toggle2;
+    [OrbitToggle(ToggleGroup = "toggleGroup")]
+    public bool Toggle3;
+    [OrbitToggle(ToggleGroup = "toggleGroup")]
+    public bool Toggle4;
     
     [OrbitSlider(0, 1, WholeNumbers = false)]
     private float SliderVal { get; set; }
@@ -24,9 +35,8 @@ public class AttributeTagsView : OrbitView {
     
     [OrbitToggle]
     private bool ToggleVal { get; set; }
-    
-    [OrbitInputField]
-    private string InputVal { get; set; }
+
+    [OrbitInputField] private string InputVal { get; set; }
 
     private string randomText;
     [OrbitText(FontSize = 40, AutoMinFontSize = 20, FontStyle = FontStyles.Bold | FontStyles.Italic, FontColor = "red", Group = "RandomText")]
@@ -61,5 +71,9 @@ public class AttributeTagsView : OrbitView {
         Debug.Log(DropdownVal);
         Debug.Log(ToggleVal);
         Debug.Log(InputVal);
+        Debug.Log(Toggle1);
+        Debug.Log(Toggle2);
+        Debug.Log(Toggle3);
+        Debug.Log(Toggle4);
     }
 }

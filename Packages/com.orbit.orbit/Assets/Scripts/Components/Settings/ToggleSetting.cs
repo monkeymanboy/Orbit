@@ -11,6 +11,7 @@ namespace Orbit.Components.Settings {
         private bool initialized = false;
 
         public override void PostParse() {
+            if(UIValue == null) return;
             initialized = true;
             toggle.onValueChanged.AddListener(SetUIValue);
             UpdateToggleValue();

@@ -35,6 +35,7 @@ namespace Orbit.Components.Settings {
         private bool initialized = false;
 
         public override void PostParse() {
+            if(UIValue == null) return;
             initialized = true;
             if(Options == null && UIValue.GetValue() is Enum valueEnum) {
                 Options = new();

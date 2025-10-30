@@ -14,6 +14,7 @@ namespace Orbit.Components.Settings {
         private ValueType valueType;
 
         public override void PostParse() {
+            if(UIValue == null) return;
             initialized = true;
 
             valueType = ValueType.String;

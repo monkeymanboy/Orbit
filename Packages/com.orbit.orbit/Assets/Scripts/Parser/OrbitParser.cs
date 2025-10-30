@@ -151,8 +151,7 @@ namespace Orbit.Parser {
                     string id = null;
                     if(valueID != null)
                         id = valueID.ID ?? fieldInfo.Name;
-                    TagGenerator tagGenerator = fieldInfo.GetCustomAttribute<TagGenerator>(true);
-                    if(tagGenerator != null) {
+                    foreach(TagGenerator tagGenerator in fieldInfo.GetCustomAttributes<TagGenerator>(true)) {
                         //Allows UIValues to be made implicitly by presence of a tag generator attribute without ValueID
                         id ??= fieldInfo.Name;
                         renderData.TagGenerators.Add((id, tagGenerator));
@@ -175,8 +174,7 @@ namespace Orbit.Parser {
                     string id = null;
                     if(valueID != null)
                         id = valueID.ID ?? propInfo.Name;
-                    TagGenerator tagGenerator = propInfo.GetCustomAttribute<TagGenerator>(true);
-                    if(tagGenerator != null) {
+                    foreach(TagGenerator tagGenerator in propInfo.GetCustomAttributes<TagGenerator>(true)) {
                         //Allows UIValues to be made implicitly by presence of a tag generator attribute without ValueID
                         id ??= propInfo.Name;
                         renderData.TagGenerators.Add((id, tagGenerator));

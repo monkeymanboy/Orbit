@@ -46,6 +46,7 @@ namespace Orbit.Components.Settings {
         private bool useInt = false;
 
         public override void PostParse() {
+            if(UIValue == null) return;
             initialized = true;
             if(ImmediateUpdate) {
                 slider.onValueChanged.AddListener(SetUIValue);

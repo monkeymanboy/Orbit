@@ -7,5 +7,13 @@
         <DEFINE_BOOL ID="CheckboxVal" Value="false"/>
         <SettingToggle Text="Normal" BoundValue="CheckboxVal" FontStyle="Underline,Bold"/>
         <SettingToggle Text="Negated" BoundValue="!CheckboxVal"/>
+        
+        <TOGGLE_GROUP ID="Toggles" AllowSwitchOff="false"/>
+        <Vertical VerticalFit="PreferredSize" ChildControlWidth="true">
+            <SettingToggle Text="Toggle Group 1" FontSize="12" ToggleGroup="~Toggles"/>
+            <SettingToggle Text="Toggle Group 2" FontSize="12" ToggleGroup="~Toggles"/>
+            <SettingToggle Text="Toggle Group 3" FontSize="12" ToggleGroup="~Toggles"/>
+            <SettingToggle Text="Toggle Group 4" FontSize="12" ToggleGroup="~Toggles"/>
+        </Vertical>
     </Vertical>
 </Container>
