@@ -13,6 +13,18 @@ namespace Orbit.Macros {
         public override TypeSetter<DefineMacroData> ValueSetter => new BoolSetter<DefineMacroData>((ref DefineMacroData data, bool value) => data.Value = value);
     }
 
+    public class DefineString : DefineMacro<string> {
+        public override string Tag => "DEFINE_STRING";
+
+        public override TypeSetter<DefineMacroData> ValueSetter => new StringSetter<DefineMacroData>((ref DefineMacroData data, string value) => data.Value = value);
+    }
+
+    public class DefineInt : DefineMacro<int> {
+        public override string Tag => "DEFINE_INT";
+
+        public override TypeSetter<DefineMacroData> ValueSetter => new IntSetter<DefineMacroData>((ref DefineMacroData data, int value) => data.Value = value);
+    }
+
     public class DefineFloat : DefineMacro<float> {
         public override string Tag => "DEFINE_FLOAT";
 
