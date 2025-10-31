@@ -19,7 +19,7 @@
             <Background SizeDelta="-20,-20" ImageColor="#252526">
                 <Container SizeDelta="-20,-20">
                     <FOR_EACH Items='~Views'>
-                        <INCLUDE ViewType='~ViewType' ViewValue='View' Active="~Active"/>
+                        <INCLUDE ViewValue='View' Active="~Active"/>
                     </FOR_EACH>
                 </Container>
             </Background>

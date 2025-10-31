@@ -11,45 +11,47 @@ public class DemoView : OrbitView {
     [SerializeField] private WebCodeManager webCodeManager;
     
     [ValueID]
-    protected List<ViewData> Views = new(){
-        new("Test", typeof(TestView)),
-        new("Resources & Globals", typeof(ResourcesAndGlobalsView)),
-        new("Setting", typeof(SettingTestView)),
-        new("List", typeof(ListTestView)),
-        new("Dynamic List", typeof(DynamicListTestView)),
-        new("Attributes", typeof(AttributeTagsView)),
-        new("Localization", typeof(LocalizationView))
+    protected List<IViewData> Views = new(){
+        new ViewData<TestView>("Test"),
+        new ViewData<ResourcesAndGlobalsView>("Resources & Globals"),
+        new ViewData<SettingTestView>("Setting"),
+        new ViewData<ListTestView>("List"),
+        new ViewData<DynamicListTestView>("Dynamic List"),
+        new ViewData<AttributeTagsView>("Attributes"),
+        new ViewData<LocalizationView>("Localization")
     };
 
-    private ViewData currentView;
+    private IViewData currentView;
     private void Awake() {
         currentView = Views.First();
     }
 
     [ListenFor("PostParse")]
     private void ShowActiveTab() {
-        currentView.View.gameObject.SetActive(true);
         currentView.Active = true;
-        webCodeManager.SetCode(currentView.View);
+        webCodeManager.SetCode(currentView.OrbitView);
     }
 
     [ListenFor("SelectView")]
-    private void SelectView(ViewData viewData) {
+    private void SelectView(IViewData viewData) {
         if(currentView != null) {
             currentView.Active = false;
         }
         currentView = viewData;
         currentView.Active = true;
-        webCodeManager.SetCode(viewData.View);
+        webCodeManager.SetCode(viewData.OrbitView);
     }
-    
-    public class ViewData : INotifyPropertyChanged {
+
+    public interface IViewData {
+        public string Name { get; }
+        public bool Active { get; set; }
+        public OrbitView OrbitView { get; }
+    }
+    public class ViewData<T> : IViewData, INotifyPropertyChanged where T : OrbitView {
         [ValueID]
         public string Name { get; }
         [ValueID]
-        public Type ViewType { get; }
-        [ValueID]
-        public OrbitView View { get; private set; }
+        public T View { get; private set; }
 
         private bool active;
         [ValueID]
@@ -61,12 +63,12 @@ public class DemoView : OrbitView {
             }
         }
         
-        public ViewData(string name, Type viewType) {
+        public OrbitView OrbitView => View;
+
+        public ViewData(string name) {
             Name = name;
-            ViewType = viewType;
         }
-
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
