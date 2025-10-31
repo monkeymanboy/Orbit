@@ -31,14 +31,16 @@ namespace Orbit.Parser {
             }
         }
 
+        public abstract Type GetValueType();
+
         public void InvokeOnChange() => OnChange?.Invoke();
     }
 
-    public class DefinedUIValue<ObjectType> : UIValue {
+    public class DefinedUIValue<TObjectType> : UIValue {
         public override bool HasValue => true;
-        private ObjectType value;
+        private TObjectType value;
         
-        public DefinedUIValue(UIRenderData renderData, ObjectType value) : base(renderData) {
+        public DefinedUIValue(UIRenderData renderData, TObjectType value) : base(renderData) {
             this.value = value;
         }
 
@@ -47,7 +49,7 @@ namespace Orbit.Parser {
         }
 
         public override void SetValue<T>(T value) {
-            this.value = (ObjectType)(object)value;
+            this.value = (TObjectType)(object)value;
             InvokeOnChange();
         }
 
@@ -55,6 +57,10 @@ namespace Orbit.Parser {
             if(typeof(T) == typeof(string))
                 return (T)(object)value.ToString();
             return (T)(object)value;
+        }
+
+        public override Type GetValueType() {
+            return typeof(TObjectType);
         }
     }
 
@@ -72,6 +78,10 @@ namespace Orbit.Parser {
         public override void SetValue<T>(T value) {
             fieldInfo.SetValue(renderData.Host, value);
             InvokeOnChange();
+        }
+
+        public override Type GetValueType() {
+            return fieldInfo.FieldType;
         }
     }
 
@@ -108,6 +118,10 @@ namespace Orbit.Parser {
             SetMethod?.Invoke(renderData.Host, ArrayParameters<object>.Single(value));
             InvokeOnChange();
         }
+
+        public override Type GetValueType() {
+            return propertyInfo.PropertyType;
+        }
     }
 
     public class UIHostValue : UIValue {
@@ -120,6 +134,10 @@ namespace Orbit.Parser {
         public override void SetValue<T>(T value) {
             renderData.Host = value;
             InvokeOnChange();
+        }
+
+        public override Type GetValueType() {
+            return renderData.Host.GetType();
         }
     }
 }
