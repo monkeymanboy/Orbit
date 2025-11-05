@@ -252,6 +252,10 @@
               <xs:enumeration value="TopRightAlign" />
               <xs:enumeration value="BottomRightAlign" />
               <xs:enumeration value="Center" />
+              <xs:enumeration value="CenterLeftAlign" />
+              <xs:enumeration value="CenterRightAlign" />
+              <xs:enumeration value="CenterTopAlign" />
+              <xs:enumeration value="CenterBottomAlign" />
               <xs:enumeration value="LeftHalf" />
               <xs:enumeration value="RightHalf" />
               <xs:enumeration value="TopHalf" />

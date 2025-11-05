@@ -17,6 +17,10 @@ namespace Orbit.ComponentProcessors {
             TopRightAlign,
             BottomRightAlign,
             Center,
+            CenterLeftAlign,
+            CenterRightAlign,
+            CenterTopAlign,
+            CenterBottomAlign,
             LeftHalf,
             RightHalf,
             TopHalf,
@@ -83,6 +87,30 @@ namespace Orbit.ComponentProcessors {
                     rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
                     rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
                     rectTransform.pivot = new Vector2(0.5f, 0.5f);
+                    break;
+                case AnchorPreset.CenterLeftAlign:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(0, 0.5f);
+                    rectTransform.anchorMax = new Vector2(0, 0.5f);
+                    rectTransform.pivot = new Vector2(0, 0.5f);
+                    break;
+                case AnchorPreset.CenterRightAlign:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(1, 0.5f);
+                    rectTransform.anchorMax = new Vector2(1, 0.5f);
+                    rectTransform.pivot = new Vector2(1, 0.5f);
+                    break;
+                case AnchorPreset.CenterTopAlign:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(0.5f, 1);
+                    rectTransform.anchorMax = new Vector2(0.5f, 1);
+                    rectTransform.pivot = new Vector2(0.5f, 1);
+                    break;
+                case AnchorPreset.CenterBottomAlign:
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.anchorMin = new Vector2(0.5f, 0);
+                    rectTransform.anchorMax = new Vector2(0.5f, 0);
+                    rectTransform.pivot = new Vector2(0.5f, 0);
                     break;
                 case AnchorPreset.TopLeftAlign:
                     rectTransform.anchoredPosition = Vector2.zero;
