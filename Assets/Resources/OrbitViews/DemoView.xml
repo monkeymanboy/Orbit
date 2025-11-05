@@ -3,10 +3,10 @@
     <Image AnchorPreset="FillParent" ImageColor="#1e1e1e"/>
     <Vertical ChildControlHeight="true" ChildControlWidth="true" PadAll="10">
         <VerticalScrollView PreferredHeight="40">
-            <DEFINE_COLOR ID="ButtonActiveColor" Value="#007acc"/>
-            <DEFINE_COLOR ID="ButtonDefaultColor" Value="#3e3e42"/>
-            <DEFINE_COLOR ID="TextActiveColor" Value="white"/>
-            <DEFINE_COLOR ID="TextDefaultColor" Value="#aaaaaa"/>
+            <SET_COLOR ID="ButtonActiveColor" Value="#007acc"/>
+            <SET_COLOR ID="ButtonDefaultColor" Value="#3e3e42"/>
+            <SET_COLOR ID="TextActiveColor" Value="white"/>
+            <SET_COLOR ID="TextDefaultColor" Value="#aaaaaa"/>
             <ButtonGroup SizeDeltaY="40" Spacing="2">
                 <FOR_EACH Items='~Views'>
                     <BIND_BOOL BoolValue="Active" ID="ButtonColor" FalseValue="^ButtonDefaultColor" TrueValue="^ButtonActiveColor"/>

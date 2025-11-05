@@ -1,10 +1,10 @@
 <Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
     <Vertical ChildControlWidth='true'>
-        <DEFINE_FLOAT ID="SliderVal" Value="0"/>
+        <SET_FLOAT ID="SliderVal" Value="0"/>
         <LERP_COLOR ID='CurrentColor' ValueID='SliderVal' StartColor="white" EndColor="red"/>
         <SettingSlider Text='Redness' FontColor="~CurrentColor" BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='100'/>
 
-        <DEFINE_BOOL ID="CheckboxVal" Value="false"/>
+        <SET_BOOL ID="CheckboxVal" Value="false"/>
         <SettingToggle Text="Normal" BoundValue="CheckboxVal" FontStyle="Underline,Bold"/>
         <SettingToggle Text="Negated" BoundValue="!CheckboxVal"/>
         
@@ -15,5 +15,10 @@
             <SettingToggle Text="Toggle Group 3" FontSize="12" ToggleGroup="~Toggles"/>
             <SettingToggle Text="Toggle Group 4" FontSize="12" ToggleGroup="~Toggles"/>
         </Vertical>
+        <SET_INT ID="a" Value="5"/>
+        <SET_INT ID="b" Value="2"/>
+        <EXPRESSION ID="ExpressionResult" Expression="a+b"/>
+        <Text Text="~ExpressionResult"/>
+        <Button ClickEvent="AddOne"/>
     </Vertical>
 </Container>
