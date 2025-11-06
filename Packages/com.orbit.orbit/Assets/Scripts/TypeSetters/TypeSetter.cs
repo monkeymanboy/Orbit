@@ -69,24 +69,24 @@ namespace Orbit.TypeSetters {
         public abstract U Parse(string value);
         
         public override XmlSchemaSimpleType GenerateSchemaType() {
-            XmlSchemaSimpleType simpleType = new XmlSchemaSimpleType();
+            XmlSchemaSimpleType simpleType = new();
 
-            XmlSchemaAnnotation annotation = new XmlSchemaAnnotation();
+            XmlSchemaAnnotation annotation = new();
             simpleType.Annotation = annotation;
 
-            XmlSchemaDocumentation schemaDoc = new XmlSchemaDocumentation();
+            XmlSchemaDocumentation schemaDoc = new();
             annotation.Items.Add(schemaDoc);
-            XmlDocument doc = new XmlDocument();
-            schemaDoc.Markup = new XmlNode[1] { doc.CreateTextNode(typeof(U).Name) };
+            XmlDocument doc = new();
+            schemaDoc.Markup = new XmlNode[] { doc.CreateTextNode(typeof(U).Name) };
 
-            XmlSchemaSimpleTypeUnion union = new XmlSchemaSimpleTypeUnion();
+            XmlSchemaSimpleTypeUnion union = new();
 
             union.MemberTypes = new XmlQualifiedName[1];
             union.MemberTypes[0] = new XmlQualifiedName("BoundType");
             foreach(string regex in Regexes) {
-                XmlSchemaSimpleType regexType = new XmlSchemaSimpleType();
-                XmlSchemaSimpleTypeRestriction regexTypeRestriction = new XmlSchemaSimpleTypeRestriction();
-                XmlSchemaPatternFacet regexPattern = new XmlSchemaPatternFacet();
+                XmlSchemaSimpleType regexType = new();
+                XmlSchemaSimpleTypeRestriction regexTypeRestriction = new();
+                XmlSchemaPatternFacet regexPattern = new();
                 regexTypeRestriction.BaseTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
                 regexPattern.Value = regex;
                 regexTypeRestriction.Facets.Add(regexPattern);

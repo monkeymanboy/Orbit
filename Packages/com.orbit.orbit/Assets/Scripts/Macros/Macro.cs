@@ -64,10 +64,10 @@ namespace Orbit.Macros {
         public abstract void Execute(XmlNode node, GameObject parent, UIRenderData renderData, T data);
 
         public override List<XmlSchemaAttribute> GenerateSchemaAttributes() {
-            List<XmlSchemaAttribute> attributes = new List<XmlSchemaAttribute>();
+            List<XmlSchemaAttribute> attributes = new();
             RequiresPropertyAttribute[] requiresAttributes = GetType().GetCustomAttributes(typeof(RequiresPropertyAttribute)).Cast<RequiresPropertyAttribute>().ToArray();
             foreach(KeyValuePair<string, TypeSetter<T>> pair in CachedSetters) {
-                XmlSchemaAttribute attribute = new XmlSchemaAttribute();
+                XmlSchemaAttribute attribute = new();
                 attribute.Name = pair.Key;
                 if(requiresAttributes.Any(x => x.Property == pair.Key)) 
                     attribute.Use = XmlSchemaUse.Required;

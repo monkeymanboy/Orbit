@@ -41,6 +41,16 @@ namespace Orbit.Parser {
 
         public List<(string,TagGenerator)> TagGenerators { get; set; } = new();
 
+
+        private Dictionary<string, TagParameters.BoundData> currentDefaultProperties;
+
+        public Dictionary<string, TagParameters.BoundData> CurrentDefaultProperties {
+            get => currentDefaultProperties ?? ParentRenderData?.CurrentDefaultProperties;
+            set {
+                currentDefaultProperties = value;
+            }
+        }
+
         public UIValue GetValueFromID(string id) {
             if(id.StartsWith(OrbitParser.PARENT_HOST_VALUE_PREFIX)) {
                 if(ParentRenderData == null)

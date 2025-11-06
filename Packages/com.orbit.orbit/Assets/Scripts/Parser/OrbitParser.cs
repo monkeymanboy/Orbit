@@ -253,26 +253,14 @@ namespace Orbit.Parser {
                 Data = reusableParameterData
             };
             parameters.Data.Clear(); //Clear out dictionary since the same one gets reused here
-            foreach(XmlAttribute attribute in node.Attributes) {
-                string propertyName = attribute.Name;
-                string value = attribute.Value;
-                switch(value[0]) {
-                    case RETRIEVE_VALUE_PREFIX:
-                        parameters.Data.Add(propertyName, new TagParameters.BoundData(renderData.GetValueFromID(value.Substring(1))));
-                        break;
-                    case RESOURCE_VALUE_PREFIX:
-                        parameters.Data.Add(propertyName, new TagParameters.BoundData(value.Substring(1), true));
-                        break;
-                    case GLOBAL_VALUE_PREFIX:
-                        if(!Globals.TryGetValue(value.Substring(1), out UIValue uiValue)) 
-                            throw new Exception($"Attempted to access '{value}' but no such global exists");
-                        parameters.Data.Add(propertyName, new TagParameters.BoundData(uiValue));
-                        break;
-                    default:
-                        parameters.Data.Add(propertyName, new TagParameters.BoundData(value));
-                        break;
-                    
+            if(renderData.CurrentDefaultProperties != null) {
+                foreach((string key, TagParameters.BoundData value) in renderData.CurrentDefaultProperties) {
+                    parameters.Data[key] = value;
+                    //TODO Could instead set it up to fallback lookup in this dictionary instead of having to add them all here
                 }
+            }
+            foreach(XmlAttribute attribute in node.Attributes) {
+                parameters.Data[attribute.Name] = TagParameters.BoundData.FromString(renderData, attribute.Value);
             }
             parameters.Node = node;
             

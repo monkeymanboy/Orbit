@@ -2199,6 +2199,2266 @@
     <xs:attributeGroup ref="ScrollRectComponent" />
     <xs:attributeGroup ref="TransformComponent" />
   </xs:complexType>
+  <xs:element name="DEFAULTS" type="DEFAULTSMacro" />
+  <xs:complexType name="DEFAULTSMacro">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="Host">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Object</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Group">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ID">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BoolValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TrueValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FalseValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FirstValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="SecondValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Items">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>IList</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RefreshEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ViewValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ViewType">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Type</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Active">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValueID">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="StartColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="EndColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Range">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValueRange">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="OnEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Value">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean, String, Int32, Single, Color, Vector2, Vector3, Vector4, OrbitFont</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Montserrat" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AllowSwitchOff">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Expression">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="IsVertical">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ClickEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ContentScale">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="VerticalFit">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>FitMode</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Unconstrained" />
+              <xs:enumeration value="MinSize" />
+              <xs:enumeration value="PreferredSize" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="HorizontalFit">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>FitMode</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Unconstrained" />
+              <xs:enumeration value="MinSize" />
+              <xs:enumeration value="PreferredSize" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="HoveredValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="HoveredEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="UnHoveredEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PointerDownEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PointerUpEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PointerDragEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RaycastTarget">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Spacing">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2, Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CellSize">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="StartAxis">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Axis</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Horizontal" />
+              <xs:enumeration value="Vertical" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="StartCorner">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Corner</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="UpperLeft" />
+              <xs:enumeration value="UpperRight" />
+              <xs:enumeration value="LowerLeft" />
+              <xs:enumeration value="LowerRight" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Constraint">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Constraint</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Flexible" />
+              <xs:enumeration value="FixedColumnCount" />
+              <xs:enumeration value="FixedRowCount" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ConstraintCount">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ChildForceExpandWidth">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ChildForceExpandHeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ChildControlWidth">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ChildControlHeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ChildScaleWidth">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ChildScaleHeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ImageColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ImageSprite">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Sprite</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ImageMaterial">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Material</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PreserveAspect">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="IgnoreLayout">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="LayoutPriority">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PreferredWidth">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PreferredHeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MinWidth">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MinHeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FlexibleWidth">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FlexibleHeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ChildAlign">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>TextAnchor</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="UpperLeft" />
+              <xs:enumeration value="UpperCenter" />
+              <xs:enumeration value="UpperRight" />
+              <xs:enumeration value="MiddleLeft" />
+              <xs:enumeration value="MiddleCenter" />
+              <xs:enumeration value="MiddleRight" />
+              <xs:enumeration value="LowerLeft" />
+              <xs:enumeration value="LowerCenter" />
+              <xs:enumeration value="LowerRight" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PadTop">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PadBottom">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PadLeft">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PadRight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PadAll">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Font">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>OrbitFont</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Montserrat" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FontWeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>FontWeight</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Thin" />
+              <xs:enumeration value="ExtraLight" />
+              <xs:enumeration value="Light" />
+              <xs:enumeration value="Regular" />
+              <xs:enumeration value="Medium" />
+              <xs:enumeration value="SemiBold" />
+              <xs:enumeration value="Bold" />
+              <xs:enumeration value="Heavy" />
+              <xs:enumeration value="Black" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="VisibleItems">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ExtraMiddleSpace">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ScrollLocked">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="OnCellCentered">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>UIFunction</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CurrentPage">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PageCount">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MaxPages">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ColorFunction">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>UIFunction</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="SelectPageFunction">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>UIFunction</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ImageTexture">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Texture</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorPreset">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>AnchorPreset</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="FillParent" />
+              <xs:enumeration value="LeftAlign" />
+              <xs:enumeration value="RightAlign" />
+              <xs:enumeration value="TopAlign" />
+              <xs:enumeration value="BottomAlign" />
+              <xs:enumeration value="TopLeftAlign" />
+              <xs:enumeration value="BottomLeftAlign" />
+              <xs:enumeration value="TopRightAlign" />
+              <xs:enumeration value="BottomRightAlign" />
+              <xs:enumeration value="Center" />
+              <xs:enumeration value="CenterLeftAlign" />
+              <xs:enumeration value="CenterRightAlign" />
+              <xs:enumeration value="CenterTopAlign" />
+              <xs:enumeration value="CenterBottomAlign" />
+              <xs:enumeration value="LeftHalf" />
+              <xs:enumeration value="RightHalf" />
+              <xs:enumeration value="TopHalf" />
+              <xs:enumeration value="BottomHalf" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorMin">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorMinX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorMinY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorMax">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorMaxX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorMaxY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorPos">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorPosX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AnchorPosY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="SizeDelta">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="SizeDeltaX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="SizeDeltaY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Pivot">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PivotX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PivotY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CellHeight">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="CellSpacing">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MovementType">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>MovementType</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Unrestricted" />
+              <xs:enumeration value="Elastic" />
+              <xs:enumeration value="Clamped" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Elasticity">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Horizontal">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Vertical">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Inertia">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DecelerationRate">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ScrollSensitivity">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Interactable">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Text">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FontSize">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="AutoFontSize">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector2</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FontColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RichText">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="FontStyle">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>FontStyles</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="((Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight),\s*)*(Normal|Bold|Italic|Underline|LowerCase|UpperCase|SmallCaps|Strikethrough|Superscript|Subscript|Highlight)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Normal" />
+              <xs:enumeration value="Bold" />
+              <xs:enumeration value="Italic" />
+              <xs:enumeration value="Underline" />
+              <xs:enumeration value="LowerCase" />
+              <xs:enumeration value="UpperCase" />
+              <xs:enumeration value="SmallCaps" />
+              <xs:enumeration value="Strikethrough" />
+              <xs:enumeration value="Superscript" />
+              <xs:enumeration value="Subscript" />
+              <xs:enumeration value="Highlight" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TextAlignment">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>TextAlignmentOptions</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="TopLeft" />
+              <xs:enumeration value="Top" />
+              <xs:enumeration value="TopRight" />
+              <xs:enumeration value="TopJustified" />
+              <xs:enumeration value="TopFlush" />
+              <xs:enumeration value="TopGeoAligned" />
+              <xs:enumeration value="Left" />
+              <xs:enumeration value="Center" />
+              <xs:enumeration value="Right" />
+              <xs:enumeration value="Justified" />
+              <xs:enumeration value="Flush" />
+              <xs:enumeration value="CenterGeoAligned" />
+              <xs:enumeration value="BottomLeft" />
+              <xs:enumeration value="Bottom" />
+              <xs:enumeration value="BottomRight" />
+              <xs:enumeration value="BottomJustified" />
+              <xs:enumeration value="BottomFlush" />
+              <xs:enumeration value="BottomGeoAligned" />
+              <xs:enumeration value="BaselineLeft" />
+              <xs:enumeration value="Baseline" />
+              <xs:enumeration value="BaselineRight" />
+              <xs:enumeration value="BaselineJustified" />
+              <xs:enumeration value="BaselineFlush" />
+              <xs:enumeration value="BaselineGeoAligned" />
+              <xs:enumeration value="MidlineLeft" />
+              <xs:enumeration value="Midline" />
+              <xs:enumeration value="MidlineRight" />
+              <xs:enumeration value="MidlineJustified" />
+              <xs:enumeration value="MidlineFlush" />
+              <xs:enumeration value="MidlineGeoAligned" />
+              <xs:enumeration value="CaplineLeft" />
+              <xs:enumeration value="Capline" />
+              <xs:enumeration value="CaplineRight" />
+              <xs:enumeration value="CaplineJustified" />
+              <xs:enumeration value="CaplineFlush" />
+              <xs:enumeration value="CaplineGeoAligned" />
+              <xs:enumeration value="Converted" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TextOverflowMode">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>TextOverflowModes</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Overflow" />
+              <xs:enumeration value="Ellipsis" />
+              <xs:enumeration value="Masking" />
+              <xs:enumeration value="Truncate" />
+              <xs:enumeration value="ScrollRect" />
+              <xs:enumeration value="Page" />
+              <xs:enumeration value="Linked" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="WordWrapping">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TextMargin">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector4</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ToggleGroup">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>ToggleGroup</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Rotation">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector3</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RotationX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RotationY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="RotationZ">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Position">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector3</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PositionX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PositionY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="PositionZ">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Scale">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Vector3</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ScaleX">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ScaleY">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ScaleZ">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="EndEditEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BoundValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValueChangedEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="NotifyValueChanged">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MaxValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="MinValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Increments">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Int32</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Formatter">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>UIFunction</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ImmediateUpdate">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
   <xs:element name="AS_HOST" type="AS_HOSTMacro" />
   <xs:complexType name="AS_HOSTMacro">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -2215,9 +4475,6 @@
   </xs:complexType>
   <xs:element name="ATTRIBUTE_TAGS" type="ATTRIBUTE_TAGSMacro" />
   <xs:complexType name="ATTRIBUTE_TAGSMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="Group">
       <xs:simpleType>
         <xs:annotation>
@@ -2235,9 +4492,6 @@
   </xs:complexType>
   <xs:element name="BIND_BOOL" type="BIND_BOOLMacro" />
   <xs:complexType name="BIND_BOOLMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2297,9 +4551,6 @@
   </xs:complexType>
   <xs:element name="COMPARE" type="COMPAREMacro" />
   <xs:complexType name="COMPAREMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2373,9 +4624,6 @@
   </xs:complexType>
   <xs:element name="INCLUDE" type="INCLUDEMacro" />
   <xs:complexType name="INCLUDEMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ViewValue" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2416,9 +4664,6 @@
   </xs:complexType>
   <xs:element name="LERP_COLOR" type="LERP_COLORMacro" />
   <xs:complexType name="LERP_COLORMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2530,9 +4775,6 @@
   </xs:complexType>
   <xs:element name="REMAP" type="REMAPMacro" />
   <xs:complexType name="REMAPMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2602,9 +4844,6 @@
   </xs:complexType>
   <xs:element name="SET_BOOL" type="SET_BOOLMacro" />
   <xs:complexType name="SET_BOOLMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2633,7 +4872,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Boolean</xs:documentation>
@@ -2651,9 +4890,6 @@
   </xs:complexType>
   <xs:element name="SET_STRING" type="SET_STRINGMacro" />
   <xs:complexType name="SET_STRINGMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2682,7 +4918,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>String</xs:documentation>
@@ -2699,9 +4935,6 @@
   </xs:complexType>
   <xs:element name="SET_INT" type="SET_INTMacro" />
   <xs:complexType name="SET_INTMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2730,7 +4963,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Int32</xs:documentation>
@@ -2747,9 +4980,6 @@
   </xs:complexType>
   <xs:element name="SET_FLOAT" type="SET_FLOATMacro" />
   <xs:complexType name="SET_FLOATMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2778,7 +5008,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Single</xs:documentation>
@@ -2795,9 +5025,6 @@
   </xs:complexType>
   <xs:element name="SET_COLOR" type="SET_COLORMacro" />
   <xs:complexType name="SET_COLORMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2826,7 +5053,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Color</xs:documentation>
@@ -2869,9 +5096,6 @@
   </xs:complexType>
   <xs:element name="SET_VECTOR2" type="SET_VECTOR2Macro" />
   <xs:complexType name="SET_VECTOR2Macro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2900,7 +5124,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Vector2</xs:documentation>
@@ -2922,9 +5146,6 @@
   </xs:complexType>
   <xs:element name="SET_VECTOR3" type="SET_VECTOR3Macro" />
   <xs:complexType name="SET_VECTOR3Macro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -2953,7 +5174,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Vector3</xs:documentation>
@@ -2975,9 +5196,6 @@
   </xs:complexType>
   <xs:element name="SET_VECTOR4" type="SET_VECTOR4Macro" />
   <xs:complexType name="SET_VECTOR4Macro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -3006,7 +5224,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Vector4</xs:documentation>
@@ -3028,9 +5246,6 @@
   </xs:complexType>
   <xs:element name="SET_FONT" type="SET_FONTMacro" />
   <xs:complexType name="SET_FONTMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -3059,7 +5274,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="Value" use="required">
+    <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>OrbitFont</xs:documentation>
@@ -3076,9 +5291,6 @@
   </xs:complexType>
   <xs:element name="TOGGLE_GROUP" type="TOGGLE_GROUPMacro" />
   <xs:complexType name="TOGGLE_GROUPMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -3111,9 +5323,6 @@
   </xs:complexType>
   <xs:element name="EXPRESSION" type="EXPRESSIONMacro" />
   <xs:complexType name="EXPRESSIONMacro">
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any minOccurs="0" />
-    </xs:sequence>
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
