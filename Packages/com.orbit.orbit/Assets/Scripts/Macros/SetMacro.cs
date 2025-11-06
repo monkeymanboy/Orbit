@@ -63,7 +63,6 @@ namespace Orbit.Macros {
     }
 
     [RequiresProperty("ID")]
-    [RequiresProperty("Value")]
     public abstract class SetMacro<T> : Macro<SetMacro<T>.SetMacroData> {
         public struct SetMacroData {
             public string ID;
