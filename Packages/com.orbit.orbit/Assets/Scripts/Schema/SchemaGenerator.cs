@@ -87,7 +87,7 @@ namespace Orbit.Schema {
                 XmlSchemaSequence sequence = new() { MinOccurs = 0, MaxOccursString = "unbounded" };
                 XmlSchemaAny any = new() { MinOccurs = 0 };
                 sequence.Items.Add(any);
-                complexType.Particle = sequence;
+                complexType.Particle = pair.Value.CanHaveChildren ? sequence : null;
                 
                 foreach(XmlSchemaAttribute attribute in pair.Value.GenerateSchemaAttributes()) {
                     complexType.Attributes.Add(attribute);

@@ -17,6 +17,7 @@ namespace Orbit.Macros {
             public string RefreshEvent;
         }
         public override string Tag => "FOR_EACH";
+        public override bool CanHaveChildren => true;
 
         public override Dictionary<string, TypeSetter<ForEachMacroData>> Setters => new() {
             {"Items", new ObjectSetter<ForEachMacroData, IList>((ref ForEachMacroData data, IList value) => data.Items = value) },

@@ -15,6 +15,7 @@ namespace Orbit.Macros {
             public UIValue HostValue;
         }
         public override string Tag => "AS_HOST";
+        public override bool CanHaveChildren => true;
 
         public override Dictionary<string, TypeSetter<AsHostMacroData>> Setters => new() {
             {"Host", new ObjectSetter<AsHostMacroData, object>((ref AsHostMacroData data, object value) => data.Host = value) },

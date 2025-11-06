@@ -13,6 +13,7 @@ namespace Orbit.Macros {
     public abstract class Macro {
         public abstract string Tag { get; }
         public OrbitParser Parser { get; set; }
+        public virtual bool CanHaveChildren => false;
 
         public abstract void Execute(GameObject parent, TagParameters parameters);
 
