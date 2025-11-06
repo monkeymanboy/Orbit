@@ -12,11 +12,21 @@ public class DefaultsMacro : Macro {
     
     public override void Execute(GameObject parent, TagParameters parameters) {
         Dictionary<string, TagParameters.BoundData> originalDefaults = parameters.RenderData.CurrentDefaultProperties;
-        Dictionary<string, TagParameters.BoundData> newDefaults = originalDefaults == null ? new() : new(originalDefaults);
-        // Due to how this is currently set up the type is unknown by the macro and it parsed for every occurence of it, though it will at least not be parsed it the tag does not use that attribute
-        foreach(XmlAttribute attribute in parameters.Node.Attributes) {
-            newDefaults[attribute.Name] = TagParameters.BoundData.FromString(parameters.RenderData, attribute.Value);
+        Dictionary<string, TagParameters.BoundData> newDefaults;
+        if(parameters.DefaultData == null) {
+            newDefaults = new(parameters.Data);
+        } else {
+            newDefaults = new(parameters.DefaultData);
+            foreach((string key, TagParameters.BoundData boundData) in parameters.Data) {
+                newDefaults[key] = boundData;
+            }
         }
+        if(newDefaults.TryGetValue("ID", out TagParameters.BoundData boundID) && newDefaults.Remove("ID")) {
+            parameters.RenderData.SetValue(boundID.data, newDefaults);
+        }
+        // Due to how this is currently set up the type is unknown by the macro and is parsed for every occurence of it, though it will at least not be parsed if the tag does not use that attribute
+        
+        
         parameters.RenderData.CurrentDefaultProperties = newDefaults;
         foreach (XmlNode childNode in parameters.Node.ChildNodes) {
             Parser.RenderNode(childNode, parent, parameters.RenderData);

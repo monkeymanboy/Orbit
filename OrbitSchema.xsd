@@ -7,6 +7,13 @@
       <xs:pattern value="([$].*)" />
     </xs:restriction>
   </xs:simpleType>
+  <xs:attributeGroup name="Defaults">
+    <xs:attribute name="Defaults">
+      <xs:simpleType>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:attributeGroup name="GraphicComponent">
     <xs:attribute name="RaycastTarget">
       <xs:simpleType>
@@ -706,6 +713,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="ImageComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -1132,6 +1140,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ButtonComponent" />
     <xs:attributeGroup ref="EventTriggerComponent" />
     <xs:attributeGroup ref="GraphicComponent" />
@@ -1415,6 +1424,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ButtonLayoutGroupComponent" />
     <xs:attributeGroup ref="ContentSizeFitterComponent" />
     <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
@@ -1429,6 +1439,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ButtonComponent" />
     <xs:attributeGroup ref="EventTriggerComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -1442,6 +1453,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ContentSizeFitterComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
@@ -1570,6 +1582,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ContentSizeFitterComponent" />
     <xs:attributeGroup ref="GridLayoutGroupComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -1583,6 +1596,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ContentSizeFitterComponent" />
     <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -1596,6 +1610,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="ImageComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -1669,6 +1684,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="ImageComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -1847,6 +1863,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
@@ -1909,6 +1926,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
@@ -1921,6 +1939,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
     <xs:attributeGroup ref="RectTransformComponent" />
     <xs:attributeGroup ref="TransformComponent" />
@@ -1940,6 +1959,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
@@ -1956,6 +1976,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
@@ -2039,6 +2060,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
     <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
@@ -2063,6 +2085,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
@@ -2079,6 +2102,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
@@ -2092,6 +2116,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ContentSizeFitterComponent" />
     <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -2165,6 +2190,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ContentSizeFitterComponent" />
     <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
     <xs:attributeGroup ref="LayoutGroupComponent" />
@@ -2178,6 +2204,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="GraphicComponent" />
     <xs:attributeGroup ref="ImageComponent" />
     <xs:attributeGroup ref="MarkupPrefabComponent" />
@@ -2190,6 +2217,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attributeGroup ref="ContentSizeFitterComponent" />
     <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
     <xs:attributeGroup ref="LayoutElementComponent" />
@@ -2204,6 +2232,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="Host">
       <xs:simpleType>
         <xs:annotation>
@@ -4464,6 +4493,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="Host" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4475,6 +4505,7 @@
   </xs:complexType>
   <xs:element name="ATTRIBUTE_TAGS" type="ATTRIBUTE_TAGSMacro" />
   <xs:complexType name="ATTRIBUTE_TAGSMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="Group">
       <xs:simpleType>
         <xs:annotation>
@@ -4492,6 +4523,7 @@
   </xs:complexType>
   <xs:element name="BIND_BOOL" type="BIND_BOOLMacro" />
   <xs:complexType name="BIND_BOOLMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4551,6 +4583,7 @@
   </xs:complexType>
   <xs:element name="COMPARE" type="COMPAREMacro" />
   <xs:complexType name="COMPAREMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4599,6 +4632,7 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="Items" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4624,6 +4658,7 @@
   </xs:complexType>
   <xs:element name="INCLUDE" type="INCLUDEMacro" />
   <xs:complexType name="INCLUDEMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ViewValue" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4664,6 +4699,7 @@
   </xs:complexType>
   <xs:element name="LERP_COLOR" type="LERP_COLORMacro" />
   <xs:complexType name="LERP_COLORMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4775,6 +4811,7 @@
   </xs:complexType>
   <xs:element name="REMAP" type="REMAPMacro" />
   <xs:complexType name="REMAPMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4844,6 +4881,7 @@
   </xs:complexType>
   <xs:element name="SET_BOOL" type="SET_BOOLMacro" />
   <xs:complexType name="SET_BOOLMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4890,6 +4928,7 @@
   </xs:complexType>
   <xs:element name="SET_STRING" type="SET_STRINGMacro" />
   <xs:complexType name="SET_STRINGMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4935,6 +4974,7 @@
   </xs:complexType>
   <xs:element name="SET_INT" type="SET_INTMacro" />
   <xs:complexType name="SET_INTMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -4980,6 +5020,7 @@
   </xs:complexType>
   <xs:element name="SET_FLOAT" type="SET_FLOATMacro" />
   <xs:complexType name="SET_FLOATMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -5025,6 +5066,7 @@
   </xs:complexType>
   <xs:element name="SET_COLOR" type="SET_COLORMacro" />
   <xs:complexType name="SET_COLORMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -5096,6 +5138,7 @@
   </xs:complexType>
   <xs:element name="SET_VECTOR2" type="SET_VECTOR2Macro" />
   <xs:complexType name="SET_VECTOR2Macro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -5146,6 +5189,7 @@
   </xs:complexType>
   <xs:element name="SET_VECTOR3" type="SET_VECTOR3Macro" />
   <xs:complexType name="SET_VECTOR3Macro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -5196,6 +5240,7 @@
   </xs:complexType>
   <xs:element name="SET_VECTOR4" type="SET_VECTOR4Macro" />
   <xs:complexType name="SET_VECTOR4Macro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -5246,6 +5291,7 @@
   </xs:complexType>
   <xs:element name="SET_FONT" type="SET_FONTMacro" />
   <xs:complexType name="SET_FONTMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -5291,6 +5337,7 @@
   </xs:complexType>
   <xs:element name="TOGGLE_GROUP" type="TOGGLE_GROUPMacro" />
   <xs:complexType name="TOGGLE_GROUPMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>
@@ -5323,6 +5370,7 @@
   </xs:complexType>
   <xs:element name="EXPRESSION" type="EXPRESSIONMacro" />
   <xs:complexType name="EXPRESSIONMacro">
+    <xs:attributeGroup ref="Defaults" />
     <xs:attribute name="ID" use="required">
       <xs:simpleType>
         <xs:annotation>

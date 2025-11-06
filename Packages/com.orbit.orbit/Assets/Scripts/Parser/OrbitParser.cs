@@ -24,6 +24,8 @@ namespace Orbit.Parser {
         internal const char RESOURCE_VALUE_PREFIX = '@';
         internal const char GLOBAL_VALUE_PREFIX = '$';
 
+        internal const string DEFAULTS_PROPERTY = "Defaults";
+
         internal const BindingFlags HOST_FLAGS =
             BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
@@ -252,14 +254,16 @@ namespace Orbit.Parser {
                 Node = node,
                 Data = reusableParameterData
             };
+            parameters.DefaultData = renderData.CurrentDefaultProperties;
             parameters.Data.Clear(); //Clear out dictionary since the same one gets reused here
-            if(renderData.CurrentDefaultProperties != null) {
-                foreach((string key, TagParameters.BoundData value) in renderData.CurrentDefaultProperties) {
-                    parameters.Data[key] = value;
-                    //TODO Could instead set it up to fallback lookup in this dictionary instead of having to add them all here
-                }
-            }
             foreach(XmlAttribute attribute in node.Attributes) {
+                if(attribute.Name == DEFAULTS_PROPERTY) {
+                    TagParameters.BoundData boundDefaults = TagParameters.BoundData.FromString(renderData, attribute.Value);
+                    if(boundDefaults.boundValue == null)
+                        throw new Exception($"Expected bound value for '{DEFAULTS_PROPERTY}'");
+                    parameters.DefaultData = boundDefaults.boundValue.GetValue<Dictionary<string, TagParameters.BoundData>>();
+                    continue;
+                }
                 parameters.Data[attribute.Name] = TagParameters.BoundData.FromString(renderData, attribute.Value);
             }
             parameters.Node = node;

@@ -34,6 +34,23 @@ namespace Orbit.Schema {
             valueBoundType.Name = "BoundType";
             schema.Items.Add(valueBoundType);
 
+
+            const string defaultsAttributeRef = "Defaults";
+            XmlSchemaAttributeGroup defaultsGroup = new() {
+                Name = defaultsAttributeRef,
+                Attributes = {
+                    new XmlSchemaAttribute {
+                        Name = "Defaults",
+                        SchemaType = new() {
+                            Content = new XmlSchemaSimpleTypeUnion {
+                                MemberTypes = new XmlQualifiedName[] { new("BoundType") }
+                            }
+                        }
+                    }
+                }
+            };
+            schema.Items.Add(defaultsGroup);
+
             List<string> addedTags = new();
             List<string> addedAttributeGroups = new();
             #region Prefab Tags
@@ -48,6 +65,7 @@ namespace Orbit.Schema {
                 XmlSchemaAny any = new() { MinOccurs = 0 };
                 sequence.Items.Add(any);
                 complexType.Particle = sequence;
+                complexType.Attributes.Add(new XmlSchemaAttributeGroupRef() { RefName = new XmlQualifiedName(defaultsAttributeRef) });
                 
                 GameObject nodeGO = resource as GameObject;
                 MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
@@ -88,6 +106,7 @@ namespace Orbit.Schema {
                 XmlSchemaAny any = new() { MinOccurs = 0 };
                 sequence.Items.Add(any);
                 complexType.Particle = pair.Value.CanHaveChildren ? sequence : null;
+                complexType.Attributes.Add(new XmlSchemaAttributeGroupRef() { RefName = new XmlQualifiedName(defaultsAttributeRef) });
                 
                 foreach(XmlSchemaAttribute attribute in pair.Value.GenerateSchemaAttributes()) {
                     complexType.Attributes.Add(attribute);

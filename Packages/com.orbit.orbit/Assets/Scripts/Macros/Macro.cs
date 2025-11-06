@@ -43,23 +43,32 @@ namespace Orbit.Macros {
 
         public override void Execute(GameObject parent, TagParameters parameters) {
             T data = default;
-            foreach(KeyValuePair<string, TagParameters.BoundData> pair in parameters.Data) {
-                UIValue uiValue = pair.Value.boundValue;
-                if(CachedValueSetters != null && CachedValueSetters.TryGetValue(pair.Key, out TypeSetter<T, UIValue> valueTypeSetter) && uiValue != null) {
-                    valueTypeSetter.Set<UIValue>(ref data, uiValue);
-                }
-                if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
-                    if(uiValue != null) {
-                        typeSetter.Set(ref data, uiValue);
-                        continue;
-                    }
-                    if(pair.Value.isDataResourcePath)
-                        typeSetter.SetFromResource(ref data, pair.Value.data);
-                    else 
-                        typeSetter.SetFromString(ref data, pair.Value.data);
+            if(parameters.DefaultData != null) {
+                foreach(KeyValuePair<string, TagParameters.BoundData> pair in parameters.DefaultData) {
+                    if(parameters.Data.TryGetValue(pair.Key, out _)) continue;
+                    BindValue(ref data, pair.Key, pair.Value);
                 }
             }
+            foreach(KeyValuePair<string, TagParameters.BoundData> pair in parameters.Data) {
+                BindValue(ref data, pair.Key, pair.Value);
+            }
             Execute(parameters.Node, parent, parameters.RenderData, data);
+        }
+        private void BindValue(ref T data, string key, TagParameters.BoundData boundData) {
+            UIValue uiValue = boundData.boundValue;
+            if(CachedValueSetters != null && CachedValueSetters.TryGetValue(key, out TypeSetter<T, UIValue> valueTypeSetter) && uiValue != null) {
+                valueTypeSetter.Set<UIValue>(ref data, uiValue);
+            }
+            if(!CachedSetters.TryGetValue(key, out TypeSetter<T> typeSetter))
+                return;
+            if(uiValue != null) {
+                typeSetter.Set(ref data, uiValue);
+                return;
+            }
+            if(boundData.isDataResourcePath)
+                typeSetter.SetFromResource(ref data, boundData.data);
+            else 
+                typeSetter.SetFromString(ref data, boundData.data);
         }
         public abstract void Execute(XmlNode node, GameObject parent, UIRenderData renderData, T data);
 

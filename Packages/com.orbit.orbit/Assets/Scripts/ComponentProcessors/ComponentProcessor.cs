@@ -1,15 +1,12 @@
-﻿using Orbit.TypeSetters;
-using Orbit.Parser;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Xml;
 using System.Xml.Schema;
-using Orbit.Components;
+using UnityEngine;
 
 namespace Orbit.ComponentProcessors {
     using Components;
     using Parser;
-    using System.Xml;
     using TypeSetters;
 
     public abstract class ComponentProcessor {
@@ -38,34 +35,45 @@ namespace Orbit.ComponentProcessors {
                 return;
             CurrentData = processorParams.RenderData;
             SetNode(component, processorParams.Node);
-            foreach(KeyValuePair<string, TagParameters.BoundData> pair in processorParams.Data) {
-                if(CachedSetters.TryGetValue(pair.Key, out TypeSetter<T> typeSetter)) {
-                    UIValue uiValue = pair.Value.boundValue;
-                    if(uiValue != null) {
-                        ValueChangeSetter valueChangeSetter = genericComponent.gameObject.GetComponent<ValueChangeSetter>();
-                        if(valueChangeSetter == null)
-                            valueChangeSetter = genericComponent.gameObject.AddComponent<ValueChangeSetter>();
-                        Action setValue = () => {
-                            if(valueChangeSetter == null) { //If the object gets destroyed while disabled OnDestroy is not called so we check for that here
-                                valueChangeSetter.NotifyDestroyed();
-                                return;
-                            }
-                            if(uiValue.HasValue) typeSetter.Set(component, uiValue);
-                        };
-                        uiValue.OnChange += setValue;
-                        valueChangeSetter.OnObjectDestroyed += () => {
-                            uiValue.OnChange -= setValue;
-                        };
-                        setValue();
-                        continue;
-                    }
-                    if(pair.Value.isDataResourcePath)
-                        typeSetter.SetFromResource(component, pair.Value.data);
-                    else 
-                        typeSetter.SetFromString(component, pair.Value.data);
+            if(processorParams.DefaultData != null) {
+                foreach(KeyValuePair<string, TagParameters.BoundData> pair in processorParams.DefaultData) {
+                    if(processorParams.Data.TryGetValue(pair.Key, out _)) continue;
+                    BindValue(component, pair.Key, pair.Value);
                 }
             }
+            foreach(KeyValuePair<string, TagParameters.BoundData> pair in processorParams.Data) {
+                BindValue(component, pair.Key, pair.Value);
+            }
         }
+
+        private void BindValue(T component, string key, TagParameters.BoundData boundData) {
+            if(!CachedSetters.TryGetValue(key, out TypeSetter<T> typeSetter))
+                return;
+            UIValue uiValue = boundData.boundValue;
+            if(uiValue != null) {
+                ValueChangeSetter valueChangeSetter = component.gameObject.GetComponent<ValueChangeSetter>();
+                if(valueChangeSetter == null)
+                    valueChangeSetter = component.gameObject.AddComponent<ValueChangeSetter>();
+                Action setValue = () => {
+                    if(valueChangeSetter == null) { //If the object gets destroyed while disabled OnDestroy is not called so we check for that here
+                        valueChangeSetter.NotifyDestroyed();
+                        return;
+                    }
+                    if(uiValue.HasValue) typeSetter.Set(component, uiValue);
+                };
+                uiValue.OnChange += setValue;
+                valueChangeSetter.OnObjectDestroyed += () => {
+                    uiValue.OnChange -= setValue;
+                };
+                setValue();
+                return;
+            }
+            if(boundData.isDataResourcePath)
+                typeSetter.SetFromResource(component, boundData.data);
+            else 
+                typeSetter.SetFromString(component, boundData.data);
+        }
+        
         public virtual void SetNode(T data, XmlNode node) { }
         
         public override List<XmlSchemaAttribute> GenerateSchemaAttributes() {
