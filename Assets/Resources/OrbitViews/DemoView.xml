@@ -11,7 +11,7 @@
                 <FOR_EACH Items='~Views'>
                     <BIND_BOOL BoolValue="Active" ID="ButtonColor" FalseValue="^ButtonDefaultColor" TrueValue="^ButtonActiveColor"/>
                     <BIND_BOOL BoolValue="Active" ID="TextColor" FalseValue="^TextDefaultColor" TrueValue="^TextActiveColor"/>
-                    <Button Text='~Name' ClickEvent='SelectView' FontColor="~TextColor" ImageColor="~ButtonColor" FontWeight="Light" AutoFontSize="18,36"/>
+                    <Button Text='~Name' ClickEvent='SelectView' FontColor="~TextColor" ImageColor="~ButtonColor" FontWeight="Light" AutoFontSize="12,36" TextMargin="10"/>
                 </FOR_EACH>
             </ButtonGroup>
         </VerticalScrollView>

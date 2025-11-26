@@ -14,7 +14,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="GraphicComponent">
+  <xs:attributeGroup name="GraphicProcessor">
     <xs:attribute name="RaycastTarget">
       <xs:simpleType>
         <xs:annotation>
@@ -31,7 +31,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="ImageComponent">
+  <xs:attributeGroup name="ImageProcessor">
     <xs:attribute name="ImageColor">
       <xs:simpleType>
         <xs:annotation>
@@ -104,7 +104,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="LayoutElementComponent">
+  <xs:attributeGroup name="LayoutElementProcessor">
     <xs:attribute name="IgnoreLayout">
       <xs:simpleType>
         <xs:annotation>
@@ -219,7 +219,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="MarkupPrefabComponent">
+  <xs:attributeGroup name="MarkupPrefabProcessor">
     <xs:attribute name="ID">
       <xs:simpleType>
         <xs:annotation>
@@ -235,7 +235,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="RectTransformComponent">
+  <xs:attributeGroup name="RectTransformProcessor">
     <xs:attribute name="AnchorPreset">
       <xs:simpleType>
         <xs:annotation>
@@ -508,7 +508,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="TransformComponent">
+  <xs:attributeGroup name="TransformProcessor">
     <xs:attribute name="Rotation">
       <xs:simpleType>
         <xs:annotation>
@@ -708,20 +708,37 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
+  <xs:attributeGroup name="SmartImageProcessor">
+    <xs:attribute name="Source">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:element name="Background" type="BackgroundTag" />
   <xs:complexType name="BackgroundTag">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="ImageComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="ImageProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SmartImageProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="ButtonComponent">
+  <xs:attributeGroup name="ButtonProcessor">
     <xs:attribute name="ClickEvent">
       <xs:simpleType>
         <xs:annotation>
@@ -737,7 +754,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="EventTriggerComponent">
+  <xs:attributeGroup name="EventTriggerProcessor">
     <xs:attribute name="HoveredValue">
       <xs:simpleType>
         <xs:annotation>
@@ -823,7 +840,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="OrbitFontUpdaterComponent">
+  <xs:attributeGroup name="OrbitFontUpdaterProcessor">
     <xs:attribute name="Font">
       <xs:simpleType>
         <xs:annotation>
@@ -866,7 +883,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="SelectableComponent">
+  <xs:attributeGroup name="SelectableProcessor">
     <xs:attribute name="Interactable">
       <xs:simpleType>
         <xs:annotation>
@@ -883,7 +900,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="TMP_TextComponent">
+  <xs:attributeGroup name="TMP_TextProcessor">
     <xs:attribute name="Text">
       <xs:simpleType>
         <xs:annotation>
@@ -1141,19 +1158,20 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ButtonComponent" />
-    <xs:attributeGroup ref="EventTriggerComponent" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="ImageComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="SelectableComponent" />
-    <xs:attributeGroup ref="TMP_TextComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ButtonProcessor" />
+    <xs:attributeGroup ref="EventTriggerProcessor" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="ImageProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TMP_TextProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SmartImageProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="ButtonLayoutGroupComponent">
+  <xs:attributeGroup name="ButtonLayoutGroupProcessor">
     <xs:attribute name="IsVertical">
       <xs:simpleType>
         <xs:annotation>
@@ -1170,7 +1188,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="ContentSizeFitterComponent">
+  <xs:attributeGroup name="ContentSizeFitterProcessor">
     <xs:attribute name="VerticalFit">
       <xs:simpleType>
         <xs:annotation>
@@ -1214,7 +1232,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="HorizontalOrVerticalLayoutGroupComponent">
+  <xs:attributeGroup name="HorizontalOrVerticalLayoutGroupProcessor">
     <xs:attribute name="Spacing">
       <xs:simpleType>
         <xs:annotation>
@@ -1320,7 +1338,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="LayoutGroupComponent">
+  <xs:attributeGroup name="LayoutGroupProcessor">
     <xs:attribute name="ChildAlign">
       <xs:simpleType>
         <xs:annotation>
@@ -1425,14 +1443,14 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ButtonLayoutGroupComponent" />
-    <xs:attributeGroup ref="ContentSizeFitterComponent" />
-    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="LayoutGroupComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ButtonLayoutGroupProcessor" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="Clickable" type="ClickableTag" />
   <xs:complexType name="ClickableTag">
@@ -1440,13 +1458,13 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ButtonComponent" />
-    <xs:attributeGroup ref="EventTriggerComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="SelectableComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ButtonProcessor" />
+    <xs:attributeGroup ref="EventTriggerProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="Container" type="ContainerTag" />
   <xs:complexType name="ContainerTag">
@@ -1454,13 +1472,13 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ContentSizeFitterComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="GridLayoutGroupComponent">
+  <xs:attributeGroup name="GridLayoutGroupProcessor">
     <xs:attribute name="Spacing">
       <xs:simpleType>
         <xs:annotation>
@@ -1583,13 +1601,13 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ContentSizeFitterComponent" />
-    <xs:attributeGroup ref="GridLayoutGroupComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="LayoutGroupComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="GridLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="Horizontal" type="HorizontalTag" />
   <xs:complexType name="HorizontalTag">
@@ -1597,13 +1615,13 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ContentSizeFitterComponent" />
-    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="LayoutGroupComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="Image" type="ImageTag" />
   <xs:complexType name="ImageTag">
@@ -1611,14 +1629,15 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="ImageComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="ImageProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SmartImageProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="InputSettingComponent">
+  <xs:attributeGroup name="InputSettingProcessor">
     <xs:attribute name="EndEditEvent">
       <xs:simpleType>
         <xs:annotation>
@@ -1634,7 +1653,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="SettingComponentComponent">
+  <xs:attributeGroup name="SettingComponentProcessor">
     <xs:attribute name="BoundValue">
       <xs:simpleType>
         <xs:annotation>
@@ -1685,18 +1704,19 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="ImageComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="SelectableComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
-    <xs:attributeGroup ref="InputSettingComponent" />
-    <xs:attributeGroup ref="SettingComponentComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="ImageProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="InputSettingProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
+    <xs:attributeGroup ref="SmartImageProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="ScrollingListComponent">
+  <xs:attributeGroup name="ScrollingListProcessor">
     <xs:attribute name="CellHeight">
       <xs:simpleType>
         <xs:annotation>
@@ -1748,7 +1768,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="ScrollRectComponent">
+  <xs:attributeGroup name="ScrollRectProcessor">
     <xs:attribute name="MovementType">
       <xs:simpleType>
         <xs:annotation>
@@ -1864,14 +1884,14 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="ScrollingListComponent" />
-    <xs:attributeGroup ref="ScrollRectComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="ScrollingListProcessor" />
+    <xs:attributeGroup ref="ScrollRectProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="RawImageComponent">
+  <xs:attributeGroup name="RawImageProcessor">
     <xs:attribute name="ImageColor">
       <xs:simpleType>
         <xs:annotation>
@@ -1927,12 +1947,12 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RawImageComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RawImageProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="RectMask" type="RectMaskTag" />
   <xs:complexType name="RectMaskTag">
@@ -1940,11 +1960,11 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="DropdownSettingComponent">
+  <xs:attributeGroup name="DropdownSettingProcessor">
     <xs:attribute name="Items">
       <xs:simpleType>
         <xs:annotation>
@@ -1960,16 +1980,16 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="SelectableComponent" />
-    <xs:attributeGroup ref="TMP_TextComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
-    <xs:attributeGroup ref="DropdownSettingComponent" />
-    <xs:attributeGroup ref="SettingComponentComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TMP_TextProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="DropdownSettingProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
   </xs:complexType>
   <xs:element name="SettingInputField" type="SettingInputFieldTag" />
   <xs:complexType name="SettingInputFieldTag">
@@ -1977,18 +1997,18 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="SelectableComponent" />
-    <xs:attributeGroup ref="TMP_TextComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
-    <xs:attributeGroup ref="InputSettingComponent" />
-    <xs:attributeGroup ref="SettingComponentComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TMP_TextProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="InputSettingProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="SliderSettingComponent">
+  <xs:attributeGroup name="SliderSettingProcessor">
     <xs:attribute name="MaxValue">
       <xs:simpleType>
         <xs:annotation>
@@ -2061,16 +2081,16 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TMP_TextComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
-    <xs:attributeGroup ref="SettingComponentComponent" />
-    <xs:attributeGroup ref="SliderSettingComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TMP_TextProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
+    <xs:attributeGroup ref="SliderSettingProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="ToggleComponent">
+  <xs:attributeGroup name="ToggleProcessor">
     <xs:attribute name="ToggleGroup">
       <xs:simpleType>
         <xs:annotation>
@@ -2086,16 +2106,16 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="SelectableComponent" />
-    <xs:attributeGroup ref="TMP_TextComponent" />
-    <xs:attributeGroup ref="ToggleComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
-    <xs:attributeGroup ref="SettingComponentComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TMP_TextProcessor" />
+    <xs:attributeGroup ref="ToggleProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
   </xs:complexType>
   <xs:element name="Text" type="TextTag" />
   <xs:complexType name="TextTag">
@@ -2103,13 +2123,13 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="OrbitFontUpdaterComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TMP_TextComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TMP_TextProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="Vertical" type="VerticalTag" />
   <xs:complexType name="VerticalTag">
@@ -2117,15 +2137,15 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ContentSizeFitterComponent" />
-    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="LayoutGroupComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="PageIndicatorComponent">
+  <xs:attributeGroup name="PageIndicatorProcessor">
     <xs:attribute name="CurrentPage">
       <xs:simpleType>
         <xs:annotation>
@@ -2191,13 +2211,13 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ContentSizeFitterComponent" />
-    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
-    <xs:attributeGroup ref="LayoutGroupComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="PageIndicatorComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="PageIndicatorProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="VerticalScrollbar" type="VerticalScrollbarTag" />
   <xs:complexType name="VerticalScrollbarTag">
@@ -2205,12 +2225,13 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="GraphicComponent" />
-    <xs:attributeGroup ref="ImageComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="SelectableComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="ImageProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SmartImageProcessor" />
   </xs:complexType>
   <xs:element name="VerticalScrollView" type="VerticalScrollViewTag" />
   <xs:complexType name="VerticalScrollViewTag">
@@ -2218,14 +2239,14 @@
       <xs:any minOccurs="0" />
     </xs:sequence>
     <xs:attributeGroup ref="Defaults" />
-    <xs:attributeGroup ref="ContentSizeFitterComponent" />
-    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupComponent" />
-    <xs:attributeGroup ref="LayoutElementComponent" />
-    <xs:attributeGroup ref="LayoutGroupComponent" />
-    <xs:attributeGroup ref="MarkupPrefabComponent" />
-    <xs:attributeGroup ref="RectTransformComponent" />
-    <xs:attributeGroup ref="ScrollRectComponent" />
-    <xs:attributeGroup ref="TransformComponent" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="MarkupPrefabProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="ScrollRectProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="DEFAULTS" type="DEFAULTSMacro" />
   <xs:complexType name="DEFAULTSMacro">
@@ -4482,6 +4503,20 @@
             <xs:restriction base="xs:string">
               <xs:enumeration value="true" />
               <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Source">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>

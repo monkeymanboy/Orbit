@@ -1,0 +1,15 @@
+{
+  "name": "com.orbit.orbit-smartimage",
+  "version": "0.0.1",
+  "displayName": "Orbit-SmartImage",
+  "description": "Adds a component processor for SmartImage",
+  "unity": "2021.3",
+  "unityRelease": "8f1",
+  "dependencies": {
+ },
+ "keywords": [
+    "XML",
+    "UI",
+    "Markup"
+  ]
+}

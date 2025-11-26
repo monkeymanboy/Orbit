@@ -1,0 +1,11 @@
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
+    <Vertical ChildControlWidth='true'>
+        <SET_INT ID="a" Value="5"/>
+        <SET_INT ID="b" Value="2"/>
+        <EXPRESSION ID="ExpressionResult" Expression="a+b"/>
+        <Text Text="~ExpressionResult"/>
+        <EXPRESSION ID="ExpressionResult2" Expression="a*b"/>
+        <Text Text="~ExpressionResult2"/>
+        <Button Text="Increment A" ClickEvent="AddOne"/>
+    </Vertical>
+</Container>

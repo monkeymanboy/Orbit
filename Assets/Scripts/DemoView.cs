@@ -18,7 +18,9 @@ public class DemoView : OrbitView {
         new ViewData<ListTestView>("List"),
         new ViewData<DynamicListTestView>("Dynamic List"),
         new ViewData<AttributeTagsView>("Attributes"),
-        new ViewData<LocalizationView>("Localization")
+        new ViewData<LocalizationView>("Localization"),
+        new ViewData<ExpressionsView>("Expressions"),
+        new ViewData<SmartImageView>("SmartImage"),
     };
 
     private IViewData currentView;

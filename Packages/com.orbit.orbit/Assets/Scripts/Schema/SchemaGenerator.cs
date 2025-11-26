@@ -76,7 +76,7 @@ namespace Orbit.Schema {
                     }
                     Component component = markupPrefab.FindComponent(processor.ComponentType);
                     if(component != null) {
-                        string attributeGroupName = $"{processor.ComponentType.Name}Component";
+                        string attributeGroupName = processor.GetType().Name;
                         if(!addedAttributeGroups.Contains(attributeGroupName)) {
                             XmlSchemaAttributeGroup group = new() { Name = attributeGroupName };
                             foreach(XmlSchemaAttribute attribute in processor.GenerateSchemaAttributes()) {

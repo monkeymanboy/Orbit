@@ -15,10 +15,5 @@
             <SettingToggle Text="Toggle Group 3" FontSize="12" ToggleGroup="~Toggles"/>
             <SettingToggle Text="Toggle Group 4" FontSize="12" ToggleGroup="~Toggles"/>
         </Vertical>
-        <SET_INT ID="a" Value="5"/>
-        <SET_INT ID="b" Value="2"/>
-        <EXPRESSION ID="ExpressionResult" Expression="a+b"/>
-        <Text Text="~ExpressionResult"/>
-        <Button ClickEvent="AddOne"/>
     </Vertical>
 </Container>
