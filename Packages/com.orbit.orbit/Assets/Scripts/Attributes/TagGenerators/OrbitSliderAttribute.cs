@@ -33,7 +33,7 @@ namespace Orbit.Attributes.TagGenerators {
         }
         
         public override XmlNode GenerateTag(XmlDocument doc, string propertyId) {
-            XmlNode node = doc.CreateNode("element", "SettingSlider", null);
+            XmlNode node = doc.CreateNode("element", Tag ?? "SettingSlider", null);
             node.AddAttribute("Text", Text ?? propertyId);
             node.AddAttribute("BoundValue", propertyId);
             if(ValueChangedEvent != null)

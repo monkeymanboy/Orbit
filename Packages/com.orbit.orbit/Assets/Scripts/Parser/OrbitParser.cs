@@ -180,7 +180,7 @@ namespace Orbit.Parser {
                         //Allows UIValues to be made implicitly by presence of a tag generator attribute without ValueID
                         id ??= propInfo.Name;
                         renderData.TagGenerators.Add((id, tagGenerator));
-                    } 
+                    }
                     if(id == null)
                         continue;
                     UIPropertyValue uiPropertyValue = new(renderData, propInfo);
@@ -190,18 +190,25 @@ namespace Orbit.Parser {
 
                 foreach(MethodInfo methodInfo in host.GetType().GetMethods(HOST_FLAGS)) {
                     ValueIDAttribute valueID = methodInfo.GetCustomAttribute<ValueIDAttribute>(true);
-                    if(valueID != null) {
-                        renderData.SetValue(string.IsNullOrEmpty(valueID.ID) ? methodInfo.Name : valueID.ID,
-                            new UIFunction(renderData, methodInfo));
+                    string id = null; //This ID will store a UIFunction for the method
+                    if(valueID != null)
+                        id = valueID.ID ?? methodInfo.Name;
+                    foreach(TagGenerator tagGenerator in methodInfo.GetCustomAttributes<TagGenerator>(true)) {
+                        //Allows UIValues to be made implicitly by presence of a tag generator attribute without ValueID
+                        id ??= methodInfo.Name;
+                        renderData.TagGenerators.Add((id, tagGenerator));
                     }
+                    if(id != null)
+                        renderData.SetValue(id, new UIFunction(renderData, methodInfo));
                     ListenForAttribute listenFor = methodInfo.GetCustomAttribute<ListenForAttribute>(true);
-                    if(listenFor == null)
+                    string events = listenFor?.Events ?? id; //If an id is present with no ListenForAttribute then listen for the id, allows using ValueIDAttribute and TagGenerator Attributes to be used to listen for events, and allows [ValueID] alone to listen for the method name
+                    if(events == null)
                         continue;
                     if(methodInfo.GetParameters().Length == 1)
-                        renderData.AddChildEvent(listenFor.Events,
+                        renderData.AddChildEvent(events,
                             (host) => methodInfo.Invoke(renderData.Host, ArrayParameters<object>.Single(host)));
                     else
-                        renderData.AddEvent(listenFor.Events,
+                        renderData.AddEvent(events,
                             () => methodInfo.Invoke(renderData.Host, Array.Empty<object>()));
                 }
             }

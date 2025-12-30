@@ -5,6 +5,10 @@ namespace Orbit.Attributes.TagGenerators {
     using Util;
 
     public class OrbitTextAttribute : TagGenerator {
+        /// <summary>
+        /// Usually should be left null, when null text will be the value of the property/field
+        /// </summary>
+        public string Text { get; set; }
         public string FontColor { get; set; }
 
         private float? fontSize;
@@ -53,8 +57,8 @@ namespace Orbit.Attributes.TagGenerators {
         }
 
         public override XmlNode GenerateTag(XmlDocument doc, string propertyId) {
-            XmlNode node = doc.CreateNode("element", "Text", null);
-            node.AddAttribute("Text", $"~{propertyId}");
+            XmlNode node = doc.CreateNode("element", Tag ?? "Text", null);
+            node.AddAttribute("Text", Text ?? $"~{propertyId}");
             if(FontColor != null)
                 node.AddAttribute("FontColor", FontColor);
             if(fontSize.HasValue) {

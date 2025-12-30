@@ -7,7 +7,7 @@ namespace Orbit.Attributes.TagGenerators {
         public bool AllowSwitchOff { get; set; }
 
         public override XmlNode GenerateTag(XmlDocument doc, string propertyId) {
-            XmlNode node = doc.CreateNode("element", "TOGGLE_GROUP", null);
+            XmlNode node = doc.CreateNode("element", Tag ?? "TOGGLE_GROUP", null);
             node.AddAttribute("ID", ID ?? propertyId);
             node.AddAttribute("AllowSwitchOff", AllowSwitchOff);
             return node;

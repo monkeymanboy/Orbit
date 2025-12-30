@@ -8,7 +8,7 @@ namespace Orbit.Attributes.TagGenerators {
         public string ValueChangedEvent { get; set; }
 
         public override XmlNode GenerateTag(XmlDocument doc, string propertyId) {
-            XmlNode node = doc.CreateNode("element", "SettingToggle", null);
+            XmlNode node = doc.CreateNode("element", Tag ?? "SettingToggle", null);
             node.AddAttribute("Text", Text ?? propertyId);
             node.AddAttribute("BoundValue", propertyId);
             if(ToggleGroup != null)

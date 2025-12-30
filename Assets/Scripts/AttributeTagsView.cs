@@ -48,12 +48,7 @@ public class AttributeTagsView : OrbitView {
         }
     }
     
-    [OrbitTag("<Button Text='~$VALUE_ID' ClickEvent='PrintValues'/>")]
-    private string ButtonText => "Print Values";
-    
-    [OrbitTag("<Button Text='~$VALUE_ID' ClickEvent='RandomizeText'/>", Group = "RandomText")]
-    private string RandomizeTextButton => "Randomize Text";
-    
+    [OrbitButton(Group = "RandomText")]
     [ListenFor("PreParse,RandomizeText")]
     private void RandomizeText() {
         RandomText = Random.Range(0, 3) switch {
@@ -64,7 +59,7 @@ public class AttributeTagsView : OrbitView {
         };
     }
     
-    [ListenFor("PrintValues")]
+    [OrbitButton]
     private void PrintValues() {
         Debug.Log(SliderVal);
         Debug.Log(SliderValInt);

@@ -7,7 +7,7 @@ namespace Orbit.Attributes.TagGenerators {
         public string ValueChangedEvent { get; set; }
 
         public override XmlNode GenerateTag(XmlDocument doc, string propertyId) {
-            XmlNode node = doc.CreateNode("element", "SettingInputField", null);
+            XmlNode node = doc.CreateNode("element", Tag ?? "SettingInputField", null);
             node.AddAttribute("Text", Text ?? propertyId);
             node.AddAttribute("BoundValue", propertyId);
             if(ValueChangedEvent != null)

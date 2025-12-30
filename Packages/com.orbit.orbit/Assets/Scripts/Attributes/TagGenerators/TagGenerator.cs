@@ -7,6 +7,7 @@ namespace Orbit.Attributes.TagGenerators {
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public abstract class TagGenerator : Attribute {
+        public string Tag { get; set; }
         public string Group { get; set; }
         public abstract XmlNode GenerateTag(XmlDocument doc, string propertyId);
     }
