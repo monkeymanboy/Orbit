@@ -132,6 +132,8 @@ namespace Orbit.Parser {
             List<(string, FieldInfo)> viewComponentFields = null;
             List<(string, PropertyInfo)> viewComponentProperties = null;
             if(host != null) {
+                OrbitClassAttribute classAttribute = host.GetType().GetCustomAttribute<OrbitClassAttribute>();
+                OrbitMemberAccess accessFlags = classAttribute?.Access ?? OrbitMemberAccess.None;
                 List<(string, FieldInfo)> eventEmitterFields = null;
                 foreach(FieldInfo fieldInfo in host.GetType().GetFields(HOST_FLAGS)) {
                     ViewComponentAttribute viewComponent = fieldInfo.GetCustomAttribute<ViewComponentAttribute>(true);
@@ -158,6 +160,9 @@ namespace Orbit.Parser {
                         id ??= fieldInfo.Name;
                         renderData.TagGenerators.Add((id, tagGenerator));
                     }
+                    if(fieldInfo.IsPublic && (accessFlags & OrbitMemberAccess.PublicField) != 0 ||
+                       !fieldInfo.IsPublic && (accessFlags & OrbitMemberAccess.PrivateField) != 0)
+                        id = fieldInfo.Name;
                     if(id == null)
                         continue;
                     renderData.Values.Add(id, new UIFieldValue(renderData, fieldInfo));
@@ -181,6 +186,9 @@ namespace Orbit.Parser {
                         id ??= propInfo.Name;
                         renderData.TagGenerators.Add((id, tagGenerator));
                     }
+                    if(propInfo.GetMethod.IsPublic && (accessFlags & OrbitMemberAccess.PublicProperty) != 0 ||
+                       !propInfo.GetMethod.IsPublic && (accessFlags & OrbitMemberAccess.PrivateProperty) != 0)
+                        id = propInfo.Name;
                     if(id == null)
                         continue;
                     UIPropertyValue uiPropertyValue = new(renderData, propInfo);
@@ -198,6 +206,9 @@ namespace Orbit.Parser {
                         id ??= methodInfo.Name;
                         renderData.TagGenerators.Add((id, tagGenerator));
                     }
+                    if(methodInfo.IsPublic && (accessFlags & OrbitMemberAccess.PublicProperty) != 0 ||
+                       !methodInfo.IsPublic && (accessFlags & OrbitMemberAccess.PrivateProperty) != 0)
+                        id = methodInfo.Name;
                     if(id != null)
                         renderData.SetValue(id, new UIFunction(renderData, methodInfo));
                     ListenForAttribute listenFor = methodInfo.GetCustomAttribute<ListenForAttribute>(true);

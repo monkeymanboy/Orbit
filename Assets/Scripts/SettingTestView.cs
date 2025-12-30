@@ -3,30 +3,30 @@ using Orbit.Components;
 using System.Collections.Generic;
 using UnityEngine;
 
+[OrbitClass(Access = OrbitMemberAccess.Public)]
 public class SettingTestView : OrbitView {
-    private enum DropdownValue {
+    public enum DropdownValue {
         FirstOption,
         SecondOption,
         ThirdOption
     }
     
-    [ValueID("SliderVal")] private float sliderVal;
-    [ValueID("ToggleVal")] private bool toggleVal;
-    [ValueID("InputStringVal")] private string inputVal;
-    [ValueID("InputFloatVal")] private float inputFloatVal = 1.5f;
-    [ValueID("InputIntVal")] private int inputIntVal;
-    [ValueID("DropdownVal")] private DropdownValue dropdownVal;
-    [ValueID("ListDropdownVal")] private string listdropdownVal = "List";
-    [ValueID("ListDropdownVals")] private List<string> listdropdownVals = new() {"Values", "Coming", "From", "List"};
+    public float SliderVal;
+    public bool ToggleVal;
+    public string InputStringVal;
+    public float InputFloatVal = 1.5f;
+    public int InputIntVal;
+    public DropdownValue DropdownVal;
+    public string ListDropdownVal = "List";
+    public List<string> ListDropdownVals = new() {"Values", "Coming", "From", "List"};
 
-    [ListenFor("PrintValues")]
     private void PrintValues() {
-        Debug.Log(sliderVal);
-        Debug.Log(toggleVal);
-        Debug.Log(inputVal);
-        Debug.Log(inputFloatVal);
-        Debug.Log(inputIntVal);
-        Debug.Log(dropdownVal);
-        Debug.Log(listdropdownVal);
+        Debug.Log(SliderVal);
+        Debug.Log(ToggleVal);
+        Debug.Log(InputStringVal);
+        Debug.Log(InputFloatVal);
+        Debug.Log(InputIntVal);
+        Debug.Log(DropdownVal);
+        Debug.Log(ListDropdownVal);
     }
 }
