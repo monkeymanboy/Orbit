@@ -29,7 +29,7 @@ namespace Orbit.Macros {
             {"Active", new ObjectSetter<IncludeMacroData, UIValue>((ref IncludeMacroData data, UIValue value) => data.ActiveValue = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, IncludeMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, IncludeMacroData data) {
             UIValue resolvedValue = null;
             if(data.ViewType == null) {
                 resolvedValue = renderData.GetValueFromID(data.ViewValue);

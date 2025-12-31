@@ -29,7 +29,7 @@ namespace Orbit.Macros {
             {"EndColor", new ColorSetter<LerpColorMacroData>((ref LerpColorMacroData data, Color value) => data.EndColor = value) }
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, LerpColorMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, LerpColorMacroData data) {
             UIValue value = renderData.GetValueFromID(data.ValueID);
 
             UIValue colorValue = renderData.SetValue(data.ID, Color.Lerp(data.StartColor, data.EndColor, value.GetValue<float>()));

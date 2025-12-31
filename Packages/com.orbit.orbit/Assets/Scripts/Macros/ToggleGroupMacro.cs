@@ -21,7 +21,7 @@ namespace Orbit.Macros {
             { "AllowSwitchOff", new BoolSetter<ToggleGroupMacroData>((ref ToggleGroupMacroData data, bool value) => data.AllowSwitchOff = value) }
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, ToggleGroupMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, ToggleGroupMacroData data) {
             ToggleGroup toggleGroup = parent.AddComponent<ToggleGroup>();
             toggleGroup.allowSwitchOff = data.AllowSwitchOff;
             renderData.SetValue(data.ID, toggleGroup);

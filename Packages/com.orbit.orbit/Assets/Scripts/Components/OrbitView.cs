@@ -23,7 +23,7 @@ namespace Orbit.Components {
 
         private bool hasParsed = false;
         private string resourceName;
-        private UIRenderData renderData;
+        private OrbitRenderData renderData;
         
         public event PropertyChangedEventHandler PropertyChanged;
         

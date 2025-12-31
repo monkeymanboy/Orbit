@@ -27,7 +27,7 @@ namespace Orbit.Macros {
             {"SecondValue", new StringSetter<CompareMacroData>((ref CompareMacroData data, string value) => data.SecondID = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, CompareMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, CompareMacroData data) {
             UIValue firstValue = renderData.GetValueFromID(data.FirstID);
             UIValue secondValue = renderData.GetValueFromID(data.SecondID);
             UIValue resultValue = renderData.SetValue(data.ID, firstValue.GetValue().Equals(secondValue.GetValue()));

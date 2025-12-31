@@ -13,7 +13,7 @@ namespace Orbit.ComponentProcessors {
         };
 
         private void ApplyClickEvent(Button button, string events) {
-            UIRenderData data = CurrentData;
+            OrbitRenderData data = CurrentData;
             button.onClick.AddListener(() => {
                 data.EmitEvent(events);
             });

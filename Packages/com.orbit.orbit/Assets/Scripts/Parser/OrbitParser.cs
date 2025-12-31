@@ -105,19 +105,19 @@ namespace Orbit.Parser {
             return doc;
         }
 
-        public UIRenderData Parse(string content, GameObject parent, object host = null,
-            UIRenderData parentData = null) {
+        public OrbitRenderData Parse(string content, GameObject parent, object host = null,
+            OrbitRenderData parentData = null) {
             return Parse(ParseXML(content), parent, host, parentData);
         }
 
-        public UIRenderData Parse(XmlNode parentNode, GameObject parent, object host = null,
-            UIRenderData parentData = null, Action<UIRenderData> preParse = null) {
+        public OrbitRenderData Parse(XmlNode parentNode, GameObject parent, object host = null,
+            OrbitRenderData parentData = null, Action<OrbitRenderData> preParse = null) {
 #if ORBIT_BENCHMARK
             Stopwatch parseStopWatch = new();
             parseStopWatch.Start();
 #endif
             
-            UIRenderData renderData = new() {
+            OrbitRenderData renderData = new() {
                 Host = host,
                 ParentRenderData = parentData,
                 Parser = this,
@@ -266,7 +266,7 @@ namespace Orbit.Parser {
             return renderData;
         }
         
-        public void RenderNode(XmlNode node, GameObject parent, UIRenderData renderData) {
+        public void RenderNode(XmlNode node, GameObject parent, OrbitRenderData renderData) {
             TagParameters parameters = new() {
                 RenderData = renderData,
                 Node = node,

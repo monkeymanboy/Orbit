@@ -8,7 +8,7 @@ namespace Orbit.Parser {
     using Components;
     using UnityEngine;
 
-    public class UIRenderData {
+    public class OrbitRenderData {
         private object host;
         public object Host {
             get => host;
@@ -27,7 +27,7 @@ namespace Orbit.Parser {
             }
         }
 
-        public UIRenderData ParentRenderData { get; set; }
+        public OrbitRenderData ParentRenderData { get; set; }
 
         internal Dictionary<string, UIValue> Values { get; } = new();
         internal Dictionary<string, UIPropertyValue> Properties { get; } = new();

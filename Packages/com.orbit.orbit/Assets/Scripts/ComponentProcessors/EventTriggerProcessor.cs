@@ -33,7 +33,7 @@ namespace Orbit.ComponentProcessors {
             RegisterEvent(eventTrigger, events, EventTriggerType.PointerExit);
 
         private void RegisterEvent(EventTrigger eventTrigger, string events, EventTriggerType triggerType) {
-            UIRenderData renderData = CurrentData;
+            OrbitRenderData renderData = CurrentData;
 
             EventTrigger.Entry entry = new();
             entry.eventID = triggerType;
@@ -44,7 +44,7 @@ namespace Orbit.ComponentProcessors {
         }
 
         private void RegisterHovered(EventTrigger eventTrigger, string valueID) {
-            UIRenderData renderData = CurrentData;
+            OrbitRenderData renderData = CurrentData;
 
             renderData.SetValue(valueID, false);
 

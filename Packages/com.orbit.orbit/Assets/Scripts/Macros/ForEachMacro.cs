@@ -28,10 +28,10 @@ namespace Orbit.Macros {
             {"Items", new ObjectSetter<ForEachMacroData, UIValue>((ref ForEachMacroData data, UIValue value) => data.ItemsValue = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, ForEachMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, ForEachMacroData data) {
             UIValue uiValue = data.ItemsValue;
             IList items = data.Items;
-            List<UIRenderData> rendered = new(items.Count);
+            List<OrbitRenderData> rendered = new(items.Count);
             for(int i=0;i<items.Count;i++) {
                 rendered.Add(Parser.Parse(node, parent, items[i], renderData));
             }

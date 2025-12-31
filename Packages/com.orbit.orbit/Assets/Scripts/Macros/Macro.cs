@@ -70,7 +70,7 @@ namespace Orbit.Macros {
             else 
                 typeSetter.SetFromString(ref data, boundData.data);
         }
-        public abstract void Execute(XmlNode node, GameObject parent, UIRenderData renderData, T data);
+        public abstract void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, T data);
 
         public override List<XmlSchemaAttribute> GenerateSchemaAttributes() {
             List<XmlSchemaAttribute> attributes = new();

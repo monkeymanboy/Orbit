@@ -12,7 +12,7 @@ namespace Orbit.Components
     {
         public event Action<int> OnFocusCell;
 
-        private UIRenderData renderData;
+        private OrbitRenderData renderData;
 
         public int LoopedIndex { get; private set; }
         public int Index { get; private set; }
@@ -22,7 +22,7 @@ namespace Orbit.Components
 
         [SerializeField] private GameObject contentParent;
 
-        public void Parse(OrbitParser parser, XmlNode rootNode, object host, UIRenderData parentData) {
+        public void Parse(OrbitParser parser, XmlNode rootNode, object host, OrbitRenderData parentData) {
             if(contentParent == null)
                 contentParent = gameObject;
             renderData = parser.Parse(rootNode, contentParent, host, parentData, (renderData) =>

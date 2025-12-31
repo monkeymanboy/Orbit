@@ -10,7 +10,7 @@ namespace Orbit.ComponentProcessors.Settings {
         };
 
         private void SetEndEditEvent(InputSetting setting, string events) {
-            UIRenderData data = CurrentData;
+            OrbitRenderData data = CurrentData;
             setting.OnEndEditEvent = () => {
                 data.EmitEvent(events);
             };

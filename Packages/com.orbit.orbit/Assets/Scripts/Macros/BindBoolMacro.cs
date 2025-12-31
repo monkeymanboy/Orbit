@@ -27,7 +27,7 @@ namespace Orbit.Macros {
             {"FalseValue", new StringSetter<BindBoolMacroData>((ref BindBoolMacroData data, string value) => data.FalseID = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, BindBoolMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, BindBoolMacroData data) {
             UIValue boolValue = renderData.GetValueFromID(data.BoolID);
             boolValue.OnChange += () => {
                 renderData.SetValue(data.ID, renderData.GetValueFromID(boolValue.GetValue<bool>() ? data.TrueID : data.FalseID).GetValue());

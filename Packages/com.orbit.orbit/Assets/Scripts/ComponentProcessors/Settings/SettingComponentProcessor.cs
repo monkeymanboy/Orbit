@@ -26,7 +26,7 @@ namespace Orbit.ComponentProcessors.Settings {
         }
 
         private void SetChangedEvent(SettingComponent setting, string events) {
-            UIRenderData data = CurrentData;
+            OrbitRenderData data = CurrentData;
             setting.OnChangeEvent = () => {
                 data.EmitEvent(events);
             };

@@ -9,7 +9,7 @@ using System.Collections.Specialized;
 namespace Orbit.Components {
     [RequireComponent(typeof(ScrollRect))]
     public class ScrollingList : MonoBehaviour {
-        public UIRenderData ParentData { get; internal set; }
+        public OrbitRenderData ParentData { get; internal set; }
 
         public float CellHeight = 30;
         public float CellSpacing = 15f;

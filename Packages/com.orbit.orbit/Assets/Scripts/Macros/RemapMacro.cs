@@ -30,7 +30,7 @@ namespace Orbit.Macros {
             {"ValueRange", new Vector2Setter<RemapMacroData>((ref RemapMacroData data, Vector2 value) => data.ValueRange = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, RemapMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, RemapMacroData data) {
             UIValue value = renderData.GetValueFromID(data.ValueID);
             
             UIValue mappedValue = renderData.SetValue(data.ID, Remap(value.GetValue<float>(), data.ValueRange, data.Range));

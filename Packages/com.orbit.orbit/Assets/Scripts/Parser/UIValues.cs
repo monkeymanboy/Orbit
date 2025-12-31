@@ -10,12 +10,12 @@ namespace Orbit.Parser {
     public abstract class UIValue {
         public event Action OnChange;
 
-        protected UIRenderData renderData;
+        protected OrbitRenderData renderData;
 
         public virtual bool HasValue => renderData?.Host != null;
 
         public UIValue() { }
-        public UIValue(UIRenderData renderData) {
+        public UIValue(OrbitRenderData renderData) {
             this.renderData = renderData;
         }
 
@@ -40,7 +40,7 @@ namespace Orbit.Parser {
         public override bool HasValue => true;
         private TObjectType value;
         
-        public DefinedUIValue(UIRenderData renderData, TObjectType value) : base(renderData) {
+        public DefinedUIValue(OrbitRenderData renderData, TObjectType value) : base(renderData) {
             this.value = value;
         }
 
@@ -67,7 +67,7 @@ namespace Orbit.Parser {
     public class UIFieldValue : UIValue {
         private FieldInfo fieldInfo;
         
-        public UIFieldValue(UIRenderData renderData, FieldInfo fieldInfo) : base(renderData){
+        public UIFieldValue(OrbitRenderData renderData, FieldInfo fieldInfo) : base(renderData){
             this.fieldInfo = fieldInfo;
         }
 
@@ -106,7 +106,7 @@ namespace Orbit.Parser {
             }
         }
 
-        public UIPropertyValue(UIRenderData renderData, PropertyInfo propertyInfo) : base(renderData){
+        public UIPropertyValue(OrbitRenderData renderData, PropertyInfo propertyInfo) : base(renderData){
             this.propertyInfo = propertyInfo;
         }
 
@@ -125,7 +125,7 @@ namespace Orbit.Parser {
     }
 
     public class UIHostValue : UIValue {
-        public UIHostValue(UIRenderData renderData) : base(renderData) { }
+        public UIHostValue(OrbitRenderData renderData) : base(renderData) { }
 
         public override object GetValue() {
             return renderData.Host;

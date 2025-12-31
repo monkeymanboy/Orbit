@@ -78,7 +78,7 @@ namespace Orbit.Macros {
             {"Value", ValueSetter }
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, SetMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, SetMacroData data) {
             if(data.Event == null) {
                 renderData.SetValue(data.ID, data.Value);
             } else {

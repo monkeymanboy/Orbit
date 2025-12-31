@@ -25,8 +25,8 @@ namespace Orbit.Macros {
             {"Host", new ObjectSetter<AsHostMacroData, UIValue>((ref AsHostMacroData data, UIValue value) => data.HostValue = value) },
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, AsHostMacroData data) {
-            UIRenderData newRenderData = Parser.Parse(node, parent, data.Host, renderData);
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, AsHostMacroData data) {
+            OrbitRenderData newRenderData = Parser.Parse(node, parent, data.Host, renderData);
             UIValue hostValue = data.HostValue;
             if(hostValue != null) {
                 hostValue.OnChange += () => newRenderData.Host = hostValue.GetValue();

@@ -16,7 +16,7 @@ namespace Orbit.Macros {
             {"Group", new StringSetter<AttributeTagsMacroData>((ref AttributeTagsMacroData data, string value) => data.Group = value) }
         };
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, AttributeTagsMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, AttributeTagsMacroData data) {
             foreach((string valueID, TagGenerator tagGenerator) in renderData.TagGenerators) {
                 if(tagGenerator.Group != data.Group) continue;
                 OrbitParser.DefaultParser.RenderNode(tagGenerator.GenerateTag(node.OwnerDocument, valueID), parent, renderData);

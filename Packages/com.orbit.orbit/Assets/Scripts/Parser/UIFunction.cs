@@ -4,10 +4,10 @@ namespace Orbit.Parser {
     using Util;
 
     public class UIFunction {
-        private UIRenderData renderData;
+        private OrbitRenderData renderData;
         private MethodInfo methodInfo;
 
-        public UIFunction(UIRenderData renderData, MethodInfo methodInfo) {
+        public UIFunction(OrbitRenderData renderData, MethodInfo methodInfo) {
             this.renderData = renderData;
             this.methodInfo = methodInfo;
         }

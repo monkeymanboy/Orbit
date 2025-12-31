@@ -8,7 +8,7 @@ namespace Orbit.Components {
     using Parser;
 
     public abstract class RepeatingList : MonoBehaviour {
-        public UIRenderData ParentData { get; internal set; }
+        public OrbitRenderData ParentData { get; internal set; }
         public IList Hosts { get; set; }
         public XmlNode ItemXml { get; set; }
 

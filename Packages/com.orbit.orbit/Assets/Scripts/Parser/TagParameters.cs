@@ -19,7 +19,7 @@ namespace Orbit.Parser {
                 this.boundValue = boundValue;
                 this.isDataResourcePath = false;
             }
-            public static BoundData FromString(UIRenderData renderData, string value)
+            public static BoundData FromString(OrbitRenderData renderData, string value)
             {
                 switch (value[0])
                 {
@@ -36,7 +36,7 @@ namespace Orbit.Parser {
                 }
             }
         }
-        public UIRenderData RenderData { get; set; }
+        public OrbitRenderData RenderData { get; set; }
         public Dictionary<string, BoundData> Data { get; set; }
         public Dictionary<string, BoundData> DefaultData { get; set; }
         public XmlNode Node { get; set; }

@@ -30,7 +30,7 @@ namespace Orbit.Expressions {
 
         private static ValueResolveVisitor visitor = new();
 
-        public override void Execute(XmlNode node, GameObject parent, UIRenderData renderData, ExpressionMacroData data) {
+        public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, ExpressionMacroData data) {
             LogicalExpression expression = Expression.Compile(data.Expression, false);
             visitor.RenderData = renderData;
             visitor.DependentValues.Clear();
@@ -51,7 +51,7 @@ namespace Orbit.Expressions {
         private const BindingFlags BINDING_FLAGS = BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
         private PropertyInfo resultProperty = typeof(EvaluationVisitor).GetProperty("Result", BINDING_FLAGS);
-        public UIRenderData RenderData;
+        public OrbitRenderData RenderData;
         public List<UIValue> DependentValues = new();
         
         public ValueResolveVisitor() : base(null, EvaluateOptions.IterateParameters) {

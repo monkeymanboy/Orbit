@@ -11,7 +11,7 @@ namespace Orbit.ComponentProcessors {
 
     public abstract class ComponentProcessor {
         public abstract Type ComponentType { get; }
-        protected UIRenderData CurrentData { get; set; }
+        protected OrbitRenderData CurrentData { get; set; }
 
         public abstract void Process(Component genericComponent, TagParameters processorParams);
 
