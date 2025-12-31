@@ -241,7 +241,7 @@ namespace Orbit.Parser {
                 foreach((string valueID, FieldInfo fieldInfo) in viewComponentFields) {
                     UIValue value = renderData.GetValueFromID(valueID);
                     void UpdateViewComponent() {
-                        fieldInfo.SetValue(host, value.GetValue<MarkupPrefab>().FindComponent(fieldInfo.FieldType));
+                        fieldInfo.SetValue(host, value.GetValue<OrbitTag>().FindComponent(fieldInfo.FieldType));
                     }
                     value.OnChange += UpdateViewComponent;
                     UpdateViewComponent();
@@ -252,7 +252,7 @@ namespace Orbit.Parser {
                 foreach((string valueID, PropertyInfo propInfo) in viewComponentProperties) {
                     UIValue value = renderData.GetValueFromID(valueID);
                     void UpdateViewComponent() {
-                        propInfo.SetValue(host, value.GetValue<MarkupPrefab>().FindComponent(propInfo.PropertyType));
+                        propInfo.SetValue(host, value.GetValue<OrbitTag>().FindComponent(propInfo.PropertyType));
                     }
                     value.OnChange += UpdateViewComponent;
                     UpdateViewComponent();
@@ -296,16 +296,16 @@ namespace Orbit.Parser {
         private void RenderTagNode(GameObject parent, TagParameters parameters) {
             XmlNode node = parameters.Node;
             GameObject nodeGO = CreatePrefab(node.Name, parent);
-            MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
-            if(markupPrefab == null)
-                throw new Exception($"'OrbitPrefabs/{node.Name}' is missing it's MarkupPrefab component");
+            OrbitTag orbitTag = nodeGO.GetComponent<OrbitTag>();
+            if(orbitTag == null)
+                throw new Exception($"'OrbitPrefabs/{node.Name}' is missing it's {nameof(OrbitTag)} component");
             
             reusableComponentList.Clear();
-            markupPrefab.GetAllComponents(reusableComponentList);
+            orbitTag.GetAllComponents(reusableComponentList);
             if(!processorPrefabCache.TryGetValue(node.Name, out List<(ComponentProcessor,int)> processors)) {
                 processors = new();
                 foreach(ComponentProcessor processor in ComponentProcessors) {
-                    markupPrefab.AddComponentIndexes(processor, processors, reusableComponentList);
+                    orbitTag.AddComponentIndexes(processor, processors, reusableComponentList);
                 }
                 processorPrefabCache.Add(node.Name, processors);
             }
@@ -313,9 +313,9 @@ namespace Orbit.Parser {
                 processor.Process(reusableComponentList[index], parameters);
             }
 
-            if(markupPrefab.ParseChildren) {
+            if(orbitTag.ParseChildren) {
                 foreach(XmlNode childNode in node.ChildNodes)
-                    RenderNode(childNode, markupPrefab.ChildrenContainer, parameters.RenderData);
+                    RenderNode(childNode, orbitTag.ChildrenContainer, parameters.RenderData);
             }
             
             if(parent == parameters.RenderData.RootParent) {

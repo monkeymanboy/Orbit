@@ -68,13 +68,13 @@ namespace Orbit.Schema {
                 complexType.Attributes.Add(new XmlSchemaAttributeGroupRef() { RefName = new XmlQualifiedName(defaultsAttributeRef) });
                 
                 GameObject nodeGO = resource as GameObject;
-                MarkupPrefab markupPrefab = nodeGO.GetComponent<MarkupPrefab>();
+                OrbitTag orbitTag = nodeGO.GetComponent<OrbitTag>();
                 foreach(ComponentProcessor processor in orbitParser.ComponentProcessors) {
-                    if (markupPrefab == null) {
-                        Debug.LogWarning($"{resource.name} is missing it's MarkupPrefab component");
+                    if (orbitTag == null) {
+                        Debug.LogWarning($"{resource.name} is missing it's {nameof(OrbitTag)} component");
                         continue;
                     }
-                    Component component = markupPrefab.FindComponent(processor.ComponentType);
+                    Component component = orbitTag.FindComponent(processor.ComponentType);
                     if(component != null) {
                         string attributeGroupName = processor.GetType().Name;
                         if(!addedAttributeGroups.Contains(attributeGroupName)) {
