@@ -1,10 +1,8 @@
-﻿using Orbit.Parser;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Orbit.Components.Settings {
-    public class ToggleSetting : SettingComponent {
+    public class OrbitToggle : SettingComponent {
         [SerializeField]
         private Toggle toggle;
 

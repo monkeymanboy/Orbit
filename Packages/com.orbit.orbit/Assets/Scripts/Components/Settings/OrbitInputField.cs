@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Orbit.Components.Settings {
     using System;
 
-    public class InputSetting : SettingComponent {
+    public class OrbitInputField : SettingComponent {
         public Action OnEndEditEvent { get; set; }
         
         [SerializeField]

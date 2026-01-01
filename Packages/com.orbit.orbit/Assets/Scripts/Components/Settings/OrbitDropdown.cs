@@ -6,7 +6,7 @@ namespace Orbit.Components.Settings {
     using System.Collections;
     using System.Collections.Generic;
 
-    public class DropdownSetting : SettingComponent {
+    public class OrbitDropdown : SettingComponent {
         [SerializeField]
         private TMP_Dropdown dropdown;
 
