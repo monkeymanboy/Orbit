@@ -20,7 +20,7 @@ namespace Orbit.Components.Graphic {
 
         [Header("Settings")]
         public FillMode fillMode = FillMode.Inner;
-        [FormerlySerializedAs("thickness")] [Min(0)] public float edgeThickness;
+        [SerializeField, Min(0)] private float edgeThickness;
 
         [Header("Corners")]
         [SerializeField] protected Corner topLeft = new() { Radius = 32, TriangleCount = 12, Color = Color.white };
@@ -28,6 +28,14 @@ namespace Orbit.Components.Graphic {
         [SerializeField] protected Corner bottomLeft = new() { Radius = 32, TriangleCount = 12, Color = Color.white };
         [SerializeField] protected Corner bottomRight = new() { Radius = 32, TriangleCount = 12, Color = Color.white };
 
+        public float EdgeThickness {
+            get => edgeThickness;
+            set {
+                edgeThickness = value;
+                SetVerticesDirty();
+            }
+        }
+        
         public Color BottomLeftColor {
             get => bottomLeft.Color;
             set {
