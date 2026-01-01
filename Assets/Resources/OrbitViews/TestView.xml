@@ -9,7 +9,7 @@
         <SettingToggle Text="Negated" BoundValue="!CheckboxVal"/>
         
         <TOGGLE_GROUP ID="Toggles" AllowSwitchOff="false"/>
-        <Vertical VerticalFit="PreferredSize" ChildControlWidth="true">
+        <Vertical VerticalFit="PreferredSize" ChildControlWidth="true" Spacing="4">
             <SettingToggle Text="Toggle Group 1" FontSize="12" ToggleGroup="~Toggles"/>
             <SettingToggle Text="Toggle Group 2" FontSize="12" ToggleGroup="~Toggles"/>
             <SettingToggle Text="Toggle Group 3" FontSize="12" ToggleGroup="~Toggles"/>

@@ -3,9 +3,9 @@
         <Text AnchorPreset="FillParent" Text="~this" FontSize="26"/>
         <Button Text="X" AnchorPreset="RightAlign" SizeDeltaX="30" ClickEvent="RemoveString"/>
     </List>
-    <Horizontal AnchorPreset="BottomAlign" SizeDeltaY="30" ChildControlWidth="true" ChildControlHeight="true">
+    <Horizontal AnchorPreset="BottomAlign" SizeDeltaY="30" ChildControlWidth="true" ChildControlHeight="true" Spacing="8">
         <InputField BoundValue="enteredText" FlexibleWidth="1000"/>
-        <ButtonGroup Spacing="2" PreferredWidth="250">
+        <ButtonGroup Spacing="-3" PreferredWidth="250">
             <Background ImageColor="grey"/>
             <Button Text="Add" ClickEvent="AddString" PreferredWidth="100"/>
             <Button Text="Clear" ClickEvent="ClearStrings"/>

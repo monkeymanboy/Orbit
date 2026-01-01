@@ -1,9 +1,7 @@
-﻿using Orbit.TypeSetters;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine;
-
-namespace Orbit.ComponentProcessors {
+﻿namespace Orbit.ComponentProcessors {
+    using System.Collections.Generic;
+    using UnityEngine.UI;
+    using UnityEngine;
     using TypeSetters;
 
     public class ImageProcessor : ComponentProcessor<Image> {

@@ -2,9 +2,12 @@ using UnityEngine.UI;
 
 namespace Orbit.Components.ButtonLayoutGroup {
     using System;
+    using System.Collections.Generic;
     using UnityEngine;
 
     public class ButtonLayoutGroup : HorizontalOrVerticalLayoutGroup {
+        private List<IButtonLayoutGroupElement> elements = new();
+        
         private bool isVertical;
         public bool IsVertical {
             get => isVertical;
@@ -44,24 +47,27 @@ namespace Orbit.Components.ButtonLayoutGroup {
             }
 
             for(int i = startIndex;m_ReverseArrangement ? i >= endIndex : i <= endIndex;i += increment) {
-                IButtonLayoutGroupElement spriteSwapper = rectChildren[i].GetComponent<IButtonLayoutGroupElement>();
-                if(spriteSwapper == null) continue;
-                if(isVertical) {
-                    if(i == startIndex)
-                        spriteSwapper.SetBottom();
-                    else if(i == endIndex)
-                        spriteSwapper.SetTop();
-                    else
-                        spriteSwapper.SetVerticalCenter();
-                } else {
-                    if(i == startIndex)
-                        spriteSwapper.SetLeft();
-                    else if(i == endIndex)
-                        spriteSwapper.SetRight();
-                    else
-                        spriteSwapper.SetHorizontalCenter();
+                elements.Clear();
+                rectChildren[i].GetComponents(elements);
+                for (int elementIndex = 0; elementIndex < elements.Count; elementIndex++)
+                {
+                    IButtonLayoutGroupElement spriteSwapper = elements[elementIndex];
+                    if(isVertical) {
+                        if(i == startIndex)
+                            spriteSwapper.SetBottom();
+                        else if(i == endIndex)
+                            spriteSwapper.SetTop();
+                        else
+                            spriteSwapper.SetVerticalCenter();
+                    } else {
+                        if(i == startIndex)
+                            spriteSwapper.SetLeft();
+                        else if(i == endIndex)
+                            spriteSwapper.SetRight();
+                        else
+                            spriteSwapper.SetHorizontalCenter();
+                    }   
                 }
-
             }
             SetChildrenAlongAxis(1, isVertical);
         }

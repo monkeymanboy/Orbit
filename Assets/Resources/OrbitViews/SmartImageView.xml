@@ -1,11 +1,11 @@
 <Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
     <Horizontal VerticalFit="PreferredSize" HorizontalFit="PreferredSize" Spacing="40" PreferredHeight="100" ChildControlWidth="true">
         <Vertical PreferredWidth="300" ChildControlWidth="true" Spacing="10">
-            <Image PreserveAspect="true" Source="https://cataas.com/cat"/>
+            <RoundedImage PreserveAspect="true" Source="https://cataas.com/cat"/>
             <Text Text="Random cat" FontSize="12" TextAlignment="Center"/>
         </Vertical>
         <Vertical PreferredWidth="300" ChildControlWidth="true" Spacing="10">
-            <Image PreserveAspect="true" Source="https://media.tenor.com/Tq2fqZg90pUAAAAi/monkey-dance.gif"/>
+            <RoundedImage PreserveAspect="true" Source="https://media.tenor.com/Tq2fqZg90pUAAAAi/monkey-dance.gif"/>
             <Text Text="Silly monkey gif" FontSize="12" TextAlignment="Center"/>
         </Vertical>
     </Horizontal>

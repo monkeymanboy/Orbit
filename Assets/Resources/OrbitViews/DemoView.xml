@@ -1,22 +1,22 @@
 <Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
            xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd' AnchorPreset="FillParent">
     <Image AnchorPreset="FillParent" ImageColor="#1e1e1e"/>
-    <Vertical ChildControlHeight="true" ChildControlWidth="true" PadAll="10">
-        <VerticalScrollView PreferredHeight="40">
+    <Vertical ChildControlHeight="true" ChildControlWidth="true" PadAll="10" Spacing="10">
+        <Horizontal PreferredHeight="30" ChildControlWidth="true">
             <SET_COLOR ID="ButtonActiveColor" Value="#007acc"/>
             <SET_COLOR ID="ButtonDefaultColor" Value="#3e3e42"/>
             <SET_COLOR ID="TextActiveColor" Value="white"/>
             <SET_COLOR ID="TextDefaultColor" Value="#aaaaaa"/>
-            <ButtonGroup SizeDeltaY="40" Spacing="2">
+            <ButtonGroup SizeDeltaY="40" Spacing="-3">
                 <FOR_EACH Items='~Views'>
                     <BIND_BOOL BoolValue="Active" ID="ButtonColor" FalseValue="^ButtonDefaultColor" TrueValue="^ButtonActiveColor"/>
                     <BIND_BOOL BoolValue="Active" ID="TextColor" FalseValue="^TextDefaultColor" TrueValue="^TextActiveColor"/>
                     <Button Text='~Name' ClickEvent='SelectView' FontColor="~TextColor" ImageColor="~ButtonColor" FontWeight="Light" AutoFontSize="12,36" TextMargin="10"/>
                 </FOR_EACH>
             </ButtonGroup>
-        </VerticalScrollView>
+        </Horizontal>
         <Container FlexibleHeight="10000">
-            <Background SizeDelta="-20,-20" ImageColor="#252526">
+            <Background ImageColor="#252526">
                 <Container SizeDelta="-20,-20">
                     <FOR_EACH Items='~Views'>
                         <INCLUDE ViewValue='View' Active="~Active"/>

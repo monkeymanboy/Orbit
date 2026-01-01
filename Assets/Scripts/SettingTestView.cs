@@ -8,7 +8,12 @@ public class SettingTestView : OrbitView {
     public enum DropdownValue {
         FirstOption,
         SecondOption,
-        ThirdOption
+        ThirdOption,
+        FourthOption,
+        FifthOption,
+        SixthOption,
+        SeventhOption,
+        EighthOption,
     }
     
     public float SliderVal;
