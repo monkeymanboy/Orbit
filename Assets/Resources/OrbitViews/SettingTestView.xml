@@ -1,13 +1,15 @@
 <Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
     <Vertical ChildControlWidth='true' PadAll="10" Spacing="10">
-        <SettingSlider Text='Slider' BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='4'/>
-		<SettingSlider Text='Slider 2' BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments="0"/>
-        <SettingToggle Text='Toggle' BoundValue='ToggleVal'/>
-        <SettingInputField Text="StringInput" BoundValue="InputStringVal"/>
-        <SettingInputField Text="FloatInput" BoundValue="InputFloatVal"/>
-        <SettingInputField Text="IntInput" BoundValue="InputIntVal"/>
-        <SettingDropdown Text="Dropdown" BoundValue="DropdownVal"/>
-        <SettingDropdown Text="ListDropdown" BoundValue="ListDropdownVal" Items="~ListDropdownVals"/>
+        <DEFAULTS LabelWidth="300">
+            <SettingSlider Text='Slider' BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments='4'/>
+            <SettingSlider Text='Slider 2' BoundValue='SliderVal' MinValue='0' MaxValue='1' Increments="0"/>
+            <SettingToggle Text='Toggle' BoundValue='ToggleVal'/>
+            <SettingInputField Text="StringInput" BoundValue="InputStringVal"/>
+            <SettingInputField Text="FloatInput" BoundValue="InputFloatVal"/>
+            <SettingInputField Text="IntInput" BoundValue="InputIntVal"/>
+            <SettingDropdown Text="Dropdown" BoundValue="DropdownVal"/>
+            <SettingDropdown Text="ListDropdown" BoundValue="ListDropdownVal" Items="~ListDropdownVals"/>
+        </DEFAULTS>
         <Button Text="Print Values" ClickEvent="PrintValues"/>
     </Vertical>
 </Container>
