@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 0}
+  m_SizeDelta: {x: 150, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4910175220801064413
 CanvasRenderer:
@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 1037757299598254229}
   - component: {fileID: 1037757299598254234}
   - component: {fileID: 1037757299598254233}
+  - component: {fileID: 5460364121768978451}
   m_Layer: 5
   m_Name: SettingDropdown
   m_TagString: Untagged
@@ -239,6 +240,20 @@ MonoBehaviour:
   - {fileID: 2087404089188184951}
   - {fileID: 5673491723728075899}
   - {fileID: 1988042251014514781}
+--- !u!114 &5460364121768978451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037757299598254239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea550b12fc1efcf419a7f63276dfa7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelTransform: {fileID: 8307886645863898496}
+  otherTransform: {fileID: 2699110730094474243}
 --- !u!1001 &2480144293899883900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -276,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 512870432234578303, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -140
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 512870432234578303, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
       propertyPath: m_SizeDelta.y
@@ -330,9 +345,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 781412441086466151, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3745248574376368235, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
       propertyPath: m_Name
       value: Dropdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626353041249670253, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626353041249670253, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626353041249670253, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6379050637010618722, guid: a2ae392917d8da94e8269aaf6070ffa8, type: 3}
       propertyPath: m_AnchorMax.x

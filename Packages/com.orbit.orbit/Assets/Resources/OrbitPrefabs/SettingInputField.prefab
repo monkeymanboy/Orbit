@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 0}
+  m_SizeDelta: {x: 150, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &899153409535412319
 CanvasRenderer:
@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 5060013937859896599}
   - component: {fileID: 5060013937859896600}
   - component: {fileID: 5060013937859896603}
+  - component: {fileID: 7018499482616839587}
   m_Layer: 5
   m_Name: SettingInputField
   m_TagString: Untagged
@@ -239,6 +240,20 @@ MonoBehaviour:
   - {fileID: 1573190581683169785}
   - {fileID: 3537732200298531154}
   - {fileID: 4796190634632741616}
+--- !u!114 &7018499482616839587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5060013937859896605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea550b12fc1efcf419a7f63276dfa7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelTransform: {fileID: 4257476119019165698}
+  otherTransform: {fileID: 1350347087996042344}
 --- !u!1001 &2767747463204199613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3806779885330555093, guid: 43ee072a10c3add459ceec3266985f08, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -140
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 3806779885330555093, guid: 43ee072a10c3add459ceec3266985f08, type: 3}
       propertyPath: m_SizeDelta.y

@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 0}
+  m_SizeDelta: {x: 150, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7544970903718602548
 CanvasRenderer:
@@ -159,6 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7544970904250936832}
   - component: {fileID: 7544970904250936833}
+  - component: {fileID: 8977397461330707198}
   m_Layer: 0
   m_Name: SettingSlider
   m_TagString: Untagged
@@ -207,6 +208,20 @@ MonoBehaviour:
   - {fileID: 4860029392059586489}
   - {fileID: 4758058854207561641}
   - {fileID: 8537334673078510601}
+--- !u!114 &8977397461330707198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7544970904250936835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea550b12fc1efcf419a7f63276dfa7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelTransform: {fileID: 7544970903718602550}
+  otherTransform: {fileID: 7544970904251652892}
 --- !u!1001 &2203897674398858611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512030129852622447, guid: 8e60f8e5c8edeaa4f9e35fe3aee084b1, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8512030129852622447, guid: 8e60f8e5c8edeaa4f9e35fe3aee084b1, type: 3}
       propertyPath: m_Pivot.y
@@ -256,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512030129852622447, guid: 8e60f8e5c8edeaa4f9e35fe3aee084b1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -160
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 8512030129852622447, guid: 8e60f8e5c8edeaa4f9e35fe3aee084b1, type: 3}
       propertyPath: m_SizeDelta.y
@@ -292,7 +307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512030129852622447, guid: 8e60f8e5c8edeaa4f9e35fe3aee084b1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8512030129852622447, guid: 8e60f8e5c8edeaa4f9e35fe3aee084b1, type: 3}
       propertyPath: m_AnchoredPosition.y
