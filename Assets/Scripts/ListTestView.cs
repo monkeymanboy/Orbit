@@ -3,30 +3,30 @@ using Orbit.Components;
 using System.Collections.Generic;
 using UnityEngine;
 
+[OrbitClass(Access = OrbitMemberAccess.Private)]
 public class ListTestView : OrbitView {
-    [ValueID] private List<ListItem> listItems;
+    private List<ListItem> listItems;
 
-    [ListenFor("PreParse")]
     private void PreParse() {
         listItems = new List<ListItem>();
-        for(int i = 0;i < 100;i++) {
+        //List will efficiently only create the minimum visible number of cells and then will reuse those as you scroll so no heavy performance impact with many elements
+        for(int i = 0;i < 250;i++) {
             listItems.Add(new() {
-                color = Random.ColorHSV(0, 1),
+                color = Random.ColorHSV(0, 1, 0.7f, 0.9f, 0.6f, 0.7f),
                 text = $"Item #{i}"
             });
         }
     }
-
-    [ListenFor("CellClicked")]
+    
     private void CellClicked(ListItem clickedItem) {
         Debug.Log($"Parent detected click of child item '{clickedItem.text}'");
     }
 
+    [OrbitClass(Access = OrbitMemberAccess.Private)]
     private struct ListItem {
-        [ValueID] internal Color color;
-        [ValueID] internal string text;
+        internal Color color;
+        internal string text;
         
-        [ListenFor("CellClicked")]
         private void CellClicked() {
             Debug.Log($"Detected click of item '{text}'");
         }
