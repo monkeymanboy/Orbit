@@ -531,6 +531,20 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="EdgeThickness">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="TopLeftColor">
       <xs:simpleType>
         <xs:annotation>
@@ -1894,6 +1908,80 @@
     <xs:attributeGroup ref="RectTransformProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
+  <xs:attributeGroup name="OrbitDropdownProcessor">
+    <xs:attribute name="Items">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>IList</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="SettingComponentProcessor">
+    <xs:attribute name="BoundValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValueChangedEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="NotifyValueChanged">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="Dropdown" type="DropdownTag" />
+  <xs:complexType name="DropdownTag">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="OrbitTagProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="RoundedImageProcessor" />
+    <xs:attributeGroup ref="RoundedRectProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="OrbitDropdownProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
+    <xs:attributeGroup ref="SmartRoundedImageProcessor" />
+  </xs:complexType>
   <xs:attributeGroup name="GridLayoutGroupProcessor">
     <xs:attribute name="Spacing">
       <xs:simpleType>
@@ -2142,7 +2230,7 @@
     <xs:attributeGroup ref="TransformProcessor" />
     <xs:attributeGroup ref="SmartImageProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="InputSettingProcessor">
+  <xs:attributeGroup name="OrbitInputFieldProcessor">
     <xs:attribute name="EndEditEvent">
       <xs:simpleType>
         <xs:annotation>
@@ -2152,51 +2240,6 @@
           <xs:simpleType>
             <xs:restriction base="xs:string">
               <xs:pattern value=".*" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
-  <xs:attributeGroup name="SettingComponentProcessor">
-    <xs:attribute name="BoundValue">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>String</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:pattern value=".*" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="ValueChangedEvent">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>String</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:pattern value=".*" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="NotifyValueChanged">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Boolean</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:enumeration value="true" />
-              <xs:enumeration value="false" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>
@@ -2218,12 +2261,12 @@
     <xs:attributeGroup ref="RoundedRectProcessor" />
     <xs:attributeGroup ref="SelectableProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
-    <xs:attributeGroup ref="InputSettingProcessor" />
+    <xs:attributeGroup ref="OrbitInputFieldProcessor" />
     <xs:attributeGroup ref="SettingComponentProcessor" />
     <xs:attributeGroup ref="SmartRoundedImageProcessor" />
   </xs:complexType>
   <xs:attributeGroup name="ScrollingListProcessor">
-    <xs:attribute name="CellHeight">
+    <xs:attribute name="CellSize">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Single</xs:documentation>
@@ -2246,6 +2289,26 @@
           <xs:simpleType>
             <xs:restriction base="xs:string">
               <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ListDirection">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>ScrollDirection</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Vertical" />
+              <xs:enumeration value="Horizontal" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>
@@ -2549,13 +2612,19 @@
     <xs:attributeGroup ref="RoundedRectProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="DropdownSettingProcessor">
-    <xs:attribute name="Items">
+  <xs:attributeGroup name="OrbitLabelWidthAdjusterProcessor">
+    <xs:attribute name="LabelWidth">
       <xs:simpleType>
         <xs:annotation>
-          <xs:documentation>IList</xs:documentation>
+          <xs:documentation>Single</xs:documentation>
         </xs:annotation>
-        <xs:union memberTypes="BoundType" />
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
@@ -2573,7 +2642,8 @@
     <xs:attributeGroup ref="SelectableProcessor" />
     <xs:attributeGroup ref="TMP_TextProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
-    <xs:attributeGroup ref="DropdownSettingProcessor" />
+    <xs:attributeGroup ref="OrbitDropdownProcessor" />
+    <xs:attributeGroup ref="OrbitLabelWidthAdjusterProcessor" />
     <xs:attributeGroup ref="SettingComponentProcessor" />
   </xs:complexType>
   <xs:element name="SettingInputField" type="SettingInputFieldTag" />
@@ -2590,10 +2660,11 @@
     <xs:attributeGroup ref="SelectableProcessor" />
     <xs:attributeGroup ref="TMP_TextProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
-    <xs:attributeGroup ref="InputSettingProcessor" />
+    <xs:attributeGroup ref="OrbitInputFieldProcessor" />
+    <xs:attributeGroup ref="OrbitLabelWidthAdjusterProcessor" />
     <xs:attributeGroup ref="SettingComponentProcessor" />
   </xs:complexType>
-  <xs:attributeGroup name="SliderSettingProcessor">
+  <xs:attributeGroup name="OrbitSliderProcessor">
     <xs:attribute name="MaxValue">
       <xs:simpleType>
         <xs:annotation>
@@ -2672,8 +2743,9 @@
     <xs:attributeGroup ref="RectTransformProcessor" />
     <xs:attributeGroup ref="TMP_TextProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="OrbitLabelWidthAdjusterProcessor" />
+    <xs:attributeGroup ref="OrbitSliderProcessor" />
     <xs:attributeGroup ref="SettingComponentProcessor" />
-    <xs:attributeGroup ref="SliderSettingProcessor" />
   </xs:complexType>
   <xs:attributeGroup name="ToggleProcessor">
     <xs:attribute name="ToggleGroup">
@@ -2702,6 +2774,21 @@
     <xs:attributeGroup ref="TransformProcessor" />
     <xs:attributeGroup ref="SettingComponentProcessor" />
   </xs:complexType>
+  <xs:element name="Slider" type="SliderTag" />
+  <xs:complexType name="SliderTag">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="OrbitFontUpdaterProcessor" />
+    <xs:attributeGroup ref="OrbitTagProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="OrbitSliderProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
+  </xs:complexType>
   <xs:element name="Text" type="TextTag" />
   <xs:complexType name="TextTag">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -2715,6 +2802,24 @@
     <xs:attributeGroup ref="RectTransformProcessor" />
     <xs:attributeGroup ref="TMP_TextProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
+  </xs:complexType>
+  <xs:element name="Toggle" type="ToggleTag" />
+  <xs:complexType name="ToggleTag">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="OrbitTagProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="RoundedImageProcessor" />
+    <xs:attributeGroup ref="RoundedRectProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="ToggleProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SettingComponentProcessor" />
+    <xs:attributeGroup ref="SmartRoundedImageProcessor" />
   </xs:complexType>
   <xs:element name="Vertical" type="VerticalTag" />
   <xs:complexType name="VerticalTag">
@@ -3487,7 +3592,7 @@
     <xs:attribute name="CellSize">
       <xs:simpleType>
         <xs:annotation>
-          <xs:documentation>Vector2</xs:documentation>
+          <xs:documentation>Vector2, Single</xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="BoundType">
           <xs:simpleType>
@@ -3498,6 +3603,11 @@
           <xs:simpleType>
             <xs:restriction base="xs:string">
               <xs:pattern value="[-+]?[0-9]*\.?[0-9]+,[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>
@@ -4402,6 +4512,20 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="EdgeThickness">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="TopLeftColor">
       <xs:simpleType>
         <xs:annotation>
@@ -4792,7 +4916,7 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="CellHeight">
+    <xs:attribute name="CellSpacing">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Single</xs:documentation>
@@ -4806,15 +4930,21 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="CellSpacing">
+    <xs:attribute name="ListDirection">
       <xs:simpleType>
         <xs:annotation>
-          <xs:documentation>Single</xs:documentation>
+          <xs:documentation>ScrollDirection</xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="BoundType">
           <xs:simpleType>
             <xs:restriction base="xs:string">
-              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Vertical" />
+              <xs:enumeration value="Horizontal" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>
@@ -5398,44 +5528,15 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="BoundValue">
+    <xs:attribute name="LabelWidth">
       <xs:simpleType>
         <xs:annotation>
-          <xs:documentation>String</xs:documentation>
+          <xs:documentation>Single</xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="BoundType">
           <xs:simpleType>
             <xs:restriction base="xs:string">
-              <xs:pattern value=".*" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="ValueChangedEvent">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>String</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:pattern value=".*" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="NotifyValueChanged">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Boolean</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:enumeration value="true" />
-              <xs:enumeration value="false" />
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
             </xs:restriction>
           </xs:simpleType>
         </xs:union>
@@ -5492,6 +5593,49 @@
       </xs:simpleType>
     </xs:attribute>
     <xs:attribute name="ImmediateUpdate">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BoundValue">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ValueChangedEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="NotifyValueChanged">
       <xs:simpleType>
         <xs:annotation>
           <xs:documentation>Boolean</xs:documentation>

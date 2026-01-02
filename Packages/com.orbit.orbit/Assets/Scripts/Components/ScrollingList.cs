@@ -7,12 +7,15 @@ using System.Collections;
 using System.Collections.Specialized;
 
 namespace Orbit.Components {
+    using UnityEngine.Serialization;
+
     [RequireComponent(typeof(ScrollRect))]
     public class ScrollingList : MonoBehaviour {
+        public enum ScrollDirection {
+            Vertical,
+            Horizontal
+        }
         public OrbitRenderData ParentData { get; internal set; }
-
-        public float CellHeight = 30;
-        public float CellSpacing = 15f;
         
         private INotifyCollectionChanged observedCollection;
         private IList hosts;
@@ -30,6 +33,34 @@ namespace Orbit.Components {
 
         public XmlNode ItemXml { get; set; }
 
+        [SerializeField]
+        private ScrollDirection direction;
+        public ScrollDirection Direction {
+            get => direction;
+            set {
+                if(direction == value) return;
+                direction = value;
+                RectTransform contentRect = scrollRect.content;
+                switch(direction) {
+                    case ScrollDirection.Vertical:
+                        contentRect.anchorMin = new Vector2(0,1);
+                        contentRect.anchorMax = new Vector2(1,1);
+                        contentRect.sizeDelta = new Vector2(0,0);
+                        break;
+                    case ScrollDirection.Horizontal:
+                        contentRect.anchorMin = new Vector2(1,0);
+                        contentRect.anchorMax = new Vector2(1,1);
+                        contentRect.sizeDelta = new Vector2(0,0);
+                        break;
+                }
+            }
+        }
+
+        [field: SerializeField]
+        public float CellSize { get; set; }
+        [field: SerializeField]
+        public float CellSpacing { get; set; }
+
         public int RowCount => Hosts.Count;
 
         protected ScrollRect scrollRect;
@@ -41,7 +72,7 @@ namespace Orbit.Components {
         // the index into source data which childBufferStart refers to 
         protected int sourceDataRowStart;
         
-        protected float previousBuildHeight = 0;
+        protected float previousBuildLength = 0;
         protected const int rowsAboveBelow = 1;
         
 
@@ -59,7 +90,7 @@ namespace Orbit.Components {
         /// for some other reason. All active items will have the ItemCallback invoked. 
         /// </summary>
         public virtual void Refresh() {
-            UpdateContentHeight();
+            UpdateContentLength();
             ReorganiseContent(true);
         }
 
@@ -79,8 +110,8 @@ namespace Orbit.Components {
         /// <param name="row"></param>
         /// <returns></returns>
         public float GetRowScrollPosition(int row) {
-            float rowCentre = (row + 0.5f) * RowHeight();
-            float vpHeight = ViewportHeight();
+            float rowCentre = (row + 0.5f) * CellLength();
+            float vpHeight = ViewportLength();
             float halfVpHeight = vpHeight * 0.5f;
             // Clamp to top of content
             float vpTop = Mathf.Max(0, rowCentre - halfVpHeight);
@@ -102,13 +133,13 @@ namespace Orbit.Components {
         }
 
         protected virtual bool CheckChildItems() {
-            float buildHeight = ViewportHeight();
-            if(!(childItems == null || buildHeight > previousBuildHeight))
+            float buildLength = ViewportLength();
+            if(!(childItems == null || buildLength > previousBuildLength))
                 return false;
 
             // create a fixed number of children, we'll re-use them when scrolling
             // figure out how many we need, round up
-            int childCount = Mathf.RoundToInt(0.5f + buildHeight / RowHeight());
+            int childCount = Mathf.RoundToInt(0.5f + buildLength / CellLength());
             childCount += rowsAboveBelow * 2; // X before, X after
 
             if(childItems == null)
@@ -124,19 +155,27 @@ namespace Orbit.Components {
                 childItems[i].gameObject.SetActive(false);
             }
 
-            previousBuildHeight = buildHeight;
+            previousBuildLength = buildLength;
 
             return true;
         }
 
         protected ListItem CreatePrefab() {
-            GameObject prefabObject = new GameObject("ListItem");
+            GameObject prefabObject = new("ListItem");
             RectTransform prefabTransform = prefabObject.AddComponent<RectTransform>();
-            prefabTransform.anchorMin = new Vector2(0, 1);
-            prefabTransform.anchorMax = new Vector2(1, 1);
-            prefabTransform.sizeDelta = new Vector2(0, CellHeight);
+            switch(Direction) {
+                case ScrollDirection.Vertical:
+                    prefabTransform.anchorMin = new Vector2(0, 1);
+                    prefabTransform.anchorMax = new Vector2(1, 1);
+                    prefabTransform.sizeDelta = new Vector2(0, CellSize);
+                    break;
+                case ScrollDirection.Horizontal:
+                    prefabTransform.anchorMin = new Vector2(0, 0);
+                    prefabTransform.anchorMax = new Vector2(0, 1);
+                    prefabTransform.sizeDelta = new Vector2(CellSize, 0);
+                    break;
+            }
             ListItem item = prefabObject.AddComponent<ListItem>();
-            //diContainer.Inject(item);
             item.Parse(ParentData.Parser, ItemXml, Hosts[0], ParentData);
             return item;
         }
@@ -156,7 +195,14 @@ namespace Orbit.Components {
         protected virtual void ReorganiseContent(bool clearContents) {
             if(clearContents) {
                 scrollRect.StopMovement();
-                scrollRect.verticalNormalizedPosition = 1;
+                switch(Direction) {
+                    case ScrollDirection.Vertical:
+                        scrollRect.verticalNormalizedPosition = 1;
+                        break;
+                    case ScrollDirection.Horizontal:
+                        scrollRect.horizontalNormalizedPosition = 0;
+                        break;
+                }
             }
 
             if(Hosts == null || Hosts.Count == 0) {
@@ -171,10 +217,13 @@ namespace Orbit.Components {
             bool populateAll = childrenChanged || clearContents;
 
             // Figure out which is the first virtual slot visible
-            float ymin = scrollRect.content.localPosition.y;
+            float minPos = Direction switch {
+                ScrollDirection.Vertical => scrollRect.content.localPosition.y,
+                ScrollDirection.Horizontal => -scrollRect.content.localPosition.x
+            };
 
             // round down to find first visible
-            int firstVisibleIndex = (int)(ymin / RowHeight());
+            int firstVisibleIndex = (int)(minPos / CellLength());
 
             // we always want to start our buffer before
             int newRowStart = firstVisibleIndex - rowsAboveBelow;
@@ -226,12 +275,15 @@ namespace Orbit.Components {
             return idx % childItems.Length;
         }
 
-        private float RowHeight() {
-            return CellSpacing + CellHeight;
+        private float CellLength() {
+            return CellSpacing + CellSize;
         }
 
-        private float ViewportHeight() {
-            return scrollRect.viewport.rect.height;
+        private float ViewportLength() {
+            return Direction switch {
+                ScrollDirection.Vertical => scrollRect.viewport.rect.height,
+                ScrollDirection.Horizontal => scrollRect.viewport.rect.width
+            };
         }
 
         protected virtual void UpdateChild(ListItem child, int rowIdx) {
@@ -241,20 +293,36 @@ namespace Orbit.Components {
             }
 
             RectTransform childTransform = child.transform as RectTransform;
-            float yPos = RowHeight() * rowIdx;
-            float pivotOffset = (1f - childTransform.pivot.y) * CellHeight;
-            (child.transform as RectTransform).anchoredPosition = new Vector2(0, -(yPos + pivotOffset));
+            float pos = CellLength() * rowIdx;
+            float pivotOffset;
+            switch(Direction) {
+                case ScrollDirection.Vertical:
+                    pivotOffset = (1f - childTransform.pivot.y) * CellSize;
+                    (child.transform as RectTransform).anchoredPosition = new Vector2(0, -(pos + pivotOffset));
+                    break;
+                case ScrollDirection.Horizontal:
+                    pivotOffset = (1f - childTransform.pivot.x) * CellSize;
+                    (child.transform as RectTransform).anchoredPosition = new Vector2((pos + pivotOffset), 0);
+                    break;
+            }
 
             child.SetHost(rowIdx, rowIdx, Hosts[rowIdx]);
 
             child.gameObject.SetActive(true);
         }
 
-        protected virtual void UpdateContentHeight() {
+        protected virtual void UpdateContentLength() {
             if(scrollRect == null) 
                 scrollRect = GetComponent<ScrollRect>();
-            float height = CellHeight * RowCount + (RowCount - 1) * CellSpacing;
-            scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, height);
+            float length = CellSize * RowCount + (RowCount - 1) * CellSpacing;
+            switch(Direction) {
+                case ScrollDirection.Vertical:
+                    scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, length);
+                    break;
+                case ScrollDirection.Horizontal:
+                    scrollRect.content.sizeDelta = new Vector2(length, scrollRect.content.sizeDelta.y);
+                    break;
+            }
         }
     }
 }

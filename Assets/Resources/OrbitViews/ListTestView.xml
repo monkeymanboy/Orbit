@@ -1,8 +1,18 @@
 <Container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../OrbitSchema.xsd">
-    <List Items="~listItems" ScrollSensitivity="15">
-        <Clickable ClickEvent="CellClicked">
-            <Image AnchorPreset="FillParent" ImageColor="~color"/>
-            <Text AnchorPreset="FillParent" Text="~text" FontSize="26"/>
-        </Clickable>
-    </List>
+    <Vertical ChildControlWidth="true" ChildControlHeight="true" PadAll="10">
+        <Text Text="Vertical List" FontSize="30" TextAlignment="Center" PreferredHeight="50"/>
+        <List Items="~listItems" ScrollSensitivity="30" CellSize="30" CellSpacing="10"  FlexibleHeight="10000">
+            <Clickable ClickEvent="CellClicked">
+                <RoundedImage AnchorPreset="FillParent" ImageColor="~color"/>
+                <Text Text="~text" FontSize="20" TextAlignment="Left" AnchorPreset="FillParent" SizeDelta="-20"/>
+            </Clickable>
+        </List>
+        <Text Text="Horizontal List" FontSize="30" TextAlignment="Center" PreferredHeight="50"/>
+        <List Items="~listItems" ScrollSensitivity="15" CellSize="120" CellSpacing="10" ListDirection="Horizontal" PreferredHeight="80">
+            <Clickable ClickEvent="CellClicked">
+                <RoundedImage AnchorPreset="FillParent" ImageColor="~color"/>
+                <Text Text="~text" FontSize="20" TextAlignment="Center" AnchorPreset="FillParent" SizeDelta="-20"/>
+            </Clickable>
+        </List>
+    </Vertical>
 </Container>

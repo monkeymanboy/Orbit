@@ -13,8 +13,9 @@ namespace Orbit.ComponentProcessors {
 
     public class ScrollingListProcessor : ComponentProcessor<ScrollingList> {
         public override Dictionary<string, TypeSetter<ScrollingList>> Setters => new() {
-            {"CellHeight", new FloatSetter<ScrollingList>((component, value) => component.CellHeight = value) },
+            {"CellSize", new FloatSetter<ScrollingList>((component, value) => component.CellSize = value) },
             {"CellSpacing", new FloatSetter<ScrollingList>((component, value) => component.CellSpacing = value) },
+            {"ListDirection", new EnumSetter<ScrollingList, ScrollingList.ScrollDirection>((component, value) => component.Direction = value) },
             {"Items", new ObjectSetter<ScrollingList, IList>((component, value) => component.Hosts = value) },
             {"RefreshEvent", new StringSetter<ScrollingList>((component, value) => CurrentData.AddEvent(value, component.Refresh)) }
         };

@@ -1,6 +1,8 @@
 <Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
     <Vertical ChildControlWidth='true'>
-        <ATTRIBUTE_TAGS/>
-        <ATTRIBUTE_TAGS Group="RandomText"/>
+        <DEFAULTS LabelWidth="250" FontSize="14"> <!--DEFAULTS Propagate into attribute tags useful for applying properties to all elements in a group without needing to set it on every attribute -->
+            <ATTRIBUTE_TAGS/>
+            <ATTRIBUTE_TAGS Group="RandomText"/>
+        </DEFAULTS>
     </Vertical>
 </Container>
