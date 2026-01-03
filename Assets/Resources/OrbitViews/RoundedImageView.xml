@@ -1,0 +1,77 @@
+<Container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../OrbitSchema.xsd'>
+    <!--
+    This is an interactive demo of RoundedImage, a UI component that produces rounded graphics.
+    Rounded meshes are created in the canvas directly so you can also use this with any sprite or material you like.
+    The sliders and buttons are just to let you immediately play around, feel free
+    to edit values in the markup directly as well.
+    -->
+    <VerticalScrollView  ChildAlign="MiddleCenter" Spacing="40">
+        <SET_COLOR ID="TopLeftColor" Value="red"/>
+        <SET_COLOR ID="TopRightColor" Value="green"/>
+        <SET_COLOR ID="BottomLeftColor" Value="blue"/>
+        <SET_COLOR ID="BottomRightColor" Value="purple"/>
+        <SET_COLOR ID="InnerEdgeColor" Value="white"/>
+        <SET_COLOR ID="TopLeftOuterEdgeColor" Value="red"/>
+        <SET_COLOR ID="TopRightOuterEdgeColor" Value="green"/>
+        <SET_COLOR ID="BottomLeftOuterEdgeColor" Value="blue"/>
+        <SET_COLOR ID="BottomRightOuterEdgeColor" Value="purple"/>
+        <SET_FLOAT ID="Width" Value="250"/>
+        <SET_FLOAT ID="Height" Value="250"/>
+        <SET_FLOAT ID="TopLeftRadius" Value="20"/>
+        <SET_FLOAT ID="TopRightRadius" Value="20"/>
+        <SET_FLOAT ID="BottomLeftRadius" Value="20"/>
+        <SET_FLOAT ID="BottomRightRadius" Value="20"/>
+        <SET_FLOAT ID="OutlineThickness" Value="15"/>
+        <SET_FLOAT ID="ShadowThickness" Value="10"/>
+        <SET_SPRITE ID="Image"/>
+        <SET_SPRITE ID="Image" OnEvent="ClearCatImage"/>
+        <SET_SPRITE ID="Image" Value="@Cats" OnEvent="ApplyCatImage"/>
+        <Container SizeDeltaY="~Height">
+            <RoundedImage SizeDeltaX="~Width"
+                          SizeDeltaY="~Height"
+                          TopLeftRadius="~TopLeftRadius"
+                          TopRightRadius="~TopRightRadius"
+                          BottomLeftRadius="~BottomLeftRadius"
+                          BottomRightRadius="~BottomRightRadius"
+                          EdgeThickness="~OutlineThickness"
+                          TopLeftColor="~TopLeftColor"
+                          TopRightColor="~TopRightColor"
+                          BottomLeftColor="~BottomLeftColor"
+                          BottomRightColor="~BottomRightColor"
+                          ImageSprite="~Image">
+                <RoundedImage AnchorPreset="FillParent"
+                              TopLeftRadius="~TopLeftRadius"
+                              TopRightRadius="~TopRightRadius"
+                              BottomLeftRadius="~BottomLeftRadius"
+                              BottomRightRadius="~BottomRightRadius"
+                              RectFillMode="InnerEdge"
+                              EdgeThickness="~OutlineThickness"
+                              InnerEdgeColor="~InnerEdgeColor"
+                              TopLeftOuterEdgeColor="~TopLeftOuterEdgeColor"
+                              TopRightOuterEdgeColor="~TopRightOuterEdgeColor"
+                              BottomLeftOuterEdgeColor="~BottomLeftOuterEdgeColor"
+                              BottomRightOuterEdgeColor="~BottomRightOuterEdgeColor"
+                              ImageSprite="~Image"/>
+                <RoundedShadow TopLeftRadius="~TopLeftRadius"
+                               TopRightRadius="~TopRightRadius"
+                               BottomLeftRadius="~BottomLeftRadius"
+                               BottomRightRadius="~BottomRightRadius" 
+                               EdgeThickness="~ShadowThickness"/>
+            </RoundedImage>
+        </Container>
+        <Vertical VerticalFit="PreferredSize" HorizontalFit="PreferredSize" PreferredWidth="500" ChildControlWidth="true" Spacing="8">
+            <DEFAULTS LabelWidth="250" FontSize="12">
+                <SettingSlider Text="Width" BoundValue="Width" MinValue="0" MaxValue="500"/>
+                <SettingSlider Text="Height" BoundValue="Height" MinValue="0" MaxValue="500"/>
+                <SettingSlider Text="TopLeftRadius" BoundValue="TopLeftRadius" MinValue="0" MaxValue="100"/>
+                <SettingSlider Text="TopRightRadius" BoundValue="TopRightRadius" MinValue="0" MaxValue="100"/>
+                <SettingSlider Text="BottomLeftRadius" BoundValue="BottomLeftRadius" MinValue="0" MaxValue="100"/>
+                <SettingSlider Text="BottomRightRadius" BoundValue="BottomRightRadius" MinValue="0" MaxValue="100"/>
+                <SettingSlider Text="OutlineThickness" BoundValue="OutlineThickness" MinValue="0" MaxValue="100"/>
+                <SettingSlider Text="ShadowThickness" BoundValue="ShadowThickness" MinValue="0" MaxValue="100"/>
+                <Button Text="Apply Cat Image" ClickEvent="ApplyCatImage"/>
+                <Button Text="Clear Cat Image" ClickEvent="ClearCatImage"/>
+            </DEFAULTS>
+        </Vertical>
+    </VerticalScrollView>
+</Container>

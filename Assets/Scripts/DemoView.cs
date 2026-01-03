@@ -13,6 +13,7 @@ public class DemoView : OrbitView {
     [ValueID]
     protected List<IViewData> Views = new(){
         new ViewData<TestView>("Test"),
+        new ViewData<RoundedImageView>("RoundedImage"),
         new ViewData<ResourcesAndGlobalsView>("Resources & Globals"),
         new ViewData<SettingTestView>("Setting"),
         new ViewData<ListTestView>("List"),
