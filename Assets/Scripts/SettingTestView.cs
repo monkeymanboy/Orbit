@@ -25,7 +25,7 @@ public class SettingTestView : OrbitView {
     public string ListDropdownVal = "List";
     public List<string> ListDropdownVals = new() {"Values", "Coming", "From", "List"};
 
-    private void PrintValues() {
+    public void PrintValues() {
         Debug.Log(SliderVal);
         Debug.Log(ToggleVal);
         Debug.Log(InputStringVal);
