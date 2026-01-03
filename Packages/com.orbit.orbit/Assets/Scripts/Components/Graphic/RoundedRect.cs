@@ -450,11 +450,17 @@ namespace Orbit.Components.Graphic {
                 Vector2 innerPoint = Rect.PointToNormalized(innerEdgeRect, point);
                 float innerX = innerPoint.x;
                 float innerY = innerPoint.y;
+                
                 cornerColor =
-                    bottomLeftEdgeColor * ((1 - innerX) * (1 - innerY)) * bottomLeft.Color * ((1 - x) * (1 - y)) +
-                    bottomRightEdgeColor * (innerX * (1 - innerY)) * bottomRight.Color * (x * (1 - y)) +
-                    topLeftEdgeColor * ((1 - innerX) * innerY) * topLeft.Color * ((1 - x) * y) +
-                    topRightEdgeColor * (innerX * innerY) * topRight.Color * (x * y);
+                    bottomLeft.Color * ((1 - x) * (1 - y)) +
+                    bottomRight.Color * (x * (1 - y)) +
+                    topLeft.Color * ((1 - x) * y) +
+                    topRight.Color * (x * y);
+                cornerColor *=
+                    bottomLeftEdgeColor * ((1 - innerX) * (1 - innerY)) +
+                    bottomRightEdgeColor * (innerX * (1 - innerY)) +
+                    topLeftEdgeColor * ((1 - innerX) * innerY) +
+                    topRightEdgeColor * (innerX * innerY);
             } else {
                 topLeftEdgeColor = topLeft.OuterEdgeColor;
                 topRightEdgeColor = topRight.OuterEdgeColor;
