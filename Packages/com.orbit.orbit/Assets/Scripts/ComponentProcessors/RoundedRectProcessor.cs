@@ -15,12 +15,7 @@ namespace Orbit.ComponentProcessors {
             {"BottomLeftRadius", new FloatSetter<RoundedRect>((component, value) => component.BottomLeftRadius = value) },
             {"BottomRightColor", new ColorSetter<RoundedRect>((component, value) => component.BottomRightColor = value) },
             {"BottomRightRadius", new FloatSetter<RoundedRect>((component, value) => component.BottomRightRadius = value) },
-            {"CornerRadius", new FloatSetter<RoundedRect>((component, value) => {
-                component.TopLeftRadius = value;
-                component.TopRightRadius = value;
-                component.BottomLeftRadius = value;
-                component.BottomRightRadius = value;
-            }) },
+            {"CornerRadius", new FloatSetter<RoundedRect>((component, value) => component.CornerRadius = value) },
             {"TopColor", new ColorSetter<RoundedRect>((component, value) => {
                 component.TopLeftColor = value;
                 component.TopRightColor = value;
@@ -36,7 +31,17 @@ namespace Orbit.ComponentProcessors {
             {"RightColor", new ColorSetter<RoundedRect>((component, value) => {
                 component.TopRightColor = value;
                 component.BottomRightColor = value;
-            }) }
+            }) },
+            {"InnerEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.InnerEdgeColor = value) },
+            {"TopLeftInnerEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.TopLeftInnerEdgeColor = value) },
+            {"TopRightInnerEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.TopRightInnerEdgeColor = value) },
+            {"BottomLeftInnerEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.BottomLeftInnerEdgeColor = value) },
+            {"BottomRightInnerEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.BottomRightInnerEdgeColor = value) },
+            {"OuterEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.OuterEdgeColor = value) },
+            {"TopLeftOuterEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.TopLeftOuterEdgeColor = value) },
+            {"TopRightOuterEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.TopRightOuterEdgeColor = value) },
+            {"BottomLeftOuterEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.BottomLeftOuterEdgeColor = value) },
+            {"BottomRightOuterEdgeColor", new ColorSetter<RoundedRect>((component, value) => component.BottomRightOuterEdgeColor = value) }
         };
     }
 }
