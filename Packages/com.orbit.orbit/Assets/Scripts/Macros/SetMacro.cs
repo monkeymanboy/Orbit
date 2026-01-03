@@ -62,6 +62,12 @@ namespace Orbit.Macros {
         public override TypeSetter<SetMacroData> ValueSetter => new FontSetter<SetMacroData>((ref SetMacroData data, OrbitConfig.OrbitFont value) => data.Value = value);
     }
 
+    public class SetSprite : SetMacro<Sprite> {
+        public override string Tag => "SET_SPRITE";
+
+        public override TypeSetter<SetMacroData> ValueSetter => new ObjectSetter<SetMacroData, Sprite>((ref SetMacroData data, Sprite value) => data.Value = value);
+    }
+
     [RequiresProperty("ID")]
     public abstract class SetMacro<T> : Macro<SetMacro<T>.SetMacroData> {
         public struct SetMacroData {
