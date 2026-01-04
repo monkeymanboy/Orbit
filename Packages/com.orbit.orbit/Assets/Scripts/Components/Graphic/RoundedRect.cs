@@ -237,7 +237,7 @@ namespace Orbit.Components.Graphic {
             float maxRadius = Mathf.Min(rect.width, rect.height) * 0.5f;
             int startIdx = vh.currentVertCount;
 
-            float cornerTransitionOffset = outer ? -0.5f*thickness : 0.5f*thickness;
+            float cornerTransitionOffset = outer ? -0.5f*thickness : 0.25f*thickness;
             
             Rect innerEdgeRect = rect; //For inner edge gradients, goes in by thickness and then consumes the full corners as well
             if(!outer) {
