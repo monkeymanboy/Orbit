@@ -237,18 +237,14 @@ namespace Orbit.Components.Graphic {
             float maxRadius = Mathf.Min(rect.width, rect.height) * 0.5f;
             int startIdx = vh.currentVertCount;
 
-            float cornerTransitionOffset = outer ? -0.5f*thickness : 0.25f*thickness;
+            float cornerTransitionOffset = outer ? -0.5f*thickness : 0.5f*thickness;
             
             Rect innerEdgeRect = rect; //For inner edge gradients, goes in by thickness and then consumes the full corners as well
             if(!outer) {
-                float innerGradientLeftOffset = -cornerTransitionOffset + 0.5f*Mathf.Min(maxRadius,0.5f * (bottomLeft.Radius + topLeft.Radius));
-                float innerGradientRightOffset = -cornerTransitionOffset + 0.5f*Mathf.Min(maxRadius,0.5f * (bottomRight.Radius + topRight.Radius));
-                float innerGradientBottomOffset = -cornerTransitionOffset + 0.5f*Mathf.Min(maxRadius,0.5f * (bottomLeft.Radius + bottomRight.Radius));
-                float innerGradientTopOffset = -cornerTransitionOffset + 0.5f*Mathf.Min(maxRadius,0.5f * (topLeft.Radius + topRight.Radius));
-                innerEdgeRect.x += innerGradientLeftOffset;
-                innerEdgeRect.y += innerGradientBottomOffset;
-                innerEdgeRect.width -= innerGradientLeftOffset + innerGradientRightOffset;
-                innerEdgeRect.height -= innerGradientBottomOffset + innerGradientTopOffset;
+                innerEdgeRect.x += thickness;
+                innerEdgeRect.y += thickness;
+                innerEdgeRect.width -= 2 * thickness;
+                innerEdgeRect.height -= 2 * thickness;
             }
             //if(innerEdgeRect.width < 0 || innerEdgeRect.height < 0) //For small rects use base rect (slightly different coloring)
             //    innerEdgeRect = rect;
