@@ -309,10 +309,10 @@ namespace Orbit.Components.Graphic {
             float adjustedR = r - edgeThickness;
 
             Rect uvRect = rect;
-            uvRect.x -= edgeThickness;
-            uvRect.y -= edgeThickness;
-            uvRect.width += edgeThickness * 2;
-            uvRect.height += edgeThickness * 2;
+            uvRect.x += edgeThickness;
+            uvRect.y += edgeThickness;
+            uvRect.width -= edgeThickness * 2;
+            uvRect.height -= edgeThickness * 2;
             
             if(adjustedR < 0) {
                 //Collapsed into a non rounded corner
