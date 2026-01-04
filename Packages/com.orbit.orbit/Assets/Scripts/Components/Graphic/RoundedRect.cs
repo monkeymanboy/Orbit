@@ -285,7 +285,10 @@ namespace Orbit.Components.Graphic {
         } 
         
         private void AddCornerTransition(VertexHelper vh, Rect rect, Vector2 midPos, Corner c1, Corner c2, bool isLast = false) {
-            Color avgColor = (0.5f * (c1.Color + c2.Color)) * (0.5f * (c1.InnerEdgeColor + c1.OuterEdgeColor)) * (0.5f * (c2.InnerEdgeColor + c2.OuterEdgeColor));
+            Color avgColor = (0.5f * (c1.Color + c2.Color)) *
+                             (0.5f *
+                              ((0.5f * (c1.InnerEdgeColor + c1.OuterEdgeColor)) +
+                               (0.5f * (c2.InnerEdgeColor + c2.OuterEdgeColor))));
             PopulatePoint(vh, rect, midPos, avgColor);
             int curr = vh.currentVertCount;
             if(isLast) {
