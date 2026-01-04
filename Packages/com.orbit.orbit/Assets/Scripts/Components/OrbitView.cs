@@ -1,20 +1,18 @@
 ﻿#if UNITY_EDITOR
 #define ORBIT_HOT_RELOAD
 #endif
-using Orbit.Attributes;
-using Orbit.Parser;
 using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using System.IO;
+using Orbit.Attributes;
+using Orbit.Parser;
+using System.Threading;
+using UnityEditor;
 
 namespace Orbit.Components {
-    using Attributes;
-    using Parser;
-    using System.Threading;
-    using UnityEditor;
 
     public class OrbitView : MonoBehaviour, INotifyPropertyChanged {
         protected virtual OrbitParser Parser => OrbitParser.DefaultParser;
@@ -74,7 +72,11 @@ namespace Orbit.Components {
         }
 
         protected void ParseView() {
-            renderData = Parser.Parse(GetXmlString(), gameObject, UIViewHost);
+            try {
+                renderData = Parser.Parse(GetXmlString(), gameObject, UIViewHost);
+            } catch (Exception ex){
+                RenderException(ex);
+            }
         }
 
         protected void ManualParse() {
@@ -116,12 +118,29 @@ namespace Orbit.Components {
 
 #if ORBIT_HOT_RELOAD
         private void HotReloadView() {
-            foreach(GameObject go in renderData.RootObjects) {
-                Destroy(go);
+            if(renderData != null) {
+                foreach(GameObject go in renderData.RootObjects) {
+                    Destroy(go);
+                }
             }
-            renderData = Parser.Parse(File.ReadAllText(ViewAssetPath), gameObject, UIViewHost);
+            try {
+                renderData = Parser.Parse(File.ReadAllText(ViewAssetPath), gameObject, UIViewHost);
+            } catch (Exception ex){
+                RenderException(ex);
+            }
         }
 #endif
+        protected virtual void RenderException(Exception ex) {
+            Debug.LogError(ex, this);
+            foreach(Transform childTransform in transform) {
+                Destroy(childTransform.gameObject);
+            }
+            string errorLine = $"Uncaught Exception while parsing '{GetType()}'\n{ex.GetType()}: {ex.Message}\n{ex.StackTrace}";
+            errorLine = errorLine.Replace("\n", "<br>");
+            errorLine = System.Security.SecurityElement.Escape(errorLine);
+            //We still set renderData here so that the objects get cleared out on next hot reload
+            renderData = Parser.Parse($@"<VerticalScrollView ChildControlHeight=""true"" PadAll=""10""><Text Text=""{errorLine}"" FontSize=""20""/></VerticalScrollView>", gameObject);
+        }
 
         protected virtual string GetDefaultResourceLocation(Type type, string location) {
             if(location == null)
