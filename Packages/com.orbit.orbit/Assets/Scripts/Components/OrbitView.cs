@@ -62,7 +62,11 @@ namespace Orbit.Components {
                     Destroy(go);
                 }
             }
-            renderData = Parser.Parse(content, gameObject, UIViewHost);
+            try {
+                renderData = Parser.Parse(GetXmlString(), gameObject, UIViewHost);
+            } catch (Exception ex){
+                RenderException(ex);
+            }
         }
 
         public string GetXmlString() {
