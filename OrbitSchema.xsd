@@ -935,6 +935,406 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="InnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopLeftInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopRightInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomLeftInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomRightInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="OuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopLeftOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopRightOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomLeftOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomRightOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:attributeGroup name="TransformProcessor">
     <xs:attribute name="Rotation">
@@ -2127,6 +2527,146 @@
     <xs:attributeGroup ref="RectTransformProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
+  <xs:element name="HorizontalScrollbar" type="HorizontalScrollbarTag" />
+  <xs:complexType name="HorizontalScrollbarTag">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="OrbitTagProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="RoundedImageProcessor" />
+    <xs:attributeGroup ref="RoundedRectProcessor" />
+    <xs:attributeGroup ref="SelectableProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SmartRoundedImageProcessor" />
+  </xs:complexType>
+  <xs:attributeGroup name="ScrollRectProcessor">
+    <xs:attribute name="MovementType">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>MovementType</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Unrestricted" />
+              <xs:enumeration value="Elastic" />
+              <xs:enumeration value="Clamped" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Elasticity">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Horizontal">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Vertical">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Inertia">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Boolean</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="true" />
+              <xs:enumeration value="false" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DecelerationRate">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ScrollSensitivity">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Single</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:element name="HorizontalScrollView" type="HorizontalScrollViewTag" />
+  <xs:complexType name="HorizontalScrollViewTag">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attributeGroup ref="ContentSizeFitterProcessor" />
+    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="OrbitTagProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="ScrollRectProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+  </xs:complexType>
   <xs:attributeGroup name="ImageProcessor">
     <xs:attribute name="ImageColor">
       <xs:simpleType>
@@ -2337,116 +2877,6 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="ScrollRectProcessor">
-    <xs:attribute name="MovementType">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>MovementType</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:pattern value="[-+]?[0-9]*" />
-            </xs:restriction>
-          </xs:simpleType>
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:enumeration value="Unrestricted" />
-              <xs:enumeration value="Elastic" />
-              <xs:enumeration value="Clamped" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="Elasticity">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Single</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="Horizontal">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Boolean</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:enumeration value="true" />
-              <xs:enumeration value="false" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="Vertical">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Boolean</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:enumeration value="true" />
-              <xs:enumeration value="false" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="Inertia">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Boolean</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:enumeration value="true" />
-              <xs:enumeration value="false" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="DecelerationRate">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Single</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="ScrollSensitivity">
-      <xs:simpleType>
-        <xs:annotation>
-          <xs:documentation>Single</xs:documentation>
-        </xs:annotation>
-        <xs:union memberTypes="BoundType">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:pattern value="[-+]?[0-9]*\.?[0-9]+" />
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:union>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
   <xs:element name="List" type="ListTag" />
   <xs:complexType name="ListTag">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -2611,6 +3041,20 @@
     <xs:attributeGroup ref="RoundedRawImageProcessor" />
     <xs:attributeGroup ref="RoundedRectProcessor" />
     <xs:attributeGroup ref="TransformProcessor" />
+  </xs:complexType>
+  <xs:element name="RoundedShadow" type="RoundedShadowTag" />
+  <xs:complexType name="RoundedShadowTag">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attributeGroup ref="GraphicProcessor" />
+    <xs:attributeGroup ref="OrbitTagProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="RoundedImageProcessor" />
+    <xs:attributeGroup ref="RoundedRectProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
+    <xs:attributeGroup ref="SmartRoundedImageProcessor" />
   </xs:complexType>
   <xs:attributeGroup name="OrbitLabelWidthAdjusterProcessor">
     <xs:attribute name="LabelWidth">
@@ -2788,6 +3232,21 @@
     <xs:attributeGroup ref="TransformProcessor" />
     <xs:attributeGroup ref="OrbitSliderProcessor" />
     <xs:attributeGroup ref="SettingComponentProcessor" />
+  </xs:complexType>
+  <xs:element name="TabButtonLayout" type="TabButtonLayoutTag" />
+  <xs:complexType name="TabButtonLayoutTag">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any minOccurs="0" />
+    </xs:sequence>
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attributeGroup ref="ButtonLayoutGroupProcessor" />
+    <xs:attributeGroup ref="HorizontalOrVerticalLayoutGroupProcessor" />
+    <xs:attributeGroup ref="LayoutElementProcessor" />
+    <xs:attributeGroup ref="LayoutGroupProcessor" />
+    <xs:attributeGroup ref="OrbitTagProcessor" />
+    <xs:attributeGroup ref="RectTransformProcessor" />
+    <xs:attributeGroup ref="ScrollRectProcessor" />
+    <xs:attributeGroup ref="TransformProcessor" />
   </xs:complexType>
   <xs:element name="Text" type="TextTag" />
   <xs:complexType name="TextTag">
@@ -3259,7 +3718,7 @@
     <xs:attribute name="Value">
       <xs:simpleType>
         <xs:annotation>
-          <xs:documentation>Boolean, String, Int32, Single, Color, Vector2, Vector3, Vector4, OrbitFont</xs:documentation>
+          <xs:documentation>Boolean, String, Int32, Single, Color, Vector2, Vector3, Vector4, OrbitFont, Sprite</xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="BoundType">
           <xs:simpleType>
@@ -4916,6 +5375,406 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="InnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopLeftInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopRightInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomLeftInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomRightInnerEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="OuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopLeftOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TopRightOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomLeftOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="BottomRightOuterEdgeColor">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Color</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="([#][a-fA-F0-9]*)" />
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="red" />
+              <xs:enumeration value="cyan" />
+              <xs:enumeration value="blue" />
+              <xs:enumeration value="darkblue" />
+              <xs:enumeration value="lightblue" />
+              <xs:enumeration value="purple" />
+              <xs:enumeration value="yellow" />
+              <xs:enumeration value="lime" />
+              <xs:enumeration value="fuchsia" />
+              <xs:enumeration value="white" />
+              <xs:enumeration value="silver" />
+              <xs:enumeration value="grey" />
+              <xs:enumeration value="black" />
+              <xs:enumeration value="orange" />
+              <xs:enumeration value="brown" />
+              <xs:enumeration value="maroon" />
+              <xs:enumeration value="green" />
+              <xs:enumeration value="olive" />
+              <xs:enumeration value="navy" />
+              <xs:enumeration value="teal" />
+              <xs:enumeration value="aqua" />
+              <xs:enumeration value="magenta" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="CellSpacing">
       <xs:simpleType>
         <xs:annotation>
@@ -6509,6 +7368,46 @@
             </xs:restriction>
           </xs:simpleType>
         </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="SET_SPRITE" type="SET_SPRITEMacro" />
+  <xs:complexType name="SET_SPRITEMacro">
+    <xs:attributeGroup ref="Defaults" />
+    <xs:attribute name="ID" use="required">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="OnEvent">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>String</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value=".*" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Value">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>Sprite</xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="BoundType" />
       </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
