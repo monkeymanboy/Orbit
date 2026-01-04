@@ -5,7 +5,7 @@
     The sliders and buttons are just to let you immediately play around, feel free
     to edit values in the markup directly as well.
     -->
-    <VerticalScrollView  ChildAlign="MiddleCenter" Spacing="40">
+    <VerticalScrollView Spacing="40" PadTop="10">
         <SET_COLOR ID="TopLeftColor" Value="red"/>
         <SET_COLOR ID="TopRightColor" Value="green"/>
         <SET_COLOR ID="BottomLeftColor" Value="blue"/>
