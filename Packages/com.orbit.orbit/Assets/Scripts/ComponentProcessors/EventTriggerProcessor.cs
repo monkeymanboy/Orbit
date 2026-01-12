@@ -4,21 +4,27 @@ using UnityEngine.EventSystems;
 namespace Orbit.ComponentProcessors {
     using Parser;
     using TypeSetters;
-    using UnityEngine;
 
     public class EventTriggerProcessor : ComponentProcessor<EventTrigger> {
         public override Dictionary<string, TypeSetter<EventTrigger>> Setters => new() {
-            { "HoveredValue", new StringSetter<EventTrigger>(RegisterHovered) },
-            { "HoveredEvent", new StringSetter<EventTrigger>(RegisterHoveredEvent) },
-            { "UnHoveredEvent", new StringSetter<EventTrigger>(RegisterUnHoveredEvent) },
+            { "PointerEnterEvent", new StringSetter<EventTrigger>(RegisterPointerEnterEvent) },
+            { "PointerExitEvent", new StringSetter<EventTrigger>(RegisterPointerExitEvent) },
             { "PointerDownEvent", new StringSetter<EventTrigger>(RegisterPointerDownEvent) },
             { "PointerUpEvent", new StringSetter<EventTrigger>(RegisterPointerUpEvent) },
-            { "PointerDragEvent", new StringSetter<EventTrigger>(RegisterPointerDragEvent) }
+            { "DragEvent", new StringSetter<EventTrigger>(RegisterDragEvent) },
+            { "BeginDragEvent", new StringSetter<EventTrigger>(RegisterDragEvent) },
+            { "EndDragEvent", new StringSetter<EventTrigger>(RegisterDragEvent) }
         };
         
         
-        private void RegisterPointerDragEvent(EventTrigger eventTrigger, string events) =>
+        private void RegisterDragEvent(EventTrigger eventTrigger, string events) =>
+            RegisterEvent(eventTrigger, events, EventTriggerType.Drag);
+        
+        private void RegisterBeginDragEvent(EventTrigger eventTrigger, string events) =>
             RegisterEvent(eventTrigger, events, EventTriggerType.BeginDrag);
+        
+        private void RegisterEndDragEvent(EventTrigger eventTrigger, string events) =>
+            RegisterEvent(eventTrigger, events, EventTriggerType.EndDrag);
         
         private void RegisterPointerDownEvent(EventTrigger eventTrigger, string events) =>
             RegisterEvent(eventTrigger, events, EventTriggerType.PointerDown);
@@ -26,10 +32,10 @@ namespace Orbit.ComponentProcessors {
         private void RegisterPointerUpEvent(EventTrigger eventTrigger, string events) =>
             RegisterEvent(eventTrigger, events, EventTriggerType.PointerUp);
         
-        private void RegisterHoveredEvent(EventTrigger eventTrigger, string events) =>
+        private void RegisterPointerEnterEvent(EventTrigger eventTrigger, string events) =>
             RegisterEvent(eventTrigger, events, EventTriggerType.PointerEnter);
 
-        private void RegisterUnHoveredEvent(EventTrigger eventTrigger, string events) =>
+        private void RegisterPointerExitEvent(EventTrigger eventTrigger, string events) =>
             RegisterEvent(eventTrigger, events, EventTriggerType.PointerExit);
 
         private void RegisterEvent(EventTrigger eventTrigger, string events, EventTriggerType triggerType) {
@@ -41,25 +47,6 @@ namespace Orbit.ComponentProcessors {
                 renderData.EmitEvent(events);
             });
             eventTrigger.triggers.Add(entry);
-        }
-
-        private void RegisterHovered(EventTrigger eventTrigger, string valueID) {
-            OrbitRenderData renderData = CurrentData;
-
-            renderData.SetValue(valueID, false);
-
-            EventTrigger.Entry pointerEnter = new();
-            pointerEnter.eventID = EventTriggerType.PointerEnter;
-            pointerEnter.callback.AddListener((data) => {
-                renderData.SetValue(valueID, true);
-            });
-            eventTrigger.triggers.Add(pointerEnter);
-            EventTrigger.Entry pointerExit = new();
-            pointerExit.eventID = EventTriggerType.PointerExit;
-            pointerExit.callback.AddListener((data) => {
-                renderData.SetValue(valueID, false);
-            });
-            eventTrigger.triggers.Add(pointerExit);
         }
     }
 }
