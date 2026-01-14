@@ -83,6 +83,17 @@ namespace Orbit.Macros {
                 attribute.SchemaType = pair.Value.GenerateSchemaType();
                 attributes.Add(attribute);
             }
+            if(CachedValueSetters != null) {
+                foreach(KeyValuePair<string, TypeSetter<T, UIValue>> pair in CachedValueSetters) {
+                    if(attributes.Any(x => x.Name == pair.Key)) continue;
+                    XmlSchemaAttribute attribute = new();
+                    attribute.Name = pair.Key;
+                    if(requiresAttributes.Any(x => x.Property == pair.Key)) 
+                        attribute.Use = XmlSchemaUse.Required;
+                    attribute.SchemaType = pair.Value.GenerateSchemaType();
+                    attributes.Add(attribute);
+                }
+            }
             return attributes;
         }
     }
