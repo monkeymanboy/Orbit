@@ -74,6 +74,7 @@ namespace Orbit.Macros {
             public string ID;
             public string Event;
             public T Value;
+            public UIValue UIValue;
         }
 
         public abstract TypeSetter<SetMacroData> ValueSetter { get; }
@@ -84,11 +85,19 @@ namespace Orbit.Macros {
             {"Value", ValueSetter }
         };
 
+        public override Dictionary<string, TypeSetter<SetMacroData, UIValue>> ValueSetters => new() {
+            {"Value", new ObjectSetter<SetMacroData, UIValue>((ref SetMacroData data, UIValue value) => data.UIValue = value) },
+        };
+
         public override void Execute(XmlNode node, GameObject parent, OrbitRenderData renderData, SetMacroData data) {
             if(data.Event == null) {
                 renderData.SetValue(data.ID, data.Value);
             } else {
-                renderData.AddEvent(data.Event, () => renderData.SetValue(data.ID, data.Value));
+                if(data.UIValue == null) {
+                    renderData.AddEvent(data.Event, () => renderData.SetValue(data.ID, data.Value));
+                } else {
+                    renderData.AddEvent(data.Event, () => renderData.SetValue(data.ID, data.UIValue.GetValue<T>()));
+                }
             }
         }
     }
