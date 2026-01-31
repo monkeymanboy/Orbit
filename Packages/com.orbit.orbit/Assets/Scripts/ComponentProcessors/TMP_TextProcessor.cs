@@ -16,7 +16,11 @@ namespace Orbit.ComponentProcessors {
             {"TextAlignment", new EnumSetter<TMP_Text, TextAlignmentOptions>((component, value) => component.alignment = value) },
             {"TextOverflowMode", new EnumSetter<TMP_Text, TextOverflowModes>((component, value) => component.overflowMode = value) },
             {"WordWrapping", new BoolSetter<TMP_Text>((component, value) => component.enableWordWrapping = value) },
-            {"TextMargin", new Vector4Setter<TMP_Text>((component, value) => component.margin = value) }
+            {"TextMargin", new Vector4Setter<TMP_Text>((component, value) => component.margin = value) },
+            {"CharacterSpacing", new FloatSetter<TMP_Text>((component, value) => component.characterSpacing = value) },
+            {"LineSpacing", new FloatSetter<TMP_Text>((component, value) => component.lineSpacing = value) },
+            {"ParagraphSpacing", new FloatSetter<TMP_Text>((component, value) => component.paragraphSpacing = value) },
+            {"WordSpacing", new FloatSetter<TMP_Text>((component, value) => component.wordSpacing = value) }
         };
 
         private void SetAutoFontSize(TMP_Text component, Vector2 size) {
