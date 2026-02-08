@@ -54,6 +54,7 @@ namespace Orbit.Components {
                 }
             }
             ParseView();
+            hasParsed = true;
         }
 
         public void ForceReloadView(string content) {
