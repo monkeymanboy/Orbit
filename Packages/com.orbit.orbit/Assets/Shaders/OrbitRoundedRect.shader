@@ -46,6 +46,7 @@ Shader "UI/OrbitRoundedRect"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma target 3.0
             
             #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
@@ -68,6 +69,10 @@ Shader "UI/OrbitRoundedRect"
                 float4 worldPosition : TEXCOORD1;
                 UNITY_VERTEX_OUTPUT_STEREO
             };
+
+            sampler2D _MainTex;
+            fixed4 _TextureSampleAdd;
+            float4 _MainTex_ST;
 
             float4 _ShaderSettings; // x: width, y: height, z: thickness, w: fillMode
             float4 _CornerRadii; // x: BL, y: BR, z: TR, w: TL
@@ -187,13 +192,15 @@ Shader "UI/OrbitRoundedRect"
                 finalColor.a *= alpha;
 
                 #ifdef UNITY_UI_CLIP_RECT
-                alpha *= UnityGet2DClipping(i.worldPosition.xy, _ClipRect);
+                finalColor.a *= UnityGet2DClipping(i.worldPosition.xy, _ClipRect);
                 #endif
                 
-                #ifdef UNITY_UI_ALPHACLIP
+                fixed4 texColor = tex2D(_MainTex, i.uv) + _TextureSampleAdd;
+                finalColor *= texColor;
+                
+                //#ifdef UNITY_UI_ALPHACLIP
                 clip(finalColor.a - 0.001);
-                #endif
-
+                //#endif
                 return finalColor * i.color;
             }
             ENDCG

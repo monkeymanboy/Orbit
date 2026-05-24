@@ -237,7 +237,6 @@ namespace Orbit.Components.Graphic {
             }
         }
 
-        // Dynamic material hook for Unity's UI pipeline
         public override Material materialForRendering {
             get {
                 if(!UseShader) {
@@ -249,8 +248,7 @@ namespace Orbit.Components.Graphic {
                     _customMaterial = new Material(baseMat);
                     _customMaterial.hideFlags = HideFlags.HideAndDontSave;
                 }
-                //UpdateShaderProperties(_customMaterial);
-                return _customMaterial;
+                return GetModifiedMaterial(_customMaterial);
             }
         }
 
