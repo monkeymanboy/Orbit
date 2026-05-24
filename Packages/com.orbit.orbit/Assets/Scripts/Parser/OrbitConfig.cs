@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Orbit.Parser {
     using System;
     using System.Collections.Generic;
+    using System.IO;
 
     [CreateAssetMenu(fileName = "OrbitConfig")]
     public class OrbitConfig : ScriptableObject {
@@ -34,7 +35,7 @@ namespace Orbit.Parser {
             }
         }
 
-        private const string configPath = "Resources/OrbitConfig.asset";
+        private const string configPath = "Assets/Resources/OrbitConfig.asset";
         private const string configResource = "OrbitConfig";
 
         [SerializeField] private OrbitFont[] fonts;
@@ -56,10 +57,13 @@ namespace Orbit.Parser {
                 defaultConfig.defaultRoundedRectMaterial = AssetDatabase.LoadAssetAtPath<Material>(path);
             }
 #endif
-            defaultConfig.Fonts = new() { {"Default", new OrbitFont{ name = "Default", fontAsset = TMP_Settings.defaultFontAsset }} };
+            OrbitFont defaultFont = new OrbitFont{ name = "Default", fontAsset = TMP_Settings.defaultFontAsset };
+            defaultConfig.Fonts = new() {{"Default", defaultFont }};
+            defaultConfig.fonts = new[] { defaultFont };
 #if UNITY_EDITOR
-            AssetDatabase.CreateFolder("Assets", "Orbit");
-            AssetDatabase.CreateFolder("Assets/Orbit", "Resources");
+            if(!AssetDatabase.IsValidFolder("Assets/Resources")) {
+                AssetDatabase.CreateFolder("Assets", "Resources");
+            }
             AssetDatabase.CreateAsset(defaultConfig, configPath);
 #endif
             return defaultConfig;
@@ -68,12 +72,16 @@ namespace Orbit.Parser {
         public static OrbitConfig Load() {
             OrbitConfig config = Resources.Load<OrbitConfig>(configResource) ?? CreateDefault();
             config.Fonts = new();
-            config.DefaultFont = config.fonts[0];
-            foreach(OrbitFont font in config.fonts) {
-                config.Fonts.Add(font.name, font);
+            if(config.fonts.Length > 0) {
+                config.DefaultFont = config.fonts[0];
+                foreach(OrbitFont font in config.fonts) {
+                    config.Fonts.Add(font.name, font);
+                }
             }
-            foreach(GlobalsCsv globalsCSV in config.globalsCsvs) {
-                CSVHelper.PopulateGlobals(OrbitParser.DefaultParser,globalsCSV.textAsset, globalsCSV.vertical);
+            if(config.globalsCsvs != null) {
+                foreach(GlobalsCsv globalsCSV in config.globalsCsvs) {
+                    CSVHelper.PopulateGlobals(OrbitParser.DefaultParser,globalsCSV.textAsset, globalsCSV.vertical);
+                }
             }
             return config;
         }
