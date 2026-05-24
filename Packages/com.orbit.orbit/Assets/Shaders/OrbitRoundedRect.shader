@@ -4,6 +4,15 @@ Shader "UI/OrbitRoundedRect"
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         [HideInInspector] _Color ("Tint", Color) = (1,1,1,1)
+
+        [HideInInspector] _StencilComp ("Stencil Comparison", Float) = 8
+        [HideInInspector] _Stencil ("Stencil ID", Float) = 0
+        [HideInInspector] _StencilOp ("Stencil Operation", Float) = 0
+        [HideInInspector] _StencilWriteMask ("Stencil Write Mask", Float) = 255
+        [HideInInspector] _StencilReadMask ("Stencil Read Mask", Float) = 255
+        [HideInInspector] _ColorMask ("Color Mask", Float) = 15
+
+        [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
     }
 
     SubShader
@@ -16,22 +25,39 @@ Shader "UI/OrbitRoundedRect"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
         }
-
-        Cull Off Lighting Off ZWrite Off ZTest [unity_GUIZTestMode]
+        Stencil
+        {
+            Ref [_Stencil]
+            Comp [_StencilComp]
+            Pass [_StencilOp]
+            ReadMask [_StencilReadMask]
+            WriteMask [_StencilWriteMask]
+        }
+        
+        Cull Off
+        Lighting Off
+        ZWrite Off
+        ZTest [unity_GUIZTestMode]
         Blend SrcAlpha OneMinusSrcAlpha
+        ColorMask [_ColorMask]
 
         Pass
         {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
+            #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
             #include "UnityCG.cginc"
+            #include "UnityUI.cginc"
 
             struct appdata_t
             {
                 float4 vertex : POSITION;
                 float4 color : COLOR;
                 float2 uv0 : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -39,6 +65,8 @@ Shader "UI/OrbitRoundedRect"
                 float4 vertex : SV_POSITION;
                 fixed4 color : COLOR;
                 float2 uv : TEXCOORD0;
+                float4 worldPosition : TEXCOORD1;
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             float4 _ShaderSettings; // x: width, y: height, z: thickness, w: fillMode
@@ -48,10 +76,15 @@ Shader "UI/OrbitRoundedRect"
             half4 _ColorsBL, _ColorsTL, _ColorsTR, _ColorsBR;
             half4 _InnerEdgeBL, _InnerEdgeTL, _InnerEdgeTR, _InnerEdgeBR;
             half4 _OuterEdgeBL, _OuterEdgeTL, _OuterEdgeTR, _OuterEdgeBR;
+            
+            float4 _ClipRect;
 
             v2f vert(appdata_t v)
             {
                 v2f o;
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                o.worldPosition = v.vertex;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv0;
                 o.color = v.color;
@@ -149,11 +182,17 @@ Shader "UI/OrbitRoundedRect"
                     edgeLinearFactor = 1.0 - saturate(dist / thickness);
                 }
 
-                if (alpha <= 0.001) discard;
-
                 // Interpolate between the Outer (0.0) and Inner (1.0) formulas correctly
                 float4 finalColor = lerp(outerRingColor, innerRingColor, edgeLinearFactor);
                 finalColor.a *= alpha;
+
+                #ifdef UNITY_UI_CLIP_RECT
+                alpha *= UnityGet2DClipping(i.worldPosition.xy, _ClipRect);
+                #endif
+                
+                #ifdef UNITY_UI_ALPHACLIP
+                clip(finalColor.a - 0.001);
+                #endif
 
                 return finalColor * i.color;
             }
