@@ -329,7 +329,7 @@ namespace Orbit.Parser {
 
         public virtual GameObject CreatePrefab(string name, GameObject parent) {
             if(!Prefabs.TryGetValue(name, out GameObject prefab)) {
-                prefab = Resources.Load<GameObject>($"OrbitPrefabs/{name}");
+                prefab = Resources.Load<GameObject>($"{OrbitConfig.Config.PrefabLocation}/{name}");
                 if(prefab == null)
                     throw new Exception($"Could not locate OrbitTag with name '{name}'");
                 Prefabs.Add(name, prefab);

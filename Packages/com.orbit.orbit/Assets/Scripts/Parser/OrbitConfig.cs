@@ -38,6 +38,7 @@ namespace Orbit.Parser {
         private const string configPath = "Assets/Resources/OrbitConfig.asset";
         private const string configResource = "OrbitConfig";
 
+        [SerializeField] private string prefabLocation = "OrbitPrefabs";
         [SerializeField] private OrbitFont[] fonts;
         [SerializeField] private ColorDefintion[] colors;
         [SerializeField] private GlobalsCsv[] globalsCsvs;
@@ -46,6 +47,7 @@ namespace Orbit.Parser {
         public Dictionary<string, OrbitFont> Fonts { get; private set; }
         public ColorDefintion[] Colors => colors;
         public Material DefaultRoundedRectMaterial => defaultRoundedRectMaterial;
+        public string PrefabLocation => prefabLocation;
 
         public static OrbitConfig CreateDefault() {
             OrbitConfig defaultConfig = CreateInstance<OrbitConfig>();
