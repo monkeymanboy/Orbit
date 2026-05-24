@@ -153,8 +153,9 @@ Shader "UI/OrbitRoundedRect"
 
                 // Interpolate between the Outer (0.0) and Inner (1.0) formulas correctly
                 float4 finalColor = lerp(outerRingColor, innerRingColor, edgeLinearFactor);
+                finalColor.a *= alpha;
 
-                return finalColor * i.color * alpha;
+                return finalColor * i.color;
             }
             ENDCG
         }
