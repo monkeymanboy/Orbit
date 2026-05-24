@@ -5,13 +5,6 @@
   "description": "An XML UI Generator",
   "unity": "2021.3",
   "unityRelease": "8f1",
-  "samples": [
-    {
-      "displayName": "Base prefabs",
-      "description": "Standard set of prefabs provided by Orbit.",
-      "path": "Samples~/Base"
-    }
-  ],
   "dependencies": {
  },
  "keywords": [
