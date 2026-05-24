@@ -131,7 +131,7 @@ Shader "UI/OrbitRoundedRect"
                 else if (fillMode == 2) // InnerEdge
                 {
                     float outAlpha = smoothstep(0.0, -aaWidth, dist);
-                    float inAlpha = smoothstep(-thickness, -thickness - aaWidth, dist);
+                    float inAlpha = smoothstep(-thickness - aaWidth, -thickness - aaWidth*2, dist);
                     alpha = outAlpha - inAlpha;
 
                     // dist goes from -thickness (inner) to 0.0 (outer).
@@ -141,7 +141,7 @@ Shader "UI/OrbitRoundedRect"
                 else if (fillMode == 3) // OuterEdge
                 {
                     float outAlpha = smoothstep(thickness, thickness - aaWidth, dist);
-                    float inAlpha = smoothstep(0.0, -aaWidth, dist);
+                    float inAlpha = smoothstep(-aaWidth, -aaWidth*2, dist);
                     alpha = outAlpha - inAlpha;
 
                     // dist goes from 0.0 (inner) to thickness (outer).
