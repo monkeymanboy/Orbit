@@ -337,7 +337,10 @@ namespace Orbit.Components.Graphic {
             }
             
             Vector4 settings = new(rect.width, rect.height, edgeThickness, (float)fillMode);
-            float maxR = Mathf.Min(rect.width, rect.height) * 0.5f + edgeThickness;
+            float maxR = Mathf.Min(rect.width, rect.height) * 0.5f;
+            if(fillMode == FillMode.Inner) {
+                maxR += edgeThickness;
+            }
             Vector4 radii = new(Mathf.Min(maxR,bottomLeft.Radius), Mathf.Min(maxR,bottomRight.Radius), Mathf.Min(maxR,topRight.Radius), Mathf.Min(maxR,topLeft.Radius));
             if(fillMode == FillMode.Inner) {
                 radii -= edgeThickness * Vector4.one;
