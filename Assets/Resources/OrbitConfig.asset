@@ -20,3 +20,4 @@ MonoBehaviour:
   globalsCsvs:
   - textAsset: {fileID: 4900000, guid: 4b1111f3bfda7d8449862090689f9856, type: 3}
     vertical: 0
+  defaultRoundedRectMaterial: {fileID: 2100000, guid: b585fb08337b0b544b0fbd716957052b, type: 2}

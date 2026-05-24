@@ -3,15 +3,24 @@ using UnityEngine.UI;
 using System;
 
 namespace Orbit.Components.Graphic {
-    using UnityEngine.Serialization;
+    using Parser;
 
     [RequireComponent(typeof(CanvasRenderer))]
     public abstract class RoundedRect : MaskableGraphic {
-        public enum FillMode { Inner, Outer, InnerEdge, OuterEdge } //TODO Add Outer mode: Could be used in place of a stencil based mask, instead covering something with a solid color or gradient with a cutout
+        public enum FillMode {
+            Inner, Outer, InnerEdge, OuterEdge
+        } //TODO Add Outer mode: Could be used in place of a stencil based mask, instead covering something with a solid color or gradient with a cutout
 
         [Serializable]
         public struct Corner {
-            public static Corner Default = new() { Radius = 32, TriangleCount = 12, Color = Color.white, InnerEdgeColor = Color.white, OuterEdgeColor = Color.white};
+            public static Corner Default = new() {
+                Radius = 32,
+                TriangleCount = 12,
+                Color = Color.white,
+                InnerEdgeColor = Color.white,
+                OuterEdgeColor = Color.white
+            };
+
             [Min(0)] public float Radius;
             [Min(1)] public int TriangleCount;
             public Color Color;
@@ -38,7 +47,7 @@ namespace Orbit.Components.Graphic {
                 SetVerticesDirty();
             }
         }
-        
+
         public Color BottomLeftColor {
             get => bottomLeft.Color;
             set {
@@ -70,7 +79,7 @@ namespace Orbit.Components.Graphic {
                 SetVerticesDirty();
             }
         }
-        
+
         public Color BottomLeftInnerEdgeColor {
             get => bottomLeft.InnerEdgeColor;
             set {
@@ -102,7 +111,7 @@ namespace Orbit.Components.Graphic {
                 SetVerticesDirty();
             }
         }
-        
+
         public Color BottomLeftOuterEdgeColor {
             get => bottomLeft.OuterEdgeColor;
             set {
@@ -200,24 +209,163 @@ namespace Orbit.Components.Graphic {
             }
         }
 
+        private Material _customMaterial;
+        
+        private static readonly int OuterEdgeBR = Shader.PropertyToID("_OuterEdgeBR");
+        private static readonly int OuterEdgeTR = Shader.PropertyToID("_OuterEdgeTR");
+        private static readonly int OuterEdgeTL = Shader.PropertyToID("_OuterEdgeTL");
+        private static readonly int OuterEdgeBL = Shader.PropertyToID("_OuterEdgeBL");
+        private static readonly int InnerEdgeBR = Shader.PropertyToID("_InnerEdgeBR");
+        private static readonly int InnerEdgeTR = Shader.PropertyToID("_InnerEdgeTR");
+        private static readonly int InnerEdgeTL = Shader.PropertyToID("_InnerEdgeTL");
+        private static readonly int InnerEdgeBL = Shader.PropertyToID("_InnerEdgeBL");
+        private static readonly int ColorsBR = Shader.PropertyToID("_ColorsBR");
+        private static readonly int ColorsTR = Shader.PropertyToID("_ColorsTR");
+        private static readonly int ColorsTL = Shader.PropertyToID("_ColorsTL");
+        private static readonly int ColorsBL = Shader.PropertyToID("_ColorsBL");
+        private static readonly int InnerRectParams = Shader.PropertyToID("_InnerRectParams");
+        private static readonly int CornerRadii = Shader.PropertyToID("_CornerRadii");
+        private static readonly int ShaderSettings = Shader.PropertyToID("_ShaderSettings");
+        
+        [SerializeField] private bool useShader;
+        public bool UseShader {
+            get => useShader;
+            set {
+                useShader = value;
+                SetMaterialDirty();
+                SetVerticesDirty();
+            }
+        }
+
+        // Dynamic material hook for Unity's UI pipeline
+        public override Material materialForRendering {
+            get {
+                if(!UseShader) {
+                    return base.materialForRendering;
+                }
+                Material baseMat = m_Material ? m_Material : OrbitConfig.Config.DefaultRoundedRectMaterial;
+                if(_customMaterial == null || _customMaterial.shader != baseMat.shader) {
+                    if(_customMaterial != null) DestroyImmediate(_customMaterial);
+                    _customMaterial = new Material(baseMat);
+                    _customMaterial.hideFlags = HideFlags.HideAndDontSave;
+                }
+                //UpdateShaderProperties(_customMaterial);
+                return _customMaterial;
+            }
+        }
+
         protected override void OnPopulateMesh(VertexHelper vh) {
             vh.Clear();
             Rect rect = rectTransform.rect;
             if(rect.width == 0 || rect.height == 0) return;
-            
+
             AdjustRect(ref rect);
 
-            switch(fillMode) {
+            if(UseShader) {
+                GenerateShaderQuad(vh, rect);
+            } else {
+                switch(fillMode) {
+                    case FillMode.Inner:
+                    case FillMode.Outer:
+                        GenerateSolidMesh(vh, rect);
+                        break;
+                    case FillMode.InnerEdge:
+                    case FillMode.OuterEdge:
+                        if(edgeThickness <= 0) return;
+                        GenerateEdgeMesh(vh, rect, edgeThickness, fillMode == FillMode.OuterEdge);
+                        break;
+                }
+            }
+        }
+
+        private void GenerateShaderQuad(VertexHelper vh, Rect rect) {
+            UIVertex vert = UIVertex.simpleVert;
+            vert.color = color;
+
+            if(fillMode == FillMode.Inner) {
+                rect.x += edgeThickness;
+                rect.y += edgeThickness;
+                rect.width -= edgeThickness * 2;
+                rect.height -= edgeThickness * 2;
+            }
+
+            // Give the quad padding for rendering outside the default bounding box
+            float padding = (fillMode == FillMode.OuterEdge) ? edgeThickness : 0f;
+
+            vert.position = new Vector3(rect.xMin - padding, rect.yMin - padding);
+            vert.uv0 = new Vector2(0f, 0f);
+            vh.AddVert(vert);
+
+            vert.position = new Vector3(rect.xMin - padding, rect.yMax + padding);
+            vert.uv0 = new Vector2(0f, 1f);
+            vh.AddVert(vert);
+
+            vert.position = new Vector3(rect.xMax + padding, rect.yMax + padding);
+            vert.uv0 = new Vector2(1f, 1f);
+            vh.AddVert(vert);
+
+            vert.position = new Vector3(rect.xMax + padding, rect.yMin - padding);
+            vert.uv0 = new Vector2(1f, 0f);
+            vh.AddVert(vert);
+
+            vh.AddTriangle(0, 1, 2);
+            vh.AddTriangle(0, 2, 3);
+            
+            UpdateShaderProperties(materialForRendering, rect);
+        }
+
+        private void UpdateShaderProperties(Material mat, Rect rect) {
+            Rect innerEdgeRect = rect;
+            switch (fillMode)
+            {
                 case FillMode.Inner:
+                    break;
                 case FillMode.Outer:
-                    GenerateSolidMesh(vh, rect);
                     break;
                 case FillMode.InnerEdge:
+                    innerEdgeRect.xMin += edgeThickness;
+                    innerEdgeRect.xMax -= edgeThickness;
+                    innerEdgeRect.yMin += edgeThickness;
+                    innerEdgeRect.yMax -= edgeThickness;
+                    break;
                 case FillMode.OuterEdge:
-                    if(edgeThickness <= 0) return;
-                    GenerateEdgeMesh(vh, rect, edgeThickness, fillMode == FillMode.OuterEdge);
+                    innerEdgeRect.xMin += edgeThickness/2;
+                    innerEdgeRect.xMax -= edgeThickness/2;
+                    innerEdgeRect.yMin += edgeThickness/2;
+                    innerEdgeRect.yMax -= edgeThickness/2;
                     break;
             }
+            
+            Vector4 settings = new(rect.width, rect.height, edgeThickness, (float)fillMode);
+            float maxR = Mathf.Min(rect.width, rect.height) * 0.5f + edgeThickness;
+            Vector4 radii = new(Mathf.Min(maxR,bottomLeft.Radius), Mathf.Min(maxR,bottomRight.Radius), Mathf.Min(maxR,topRight.Radius), Mathf.Min(maxR,topLeft.Radius));
+            if(fillMode == FillMode.Inner) {
+                radii -= edgeThickness * Vector4.one;
+            }
+            mat.SetVector(ShaderSettings, settings);
+            mat.SetVector(CornerRadii, radii);
+
+            // Pass parameters required to calculate inner normalized positions: 
+            // x: xMin, y: yMin, z: width, w: height
+            Vector4 innerRectParams = new(innerEdgeRect.xMin, innerEdgeRect.yMin, innerEdgeRect.width,
+                innerEdgeRect.height);
+            mat.SetVector(InnerRectParams, innerRectParams);
+
+            // Standard baseline matrix inputs
+            mat.SetColor(ColorsBL, bottomLeft.Color);
+            mat.SetColor(ColorsTL, topLeft.Color);
+            mat.SetColor(ColorsTR, topRight.Color);
+            mat.SetColor(ColorsBR, bottomRight.Color);
+
+            mat.SetColor(InnerEdgeBL, bottomLeft.InnerEdgeColor.linear);
+            mat.SetColor(InnerEdgeTL, topLeft.InnerEdgeColor.linear);
+            mat.SetColor(InnerEdgeTR, topRight.InnerEdgeColor.linear);
+            mat.SetColor(InnerEdgeBR, bottomRight.InnerEdgeColor.linear);
+
+            mat.SetColor(OuterEdgeBL, bottomLeft.OuterEdgeColor.linear);
+            mat.SetColor(OuterEdgeTL, topLeft.OuterEdgeColor.linear);
+            mat.SetColor(OuterEdgeTR, topRight.OuterEdgeColor.linear);
+            mat.SetColor(OuterEdgeBR, bottomRight.OuterEdgeColor.linear);
         }
 
         private void GenerateSolidMesh(VertexHelper vh, Rect rect) {
@@ -237,8 +385,8 @@ namespace Orbit.Components.Graphic {
             float maxRadius = Mathf.Min(rect.width, rect.height) * 0.5f;
             int startIdx = vh.currentVertCount;
 
-            float cornerTransitionOffset = outer ? -0.5f*thickness : 0.5f*thickness;
-            
+            float cornerTransitionOffset = outer ? -0.5f * thickness : 0.5f * thickness;
+
             Rect innerEdgeRect = rect; //For inner edge gradients, goes in by thickness and then consumes the full corners as well
             if(!outer) {
                 innerEdgeRect.x += thickness;
@@ -246,29 +394,41 @@ namespace Orbit.Components.Graphic {
                 innerEdgeRect.width -= 2 * thickness;
                 innerEdgeRect.height -= 2 * thickness;
             }
+
             //if(innerEdgeRect.width < 0 || innerEdgeRect.height < 0) //For small rects use base rect (slightly different coloring)
             //    innerEdgeRect = rect;
             // Generate all vertices for all 4 corners in a continuous sequence
             AddCornerToStrip(vh, rect, innerEdgeRect, RectCorner.BottomLeft, bottomLeft, maxRadius, thickness, outer);
             //After every strip we may need a supplemental color vertex to smoothly transition inner and outer edge colors if they are different
-            bool hasCornerTransition = DoesNeedExtraColorVertex(bottomLeft.InnerEdgeColor, topLeft.InnerEdgeColor, bottomLeft.OuterEdgeColor, topLeft.OuterEdgeColor);
-            if(hasCornerTransition) 
-                AddCornerTransition(vh, rect, new Vector2(rect.xMin+cornerTransitionOffset, rect.center.y), bottomLeft, topLeft);
-            
-            AddCornerToStrip(vh, rect, innerEdgeRect, RectCorner.TopLeft, topLeft, maxRadius, thickness, outer, hasCornerTransition);
-            hasCornerTransition = DoesNeedExtraColorVertex(topLeft.InnerEdgeColor, topRight.InnerEdgeColor, topLeft.OuterEdgeColor, topRight.OuterEdgeColor);
-            if(hasCornerTransition) 
-                AddCornerTransition(vh, rect, new Vector2(rect.center.x, rect.yMax-cornerTransitionOffset), topLeft, topRight);
-            
-            AddCornerToStrip(vh, rect, innerEdgeRect, RectCorner.TopRight, topRight, maxRadius, thickness, outer, hasCornerTransition);
-            hasCornerTransition = DoesNeedExtraColorVertex(topRight.InnerEdgeColor, bottomRight.InnerEdgeColor, topRight.OuterEdgeColor, bottomRight.OuterEdgeColor);
-            if(hasCornerTransition) 
-                AddCornerTransition(vh, rect, new Vector2(rect.xMax-cornerTransitionOffset, rect.center.y), topRight, bottomRight);
+            bool hasCornerTransition = DoesNeedExtraColorVertex(bottomLeft.InnerEdgeColor, topLeft.InnerEdgeColor,
+                bottomLeft.OuterEdgeColor, topLeft.OuterEdgeColor);
+            if(hasCornerTransition)
+                AddCornerTransition(vh, rect, new Vector2(rect.xMin + cornerTransitionOffset, rect.center.y),
+                    bottomLeft, topLeft);
 
-            AddCornerToStrip(vh, rect, innerEdgeRect, RectCorner.BottomRight, bottomRight, maxRadius, thickness, outer, hasCornerTransition);
-            hasCornerTransition = DoesNeedExtraColorVertex(bottomRight.InnerEdgeColor, bottomLeft.InnerEdgeColor, bottomRight.OuterEdgeColor, bottomLeft.OuterEdgeColor);
-            if(hasCornerTransition) 
-                AddCornerTransition(vh, rect, new Vector2(rect.center.x, rect.yMin+cornerTransitionOffset), bottomRight, bottomLeft, true);
+            AddCornerToStrip(vh, rect, innerEdgeRect, RectCorner.TopLeft, topLeft, maxRadius, thickness, outer,
+                hasCornerTransition);
+            hasCornerTransition = DoesNeedExtraColorVertex(topLeft.InnerEdgeColor, topRight.InnerEdgeColor,
+                topLeft.OuterEdgeColor, topRight.OuterEdgeColor);
+            if(hasCornerTransition)
+                AddCornerTransition(vh, rect, new Vector2(rect.center.x, rect.yMax - cornerTransitionOffset), topLeft,
+                    topRight);
+
+            AddCornerToStrip(vh, rect, innerEdgeRect, RectCorner.TopRight, topRight, maxRadius, thickness, outer,
+                hasCornerTransition);
+            hasCornerTransition = DoesNeedExtraColorVertex(topRight.InnerEdgeColor, bottomRight.InnerEdgeColor,
+                topRight.OuterEdgeColor, bottomRight.OuterEdgeColor);
+            if(hasCornerTransition)
+                AddCornerTransition(vh, rect, new Vector2(rect.xMax - cornerTransitionOffset, rect.center.y), topRight,
+                    bottomRight);
+
+            AddCornerToStrip(vh, rect, innerEdgeRect, RectCorner.BottomRight, bottomRight, maxRadius, thickness, outer,
+                hasCornerTransition);
+            hasCornerTransition = DoesNeedExtraColorVertex(bottomRight.InnerEdgeColor, bottomLeft.InnerEdgeColor,
+                bottomRight.OuterEdgeColor, bottomLeft.OuterEdgeColor);
+            if(hasCornerTransition)
+                AddCornerTransition(vh, rect, new Vector2(rect.center.x, rect.yMin + cornerTransitionOffset),
+                    bottomRight, bottomLeft, true);
             else {
                 //If no corner transition at the end need to close out the loop
                 int lastOuter = vh.currentVertCount - 2;
@@ -278,9 +438,10 @@ namespace Orbit.Components.Graphic {
                 vh.AddTriangle(lastOuter, firstOuter, firstInner);
                 vh.AddTriangle(lastOuter, firstInner, lastInner);
             }
-        } 
-        
-        private void AddCornerTransition(VertexHelper vh, Rect rect, Vector2 midPos, Corner c1, Corner c2, bool isLast = false) {
+        }
+
+        private void AddCornerTransition(VertexHelper vh, Rect rect, Vector2 midPos, Corner c1, Corner c2,
+            bool isLast = false) {
             Color avgColor = (0.5f * (c1.Color + c2.Color)) *
                              (0.5f *
                               ((0.5f * (c1.InnerEdgeColor + c1.OuterEdgeColor)) +
@@ -289,22 +450,25 @@ namespace Orbit.Components.Graphic {
             int curr = vh.currentVertCount;
             if(isLast) {
                 //close out the loop
-                vh.AddTriangle(curr-1, curr-2, curr-3);
-                vh.AddTriangle(curr-1, 0, curr-3);
-                vh.AddTriangle(curr-1, 0, 1);
-                vh.AddTriangle(curr-1, 1, curr-2);
+                vh.AddTriangle(curr - 1, curr - 2, curr - 3);
+                vh.AddTriangle(curr - 1, 0, curr - 3);
+                vh.AddTriangle(curr - 1, 0, 1);
+                vh.AddTriangle(curr - 1, 1, curr - 2);
             } else {
-                vh.AddTriangle(curr-1, curr-2, curr-3);
-                vh.AddTriangle(curr-1, curr-3, curr);
-                vh.AddTriangle(curr-1, curr, curr+1);
-                vh.AddTriangle(curr-1, curr-2, curr+1);
+                vh.AddTriangle(curr - 1, curr - 2, curr - 3);
+                vh.AddTriangle(curr - 1, curr - 3, curr);
+                vh.AddTriangle(curr - 1, curr, curr + 1);
+                vh.AddTriangle(curr - 1, curr - 2, curr + 1);
             }
         }
-        private bool DoesNeedExtraColorVertex(Color innerColorA, Color innerColorB, Color outerColorA, Color outerColorB) {
+
+        private bool DoesNeedExtraColorVertex(Color innerColorA, Color innerColorB, Color outerColorA,
+            Color outerColorB) {
             return innerColorA != innerColorB || outerColorA != outerColorB;
         }
 
-        private void AddCornerToFan(VertexHelper vh, Rect rect, RectCorner corner, Corner p, float maxR, ref int vCount) {
+        private void AddCornerToFan(VertexHelper vh, Rect rect, RectCorner corner, Corner p, float maxR,
+            ref int vCount) {
             float r = Mathf.Min(maxR, p.Radius);
             float adjustedR = r - edgeThickness;
 
@@ -313,28 +477,28 @@ namespace Orbit.Components.Graphic {
             uvRect.y += edgeThickness;
             uvRect.width -= edgeThickness * 2;
             uvRect.height -= edgeThickness * 2;
-            
+
             if(adjustedR < 0) {
                 //Collapsed into a non rounded corner
                 (float startAngle, float endAngle, Vector2 pivot) = GetCornerData(rect, corner, edgeThickness);
-                
+
                 PopulatePoint(vh, uvRect, pivot);
                 vCount++;
-                
+
                 if(vCount > 2) {
                     vh.AddTriangle(0, vCount - 2, vCount - 1);
                 }
             } else {
                 (float startAngle, float endAngle, Vector2 pivot) = GetCornerData(rect, corner, r);
 
-                for(int i = 0; i <= p.TriangleCount; i++) {
+                for(int i = 0;i <= p.TriangleCount;i++) {
                     float angle = Mathf.Lerp(startAngle, endAngle, (float)i / p.TriangleCount);
-        
+
                     Vector2 pos = pivot + VectorAtAngle(adjustedR, angle);
-        
+
                     PopulatePoint(vh, uvRect, pos);
                     vCount++;
-        
+
                     if(vCount > 2) {
                         vh.AddTriangle(0, vCount - 2, vCount - 1);
                     }
@@ -342,14 +506,15 @@ namespace Orbit.Components.Graphic {
             }
         }
 
-        private void AddCornerToStrip(VertexHelper vh, Rect rect, Rect innerRect, RectCorner corner, Corner p, float maxR, float thickness, bool outer, bool hasCornerTransition = false) {
+        private void AddCornerToStrip(VertexHelper vh, Rect rect, Rect innerRect, RectCorner corner, Corner p,
+            float maxR, float thickness, bool outer, bool hasCornerTransition = false) {
             float requestedR = Mathf.Min(maxR, p.Radius);
             float outerR = requestedR;
             float innerR = outer ? outerR + thickness : outerR - thickness;
 
             (float startAngle, float endAngle, Vector2 pivot) = GetCornerData(rect, corner, outerR);
             (float _, float _, Vector2 edgeEndPivot) = GetCornerData(rect, corner, edgeThickness);
-    
+
             if(outer) {
                 rect.x -= this.edgeThickness / 2;
                 rect.y -= this.edgeThickness / 2;
@@ -358,33 +523,36 @@ namespace Orbit.Components.Graphic {
             }
 
             //Both are hard corners (0 radius)
-            if (innerR <= 0 && outerR <= 0) {
+            if(innerR <= 0 && outerR <= 0) {
                 AddStripPair(vh, rect, innerRect, pivot, edgeEndPivot, hasCornerTransition);
-            } 
+            }
             //Outer is rounded, but thickness swallows the inner radius
-            else if (innerR <= 0) {
-                for (int i = 0; i <= p.TriangleCount; i++) {
-                    float angle = Mathf.Lerp(startAngle, endAngle, (float)i / p.TriangleCount);
+            else if(innerR <= 0) {
+                for(int i = 0;i <= p.TriangleCount;i++) {
+                    float angle = Mathf.Lerp(startAngle, endAngle, (float)i / (p.TriangleCount-1));
                     Vector2 dir = VectorAtAngle(1f, angle);
                     //Outer follows the curve, Inner stays at the pivot point
-                    AddStripPair(vh, rect, innerRect, pivot + dir * outerR, edgeEndPivot, hasCornerTransition && i == 0);
+                    AddStripPair(vh, rect, innerRect, pivot + dir * outerR, edgeEndPivot,
+                        hasCornerTransition && i == 0);
                 }
-            } 
+            }
             //Standard rounded strip
             else {
-                for (int i = 0; i < p.TriangleCount; i++) {
-                    float angle = Mathf.Lerp(startAngle, endAngle, (float)i / p.TriangleCount);
+                for(int i = 0;i < p.TriangleCount;i++) {
+                    float angle = Mathf.Lerp(startAngle, endAngle, (float)i / (p.TriangleCount-1));
                     Vector2 dir = VectorAtAngle(1f, angle);
-                    AddStripPair(vh, rect, innerRect, pivot + dir * outerR, pivot + dir * innerR, hasCornerTransition && i == 0);
+                    AddStripPair(vh, rect, innerRect, pivot + dir * outerR, pivot + dir * innerR,
+                        hasCornerTransition && i == 0);
                 }
             }
         }
 
-        private void AddStripPair(VertexHelper vh, Rect rect, Rect innerEdgeRect, Vector2 outer, Vector2 inner, bool skipTriangles = false) {
+        private void AddStripPair(VertexHelper vh, Rect rect, Rect innerEdgeRect, Vector2 outer, Vector2 inner,
+            bool skipTriangles = false) {
             bool isOuterEdge = fillMode == FillMode.OuterEdge;
             PopulateEdgePoint(vh, rect, innerEdgeRect, outer, isOuterEdge);
             PopulateEdgePoint(vh, rect, innerEdgeRect, inner, !isOuterEdge);
-            
+
             if(vh.currentVertCount > 2) {
                 int currOuter = vh.currentVertCount - 2;
                 int currInner = vh.currentVertCount - 1;
@@ -421,15 +589,16 @@ namespace Orbit.Components.Graphic {
 
             vh.AddVert(point, color * cornerColor, uv);
         }
-        
+
         protected void PopulatePoint(VertexHelper vh, Rect fullRect, Vector2 point, Color cornerColor) {
             Vector2 normalizedPoint = Rect.PointToNormalized(fullRect, point);
             Vector2 uv = GetUVForNormalizedPosition(normalizedPoint);
 
             vh.AddVert(point, color * cornerColor, uv);
         }
-        
-        protected void PopulateEdgePoint(VertexHelper vh, Rect fullRect, Rect innerEdgeRect, Vector2 point, bool inner) {
+
+        protected void PopulateEdgePoint(VertexHelper vh, Rect fullRect, Rect innerEdgeRect, Vector2 point,
+            bool inner) {
             Vector2 normalizedPoint = Rect.PointToNormalized(fullRect, point);
             Vector2 uv = GetUVForNormalizedPosition(normalizedPoint);
             float x = normalizedPoint.x;
@@ -445,11 +614,11 @@ namespace Orbit.Components.Graphic {
                 topRightEdgeColor = topRight.InnerEdgeColor;
                 bottomLeftEdgeColor = bottomLeft.InnerEdgeColor;
                 bottomRightEdgeColor = bottomRight.InnerEdgeColor;
-                
+
                 Vector2 innerPoint = Rect.PointToNormalized(innerEdgeRect, point);
                 float innerX = innerPoint.x;
                 float innerY = innerPoint.y;
-                
+
                 cornerColor =
                     bottomLeft.Color * ((1 - x) * (1 - y)) +
                     bottomRight.Color * (x * (1 - y)) +
@@ -465,7 +634,7 @@ namespace Orbit.Components.Graphic {
                 topRightEdgeColor = topRight.OuterEdgeColor;
                 bottomLeftEdgeColor = bottomLeft.OuterEdgeColor;
                 bottomRightEdgeColor = bottomRight.OuterEdgeColor;
-                
+
                 cornerColor =
                     bottomLeftEdgeColor * bottomLeft.Color * ((1 - x) * (1 - y)) +
                     bottomRightEdgeColor * bottomRight.Color * (x * (1 - y)) +

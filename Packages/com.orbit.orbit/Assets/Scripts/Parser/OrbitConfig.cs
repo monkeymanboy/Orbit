@@ -40,12 +40,22 @@ namespace Orbit.Parser {
         [SerializeField] private OrbitFont[] fonts;
         [SerializeField] private ColorDefintion[] colors;
         [SerializeField] private GlobalsCsv[] globalsCsvs;
+        [SerializeField] private Material defaultRoundedRectMaterial;
         public OrbitFont DefaultFont { get; private set; }
         public Dictionary<string, OrbitFont> Fonts { get; private set; }
         public ColorDefintion[] Colors => colors;
+        public Material DefaultRoundedRectMaterial => defaultRoundedRectMaterial;
 
         public static OrbitConfig CreateDefault() {
             OrbitConfig defaultConfig = CreateInstance<OrbitConfig>();
+#if UNITY_EDITOR
+            string[] guids = AssetDatabase.FindAssets("OrbitRounded t:Material");
+            if (guids.Length > 0)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+                defaultConfig.defaultRoundedRectMaterial = AssetDatabase.LoadAssetAtPath<Material>(path);
+            }
+#endif
             defaultConfig.Fonts = new() { {"Default", new OrbitFont{ name = "Default", fontAsset = TMP_Settings.defaultFontAsset }} };
 #if UNITY_EDITOR
             AssetDatabase.CreateFolder("Assets", "Orbit");
