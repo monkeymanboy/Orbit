@@ -198,9 +198,9 @@ Shader "UI/OrbitRoundedRect"
                 fixed4 texColor = tex2D(_MainTex, i.uv) + _TextureSampleAdd;
                 finalColor *= texColor;
                 
-                //#ifdef UNITY_UI_ALPHACLIP
+                #ifdef UNITY_UI_ALPHACLIP
                 clip(finalColor.a - 0.001);
-                //#endif
+                #endif
                 return finalColor * i.color;
             }
             ENDCG

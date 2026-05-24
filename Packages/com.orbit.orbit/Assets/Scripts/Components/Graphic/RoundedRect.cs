@@ -4,6 +4,7 @@ using System;
 
 namespace Orbit.Components.Graphic {
     using Parser;
+    using System.Collections.Generic;
 
     [RequireComponent(typeof(CanvasRenderer))]
     public abstract class RoundedRect : MaskableGraphic {
@@ -242,12 +243,6 @@ namespace Orbit.Components.Graphic {
                 if(!UseShader) {
                     return base.materialForRendering;
                 }
-                Material baseMat = m_Material ? m_Material : OrbitConfig.Config.DefaultRoundedRectMaterial;
-                if(_customMaterial == null || _customMaterial.shader != baseMat.shader) {
-                    if(_customMaterial != null) DestroyImmediate(_customMaterial);
-                    _customMaterial = new Material(baseMat);
-                    _customMaterial.hideFlags = HideFlags.HideAndDontSave;
-                }
                 return GetModifiedMaterial(_customMaterial);
             }
         }
@@ -309,10 +304,53 @@ namespace Orbit.Components.Graphic {
             vh.AddTriangle(0, 1, 2);
             vh.AddTriangle(0, 2, 3);
             
-            UpdateShaderProperties(materialForRendering, rect);
+            UpdateShaderProperties(rect);
         }
 
-        private void UpdateShaderProperties(Material mat, Rect rect) {
+        private struct MaterialProps : IEquatable<MaterialProps>
+        {
+            public Rect rect;
+            public FillMode fillMode;
+            public float edgeThickness;
+            public Vector4 radii;
+    
+            public Color colorBL, colorTL, colorTR, colorBR;
+            public Color innerBL, innerTL, innerTR, innerBR;
+            public Color outerBL, outerTL, outerTR, outerBR;
+
+            public bool Equals(MaterialProps other)
+            {
+                return rect.Equals(other.rect) &&
+                       fillMode == other.fillMode &&
+                       Mathf.Approximately(edgeThickness, other.edgeThickness) &&
+                       radii.Equals(other.radii) &&
+                       colorBL == other.colorBL && colorTL == other.colorTL && colorTR == other.colorTR && colorBR == other.colorBR &&
+                       innerBL == other.innerBL && innerTL == other.innerTL && innerTR == other.innerTR && innerBR == other.innerBR &&
+                       outerBL == other.outerBL && outerTL == other.outerTL && outerTR == other.outerTR && outerBR == other.outerBR;
+            }
+
+            public override bool Equals(object obj) => obj is MaterialProps other && Equals(other);
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    int hash = 17;
+                    hash = hash * 23 + rect.GetHashCode();
+                    hash = hash * 23 + fillMode.GetHashCode();
+                    hash = hash * 23 + edgeThickness.GetHashCode();
+                    hash = hash * 23 + radii.GetHashCode();
+                    hash = hash * 23 + colorBL.GetHashCode();
+                    hash = hash * 23 + colorTL.GetHashCode();
+                    hash = hash * 23 + colorTR.GetHashCode();
+                    hash = hash * 23 + colorBR.GetHashCode();
+                    return hash;
+                }
+            }
+        }
+        private static readonly Dictionary<Material, Dictionary<MaterialProps, Material>> materialCache = new();
+
+        private void UpdateShaderProperties(Rect rect) {
             Rect innerEdgeRect = rect;
             switch (fillMode)
             {
@@ -334,7 +372,6 @@ namespace Orbit.Components.Graphic {
                     break;
             }
             
-            Vector4 settings = new(rect.width, rect.height, edgeThickness, (float)fillMode);
             float maxR = Mathf.Min(rect.width, rect.height) * 0.5f;
             if(fillMode == FillMode.Inner) {
                 maxR += edgeThickness;
@@ -343,30 +380,69 @@ namespace Orbit.Components.Graphic {
             if(fillMode == FillMode.Inner) {
                 radii -= edgeThickness * Vector4.one;
             }
-            mat.SetVector(ShaderSettings, settings);
-            mat.SetVector(CornerRadii, radii);
+            MaterialProps props = new() {
+                rect = rect,
+                fillMode = fillMode,
+                edgeThickness = edgeThickness,
+                radii = radii,
+        
+                colorBL = bottomLeft.Color, colorTL = topLeft.Color, colorTR = topRight.Color, colorBR = bottomRight.Color,
+                innerBL = bottomLeft.InnerEdgeColor.linear, innerTL = topLeft.InnerEdgeColor.linear, innerTR = topRight.InnerEdgeColor.linear, innerBR = bottomRight.InnerEdgeColor.linear,
+                outerBL = bottomLeft.OuterEdgeColor.linear, outerTL = topLeft.OuterEdgeColor.linear, outerTR = topRight.OuterEdgeColor.linear, outerBR = bottomRight.OuterEdgeColor.linear
+            };
 
-            // Pass parameters required to calculate inner normalized positions: 
-            // x: xMin, y: yMin, z: width, w: height
-            Vector4 innerRectParams = new(innerEdgeRect.xMin, innerEdgeRect.yMin, innerEdgeRect.width,
-                innerEdgeRect.height);
+            var baseMaterial = m_Material ? m_Material : OrbitConfig.Config.DefaultRoundedRectMaterial;
+            if(!materialCache.TryGetValue(baseMaterial, out var cache))
+                materialCache[baseMaterial] = cache = new();
+
+            if(cache.TryGetValue(props, out Material sharedMaterial)) {
+                _customMaterial = sharedMaterial;
+            } else {
+                _customMaterial = Instantiate(baseMaterial);
+                ApplyShaderProperties(_customMaterial, props);
+                cache.Add(props, _customMaterial);
+            }
+        }
+        private void ApplyShaderProperties(Material mat, MaterialProps props) 
+        {
+            Rect innerEdgeRect = props.rect;
+            switch (props.fillMode)
+            {
+                case FillMode.InnerEdge:
+                    innerEdgeRect.xMin += props.edgeThickness;
+                    innerEdgeRect.xMax -= props.edgeThickness;
+                    innerEdgeRect.yMin += props.edgeThickness;
+                    innerEdgeRect.yMax -= props.edgeThickness;
+                    break;
+                case FillMode.OuterEdge:
+                    innerEdgeRect.xMin += props.edgeThickness / 2f;
+                    innerEdgeRect.xMax -= props.edgeThickness / 2f;
+                    innerEdgeRect.yMin += props.edgeThickness / 2f;
+                    innerEdgeRect.yMax -= props.edgeThickness / 2f;
+                    break;
+            }
+    
+            Vector4 settings = new(props.rect.width, props.rect.height, props.edgeThickness, (float)props.fillMode);
+            mat.SetVector(ShaderSettings, settings);
+            mat.SetVector(CornerRadii, props.radii);
+
+            Vector4 innerRectParams = new(innerEdgeRect.xMin, innerEdgeRect.yMin, innerEdgeRect.width, innerEdgeRect.height);
             mat.SetVector(InnerRectParams, innerRectParams);
 
-            // Standard baseline matrix inputs
-            mat.SetColor(ColorsBL, bottomLeft.Color);
-            mat.SetColor(ColorsTL, topLeft.Color);
-            mat.SetColor(ColorsTR, topRight.Color);
-            mat.SetColor(ColorsBR, bottomRight.Color);
+            mat.SetColor(ColorsBL, props.colorBL);
+            mat.SetColor(ColorsTL, props.colorTL);
+            mat.SetColor(ColorsTR, props.colorTR);
+            mat.SetColor(ColorsBR, props.colorBR);
 
-            mat.SetColor(InnerEdgeBL, bottomLeft.InnerEdgeColor.linear);
-            mat.SetColor(InnerEdgeTL, topLeft.InnerEdgeColor.linear);
-            mat.SetColor(InnerEdgeTR, topRight.InnerEdgeColor.linear);
-            mat.SetColor(InnerEdgeBR, bottomRight.InnerEdgeColor.linear);
+            mat.SetColor(InnerEdgeBL, props.innerBL);
+            mat.SetColor(InnerEdgeTL, props.innerTL);
+            mat.SetColor(InnerEdgeTR, props.innerTR);
+            mat.SetColor(InnerEdgeBR, props.innerBR);
 
-            mat.SetColor(OuterEdgeBL, bottomLeft.OuterEdgeColor.linear);
-            mat.SetColor(OuterEdgeTL, topLeft.OuterEdgeColor.linear);
-            mat.SetColor(OuterEdgeTR, topRight.OuterEdgeColor.linear);
-            mat.SetColor(OuterEdgeBR, bottomRight.OuterEdgeColor.linear);
+            mat.SetColor(OuterEdgeBL, props.outerBL);
+            mat.SetColor(OuterEdgeTL, props.outerTL);
+            mat.SetColor(OuterEdgeTR, props.outerTR);
+            mat.SetColor(OuterEdgeBR, props.outerBR);
         }
 
         private void GenerateSolidMesh(VertexHelper vh, Rect rect) {
