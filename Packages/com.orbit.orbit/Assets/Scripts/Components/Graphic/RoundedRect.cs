@@ -732,5 +732,12 @@ namespace Orbit.Components.Graphic {
             float rad = Mathf.Deg2Rad * angle;
             return new Vector2(radius * Mathf.Cos(rad), radius * Mathf.Sin(rad));
         }
+
+        protected override void OnRectTransformDimensionsChange() {
+            if(UseShader) {
+                SetVerticesDirty();
+                SetMaterialDirty();
+            }
+        }
     }
 }
