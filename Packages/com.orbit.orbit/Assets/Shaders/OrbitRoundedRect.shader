@@ -98,9 +98,7 @@ Shader "UI/OrbitRoundedRect"
 
             float SDFRoundedRect(float2 p, float2 halfSize, float4 r)
             {
-                float2 r_picked = (p.x > 0.0) ? ((p.y > 0.0) ? r.zy : r.yy) : ((p.y > 0.0) ? r.ww : r.xw);
-                float radius = r_picked.x;
-
+                float radius = (p.x > 0.0) ? ((p.y > 0.0) ? r.z : r.y) : ((p.y > 0.0) ? r.w : r.x);
                 float2 q = abs(p) - halfSize + radius;
                 return min(max(q.x, q.y), 0.0) + length(max(q, 0.0)) - radius;
             }
@@ -123,7 +121,7 @@ Shader "UI/OrbitRoundedRect"
                 float2 halfSize = dimensions * 0.5;
 
                 float dist = SDFRoundedRect(p, halfSize, _CornerRadii);
-                float aaWidth = fwidth(dist);
+                float aaWidth = max(fwidth(dist), 1e-4);
 
                 float alpha = 1.0;
                 float x = uvNorm.x;
