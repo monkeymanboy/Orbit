@@ -42,7 +42,8 @@ namespace Orbit.Components.ButtonLayoutGroup {
             int endIndex = m_ReverseArrangement ? 0 : rectChildren.Count - 1;
             int increment = m_ReverseArrangement ? -1 : 1;
             if(startIndex == endIndex) {
-                rectChildren[0].GetComponent<IButtonLayoutGroupElement>()?.SetSingle();
+                rectChildren[startIndex].GetComponent<IButtonLayoutGroupElement>()?.SetSingle();
+                SetChildrenAlongAxis(1, isVertical);
                 return;
             }
 
