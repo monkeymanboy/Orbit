@@ -10,6 +10,7 @@ namespace Orbit.Schema {
     using Components;
     using Macros;
     using Parser;
+    using System.Linq;
     using System.Text;
 
     public static class SchemaGenerator {
@@ -54,7 +55,10 @@ namespace Orbit.Schema {
             List<string> addedTags = new();
             List<string> addedAttributeGroups = new();
             #region Prefab Tags
-            foreach(Object resource in Resources.LoadAll("OrbitPrefabs")) {
+            Object[] orbitPrefabs = Resources.LoadAll("OrbitPrefabs");
+            if(OrbitConfig.Config.PrefabLocation != "OrbitPrefabs")
+                orbitPrefabs = Resources.LoadAll(OrbitConfig.Config.PrefabLocation).Union(orbitPrefabs).ToArray();
+            foreach(Object resource in orbitPrefabs) {
                 if(addedTags.Contains(resource.name))
                     continue;
                 XmlSchemaElement currentElement = new() { Name = resource.name };
