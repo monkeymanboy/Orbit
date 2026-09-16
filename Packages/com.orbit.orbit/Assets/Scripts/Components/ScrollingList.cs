@@ -15,6 +15,11 @@ namespace Orbit.Components {
             Vertical,
             Horizontal
         }
+        public enum RefreshScrollBehavior {
+            ScrollToStart,
+            ScrollToEnd,
+            MaintainScroll
+        }
         public OrbitRenderData ParentData { get; internal set; }
         
         private INotifyCollectionChanged observedCollection;
@@ -60,6 +65,8 @@ namespace Orbit.Components {
         public float CellSize { get; set; }
         [field: SerializeField]
         public float CellSpacing { get; set; }
+        [field: SerializeField]
+        public RefreshScrollBehavior RefreshScroll { get; set; }
 
         public int RowCount => Hosts.Count;
 
@@ -74,7 +81,8 @@ namespace Orbit.Components {
         
         protected float previousBuildLength = 0;
         protected const int rowsAboveBelow = 1;
-        
+
+        private float previousNormalizedScroll;
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             if(this == null) { //Handles this component being destroyed
@@ -90,6 +98,12 @@ namespace Orbit.Components {
         /// for some other reason. All active items will have the ItemCallback invoked. 
         /// </summary>
         public virtual void Refresh() {
+            if(RefreshScroll == RefreshScrollBehavior.MaintainScroll) {
+                previousNormalizedScroll = Direction switch {
+                    ScrollDirection.Vertical => scrollRect.verticalNormalizedPosition,
+                    ScrollDirection.Horizontal => scrollRect.horizontalNormalizedPosition
+                };
+            }
             UpdateContentLength();
             ReorganiseContent(true);
         }
@@ -197,11 +211,31 @@ namespace Orbit.Components {
                 scrollRect.StopMovement();
                 switch(Direction) {
                     case ScrollDirection.Vertical:
-                        scrollRect.verticalNormalizedPosition = 1;
+                        switch(RefreshScroll) {
+                            case RefreshScrollBehavior.ScrollToStart:
+                                scrollRect.verticalNormalizedPosition = 1;
+                                break;
+                            case RefreshScrollBehavior.ScrollToEnd:
+                                scrollRect.verticalNormalizedPosition = 0;
+                                break;
+                            case RefreshScrollBehavior.MaintainScroll:
+                                scrollRect.verticalNormalizedPosition = previousNormalizedScroll;
+                                break;
+                        }
                         break;
                     case ScrollDirection.Horizontal:
-                        scrollRect.horizontalNormalizedPosition = 0;
-                        break;
+                        switch(RefreshScroll) {
+                            case RefreshScrollBehavior.ScrollToStart:
+                                scrollRect.horizontalNormalizedPosition = 0;
+                                break;
+                            case RefreshScrollBehavior.ScrollToEnd:
+                                scrollRect.horizontalNormalizedPosition = 1;
+                                break;
+                            case RefreshScrollBehavior.MaintainScroll:
+                                scrollRect.horizontalNormalizedPosition = previousNormalizedScroll;
+                                break;
+                        }
+                        break; 
                 }
             }
 

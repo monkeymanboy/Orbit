@@ -16,6 +16,7 @@ namespace Orbit.ComponentProcessors {
             {"CellSize", new FloatSetter<ScrollingList>((component, value) => component.CellSize = value) },
             {"CellSpacing", new FloatSetter<ScrollingList>((component, value) => component.CellSpacing = value) },
             {"ListDirection", new EnumSetter<ScrollingList, ScrollingList.ScrollDirection>((component, value) => component.Direction = value) },
+            {"RefreshScroll", new EnumSetter<ScrollingList, ScrollingList.RefreshScrollBehavior>((component, value) => component.RefreshScroll = value) },
             {"Items", new ObjectSetter<ScrollingList, IList>((component, value) => component.Hosts = value) },
             {"RefreshEvent", new StringSetter<ScrollingList>((component, value) => CurrentData.AddEvent(value, component.Refresh)) }
         };
