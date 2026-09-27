@@ -5,8 +5,6 @@ namespace Orbit.Components.Settings {
     using System;
 
     public class OrbitInputField : SettingComponent {
-        public Action OnEndEditEvent { get; set; }
-        
         [SerializeField]
         private TMP_InputField inputField;
 
@@ -33,10 +31,6 @@ namespace Orbit.Components.Settings {
             
             inputField.onValueChanged.AddListener(SetUIValue);
             UpdateInputText();
-        }
-
-        public void EndEdit(string text) {
-            OnEndEditEvent?.Invoke();
         }
 
         private void UpdateInputText(bool notify = false) {

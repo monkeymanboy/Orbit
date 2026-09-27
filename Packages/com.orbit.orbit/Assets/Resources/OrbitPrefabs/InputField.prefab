@@ -69,19 +69,29 @@ MonoBehaviour:
     Radius: 6
     TriangleCount: 12
     Color: {r: 1, g: 1, b: 1, a: 1}
+    OuterEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    InnerEdgeColor: {r: 1, g: 1, b: 1, a: 1}
   topRight:
     Radius: 6
     TriangleCount: 12
     Color: {r: 1, g: 1, b: 1, a: 1}
+    OuterEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    InnerEdgeColor: {r: 1, g: 1, b: 1, a: 1}
   bottomLeft:
     Radius: 6
     TriangleCount: 12
     Color: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    OuterEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    InnerEdgeColor: {r: 1, g: 1, b: 1, a: 1}
   bottomRight:
     Radius: 6
     TriangleCount: 12
     Color: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 1}
+    OuterEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    InnerEdgeColor: {r: 1, g: 1, b: 1, a: 1}
+  useShader: 0
   sprite: {fileID: 0}
+  preserveAspect: 0
 --- !u!222 &6072920797819886966
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -151,19 +161,7 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7270637598548254285}
-        m_TargetAssemblyTypeName: Orbit.Components.Settings.InputSetting, Orbit
-        m_MethodName: EndEdit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
