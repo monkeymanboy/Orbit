@@ -63,6 +63,8 @@ namespace Orbit.Parser {
         private Dictionary<string, TagParameters.BoundData> reusableParameterData = new();
         private List<Component> reusableComponentList = new();
 
+        public Func<string, UIValue> DynamicGlobalBuilder;
+
         public XmlDocument XmlDocument => doc;
 
         public virtual void Init(OrbitConfig config) {

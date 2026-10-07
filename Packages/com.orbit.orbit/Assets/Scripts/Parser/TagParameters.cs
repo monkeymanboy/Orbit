@@ -28,8 +28,16 @@ namespace Orbit.Parser {
                     case OrbitParser.RESOURCE_VALUE_PREFIX:
                         return new BoundData(value.Substring(1), true);
                     case OrbitParser.GLOBAL_VALUE_PREFIX:
-                        if (!renderData.Parser.Globals.TryGetValue(value.Substring(1), out UIValue uiValue))
-                            throw new Exception($"Attempted to access '{value}' but no such global exists");
+                        string str = value.Substring(1);
+                        if(!renderData.Parser.Globals.TryGetValue(str, out UIValue uiValue)) {
+                            if(renderData.Parser.DynamicGlobalBuilder != null) {
+                                uiValue = renderData.Parser.DynamicGlobalBuilder(str);
+                            }
+                            if(uiValue != null)
+                                renderData.Parser.Globals.Add(str, uiValue);
+                            else 
+                                throw new Exception($"Attempted to access '{value}' but no such global exists");
+                        }
                         return new BoundData(uiValue);
                     default:
                         return new BoundData(value);
