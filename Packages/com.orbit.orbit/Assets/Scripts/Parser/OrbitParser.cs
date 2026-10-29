@@ -60,7 +60,7 @@ namespace Orbit.Parser {
         private XmlDocument doc = new();
         private XmlReaderSettings readerSettings = new();
         private Dictionary<string, List<(ComponentProcessor,int)>> processorPrefabCache = new();
-        private Dictionary<string, TagParameters.BoundData> reusableParameterData = new();
+        private Stack<Dictionary<string, TagParameters.BoundData>> parameterDataPool = new();
         private List<Component> reusableComponentList = new();
 
         public Func<string, UIValue> DynamicGlobalBuilder;
@@ -269,13 +269,14 @@ namespace Orbit.Parser {
         }
         
         public void RenderNode(XmlNode node, GameObject parent, OrbitRenderData renderData) {
+            if(!parameterDataPool.TryPop(out Dictionary<string, TagParameters.BoundData> parameterData))
+                parameterData = new();
             TagParameters parameters = new() {
                 RenderData = renderData,
                 Node = node,
-                Data = reusableParameterData
+                Data = parameterData
             };
             parameters.DefaultData = renderData.CurrentDefaultProperties;
-            parameters.Data.Clear(); //Clear out dictionary since the same one gets reused here
             foreach(XmlAttribute attribute in node.Attributes) {
                 if(attribute.Name == DEFAULTS_PROPERTY) {
                     TagParameters.BoundData boundDefaults = TagParameters.BoundData.FromString(renderData, attribute.Value);
@@ -293,6 +294,8 @@ namespace Orbit.Parser {
                 return;
             }
             RenderTagNode(parent, parameters);
+            parameterData.Clear();
+            parameterDataPool.Push(parameterData);
         }
 
         private void RenderTagNode(GameObject parent, TagParameters parameters) {
