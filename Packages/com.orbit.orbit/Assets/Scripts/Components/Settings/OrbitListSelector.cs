@@ -49,8 +49,9 @@ namespace Orbit.Components.Settings {
             currentIndex = OptionsList.IndexOf(UIValue.GetValue());
         }
 
-        private void UpdateText(bool notify = false) {
-            valueText.text = UIValue.GetValue().ToString();
+        private void UpdateText() {
+            object value = UIValue.GetValue();
+            valueText.text = value == null ? "" : value.ToString();
         }
 
         private void SetUIValue(int index) {
