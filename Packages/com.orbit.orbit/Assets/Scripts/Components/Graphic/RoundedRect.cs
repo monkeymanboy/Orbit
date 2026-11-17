@@ -734,8 +734,8 @@ namespace Orbit.Components.Graphic {
         }
 
         protected override void OnRectTransformDimensionsChange() {
+            SetVerticesDirty();
             if(UseShader) {
-                SetVerticesDirty();
                 SetMaterialDirty();
             }
         }
