@@ -391,14 +391,17 @@ namespace Orbit.Components.Graphic {
                 outerBL = bottomLeft.OuterEdgeColor.linear, outerTL = topLeft.OuterEdgeColor.linear, outerTR = topRight.OuterEdgeColor.linear, outerBR = bottomRight.OuterEdgeColor.linear
             };
 
-            var baseMaterial = m_Material ? m_Material : OrbitConfig.Config.DefaultRoundedRectMaterial;
+            var baseMaterial = (m_Material != null) ? m_Material : OrbitConfig.Config.DefaultRoundedRectMaterial;
             if(!materialCache.TryGetValue(baseMaterial, out var cache))
                 materialCache[baseMaterial] = cache = new();
 
-            if(cache.TryGetValue(props, out Material sharedMaterial)) {
+            if(cache.TryGetValue(props, out Material sharedMaterial) && sharedMaterial != null) {
                 _customMaterial = sharedMaterial;
+                if(!_customMaterial.HasVector(ShaderSettings)) //Cleared from editor stuff 
+                    ApplyShaderProperties(_customMaterial, props);
             } else {
                 _customMaterial = Instantiate(baseMaterial);
+                _customMaterial.hideFlags = HideFlags.DontSave;
                 ApplyShaderProperties(_customMaterial, props);
                 cache.Add(props, _customMaterial);
             }
